@@ -1,0 +1,74 @@
+{
+  "app": {
+    "title": "Calculateur de Plâtre",
+    "subtitle": "Dosage eau / plâtre pour moulage"
+  },
+  "mold": {
+    "title": "Moule",
+    "volume": "Volume du moule",
+    "titleTooltip": "Les dimensions correspondent à celles de votre coffrage intérieur. La hauteur à renseigner est celle jusqu'où vous souhaitez remplir le plâtre, pas nécessairement la hauteur totale du coffrage."
+  },
+  "object": {
+    "title": "Pièce à mouler",
+    "titleTooltip": "Si votre pièce n'a pas de forme exacte parmi celles proposées, choisissez la forme qui s'en approche le plus en arrondissant les dimensions à la hausse — le volume sera légèrement surestimé, ce qui reste préférable à un manque de matière.",
+    "shape": {
+      "none": "Aucune"
+    },
+    "manualEntry": "Saisir un volume directement",
+    "dimensionEntry": "Saisir des dimensions",
+    "manualVolume": "Volume",
+    "volume": "Volume de la pièce"
+  },
+  "shapes": {
+    "box": "Pavé",
+    "cylinder": "Cylindre",
+    "sphere": "Sphère",
+    "halfSphere": "Demi-sphère",
+    "manual": "Volume libre"
+  },
+  "fields": {
+    "length": "Longueur",
+    "width": "Largeur",
+    "height": "Hauteur",
+    "diameter": "Diamètre",
+    "volume": "Volume"
+  },
+  "mix": {
+    "title": "Paramètres de mélange",
+    "titleTooltip": "Les valeurs par défaut conviennent à la majorité des usages. Ne modifiez ces paramètres que si vous maîtrisez la chimie du plâtre et avez des exigences précises sur la dureté ou le temps de prise.",
+    "ratio": "Ratio plâtre / eau",
+    "ratioHint": "kg de plâtre par litre d'eau",
+    "ratioScale": "fin ← 1.3 — 1.5 — 1.8 → dur",
+    "margin": "Marge de sécurité",
+    "density": "Masse volumique du gypse",
+    "densityTooltip": "Constante physique du sulfate de calcium (CaSO₄·2H₂O). Identique quel que soit le type de plâtre utilisé."
+  },
+  "results": {
+    "title": "Résultats",
+    "water": "Eau",
+    "plaster": "Plâtre",
+    "withMargin": "avec marge",
+    "withoutMargin": "sans marge",
+    "netVolume": "Volume net"
+  },
+  "errors": {
+    "volumeExceeded": "Le volume de la pièce dépasse ou égale celui du moule",
+    "invalidRatio": "Le ratio doit être supérieur à 0"
+  },
+  "units": {
+    "cm": "cm",
+    "liters": "L",
+    "kg": "kg",
+    "percent": "%"
+  },
+  "guide": {
+    "title": "Guide d'utilisation",
+    "ratioExplain": "Le ratio plâtre/eau détermine la dureté finale. 1.3 pour un plâtre fin et fluide, 1.5 pour un usage standard, 1.8 pour un plâtre dur et résistant. Ce ratio exprime la masse de plâtre (en kg) pour 1 litre d'eau.",
+    "pourOrder": "Toujours verser le plâtre dans l'eau, jamais l'inverse.",
+    "immersion": "Pour mesurer le volume d'une pièce irrégulière, plongez-la dans un récipient gradué et notez la montée d'eau.",
+    "formula": "Formule : Eau = Volume net ÷ (1 + Ratio ÷ 2.58)"
+  },
+  "scene": {
+    "placeholder": "Visualisation 3D — bientôt disponible"
+  }
+}
