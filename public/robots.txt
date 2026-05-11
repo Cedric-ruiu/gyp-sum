@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://cedric-ruiu.github.io/gyp-sum/sitemap.xml
