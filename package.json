@@ -1,0 +1,45 @@
+{
+  "private": true,
+  "type": "module",
+  "version": "1.0.0",
+  "name": "gyp-sum",
+  "description": "Calculateur de dosage eau / plâtre pour moulage — calcul précis basé sur la masse volumique du gypse (2,58 kg/L). SPA Vue 3, open source.",
+  "keywords": [
+    "plaster",
+    "calculator",
+    "moulage",
+    "gypsum",
+    "vue",
+    "vite",
+    "plâtre"
+  ],
+  "homepage": "https://cedric-ruiu.github.io/gyp-sum/",
+  "repository": "https://github.com/Cedric-ruiu/gyp-sum.git",
+  "author": "Cédric Ruiu <cedric.ruiu@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc --noEmit && vite build",
+    "typecheck": "vue-tsc --noEmit",
+    "preview": "vite preview",
+    "lint": "biome check .",
+    "format": "biome check . --write --unsafe"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.4.15",
+    "@tailwindcss/vite": "4.3.0",
+    "@types/node": "25.6.2",
+    "@types/three": "0.184.1",
+    "@vitejs/plugin-vue": "6.0.6",
+    "typescript": "6.0.3",
+    "vite": "8.0.12",
+    "vue-tsc": "3.2.8"
+  },
+  "packageManager": "yarn@4.13.0",
+  "dependencies": {
+    "tailwindcss": "4.3.0",
+    "three": "0.184.0",
+    "vue": "3.5.34",
+    "vue-i18n": "11.4.2"
+  }
+}
