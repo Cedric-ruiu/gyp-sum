@@ -54,6 +54,37 @@ export const cylinderShape: ShapeDefinition = {
   computeVolume: ([d, h]) => cm3ToLiters((Math.PI / 4) * d ** 2 * h),
 };
 
+export const frustumShape: ShapeDefinition = {
+  type: "frustum",
+  labelKey: "shapes.frustum",
+  icon: "frustum",
+  fields: [
+    {
+      key: "diameterBottom",
+      labelKey: "fields.diameterBottom",
+      unitKey: "units.cm",
+      defaultValue: 10,
+      min: 0,
+    },
+    {
+      key: "diameterTop",
+      labelKey: "fields.diameterTop",
+      unitKey: "units.cm",
+      defaultValue: 8,
+      min: 0,
+    },
+    {
+      key: "height",
+      labelKey: "fields.height",
+      unitKey: "units.cm",
+      defaultValue: 10,
+      min: 0,
+    },
+  ],
+  computeVolume: ([d1, d2, h]) =>
+    cm3ToLiters(((Math.PI * h) / 12) * (d1 * d1 + d1 * d2 + d2 * d2)),
+};
+
 export const sphereShape: ShapeDefinition = {
   type: "sphere",
   labelKey: "shapes.sphere",
@@ -86,6 +117,30 @@ export const halfSphereShape: ShapeDefinition = {
   computeVolume: ([d]) => cm3ToLiters((Math.PI / 12) * d ** 3),
 };
 
+export const sphericalCapShape: ShapeDefinition = {
+  type: "spherical-cap",
+  labelKey: "shapes.sphericalCap",
+  icon: "spherical-cap",
+  fields: [
+    {
+      key: "diameter",
+      labelKey: "fields.diameter",
+      unitKey: "units.cm",
+      defaultValue: 12,
+      min: 0,
+    },
+    {
+      key: "height",
+      labelKey: "fields.height",
+      unitKey: "units.cm",
+      defaultValue: 4,
+      min: 0,
+    },
+  ],
+  computeVolume: ([d, h]) =>
+    cm3ToLiters(((Math.PI * h) / 24) * (3 * d * d + 4 * h * h)),
+};
+
 export const manualVolumeShape: ShapeDefinition = {
   type: "manual",
   labelKey: "shapes.manual",
@@ -105,8 +160,10 @@ export const manualVolumeShape: ShapeDefinition = {
 export const shapeRegistry: ShapeDefinition[] = [
   boxShape,
   cylinderShape,
+  frustumShape,
   sphereShape,
   halfSphereShape,
+  sphericalCapShape,
   manualVolumeShape,
 ];
 
@@ -117,8 +174,10 @@ export const moldShapeRegistry: ShapeDefinition[] = [boxShape, cylinderShape];
 export const objectShapeRegistry: ShapeDefinition[] = [
   boxShape,
   cylinderShape,
+  frustumShape,
   sphereShape,
   halfSphereShape,
+  sphericalCapShape,
   manualVolumeShape,
 ];
 

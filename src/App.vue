@@ -1,5 +1,11 @@
 <script setup lang="ts">
-import { computed, defineAsyncComponent } from "vue";
+import {
+  computed,
+  defineAsyncComponent,
+  onMounted,
+  onUnmounted,
+  ref,
+} from "vue";
 import { useI18n } from "vue-i18n";
 import MixParameters from "@/components/MixParameters.vue";
 import MoldConfigurator from "@/components/MoldConfigurator.vue";
@@ -9,6 +15,30 @@ import ResultPanel from "@/components/ResultPanel.vue";
 const SceneViewer = defineAsyncComponent(
   () => import("@/components/SceneViewer.vue"),
 );
+
+const sceneSlot = ref<HTMLElement | null>(null);
+const sceneVisible = ref(false);
+let sceneObserver: IntersectionObserver | null = null;
+
+onMounted(() => {
+  if (!sceneSlot.value) return;
+  sceneObserver = new IntersectionObserver(
+    (entries) => {
+      if (entries.some((e) => e.isIntersecting)) {
+        sceneVisible.value = true;
+        sceneObserver?.disconnect();
+        sceneObserver = null;
+      }
+    },
+    { rootMargin: "200px" },
+  );
+  sceneObserver.observe(sceneSlot.value);
+});
+
+onUnmounted(() => {
+  sceneObserver?.disconnect();
+  sceneObserver = null;
+});
 
 import { useCalculator } from "@/composables/useCalculator";
 import { useLocalStorage } from "@/composables/useLocalStorage";
@@ -62,7 +92,7 @@ const result = useCalculator(mold, object, mix);
     <header class="border-b border-[color:var(--color-line)] py-4">
       <div class="mx-auto max-w-6xl px-6 flex items-center justify-between">
         <a href="." aria-label="GypSum">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 190 44" class="h-7 w-31.25" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 190 44" class="-ml-1.25 h-7 w-31.25" aria-hidden="true">
             <g stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5">
               <path d="M4 10h30v30H4zM4 10l6-6h30l-6 6zM34 10l6-6M34 40l6-6M40 4v30"/>
             </g>
@@ -79,7 +109,7 @@ const result = useCalculator(mold, object, mix);
     </header>
 
     <main class="mx-auto max-w-6xl px-6 py-8">
-      <h1 class="sr-only">Calculateur de dosage eau et plâtre pour moulage</h1>
+      <h1 class="mb-4 text-xs font-medium tracking-widest uppercase flex items-center">Calculateur de dosage eau et plâtre pour moulage</h1>
 
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-x-6 gap-y-8 items-start">
         <!-- Intro (left col, row 1) -->
@@ -105,7 +135,7 @@ const result = useCalculator(mold, object, mix);
 
         <!-- Configurators (left col, row 2) -->
         <div class="order-2 lg:order-0 lg:col-start-1 lg:row-start-2 flex flex-col gap-4">
-          <MoldConfigurator v-model="mold" />
+          <MoldConfigurator v-model="mold" :object-config="object" />
           <ObjectConfigurator v-model="object" />
           <MixParameters v-model="mix" />
         </div>
@@ -117,7 +147,17 @@ const result = useCalculator(mold, object, mix);
         >
           <ResultPanel :result="result">
             <template #scene>
-              <SceneViewer :mold-config="mold" :object-config="object" />
+              <div
+                ref="sceneSlot"
+                class="w-full bg-surface"
+                style="aspect-ratio: 4 / 3"
+              >
+                <SceneViewer
+                  v-if="sceneVisible"
+                  :mold-config="mold"
+                  :object-config="object"
+                />
+              </div>
             </template>
           </ResultPanel>
         </div>

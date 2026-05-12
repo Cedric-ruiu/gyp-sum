@@ -34,12 +34,28 @@ export function useThreeScene() {
         r: number;
         h: number;
       }
+    | {
+        kind: "frustumTangents";
+        owner: THREE.Group;
+        lineA: THREE.Line;
+        lineB: THREE.Line;
+        rBottom: number;
+        rTop: number;
+        h: number;
+      }
     | { kind: "sphereBillboard"; owner: THREE.Group; line: THREE.Line }
     | {
         kind: "halfSphereArc";
         owner: THREE.Group;
         line: THREE.Line;
         r: number;
+      }
+    | {
+        kind: "sphericalCapArc";
+        owner: THREE.Group;
+        line: THREE.Line;
+        R: number;
+        h: number;
       };
   let silhouettes: Silhouette[] = [];
 
@@ -143,6 +159,36 @@ export function useThreeScene() {
           new THREE.Vector3(-px, h / 2, -pz),
           new THREE.Vector3(-px, -h / 2, -pz),
         ]);
+      } else if (s.kind === "frustumTangents") {
+        const { rBottom, rTop, h, lineA, lineB } = s;
+        const pxB = tx * rBottom;
+        const pzB = tz * rBottom;
+        const pxT = tx * rTop;
+        const pzT = tz * rTop;
+        lineA.geometry.dispose();
+        lineA.geometry = new THREE.BufferGeometry().setFromPoints([
+          new THREE.Vector3(pxT, h / 2, pzT),
+          new THREE.Vector3(pxB, -h / 2, pzB),
+        ]);
+        lineB.geometry.dispose();
+        lineB.geometry = new THREE.BufferGeometry().setFromPoints([
+          new THREE.Vector3(-pxT, h / 2, -pzT),
+          new THREE.Vector3(-pxB, -h / 2, -pzB),
+        ]);
+      } else if (s.kind === "sphericalCapArc") {
+        const { R, h, line } = s;
+        const phiMax = Math.acos((R - h) / R);
+        const yc = h - R; // sphere center y (base is at y=0)
+        const N = 48;
+        const pts: THREE.Vector3[] = [];
+        for (let i = 0; i <= N; i++) {
+          const phi = -phiMax + (i / N) * 2 * phiMax;
+          const sn = Math.sin(phi);
+          const c = Math.cos(phi);
+          pts.push(new THREE.Vector3(tx * R * sn, yc + R * c, tz * R * sn));
+        }
+        line.geometry.dispose();
+        line.geometry = new THREE.BufferGeometry().setFromPoints(pts);
       } else if (s.kind === "halfSphereArc") {
         const { r, line } = s;
         const N = 48;
@@ -256,6 +302,63 @@ export function useThreeScene() {
     });
   }
 
+  function addFrustumWireframe(
+    group: THREE.Group,
+    rBottom: number,
+    rTop: number,
+    h: number,
+    color: number,
+  ) {
+    group.add(makeCircleLine(rTop, h / 2, color));
+    group.add(makeCircleLine(rBottom, -h / 2, color));
+    const material = new THREE.LineBasicMaterial({ color });
+    const lineA = new THREE.Line(
+      new THREE.BufferGeometry().setFromPoints([
+        new THREE.Vector3(rTop, h / 2, 0),
+        new THREE.Vector3(rBottom, -h / 2, 0),
+      ]),
+      material,
+    );
+    const lineB = new THREE.Line(
+      new THREE.BufferGeometry().setFromPoints([
+        new THREE.Vector3(-rTop, h / 2, 0),
+        new THREE.Vector3(-rBottom, -h / 2, 0),
+      ]),
+      material,
+    );
+    group.add(lineA);
+    group.add(lineB);
+    silhouettes.push({
+      kind: "frustumTangents",
+      owner: group,
+      lineA,
+      lineB,
+      rBottom,
+      rTop,
+      h,
+    });
+  }
+
+  function addSphericalCapWireframe(
+    group: THREE.Group,
+    R: number,
+    h: number,
+    color: number,
+  ) {
+    // Base radius derived from the sphere radius R and cap height h.
+    const baseRadius = Math.sqrt(Math.max(0, h * (2 * R - h)));
+    group.add(makeCircleLine(baseRadius, 0, color));
+    const line = new THREE.Line(
+      new THREE.BufferGeometry().setFromPoints([
+        new THREE.Vector3(baseRadius, 0, 0),
+        new THREE.Vector3(-baseRadius, 0, 0),
+      ]),
+      new THREE.LineBasicMaterial({ color }),
+    );
+    group.add(line);
+    silhouettes.push({ kind: "sphericalCapArc", owner: group, line, R, h });
+  }
+
   function addSphereWireframe(group: THREE.Group, r: number, color: number) {
     // Single silhouette great-circle, billboarded toward the camera
     const N = 64;
@@ -324,6 +427,8 @@ export function useThreeScene() {
     switch (config.shape) {
       case "box":
       case "cylinder":
+      case "frustum":
+      case "spherical-cap":
         return d.height ?? 0;
       case "sphere":
         return d.diameter ?? 0;
@@ -401,6 +506,19 @@ export function useThreeScene() {
       return group;
     }
 
+    if (config.shape === "frustum") {
+      const d1 = d.diameterBottom ?? 0;
+      const d2 = d.diameterTop ?? 0;
+      const height = d.height ?? 0;
+      if (height <= 0 || (d1 <= 0 && d2 <= 0)) return null;
+      const rBottom = d1 / 2;
+      const rTop = d2 / 2;
+      const geometry = new THREE.CylinderGeometry(rTop, rBottom, height, 64);
+      group.add(new THREE.Mesh(geometry, faceMaterial));
+      addFrustumWireframe(group, rBottom, rTop, height, COLOR_OBJECT_EDGE);
+      return group;
+    }
+
     if (config.shape === "sphere") {
       const diameter = d.diameter ?? 0;
       if (diameter <= 0) return null;
@@ -430,6 +548,35 @@ export function useThreeScene() {
       base.rotation.x = Math.PI / 2;
       group.add(base);
       addHalfSphereWireframe(group, r, COLOR_OBJECT_EDGE);
+      return group;
+    }
+
+    if (config.shape === "spherical-cap") {
+      const diameter = d.diameter ?? 0;
+      const height = d.height ?? 0;
+      if (diameter <= 0 || height <= 0) return null;
+      const a = diameter / 2;
+      // Sphere radius implied by base radius `a` and cap height `h`.
+      const R = (a * a + height * height) / (2 * height);
+      const thetaLength = Math.acos((R - height) / R);
+      const domeGeometry = new THREE.SphereGeometry(
+        R,
+        32,
+        32,
+        0,
+        Math.PI * 2,
+        0,
+        thetaLength,
+      );
+      const dome = new THREE.Mesh(domeGeometry, faceMaterial);
+      // Sphere is built around origin; shift so the cap base lies at y=0.
+      dome.position.y = -(R - height);
+      group.add(dome);
+      const baseGeometry = new THREE.CircleGeometry(a, 64);
+      const base = new THREE.Mesh(baseGeometry, faceMaterial);
+      base.rotation.x = Math.PI / 2;
+      group.add(base);
+      addSphericalCapWireframe(group, R, height, COLOR_OBJECT_EDGE);
       return group;
     }
 
@@ -524,7 +671,7 @@ export function useThreeScene() {
     const moldHeight = lastMoldConfig ? getMoldHeight(lastMoldConfig) : 0;
     const objectHeight = getObjectHeight(config);
 
-    if (config.shape === "half-sphere") {
+    if (config.shape === "half-sphere" || config.shape === "spherical-cap") {
       // Flat base sits on the floor of the mold.
       group.position.y = -moldHeight / 2;
     } else {

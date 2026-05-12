@@ -64,6 +64,12 @@ const { t } = useI18n();
         <line x1="17" y1="5" x2="17" y2="15"/>
         <ellipse cx="10" cy="15" rx="7" ry="2.5"/>
       </svg>
+      <svg v-else-if="shape.icon === 'frustum'" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1" class="w-3.5 h-3.5 shrink-0">
+        <ellipse cx="10" cy="5" rx="4" ry="1.5"/>
+        <line x1="6" y1="5" x2="3" y2="15"/>
+        <line x1="14" y1="5" x2="17" y2="15"/>
+        <ellipse cx="10" cy="15" rx="7" ry="2.5"/>
+      </svg>
       <svg v-else-if="shape.icon === 'sphere'" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1" class="w-3.5 h-3.5 shrink-0">
         <circle cx="10" cy="10" r="7"/>
         <ellipse cx="10" cy="10" rx="7" ry="3"/>
@@ -73,6 +79,11 @@ const { t } = useI18n();
         <path d="M3,11 A7,7 0 0,1 17,11"/>
         <ellipse cx="10" cy="11" rx="7" ry="2.5"/>
         <line x1="10" y1="4" x2="10" y2="11"/>
+      </svg>
+      <svg v-else-if="shape.icon === 'spherical-cap'" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1" class="w-3.5 h-3.5 shrink-0">
+        <path d="M3,13 A10,10 0 0,1 17,13"/>
+        <ellipse cx="10" cy="13" rx="7" ry="2"/>
+        <line x1="10" y1="8" x2="10" y2="13"/>
       </svg>
       <svg v-else-if="shape.icon === 'manual'" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1" stroke-dasharray="2,1.5" class="w-3.5 h-3.5 shrink-0">
         <rect x="3" y="7" width="10" height="9"/>
