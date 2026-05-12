@@ -62,7 +62,7 @@ const result = useCalculator(mold, object, mix);
     <header class="border-b border-[color:var(--color-line)] py-4">
       <div class="mx-auto max-w-6xl px-6 flex items-center justify-between">
         <a href="." aria-label="GypSum">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 190 44" class="h-7 w-31.25" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 190 44" class="-ml-1.25 h-7 w-31.25" aria-hidden="true">
             <g stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5">
               <path d="M4 10h30v30H4zM4 10l6-6h30l-6 6zM34 10l6-6M34 40l6-6M40 4v30"/>
             </g>
