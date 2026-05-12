@@ -1,5 +1,11 @@
 <script setup lang="ts">
-import { computed, defineAsyncComponent } from "vue";
+import {
+  computed,
+  defineAsyncComponent,
+  onMounted,
+  onUnmounted,
+  ref,
+} from "vue";
 import { useI18n } from "vue-i18n";
 import MixParameters from "@/components/MixParameters.vue";
 import MoldConfigurator from "@/components/MoldConfigurator.vue";
@@ -9,6 +15,30 @@ import ResultPanel from "@/components/ResultPanel.vue";
 const SceneViewer = defineAsyncComponent(
   () => import("@/components/SceneViewer.vue"),
 );
+
+const sceneSlot = ref<HTMLElement | null>(null);
+const sceneVisible = ref(false);
+let sceneObserver: IntersectionObserver | null = null;
+
+onMounted(() => {
+  if (!sceneSlot.value) return;
+  sceneObserver = new IntersectionObserver(
+    (entries) => {
+      if (entries.some((e) => e.isIntersecting)) {
+        sceneVisible.value = true;
+        sceneObserver?.disconnect();
+        sceneObserver = null;
+      }
+    },
+    { rootMargin: "200px" },
+  );
+  sceneObserver.observe(sceneSlot.value);
+});
+
+onUnmounted(() => {
+  sceneObserver?.disconnect();
+  sceneObserver = null;
+});
 
 import { useCalculator } from "@/composables/useCalculator";
 import { useLocalStorage } from "@/composables/useLocalStorage";
@@ -117,7 +147,17 @@ const result = useCalculator(mold, object, mix);
         >
           <ResultPanel :result="result">
             <template #scene>
-              <SceneViewer :mold-config="mold" :object-config="object" />
+              <div
+                ref="sceneSlot"
+                class="w-full bg-surface"
+                style="aspect-ratio: 4 / 3"
+              >
+                <SceneViewer
+                  v-if="sceneVisible"
+                  :mold-config="mold"
+                  :object-config="object"
+                />
+              </div>
             </template>
           </ResultPanel>
         </div>
