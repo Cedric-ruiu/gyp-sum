@@ -2,8 +2,10 @@ export type ShapeType = "box" | "cylinder";
 export type ObjectShapeType =
   | "box"
   | "cylinder"
+  | "frustum"
   | "sphere"
   | "half-sphere"
+  | "spherical-cap"
   | "none";
 
 // Préparation système d'unités (Phase ultérieure)

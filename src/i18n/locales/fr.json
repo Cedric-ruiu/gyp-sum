@@ -26,8 +26,10 @@
   "shapes": {
     "box": "Pavé",
     "cylinder": "Cylindre",
+    "frustum": "Tronc de cône",
     "sphere": "Sphère",
     "halfSphere": "Demi-sphère",
+    "sphericalCap": "Calotte sphérique",
     "manual": "Volume libre"
   },
   "fields": {
@@ -35,6 +37,8 @@
     "width": "Largeur",
     "height": "Hauteur",
     "diameter": "Diamètre",
+    "diameterBottom": "Diamètre bas",
+    "diameterTop": "Diamètre haut",
     "volume": "Volume"
   },
   "mix": {

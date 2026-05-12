@@ -123,6 +123,20 @@ function adaptToObject() {
         width: diam + 2 * m,
         height: diam / 2 + m,
       };
+    } else if (obj.shape === "frustum") {
+      const maxDiam = Math.max(d.diameterBottom || 0, d.diameterTop || 0);
+      dims = {
+        length: maxDiam + 2 * m,
+        width: maxDiam + 2 * m,
+        height: (d.height || 0) + m,
+      };
+    } else if (obj.shape === "spherical-cap") {
+      const diam = d.diameter || 0;
+      dims = {
+        length: diam + 2 * m,
+        width: diam + 2 * m,
+        height: (d.height || 0) + m,
+      };
     }
   } else if (moldShape === "cylinder") {
     if (obj.shape === "box") {
@@ -144,6 +158,12 @@ function adaptToObject() {
     } else if (obj.shape === "half-sphere") {
       const diam = d.diameter || 0;
       dims = { diameter: diam + 2 * m, height: diam / 2 + m };
+    } else if (obj.shape === "frustum") {
+      const maxDiam = Math.max(d.diameterBottom || 0, d.diameterTop || 0);
+      dims = { diameter: maxDiam + 2 * m, height: (d.height || 0) + m };
+    } else if (obj.shape === "spherical-cap") {
+      const diam = d.diameter || 0;
+      dims = { diameter: diam + 2 * m, height: (d.height || 0) + m };
     }
   }
 
