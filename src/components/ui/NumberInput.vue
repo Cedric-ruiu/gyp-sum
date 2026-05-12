@@ -108,6 +108,8 @@ const isInvalid = computed(() => {
         class="w-full min-w-0 bg-transparent px-3 py-2 font-mono text-sm font-light tnum text-ink outline-none"
         @beforeinput="onBeforeInput"
         @input="onInput"
+        @keydown.up.prevent="increment"
+        @keydown.down.prevent="decrement"
       />
       <span
         v-if="unit"

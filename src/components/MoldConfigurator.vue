@@ -40,6 +40,13 @@ function cancelEdit() {
   editingMargin.value = false;
 }
 
+function stepMargin(delta: number) {
+  const current = Number(marginRaw.value.replace(",", "."));
+  const base = Number.isNaN(current) ? adaptMargin.value : current;
+  const next = Math.max(0.1, Math.round((base + delta) * 10) / 10);
+  marginRaw.value = String(next);
+}
+
 const { t, n } = useI18n();
 
 const currentShape = computed(
@@ -140,9 +147,9 @@ function adaptToObject() {
     }
   }
 
-  if (dims) emit("update:modelValue", { ...props.modelValue, dimensions: dims });
+  if (dims)
+    emit("update:modelValue", { ...props.modelValue, dimensions: dims });
 }
-
 </script>
 
 <template>
@@ -190,7 +197,7 @@ function adaptToObject() {
         <button
           v-if="!editingMargin"
           type="button"
-          class="font-mono text-ink underline decoration-dashed underline-offset-2 transition-colors duration-150 hover:text-accent"
+          class="p-2 font-mono text-ink underline decoration-dashed underline-offset-2 transition-colors duration-150 hover:text-accent"
           :title="t('mold.marginEditHint')"
           @click="startEditMargin"
         >{{ adaptMarginDisplay }}</button>
@@ -204,6 +211,8 @@ function adaptToObject() {
           @blur="commitMargin"
           @keydown.enter.prevent="commitMargin"
           @keydown.escape="cancelEdit"
+          @keydown.up.prevent="stepMargin(0.5)"
+          @keydown.down.prevent="stepMargin(-0.5)"
         />
         {{ t("units.cm") }}
       </span>
