@@ -51,6 +51,14 @@ function onInput(e: Event) {
   if (!Number.isNaN(n)) emit("update:modelValue", n);
 }
 
+function onBlur(e: Event) {
+  const raw = (e.target as HTMLInputElement).value.replace(",", ".");
+  const n = Number(raw);
+  if (!Number.isNaN(n) && raw !== "") {
+    emit("update:modelValue", clamp(Math.round(n * 10) / 10));
+  }
+}
+
 function increment() {
   const cur = props.modelValue ?? 0;
   emit("update:modelValue", clamp(roundToStep(cur + props.step)));
@@ -108,6 +116,7 @@ const isInvalid = computed(() => {
         class="w-full min-w-0 bg-transparent px-3 py-2 font-mono text-sm font-light tnum text-ink outline-none"
         @beforeinput="onBeforeInput"
         @input="onInput"
+        @blur="onBlur"
         @keydown.up.prevent="increment"
         @keydown.down.prevent="decrement"
       />
