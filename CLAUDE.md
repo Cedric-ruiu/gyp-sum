@@ -12,7 +12,10 @@ SPA statique hébergée sur GitHub Pages (`base: '/gyp-sum/'`). Aucun backend.
   lint safe + unsafe, organize imports). Toujours lancer `yarn format` avant
   commit. `css.parser.tailwindDirectives: true` est requis pour `@theme`, `@apply`.
 - `yarn build` = `vue-tsc --noEmit && vite build`
-- Fonts : Bunny Fonts uniquement (pas Google Fonts)
+- Fonts : auto-hébergées dans `public/fonts/` (Fontsource, latin subset, woff2).
+  Inter 300/400/500 + JetBrains Mono 300/400. Preload des 3 fichiers critiques
+  dans `index.html`. Fallbacks avec metric overrides dans `main.css` pour CLS
+  nul au font-swap. Pas de Google Fonts, pas de Bunny.
 
 ## Architecture
 
@@ -85,7 +88,7 @@ accent `#2563EB`, accent-soft `#F59E0B`, danger `#DC2626`.
 
 ## Design
 
-- Police corps : Inter 300/400, valeurs numériques : JetBrains Mono 300/400
+- Police corps : Inter 300/400/500, valeurs numériques : JetBrains Mono 300/400
 - Bordures 1px, pas d'ombres, `rounded` max (pas `rounded-xl`)
 - Transitions 150–200 ms
 - Pas de dark mode, pas de sélecteur de langue, pas de sélecteur d'unités

@@ -3,8 +3,8 @@ import tailwindcss from "@tailwindcss/vite";
 import vue from "@vitejs/plugin-vue";
 import { defineConfig } from "vite";
 
-export default defineConfig(({ command }) => ({
-  base: command === "serve" ? "/" : "/gyp-sum/",
+export default defineConfig(() => ({
+  base: "/gyp-sum/",
   plugins: [vue(), tailwindcss()],
   resolve: {
     alias: {
