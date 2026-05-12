@@ -105,7 +105,7 @@ const result = useCalculator(mold, object, mix);
 
         <!-- Configurators (left col, row 2) -->
         <div class="order-2 lg:order-0 lg:col-start-1 lg:row-start-2 flex flex-col gap-4">
-          <MoldConfigurator v-model="mold" />
+          <MoldConfigurator v-model="mold" :object-config="object" />
           <ObjectConfigurator v-model="object" />
           <MixParameters v-model="mix" />
         </div>

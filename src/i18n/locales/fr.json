@@ -6,7 +6,11 @@
   "mold": {
     "title": "Moule",
     "volume": "Volume du moule",
-    "titleTooltip": "Les dimensions correspondent à celles de votre coffrage intérieur. La hauteur à renseigner est celle jusqu'où vous souhaitez remplir le plâtre, pas nécessairement la hauteur totale du coffrage."
+    "titleTooltip": "Les dimensions correspondent à celles de votre coffrage intérieur. La hauteur à renseigner est celle jusqu'où vous souhaitez remplir le plâtre, pas nécessairement la hauteur totale du coffrage.",
+    "adaptToObject": "Adapter au gabarit",
+    "adaptToObjectTooltip": "Calcule les dimensions minimales du moule à partir de la pièce définie, en ajoutant 2,5 cm de marge de chaque côté et au-dessus. Les dimensions du moule sont mises à jour automatiquement — utile pour dimensionner votre coffrage avant de commencer.",
+    "margin": "marge",
+    "marginEditHint": "Cliquer pour modifier la marge"
   },
   "object": {
     "title": "Pièce à mouler",
