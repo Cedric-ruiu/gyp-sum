@@ -98,20 +98,21 @@ const volume = computed(() => {
         />
       </div>
 
-      <div
-        v-else-if="currentShape"
-        class="grid gap-3"
-        :style="{ gridTemplateColumns: `repeat(${currentShape.fields.length}, minmax(0, 1fr))` }"
-      >
-        <NumberInput
-          v-for="field in currentShape.fields"
-          :key="field.key"
-          :label="t(field.labelKey)"
-          :unit="t(field.unitKey)"
-          :min="field.min"
-          :model-value="modelValue.dimensions?.[field.key] ?? field.defaultValue"
-          @update:model-value="updateField(field.key, $event)"
-        />
+      <div v-else-if="currentShape" class="fields-grid-wrap">
+        <div
+          class="fields-grid"
+          :style="{ '--fields-count': currentShape.fields.length }"
+        >
+          <NumberInput
+            v-for="field in currentShape.fields"
+            :key="field.key"
+            :label="t(field.labelKey)"
+            :unit="t(field.unitKey)"
+            :min="field.min"
+            :model-value="modelValue.dimensions?.[field.key] ?? field.defaultValue"
+            @update:model-value="updateField(field.key, $event)"
+          />
+        </div>
       </div>
 
       <p class="mt-4 text-xs font-light text-muted">

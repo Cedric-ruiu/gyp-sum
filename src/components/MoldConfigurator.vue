@@ -184,9 +184,10 @@ function adaptToObject() {
       @update:model-value="updateShape"
     />
 
+    <div class="fields-grid-wrap mt-4">
     <div
-      class="mt-4 grid gap-3"
-      :style="{ gridTemplateColumns: `repeat(${currentShape.fields.length}, minmax(0, 1fr))` }"
+      class="fields-grid"
+      :style="{ '--fields-count': currentShape.fields.length }"
     >
       <NumberInput
         v-for="field in currentShape.fields"
@@ -197,6 +198,7 @@ function adaptToObject() {
         :model-value="modelValue.dimensions[field.key] ?? field.defaultValue"
         @update:model-value="updateField(field.key, $event)"
       />
+    </div>
     </div>
 
     <div class="mt-3 flex items-center gap-1.5">
