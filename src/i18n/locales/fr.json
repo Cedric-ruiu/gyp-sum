@@ -3,6 +3,12 @@
     "title": "Calculateur de Plâtre",
     "subtitle": "Dosage eau / plâtre pour moulage"
   },
+  "intro": {
+    "h1": "Calculateur de dosage eau et plâtre pour moulage",
+    "p1": "Ce calculateur vous donne les quantités exactes d'eau et de plâtre nécessaires pour couler un moule, en tenant compte du volume de la pièce à reproduire. L'objectif : ne pas gâcher un gramme — car un sac de 25 kg représente un coût réel, et chaque gâchée approximative finit à la poubelle.",
+    "p2": "Il repose sur la physique du mélange : quand on combine eau et plâtre, le volume final est la somme du volume d'eau et du volume occupé par les grains de plâtre (masse volumique du gypse : 2,58 kg/L). Cette approche est plus précise qu'un simple ratio volumique.",
+    "p3": "Le ratio plâtre/eau — exprimé en kg de plâtre par litre d'eau — détermine la dureté du résultat : 1,3 pour un plâtre fluide et détaillé, 1,5 pour un usage courant, 1,8 pour un plâtre dur et résistant."
+  },
   "mold": {
     "title": "Moule",
     "volume": "Volume du moule",
@@ -75,6 +81,12 @@
     "pourOrder": "Toujours verser le plâtre dans l'eau, jamais l'inverse.",
     "immersion": "Pour mesurer le volume d'une pièce irrégulière, plongez-la dans un récipient gradué et notez la montée d'eau.",
     "formula": "Formule : Eau = Volume net ÷ (1 + Ratio ÷ 2.58)"
+  },
+  "footer": {
+    "tagline": "Calculateur de dosage eau / plâtre pour moulage. Formules basées sur la masse volumique du gypse (2,58 kg/L). Aucune donnée n'est envoyée — tout reste dans votre navigateur.",
+    "createdBy": "Créé par",
+    "contribute": "Contribuer",
+    "openSource": "Projet open source — vos suggestions et retours sont les bienvenus."
   },
   "scene": {
     "placeholder": "Visualisation 3D — bientôt disponible"
