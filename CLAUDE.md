@@ -11,7 +11,13 @@ SPA statique hébergée sur GitHub Pages (`base: '/gyp-sum/'`). Aucun backend.
   `yarn format` (= `biome check . --write --unsafe`, auto-fix complet : format,
   lint safe + unsafe, organize imports). Toujours lancer `yarn format` avant
   commit. `css.parser.tailwindDirectives: true` est requis pour `@theme`, `@apply`.
-- `yarn build` = `vue-tsc --noEmit && vite build`
+  Note : `vcs.useIgnoreFile: true` dans `biome.json` → les répertoires gitignorés
+  (`tmp/`, `dist/`) sont exclus du lint.
+- `yarn build` = `vue-tsc --noEmit && vite-ssg build`
+- Pré-rendu statique via **vite-ssg/single-page** : `src/main.ts` exporte
+  `createApp = ViteSSG(App, …)`. Vite 8 utilise Rolldown — vue-i18n doit être
+  bundlé côté SSR (`ssr.noExternal: ["vue-i18n"]`) et les flags Vue définis
+  (`__VUE_PROD_DEVTOOLS__` etc.) dans `vite.config.ts`.
 - Fonts : auto-hébergées dans `public/fonts/` (Fontsource, latin subset, woff2).
   Inter 300/400/500 + JetBrains Mono 300/400. Preload des 3 fichiers critiques
   dans `index.html`. Fallbacks avec metric overrides dans `main.css` pour CLS
@@ -41,11 +47,13 @@ src/
 │   ├── MixParameters.vue
 │   ├── ResultPanel.vue
 │   ├── SceneViewer.vue     Three.js canvas, autoRotate + OrbitControls
+│   ├── HowToGuide.vue      section « Comment doser le plâtre » (tm()/rt())
+│   ├── FaqSection.vue      FAQ accordéon <details> (tm()/rt()), sans JS
 │   └── ui/
 │       ├── NumberInput.vue  virgule/point acceptés, spinners masqués
 │       ├── ShapeSelector.vue  généré depuis ShapeDefinition[], prop noneOption
 │       └── InfoTooltip.vue
-└── App.vue                 layout 2 colonnes lg, guide accordéon en bas
+└── App.vue                 layout 2 colonnes lg, guide + how-to + faq en bas
 ```
 
 ## Règle centrale : pas de switch/case sur les formes dans les composants
@@ -91,18 +99,23 @@ accent `#2563EB`, accent-soft `#F59E0B`, danger `#DC2626`.
 - Police corps : Inter 300/400/500, valeurs numériques : JetBrains Mono 300/400
 - Bordures 1px, pas d'ombres, `rounded` max (pas `rounded-xl`)
 - Transitions 150–200 ms
-- Pas de dark mode, pas de sélecteur de langue, pas de sélecteur d'unités
+- Pas de dark mode, pas de sélecteur d'unités
+- Pas de sélecteur de langue pour l'instant (EN = phase 2, architecture à décider)
 
 ## i18n
 
 Toutes les chaînes UI passent par `t()` / `$t()`. Pas de texte en dur dans les
-templates. Structure des clés : `app`, `mold`, `object`, `shapes`, `fields`,
-`mix`, `results`, `errors`, `units`, `guide`, `scene`.
+templates. Structure des clés : `app`, `intro`, `mold`, `object`, `shapes`,
+`fields`, `mix`, `results`, `errors`, `units`, `toc`, `howto`, `faq`, `guide`,
+`footer`, `scene`. Pour les tableaux de messages (steps, faq items), utiliser
+`tm()` + `rt()` (renvoie un tableau d'objets, pas une string).
 
 ## Persistance localStorage
 
 Clé `plaster-calc-state`, objet `{ mold, object, mix }`. Fallback silencieux.
-Debounce 500 ms.
+Debounce 500 ms. La lecture du localStorage est **différée dans `onMounted`**
+(SSR-safe : le pré-rendu utilise toujours les valeurs par défaut pour éviter
+un mismatch d'hydratation).
 
 ## Système d'unités
 
