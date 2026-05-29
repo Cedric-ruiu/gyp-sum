@@ -19,27 +19,30 @@
   "license": "MIT",
   "scripts": {
     "dev": "vite",
-    "build": "vue-tsc --noEmit && vite build",
+    "build": "vue-tsc --noEmit && vite-ssg build",
     "typecheck": "vue-tsc --noEmit",
     "preview": "vite preview",
     "lint": "biome check .",
     "format": "biome check . --write --unsafe"
   },
   "devDependencies": {
-    "@biomejs/biome": "2.4.15",
+    "@biomejs/biome": "2.4.16",
     "@tailwindcss/vite": "4.3.0",
-    "@types/node": "25.8.0",
+    "@types/node": "25.9.1",
     "@types/three": "0.184.1",
     "@vitejs/plugin-vue": "6.0.7",
     "typescript": "6.0.3",
-    "vite": "8.0.13",
-    "vue-tsc": "3.2.9"
+    "vite": "8.0.14",
+    "vite-ssg": "^28.3.0",
+    "vue-tsc": "3.3.2"
   },
   "packageManager": "yarn@4.13.0",
   "dependencies": {
+    "@unhead/vue": "^2.1.2",
     "tailwindcss": "4.3.0",
     "three": "0.184.0",
-    "vue": "3.5.34",
-    "vue-i18n": "11.4.2"
+    "vue": "3.5.35",
+    "vue-i18n": "11.4.4",
+    "vue-router": "^5.1.0"
   }
 }

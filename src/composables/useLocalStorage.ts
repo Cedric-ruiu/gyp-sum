@@ -1,24 +1,28 @@
-import { type Ref, ref, watch } from "vue";
+import { onMounted, type Ref, ref, watch } from "vue";
 
 export function useLocalStorage<T>(
   key: string,
   defaults: T,
   debounceMs = 500,
 ): Ref<T> {
-  let initial: T = defaults;
-  try {
-    const raw = localStorage.getItem(key);
-    if (raw !== null) {
-      const parsed = JSON.parse(raw);
-      if (parsed && typeof parsed === "object") {
-        initial = { ...defaults, ...parsed } as T;
-      }
-    }
-  } catch {
-    initial = defaults;
-  }
+  const state = ref(defaults) as Ref<T>;
 
-  const state = ref(initial) as Ref<T>;
+  // Read persisted state on the client only, after hydration. The server
+  // render (vite-ssg) always uses defaults, so reading synchronously would
+  // cause an SSR/CSR hydration mismatch for returning visitors.
+  onMounted(() => {
+    try {
+      const raw = localStorage.getItem(key);
+      if (raw !== null) {
+        const parsed = JSON.parse(raw);
+        if (parsed && typeof parsed === "object") {
+          state.value = { ...defaults, ...parsed } as T;
+        }
+      }
+    } catch {
+      // ignore parse / access errors
+    }
+  });
 
   let timer: ReturnType<typeof setTimeout> | null = null;
   watch(

@@ -3,29 +3,18 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>GypSum — Calculateur de Plâtre</title>
-    <meta name="description" content="Calculateur précis de dosage eau / plâtre pour moulage. Calcule les quantités exactes pour vos moules en tenant compte du volume de la pièce, du ratio plâtre/eau (1,3 fluide à 1,8 dur) et de la masse volumique du gypse." />
-    <meta name="keywords" content="calculateur plâtre, dosage plâtre eau, ratio plâtre, moulage plâtre, gypse, plâtre de moulage, quantité plâtre" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'"
+    />
+    <!-- Title, description, OG/Twitter, canonical, hreflang and JSON-LD are
+         emitted per locale via useHead (see src/pages/HomePage.vue). -->
     <meta name="author" content="Cédric Ruiu" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
     <meta name="google-site-verification" content="ZFL_Uz5FNhczyHJl4xXeef_O3Hp7MQX5KLSTqeT2_Lc" />
 
     <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
     <meta name="theme-color" content="#1a1a1a" media="(prefers-color-scheme: dark)" />
-
-    <link rel="canonical" href="https://cedric-ruiu.github.io/gyp-sum/" />
-
-    <meta property="og:type" content="website" />
-    <meta property="og:locale" content="fr_FR" />
-    <meta property="og:site_name" content="GypSum" />
-    <meta property="og:title" content="GypSum — Calculateur de Plâtre" />
-    <meta property="og:description" content="Dosage eau / plâtre précis pour moulage. Ne gâchez plus un gramme." />
-    <meta property="og:url" content="https://cedric-ruiu.github.io/gyp-sum/" />
-    <meta property="og:image" content="https://cedric-ruiu.github.io/gyp-sum/og-image.png" />
-
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="GypSum — Calculateur de Plâtre" />
-    <meta name="twitter:description" content="Dosage eau / plâtre précis pour moulage." />
-    <meta name="twitter:image" content="https://cedric-ruiu.github.io/gyp-sum/og-image.png" />
 
     <link rel="preload" as="font" type="font/woff2" crossorigin href="%BASE_URL%fonts/inter-latin-400-normal.woff2" />
     <link rel="preload" as="font" type="font/woff2" crossorigin href="%BASE_URL%fonts/inter-latin-300-normal.woff2" />
@@ -37,22 +26,6 @@
     <link rel="apple-touch-icon" sizes="180x180" href="%BASE_URL%apple-touch-icon.png" />
     <meta name="apple-mobile-web-app-title" content="GypSum" />
     <link rel="manifest" href="%BASE_URL%site.webmanifest" />
-
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "WebApplication",
-        "name": "GypSum",
-        "description": "Calculateur de dosage eau / plâtre pour moulage, basé sur la masse volumique du gypse (2,58 kg/L).",
-        "url": "https://cedric-ruiu.github.io/gyp-sum/",
-        "applicationCategory": "UtilityApplication",
-        "operatingSystem": "Any",
-        "inLanguage": "fr-FR",
-        "isAccessibleForFree": true,
-        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" },
-        "author": { "@type": "Person", "name": "Cédric Ruiu" }
-      }
-    </script>
   </head>
   <body>
     <div id="app"></div>

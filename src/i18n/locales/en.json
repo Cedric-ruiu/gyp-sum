@@ -1,0 +1,173 @@
+{
+  "app": {
+    "title": "Plaster Calculator",
+    "subtitle": "Water / plaster ratio for mold making"
+  },
+  "lang": {
+    "switcher": "Choose language",
+    "fr": "Français",
+    "en": "English"
+  },
+  "meta": {
+    "title": "Plaster Calculator for Mold Making: Water Ratio — GypSum",
+    "description": "Calculate the exact water and plaster amounts for your molds (ceramics, pottery, sculpture) from the mold volume and plaster-to-water ratio. Free.",
+    "keywords": "plaster calculator, plaster to water ratio calculator, pottery plaster calculator, plaster of paris calculator, mold making, mould making, ceramic mold, slip casting plaster",
+    "ogTitle": "Plaster Calculator for Mold Making",
+    "ogDescription": "Precise water / plaster amounts for your molds (ceramics, pottery, sculpture). Stop wasting plaster.",
+    "twitterDescription": "Precise water / plaster amounts for your molds (ceramics, pottery, sculpture).",
+    "schemaApp": "Plaster calculator for mold making (ceramics, pottery, sculpture), based on the density of gypsum (2.58 kg/L)."
+  },
+  "intro": {
+    "h1": "Plaster Calculator for Mold Making — Water & Plaster Ratio",
+    "p1": "This calculator gives you the exact amounts of water and plaster needed to pour a mold — for ceramics, pottery or sculpture — taking into account the volume of the piece you are reproducing. The goal: don't waste a gram — a 25 kg bag is a real cost, and every rough batch ends up in the bin.",
+    "p2": "It is based on the physics of the mix: when you combine water and plaster, the final volume is the sum of the water volume and the volume taken up by the plaster grains (gypsum density: 2.58 kg/L). This is more accurate than a simple volume ratio.",
+    "p3": "The plaster-to-water ratio — expressed in kg of plaster per liter of water — sets the final hardness: 1.3 for a fluid, detailed plaster, 1.5 for everyday use, 1.8 for a hard, durable plaster. (This is the inverse of the common water-to-plaster ratio.)"
+  },
+  "mold": {
+    "title": "Mold",
+    "volume": "Mold volume",
+    "titleTooltip": "These dimensions are those of the inside of your formwork. The height to enter is how high you want to fill with plaster, not necessarily the full height of the formwork.",
+    "adaptToObject": "Fit to object",
+    "adaptToObjectTooltip": "Computes the minimum mold dimensions from the defined piece, adding 2.5 cm of margin on each side and on top. The mold dimensions update automatically — useful to size your formwork before you start.",
+    "margin": "margin",
+    "marginEditHint": "Click to edit the margin"
+  },
+  "object": {
+    "title": "Object to mold",
+    "titleTooltip": "If your piece doesn't exactly match one of the shapes offered, choose the closest one and round the dimensions up — the volume will be slightly overestimated, which is better than running short of material.",
+    "shape": {
+      "none": "None"
+    },
+    "manualEntry": "Enter a volume directly",
+    "dimensionEntry": "Enter dimensions",
+    "manualVolume": "Volume",
+    "volume": "Object volume"
+  },
+  "shapes": {
+    "box": "Box",
+    "cylinder": "Cylinder",
+    "frustum": "Cone frustum",
+    "sphere": "Sphere",
+    "halfSphere": "Half-sphere",
+    "sphericalCap": "Spherical cap",
+    "manual": "Free volume"
+  },
+  "fields": {
+    "length": "Length",
+    "width": "Width",
+    "height": "Height",
+    "diameter": "Diameter",
+    "diameterBottom": "Bottom diameter",
+    "diameterTop": "Top diameter",
+    "volume": "Volume"
+  },
+  "mix": {
+    "title": "Mix parameters",
+    "titleTooltip": "The default values suit most uses. Only change these parameters if you understand plaster chemistry and have specific requirements for hardness or setting time.",
+    "ratio": "Plaster-to-water ratio",
+    "ratioHint": "kg of plaster per liter of water",
+    "ratioScale": "fine ← 1.3 — 1.5 — 1.8 → hard",
+    "margin": "Safety margin",
+    "density": "Gypsum density",
+    "densityTooltip": "Physical constant of calcium sulfate (CaSO₄·2H₂O). Identical whatever type of plaster you use."
+  },
+  "results": {
+    "title": "Results",
+    "water": "Water",
+    "plaster": "Plaster",
+    "withMargin": "with margin",
+    "withoutMargin": "without margin",
+    "netVolume": "Net volume"
+  },
+  "errors": {
+    "volumeExceeded": "The object volume meets or exceeds the mold volume",
+    "invalidRatio": "The ratio must be greater than 0"
+  },
+  "units": {
+    "cm": "cm",
+    "liters": "L",
+    "kg": "kg",
+    "percent": "%"
+  },
+  "guide": {
+    "title": "How to use",
+    "ratioExplain": "The plaster-to-water ratio sets the final hardness. 1.3 for a fine, fluid plaster, 1.5 for standard use, 1.8 for a hard, durable plaster. This ratio is the mass of plaster (in kg) per 1 liter of water.",
+    "pourOrder": "Always add plaster to water, never the reverse.",
+    "immersion": "To measure the volume of an irregular piece, dip it into a graduated container and read the rise in water level.",
+    "formula": "Formula: Water = Net volume ÷ (1 + Ratio ÷ 2.58)"
+  },
+  "footer": {
+    "tagline": "Water / plaster calculator for mold making. Formulas based on the density of gypsum (2.58 kg/L). No data is sent — everything stays in your browser.",
+    "createdBy": "Created by",
+    "contribute": "Contribute",
+    "openSource": "Open source project — your suggestions and feedback are welcome."
+  },
+  "toc": {
+    "label": "On this page",
+    "howto": "How-to",
+    "faq": "FAQ",
+    "guide": "How to use"
+  },
+  "howto": {
+    "title": "How to measure plaster for mold making",
+    "intro": "In five steps, calculate and prepare the right amount of plaster to fill your mold without waste.",
+    "steps": [
+      {
+        "title": "Measure the mold volume",
+        "text": "Record the inside dimensions of your formwork (length, width, the fill height you want). This is the total volume to fill with plaster."
+      },
+      {
+        "title": "Estimate the volume of the piece to mold",
+        "text": "If a piece sits in the mold, subtract its volume. Pick the closest shape, or measure it by immersion in a graduated container."
+      },
+      {
+        "title": "Choose the plaster-to-water ratio",
+        "text": "The ratio (kg of plaster per liter of water) sets the hardness: 1.3 for a fine, fluid plaster, 1.5 for everyday use, 1.8 for a hard, durable plaster."
+      },
+      {
+        "title": "Add a safety margin",
+        "text": "Plan for about 10% extra material to make up for losses (container, overflow, fast setting)."
+      },
+      {
+        "title": "Mix and pour",
+        "text": "Always add plaster to water, never the reverse. Let it slake without stirring, then mix and pour before it starts to set."
+      }
+    ]
+  },
+  "faq": {
+    "title": "Frequently asked questions",
+    "items": [
+      {
+        "q": "How much plaster do I need for a mold?",
+        "a": "It depends on the net volume to fill (mold volume minus the piece) and the plaster-to-water ratio. Enter your dimensions above: the calculator shows the exact amounts of water and plaster, safety margin included."
+      },
+      {
+        "q": "What is the right plaster-to-water ratio?",
+        "a": "The ratio is expressed in kilograms of plaster per liter of water. Use 1.3 for a fluid, detailed plaster, 1.5 for standard use, and 1.8 for a hard, strong plaster. The higher the ratio, the denser and stronger the plaster. Expressed the other way around, that is a water-to-plaster ratio of about 0.77 down to 0.56."
+      },
+      {
+        "q": "How much plaster for a pottery or ceramic mold?",
+        "a": "For ceramics you want a porous plaster that absorbs water from the slip: a ratio of 1.3 to 1.5 (kg of plaster per liter of water) suits most slip-casting molds. Enter your mold volume above to get the exact amounts."
+      },
+      {
+        "q": "Do you add plaster to water or water to plaster?",
+        "a": "Always add plaster to water, never the reverse. Sprinkle the plaster in gradually, let it slake for a few minutes, then mix to avoid lumps."
+      },
+      {
+        "q": "What is the density of plaster (Plaster of Paris)?",
+        "a": "The calculation is based on the density of gypsum (calcium sulfate): 2.58 kg/L. It is a physical constant, the same whatever the type of plaster (Plaster of Paris, pottery plaster, etc.). It allows more accurate dosing than a simple volume ratio."
+      },
+      {
+        "q": "How do I measure the volume of an irregular object?",
+        "a": "Dip the object into a graduated container filled with water and note how far the level rises: the difference is its volume. You can also enter that volume directly in the calculator."
+      },
+      {
+        "q": "How much water for 1 kg of plaster?",
+        "a": "At a ratio of 1.5, you need about 0.67 liter of water for 1 kg of plaster (1 ÷ ratio). At 1.3 it's ~0.77 L, and at 1.8 about 0.56 L. The calculator does this automatically for your mold volume."
+      }
+    ]
+  },
+  "scene": {
+    "placeholder": "3D view — coming soon"
+  }
+}
