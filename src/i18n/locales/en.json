@@ -3,6 +3,11 @@
     "title": "Plaster Calculator",
     "subtitle": "Water / plaster ratio for mold making"
   },
+  "lang": {
+    "switcher": "Choose language",
+    "fr": "Français",
+    "en": "English"
+  },
   "meta": {
     "title": "Plaster Calculator for Mold Making: Water Ratio — GypSum",
     "description": "Calculate the exact water and plaster amounts for your molds (ceramics, pottery, sculpture) from the mold volume and plaster-to-water ratio. Free.",

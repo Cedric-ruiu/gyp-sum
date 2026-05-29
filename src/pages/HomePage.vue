@@ -14,6 +14,7 @@ import MixParameters from "@/components/MixParameters.vue";
 import MoldConfigurator from "@/components/MoldConfigurator.vue";
 import ObjectConfigurator from "@/components/ObjectConfigurator.vue";
 import ResultPanel from "@/components/ResultPanel.vue";
+import LanguageSwitcher from "@/components/ui/LanguageSwitcher.vue";
 
 const SceneViewer = defineAsyncComponent(
   () => import("@/components/SceneViewer.vue"),
@@ -198,9 +199,12 @@ const result = useCalculator(mold, object, mix);
             <text x="54" y="34" fill="currentColor" font-family="Inter, system-ui, sans-serif" font-size="36" font-weight="300" letter-spacing="-.5">GypSum</text>
           </svg>
         </a>
-        <p class="text-xs font-light text-[color:var(--color-muted)] hidden sm:block">
-          {{ t("app.subtitle") }}
-        </p>
+        <div class="flex items-center gap-4">
+          <p class="text-xs font-light text-muted hidden sm:block">
+            {{ t("app.subtitle") }}
+          </p>
+          <LanguageSwitcher />
+        </div>
       </div>
     </header>
 
