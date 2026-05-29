@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { useHead } from "@unhead/vue";
 import {
   computed,
   defineAsyncComponent,
@@ -46,7 +47,100 @@ import { useCalculator } from "@/composables/useCalculator";
 import { useLocalStorage } from "@/composables/useLocalStorage";
 import type { MixParams, PersistedState } from "@/types";
 
-const { t } = useI18n();
+const { t, tm, rt, locale } = useI18n();
+
+// Per-locale SEO head. Pre-rendered by vite-ssg into each route's HTML and
+// reactive on the client when the locale switches. JSON-LD is built from the
+// same i18n data shown on the page, so schema always matches the visible copy.
+const SITE_URL = "https://cedric-ruiu.github.io/gyp-sum";
+const FR_URL = `${SITE_URL}/`;
+const EN_URL = `${SITE_URL}/en/`;
+const OG_IMAGE = `${SITE_URL}/og-image.png`;
+
+useHead(() => {
+  const isEn = locale.value === "en";
+  const canonical = isEn ? EN_URL : FR_URL;
+  const inLanguage = isEn ? "en-US" : "fr-FR";
+
+  const appSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    name: "GypSum",
+    description: t("meta.schemaApp"),
+    keywords: t("meta.keywords"),
+    url: canonical,
+    applicationCategory: "UtilityApplication",
+    operatingSystem: "Any",
+    inLanguage,
+    isAccessibleForFree: true,
+    offers: {
+      "@type": "Offer",
+      price: "0",
+      priceCurrency: isEn ? "USD" : "EUR",
+    },
+    author: { "@type": "Person", name: "Cédric Ruiu" },
+    dateModified: "2026-05-29",
+  };
+
+  const howToSchema = {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    name: t("howto.title"),
+    description: t("howto.intro"),
+    inLanguage,
+    step: (tm("howto.steps") as { title: string; text: string }[]).map(
+      (s, i) => ({
+        "@type": "HowToStep",
+        position: i + 1,
+        name: rt(s.title),
+        text: rt(s.text),
+      }),
+    ),
+  };
+
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    inLanguage,
+    mainEntity: (tm("faq.items") as { q: string; a: string }[]).map((it) => ({
+      "@type": "Question",
+      name: rt(it.q),
+      acceptedAnswer: { "@type": "Answer", text: rt(it.a) },
+    })),
+  };
+
+  return {
+    htmlAttrs: { lang: isEn ? "en" : "fr" },
+    title: t("meta.title"),
+    meta: [
+      { name: "description", content: t("meta.description") },
+      { name: "keywords", content: t("meta.keywords") },
+      { property: "og:type", content: "website" },
+      { property: "og:site_name", content: "GypSum" },
+      { property: "og:locale", content: isEn ? "en_US" : "fr_FR" },
+      { property: "og:locale:alternate", content: isEn ? "fr_FR" : "en_US" },
+      { property: "og:title", content: t("meta.ogTitle") },
+      { property: "og:description", content: t("meta.ogDescription") },
+      { property: "og:url", content: canonical },
+      { property: "og:image", content: OG_IMAGE },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: t("meta.ogTitle") },
+      { name: "twitter:description", content: t("meta.twitterDescription") },
+      { name: "twitter:image", content: OG_IMAGE },
+    ],
+    link: [
+      { rel: "canonical", href: canonical },
+      { rel: "alternate", hreflang: "fr", href: FR_URL },
+      { rel: "alternate", hreflang: "en", href: EN_URL },
+      { rel: "alternate", hreflang: "x-default", href: FR_URL },
+    ],
+    script: [
+      { type: "application/ld+json", innerHTML: JSON.stringify(appSchema) },
+      { type: "application/ld+json", innerHTML: JSON.stringify(howToSchema) },
+      { type: "application/ld+json", innerHTML: JSON.stringify(faqSchema) },
+    ],
+  };
+});
 
 const defaults: PersistedState = {
   mold: {

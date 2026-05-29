@@ -3,6 +3,15 @@
     "title": "Plaster Calculator",
     "subtitle": "Water / plaster ratio for mold making"
   },
+  "meta": {
+    "title": "Plaster Calculator for Mold Making: Water Ratio — GypSum",
+    "description": "Calculate the exact water and plaster amounts for your molds (ceramics, pottery, sculpture) from the mold volume and plaster-to-water ratio. Free.",
+    "keywords": "plaster calculator, plaster to water ratio calculator, pottery plaster calculator, plaster of paris calculator, mold making, mould making, ceramic mold, slip casting plaster",
+    "ogTitle": "Plaster Calculator for Mold Making",
+    "ogDescription": "Precise water / plaster amounts for your molds (ceramics, pottery, sculpture). Stop wasting plaster.",
+    "twitterDescription": "Precise water / plaster amounts for your molds (ceramics, pottery, sculpture).",
+    "schemaApp": "Plaster calculator for mold making (ceramics, pottery, sculpture), based on the density of gypsum (2.58 kg/L)."
+  },
   "intro": {
     "h1": "Plaster Calculator for Mold Making — Water & Plaster Ratio",
     "p1": "This calculator gives you the exact amounts of water and plaster needed to pour a mold — for ceramics, pottery or sculpture — taking into account the volume of the piece you are reproducing. The goal: don't waste a gram — a 25 kg bag is a real cost, and every rough batch ends up in the bin.",
