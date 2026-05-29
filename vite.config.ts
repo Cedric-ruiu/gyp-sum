@@ -6,6 +6,11 @@ import { defineConfig } from "vite";
 export default defineConfig(() => ({
   base: "/gyp-sum/",
   plugins: [vue(), tailwindcss()],
+  // vite-ssg: pre-render each route to its own directory index
+  // (`/en` -> `dist/en/index.html`, served at `/gyp-sum/en/`).
+  ssgOptions: {
+    dirStyle: "nested",
+  },
   // Vue feature flags — required so externalised deps (vue-i18n) resolve them
   // during the vite-ssg server render.
   define: {

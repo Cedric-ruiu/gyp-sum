@@ -5,7 +5,9 @@ SPA statique hébergée sur GitHub Pages (`base: '/gyp-sum/'`). Aucun backend.
 ## Stack
 
 - Vue 3 Composition API + `<script setup>` + TypeScript
-- Vite 8, Tailwind CSS v4 (`@tailwindcss/vite`), vue-i18n 10 (`legacy: false`)
+- Vite 8, Tailwind CSS v4 (`@tailwindcss/vite`), vue-i18n 11 (`legacy: false`)
+- vue-router 5 (2 routes statiques pour le multi-pages i18n) + `@unhead/vue` 2
+  (gestion du `<head>` par locale)
 - Three.js + OrbitControls pour la scène 3D
 - Biome 2.4 (lint + format + CSS Tailwind v4) — `yarn lint` (vérif) /
   `yarn format` (= `biome check . --write --unsafe`, auto-fix complet : format,
@@ -14,10 +16,20 @@ SPA statique hébergée sur GitHub Pages (`base: '/gyp-sum/'`). Aucun backend.
   Note : `vcs.useIgnoreFile: true` dans `biome.json` → les répertoires gitignorés
   (`tmp/`, `dist/`) sont exclus du lint.
 - `yarn build` = `vue-tsc --noEmit && vite-ssg build`
-- Pré-rendu statique via **vite-ssg/single-page** : `src/main.ts` exporte
-  `createApp = ViteSSG(App, …)`. Vite 8 utilise Rolldown — vue-i18n doit être
-  bundlé côté SSR (`ssr.noExternal: ["vue-i18n"]`) et les flags Vue définis
-  (`__VUE_PROD_DEVTOOLS__` etc.) dans `vite.config.ts`.
+- Pré-rendu statique **multi-pages via vite-ssg + vue-router** : `src/main.ts`
+  exporte `createApp = ViteSSG(App, { routes, base }, …)`. Deux routes
+  pré-rendues : `/` (FR) et `/en` (EN) → `dist/index.html` et
+  `dist/en/index.html` (`ssgOptions.dirStyle: 'nested'`). `App.vue` n'est qu'un
+  `<RouterView/>` ; la page est `src/pages/HomePage.vue`. La locale est pilotée
+  par `route.meta.locale` via un guard `router.beforeEach`. Vite 8 utilise
+  Rolldown — vue-i18n doit être bundlé côté SSR (`ssr.noExternal: ["vue-i18n"]`)
+  et les flags Vue définis (`__VUE_PROD_DEVTOOLS__` etc.) dans `vite.config.ts`.
+- L'instance i18n est créée **par app** (`createAppI18n()`), pas en singleton :
+  vite-ssg appelle la factory une fois par route, et un singleton partagé fait
+  fuiter la locale d'une page à l'autre.
+- **`@unhead/vue` épinglé en `^2.1.2`** (= version utilisée par vite-ssg). En v3,
+  le `useHead` de l'app et le head de vite-ssg sont deux instances distinctes →
+  rien n'est injecté dans le HTML pré-généré. Ne pas remonter sans aligner vite-ssg.
 - Fonts : auto-hébergées dans `public/fonts/` (Fontsource, latin subset, woff2).
   Inter 300/400/500 + JetBrains Mono 300/400. Preload des 3 fichiers critiques
   dans `index.html`. Fallbacks avec metric overrides dans `main.css` pour CLS
@@ -39,8 +51,10 @@ src/
 │   ├── useLocalStorage.ts  ref + watch debounce 500 ms, clé 'plaster-calc-state'
 │   └── useThreeScene.ts    init/updateMold/updateObject/destroy (Three.js)
 ├── i18n/
-│   ├── index.ts            locale 'fr' uniquement pour l'instant
-│   └── locales/fr.json     toutes les chaînes UI
+│   ├── index.ts            createAppI18n() (instance par app, SSG-safe), SUPPORTED_LOCALES = ['fr','en']
+│   └── locales/{fr,en}.json   toutes les chaînes UI (fr = défaut/x-default)
+├── pages/
+│   └── HomePage.vue        la page (ex-App.vue) + useHead SEO par locale
 ├── components/
 │   ├── MoldConfigurator.vue
 │   ├── ObjectConfigurator.vue  (toggle saisie directe de volume)
@@ -52,8 +66,9 @@ src/
 │   └── ui/
 │       ├── NumberInput.vue  virgule/point acceptés, spinners masqués
 │       ├── ShapeSelector.vue  généré depuis ShapeDefinition[], prop noneOption
-│       └── InfoTooltip.vue
-└── App.vue                 layout 2 colonnes lg, guide + how-to + faq en bas
+│       ├── InfoTooltip.vue
+│       └── LanguageSwitcher.vue  liens FR/EN (RouterLink, hreflang, aria-current)
+└── App.vue                 shell racine : <RouterView/> uniquement
 ```
 
 ## Règle centrale : pas de switch/case sur les formes dans les composants
@@ -100,15 +115,27 @@ accent `#2563EB`, accent-soft `#F59E0B`, danger `#DC2626`.
 - Bordures 1px, pas d'ombres, `rounded` max (pas `rounded-xl`)
 - Transitions 150–200 ms
 - Pas de dark mode, pas de sélecteur d'unités
-- Pas de sélecteur de langue pour l'instant (EN = phase 2, architecture à décider)
+- Sélecteur de langue FR/EN dans le header (`ui/LanguageSwitcher.vue`)
 
 ## i18n
 
-Toutes les chaînes UI passent par `t()` / `$t()`. Pas de texte en dur dans les
-templates. Structure des clés : `app`, `intro`, `mold`, `object`, `shapes`,
-`fields`, `mix`, `results`, `errors`, `units`, `toc`, `howto`, `faq`, `guide`,
-`footer`, `scene`. Pour les tableaux de messages (steps, faq items), utiliser
-`tm()` + `rt()` (renvoie un tableau d'objets, pas une string).
+Deux locales : `fr` (défaut + x-default) et `en`. Toutes les chaînes UI passent
+par `t()` / `$t()`. Pas de texte en dur dans les templates. Clés : `app`, `lang`,
+`meta`, `intro`, `mold`, `object`, `shapes`, `fields`, `mix`, `results`,
+`errors`, `units`, `toc`, `howto`, `faq`, `guide`, `footer`, `scene`. Pour les
+tableaux de messages (steps, faq items), utiliser `tm()` + `rt()`.
+
+- `meta.*` alimente le `<head>` par locale. Le `<head>` est généré par `useHead`
+  dans `HomePage.vue` : title/description/keywords, canonical, hreflang
+  réciproques (fr/en/x-default, FR = x-default), og/twitter, et les JSON-LD
+  WebApplication/HowTo/FAQPage **construits depuis les mêmes clés i18n que le
+  visible** (invariant schema == visible). `index.html` ne contient plus aucune
+  balise locale-spécifique.
+- ⚠️ Jamais de caractère `|` dans une valeur i18n : c'est le séparateur de pluriel
+  de vue-i18n (`t()` ne renverrait que le 1er segment). Utiliser `—` / `/` / `:`.
+- Convention EN : le ratio reste « kg de plâtre par litre d'eau » (formules
+  inchangées), libellé « Plaster-to-water ratio » ; la FAQ EN mentionne la
+  convention inverse « water-to-plaster ».
 
 ## Persistance localStorage
 
@@ -137,7 +164,9 @@ un mismatch d'hydratation).
 
 ## Ce qu'il ne faut pas faire
 
-- Pas de Pinia, pas de router, pas de librairie UI (Vuetify, PrimeVue…)
+- Pas de Pinia, pas de librairie UI (Vuetify, PrimeVue…). vue-router sert
+  uniquement au multi-pages SSG i18n (2 routes statiques) — pas de logique métier
+  ni de routes dynamiques.
 - Pas de librairie de formulaires (VeeValidate…)
 - Pas de Google Fonts
 - Pas de GitHub Action de déploiement

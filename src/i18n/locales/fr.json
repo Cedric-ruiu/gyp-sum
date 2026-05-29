@@ -3,6 +3,20 @@
     "title": "Calculateur de Plâtre",
     "subtitle": "Dosage eau / plâtre pour moulage"
   },
+  "lang": {
+    "switcher": "Choisir la langue",
+    "fr": "Français",
+    "en": "English"
+  },
+  "meta": {
+    "title": "Calculateur de dosage eau / plâtre pour moulage — GypSum",
+    "description": "Calculez au gramme près le dosage eau / plâtre de vos moulages (céramique, sculpture) selon le volume du moule et le ratio plâtre/eau. Gratuit.",
+    "keywords": "calculateur plâtre, dosage plâtre eau, ratio plâtre eau, proportion eau plâtre, plâtre de moulage, moule céramique, plâtre poterie, plâtre de Paris, quantité plâtre moule",
+    "ogTitle": "Calculateur de dosage eau / plâtre pour moulage",
+    "ogDescription": "Dosage eau / plâtre précis pour vos moulages (céramique, sculpture). Ne gâchez plus un gramme.",
+    "twitterDescription": "Dosage eau / plâtre précis pour vos moulages (céramique, sculpture).",
+    "schemaApp": "Calculateur de dosage eau / plâtre pour le moulage (céramique, poterie, sculpture), basé sur la masse volumique du gypse (2,58 kg/L)."
+  },
   "intro": {
     "h1": "Calculateur de dosage eau et plâtre pour moulage",
     "p1": "Ce calculateur vous donne les quantités exactes d'eau et de plâtre nécessaires pour couler un moule — en céramique, en poterie ou en sculpture — en tenant compte du volume de la pièce à reproduire. L'objectif : ne pas gâcher un gramme — car un sac de 25 kg représente un coût réel, et chaque gâchée approximative finit à la poubelle.",
