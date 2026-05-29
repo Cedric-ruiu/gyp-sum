@@ -7,6 +7,8 @@ import {
   ref,
 } from "vue";
 import { useI18n } from "vue-i18n";
+import FaqSection from "@/components/FaqSection.vue";
+import HowToGuide from "@/components/HowToGuide.vue";
 import MixParameters from "@/components/MixParameters.vue";
 import MoldConfigurator from "@/components/MoldConfigurator.vue";
 import ObjectConfigurator from "@/components/ObjectConfigurator.vue";
@@ -109,28 +111,20 @@ const result = useCalculator(mold, object, mix);
     </header>
 
     <main class="mx-auto max-w-6xl px-6 py-8">
-      <h1 class="mb-4 text-xs font-medium tracking-widest uppercase flex items-center">Calculateur de dosage eau et plâtre pour moulage</h1>
+      <h1 class="mb-4 text-xs font-medium tracking-widest uppercase flex items-center">{{ t("intro.h1") }}</h1>
 
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-x-6 gap-y-8 items-start">
         <!-- Intro (left col, row 1) -->
         <div class="order-1 lg:order-0 lg:col-start-1 lg:row-start-1 max-w-2xl">
-          <p class="text-sm font-light leading-relaxed text-muted">
-            Ce calculateur vous donne les quantités exactes d'eau et de plâtre nécessaires
-            pour couler un moule, en tenant compte du volume de la pièce à reproduire.
-            L'objectif : ne pas gâcher un gramme — car un sac de 25 kg représente un coût
-            réel, et chaque gâchée approximative finit à la poubelle.
-          </p>
-          <p class="mt-3 text-sm font-light leading-relaxed text-muted">
-            Il repose sur la physique du mélange : quand on combine eau et plâtre, le volume
-            final est la somme du volume d'eau et du volume occupé par les grains de plâtre
-            (masse volumique du gypse : 2,58 kg/L). Cette approche est plus précise qu'un
-            simple ratio volumique.
-          </p>
-          <p class="mt-3 text-sm font-light leading-relaxed text-muted">
-            Le ratio plâtre/eau — exprimé en kg de plâtre par litre d'eau — détermine la
-            dureté du résultat : 1,3 pour un plâtre fluide et détaillé, 1,5 pour un usage
-            courant, 1,8 pour un plâtre dur et résistant.
-          </p>
+          <p class="text-sm font-light leading-relaxed text-muted">{{ t("intro.p1") }}</p>
+          <p class="mt-3 text-sm font-light leading-relaxed text-muted">{{ t("intro.p2") }}</p>
+          <p class="mt-3 text-sm font-light leading-relaxed text-muted">{{ t("intro.p3") }}</p>
+          <nav class="mt-4 flex flex-wrap items-center gap-x-4 gap-y-1 text-xs font-light text-muted">
+            <span class="uppercase tracking-widest">{{ t("toc.label") }}</span>
+            <a href="#how-to" class="hover:text-ink transition-colors duration-150">{{ t("toc.howto") }}</a>
+            <a href="#faq" class="hover:text-ink transition-colors duration-150">{{ t("toc.faq") }}</a>
+            <a href="#guide" class="hover:text-ink transition-colors duration-150">{{ t("toc.guide") }}</a>
+          </nav>
         </div>
 
         <!-- Configurators (left col, row 2) -->
@@ -163,7 +157,7 @@ const result = useCalculator(mold, object, mix);
         </div>
 
         <!-- Guide (left col, row 3) -->
-        <div class="order-4 lg:order-0 lg:col-start-1 lg:row-start-3">
+        <div id="guide" class="order-4 lg:order-0 lg:col-start-1 lg:row-start-3 scroll-mt-6">
           <h2 class="mb-4 text-xs font-medium tracking-widest uppercase text-muted">
             {{ t("guide.title") }}
           </h2>
@@ -175,23 +169,25 @@ const result = useCalculator(mold, object, mix);
           </div>
         </div>
       </div>
+
+      <div class="mt-12 grid max-w-2xl gap-12">
+        <HowToGuide />
+        <FaqSection />
+      </div>
     </main>
 
     <footer class="border-t border-line">
       <div class="mx-auto max-w-6xl px-6 py-10 flex flex-col sm:flex-row gap-8 justify-between">
         <div class="flex flex-col gap-2">
           <p class="text-xs font-light tracking-widest uppercase text-muted">GypSum</p>
-          <p class="text-xs font-light text-muted leading-relaxed max-w-xs">
-            Calculateur de dosage eau / plâtre pour moulage. Formules basées sur la masse volumique du gypse (2,58 kg/L).
-            Aucune donnée n'est envoyée — tout reste dans votre navigateur.
-          </p>
+          <p class="text-xs font-light text-muted leading-relaxed max-w-xs">{{ t("footer.tagline") }}</p>
           <p class="mt-1 text-xs font-light text-muted">
-            Créé par <span class="text-ink">Cédric Ruiu</span>.
+            {{ t("footer.createdBy") }} <span class="text-ink">Cédric Ruiu</span>.
           </p>
         </div>
 
         <div class="flex flex-col gap-3">
-          <p class="text-xs font-light tracking-widest uppercase text-muted">Contribuer</p>
+          <p class="text-xs font-light tracking-widest uppercase text-muted">{{ t("footer.contribute") }}</p>
           <a
             href="https://github.com/Cedric-ruiu/gyp-sum"
             target="_blank"
@@ -203,9 +199,7 @@ const result = useCalculator(mold, object, mix);
             </svg>
             Cedric-ruiu/gyp-sum
           </a>
-          <p class="text-xs font-light text-muted max-w-xs leading-relaxed">
-            Projet open source — vos suggestions et retours sont les bienvenus.
-          </p>
+          <p class="text-xs font-light text-muted max-w-xs leading-relaxed">{{ t("footer.openSource") }}</p>
         </div>
       </div>
     </footer>

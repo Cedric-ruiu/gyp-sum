@@ -3,10 +3,15 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>GypSum — Calculateur de Plâtre</title>
-    <meta name="description" content="Calculateur précis de dosage eau / plâtre pour moulage. Calcule les quantités exactes pour vos moules en tenant compte du volume de la pièce, du ratio plâtre/eau (1,3 fluide à 1,8 dur) et de la masse volumique du gypse." />
-    <meta name="keywords" content="calculateur plâtre, dosage plâtre eau, ratio plâtre, moulage plâtre, gypse, plâtre de moulage, quantité plâtre" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'"
+    />
+    <title>Calculateur de dosage eau / plâtre pour moulage — GypSum</title>
+    <meta name="description" content="Calculez au gramme près le dosage eau / plâtre de vos moulages (céramique, sculpture) selon le volume du moule et le ratio plâtre/eau. Gratuit." />
+    <meta name="keywords" content="calculateur plâtre, dosage plâtre eau, ratio plâtre eau, proportion eau plâtre, plâtre de moulage, moule céramique, plâtre poterie, plâtre de Paris, quantité plâtre moule" />
     <meta name="author" content="Cédric Ruiu" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
     <meta name="google-site-verification" content="ZFL_Uz5FNhczyHJl4xXeef_O3Hp7MQX5KLSTqeT2_Lc" />
 
     <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
@@ -17,14 +22,14 @@
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="fr_FR" />
     <meta property="og:site_name" content="GypSum" />
-    <meta property="og:title" content="GypSum — Calculateur de Plâtre" />
-    <meta property="og:description" content="Dosage eau / plâtre précis pour moulage. Ne gâchez plus un gramme." />
+    <meta property="og:title" content="Calculateur de dosage eau / plâtre pour moulage" />
+    <meta property="og:description" content="Dosage eau / plâtre précis pour vos moulages (céramique, sculpture). Ne gâchez plus un gramme." />
     <meta property="og:url" content="https://cedric-ruiu.github.io/gyp-sum/" />
     <meta property="og:image" content="https://cedric-ruiu.github.io/gyp-sum/og-image.png" />
 
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="GypSum — Calculateur de Plâtre" />
-    <meta name="twitter:description" content="Dosage eau / plâtre précis pour moulage." />
+    <meta name="twitter:title" content="Calculateur de dosage eau / plâtre pour moulage" />
+    <meta name="twitter:description" content="Dosage eau / plâtre précis pour vos moulages (céramique, sculpture)." />
     <meta name="twitter:image" content="https://cedric-ruiu.github.io/gyp-sum/og-image.png" />
 
     <link rel="preload" as="font" type="font/woff2" crossorigin href="%BASE_URL%fonts/inter-latin-400-normal.woff2" />
@@ -43,14 +48,50 @@
         "@context": "https://schema.org",
         "@type": "WebApplication",
         "name": "GypSum",
-        "description": "Calculateur de dosage eau / plâtre pour moulage, basé sur la masse volumique du gypse (2,58 kg/L).",
+        "description": "Calculateur de dosage eau / plâtre pour le moulage (céramique, poterie, sculpture), basé sur la masse volumique du gypse (2,58 kg/L).",
+        "keywords": "calculateur plâtre, dosage eau plâtre, ratio plâtre eau, moule céramique, plâtre de moulage",
         "url": "https://cedric-ruiu.github.io/gyp-sum/",
         "applicationCategory": "UtilityApplication",
         "operatingSystem": "Any",
         "inLanguage": "fr-FR",
         "isAccessibleForFree": true,
         "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" },
-        "author": { "@type": "Person", "name": "Cédric Ruiu" }
+        "author": { "@type": "Person", "name": "Cédric Ruiu" },
+        "dateModified": "2026-05-29"
+      }
+    </script>
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "HowTo",
+        "name": "Comment doser le plâtre pour un moulage",
+        "description": "Calculez et préparez la bonne quantité de plâtre pour remplir votre moule sans gâchis, en cinq étapes.",
+        "inLanguage": "fr-FR",
+        "step": [
+          { "@type": "HowToStep", "position": 1, "name": "Mesurer le volume du moule", "text": "Relevez les dimensions intérieures de votre coffrage (longueur, largeur, hauteur de remplissage souhaitée). C'est le volume total à remplir de plâtre." },
+          { "@type": "HowToStep", "position": 2, "name": "Estimer le volume de la pièce à mouler", "text": "Si une pièce occupe le moule, soustrayez son volume. Choisissez la forme la plus proche, ou mesurez-le par immersion dans un récipient gradué." },
+          { "@type": "HowToStep", "position": 3, "name": "Choisir le ratio plâtre / eau", "text": "Le ratio (kg de plâtre par litre d'eau) fixe la dureté : 1,3 pour un plâtre fin et fluide, 1,5 pour un usage courant, 1,8 pour un plâtre dur et résistant." },
+          { "@type": "HowToStep", "position": 4, "name": "Ajouter une marge de sécurité", "text": "Prévoyez environ 10 % de matière en plus pour compenser les pertes (récipient, débordements, prise rapide)." },
+          { "@type": "HowToStep", "position": 5, "name": "Mélanger et couler", "text": "Versez toujours le plâtre dans l'eau, jamais l'inverse. Laissez détremper sans remuer, puis mélangez et coulez avant le début de prise." }
+        ]
+      }
+    </script>
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "inLanguage": "fr-FR",
+        "mainEntity": [
+          { "@type": "Question", "name": "Combien de plâtre faut-il pour un moule ?", "acceptedAnswer": { "@type": "Answer", "text": "Cela dépend du volume net à remplir (volume du moule moins celui de la pièce) et du ratio plâtre/eau. Renseignez vos dimensions ci-dessus : le calculateur affiche les quantités exactes d'eau et de plâtre, marge de sécurité comprise." } },
+          { "@type": "Question", "name": "Quel est le bon ratio plâtre / eau ?", "acceptedAnswer": { "@type": "Answer", "text": "Le ratio s'exprime en kilos de plâtre par litre d'eau. Comptez 1,3 pour un plâtre fluide et détaillé, 1,5 pour un usage standard, et 1,8 pour un plâtre dur et résistant. Plus le ratio est élevé, plus le plâtre est dense et solide." } },
+          { "@type": "Question", "name": "Quel dosage de plâtre pour un moule en céramique ou poterie ?", "acceptedAnswer": { "@type": "Answer", "text": "En céramique, on cherche un plâtre poreux qui absorbe l'eau de la barbotine : un ratio de 1,3 à 1,5 (kg de plâtre par litre d'eau) convient à la plupart des moules de coulage. Renseignez le volume de votre moule ci-dessus pour obtenir les quantités exactes." } },
+          { "@type": "Question", "name": "Faut-il verser le plâtre dans l'eau ou l'eau dans le plâtre ?", "acceptedAnswer": { "@type": "Answer", "text": "Toujours le plâtre dans l'eau, jamais l'inverse. Saupoudrez le plâtre progressivement, laissez-le détremper quelques minutes, puis mélangez pour éviter les grumeaux." } },
+          { "@type": "Question", "name": "Quelle est la masse volumique du plâtre ?", "acceptedAnswer": { "@type": "Answer", "text": "Le calcul repose sur la masse volumique du gypse (sulfate de calcium) : 2,58 kg/L. C'est une constante physique, identique quel que soit le type de plâtre (plâtre de Paris, plâtre céramique, etc.). Elle permet un dosage plus précis qu'un simple ratio volumique." } },
+          { "@type": "Question", "name": "Comment mesurer le volume d'une pièce de forme irrégulière ?", "acceptedAnswer": { "@type": "Answer", "text": "Plongez la pièce dans un récipient gradué rempli d'eau et notez la montée du niveau : la différence correspond à son volume. Vous pouvez aussi saisir ce volume directement dans le calculateur." } },
+          { "@type": "Question", "name": "Combien d'eau pour 1 kg de plâtre ?", "acceptedAnswer": { "@type": "Answer", "text": "À un ratio de 1,5, il faut environ 0,67 litre d'eau pour 1 kg de plâtre (1 ÷ ratio). À 1,3 comptez ~0,77 L, et à 1,8 environ 0,56 L. Le calculateur effectue ce calcul automatiquement pour le volume de votre moule." } }
+        ]
       }
     </script>
   </head>

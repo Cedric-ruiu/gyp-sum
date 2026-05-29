@@ -3,6 +3,12 @@
     "title": "Calculateur de Plâtre",
     "subtitle": "Dosage eau / plâtre pour moulage"
   },
+  "intro": {
+    "h1": "Calculateur de dosage eau et plâtre pour moulage",
+    "p1": "Ce calculateur vous donne les quantités exactes d'eau et de plâtre nécessaires pour couler un moule — en céramique, en poterie ou en sculpture — en tenant compte du volume de la pièce à reproduire. L'objectif : ne pas gâcher un gramme — car un sac de 25 kg représente un coût réel, et chaque gâchée approximative finit à la poubelle.",
+    "p2": "Il repose sur la physique du mélange : quand on combine eau et plâtre, le volume final est la somme du volume d'eau et du volume occupé par les grains de plâtre (masse volumique du gypse : 2,58 kg/L). Cette approche est plus précise qu'un simple ratio volumique.",
+    "p3": "Le ratio plâtre/eau — exprimé en kg de plâtre par litre d'eau — détermine la dureté du résultat : 1,3 pour un plâtre fluide et détaillé, 1,5 pour un usage courant, 1,8 pour un plâtre dur et résistant."
+  },
   "mold": {
     "title": "Moule",
     "volume": "Volume du moule",
@@ -75,6 +81,77 @@
     "pourOrder": "Toujours verser le plâtre dans l'eau, jamais l'inverse.",
     "immersion": "Pour mesurer le volume d'une pièce irrégulière, plongez-la dans un récipient gradué et notez la montée d'eau.",
     "formula": "Formule : Eau = Volume net ÷ (1 + Ratio ÷ 2.58)"
+  },
+  "footer": {
+    "tagline": "Calculateur de dosage eau / plâtre pour moulage. Formules basées sur la masse volumique du gypse (2,58 kg/L). Aucune donnée n'est envoyée — tout reste dans votre navigateur.",
+    "createdBy": "Créé par",
+    "contribute": "Contribuer",
+    "openSource": "Projet open source — vos suggestions et retours sont les bienvenus."
+  },
+  "toc": {
+    "label": "Sur cette page",
+    "howto": "Mode d'emploi",
+    "faq": "Questions fréquentes",
+    "guide": "Guide d'utilisation"
+  },
+  "howto": {
+    "title": "Comment doser le plâtre pour un moulage",
+    "intro": "En cinq étapes, calculez et préparez la bonne quantité de plâtre pour remplir votre moule sans gâchis.",
+    "steps": [
+      {
+        "title": "Mesurer le volume du moule",
+        "text": "Relevez les dimensions intérieures de votre coffrage (longueur, largeur, hauteur de remplissage souhaitée). C'est le volume total à remplir de plâtre."
+      },
+      {
+        "title": "Estimer le volume de la pièce à mouler",
+        "text": "Si une pièce occupe le moule, soustrayez son volume. Choisissez la forme la plus proche, ou mesurez-le par immersion dans un récipient gradué."
+      },
+      {
+        "title": "Choisir le ratio plâtre / eau",
+        "text": "Le ratio (kg de plâtre par litre d'eau) fixe la dureté : 1,3 pour un plâtre fin et fluide, 1,5 pour un usage courant, 1,8 pour un plâtre dur et résistant."
+      },
+      {
+        "title": "Ajouter une marge de sécurité",
+        "text": "Prévoyez environ 10 % de matière en plus pour compenser les pertes (récipient, débordements, prise rapide)."
+      },
+      {
+        "title": "Mélanger et couler",
+        "text": "Versez toujours le plâtre dans l'eau, jamais l'inverse. Laissez détremper sans remuer, puis mélangez et coulez avant le début de prise."
+      }
+    ]
+  },
+  "faq": {
+    "title": "Questions fréquentes",
+    "items": [
+      {
+        "q": "Combien de plâtre faut-il pour un moule ?",
+        "a": "Cela dépend du volume net à remplir (volume du moule moins celui de la pièce) et du ratio plâtre/eau. Renseignez vos dimensions ci-dessus : le calculateur affiche les quantités exactes d'eau et de plâtre, marge de sécurité comprise."
+      },
+      {
+        "q": "Quel est le bon ratio plâtre / eau ?",
+        "a": "Le ratio s'exprime en kilos de plâtre par litre d'eau. Comptez 1,3 pour un plâtre fluide et détaillé, 1,5 pour un usage standard, et 1,8 pour un plâtre dur et résistant. Plus le ratio est élevé, plus le plâtre est dense et solide."
+      },
+      {
+        "q": "Quel dosage de plâtre pour un moule en céramique ou poterie ?",
+        "a": "En céramique, on cherche un plâtre poreux qui absorbe l'eau de la barbotine : un ratio de 1,3 à 1,5 (kg de plâtre par litre d'eau) convient à la plupart des moules de coulage. Renseignez le volume de votre moule ci-dessus pour obtenir les quantités exactes."
+      },
+      {
+        "q": "Faut-il verser le plâtre dans l'eau ou l'eau dans le plâtre ?",
+        "a": "Toujours le plâtre dans l'eau, jamais l'inverse. Saupoudrez le plâtre progressivement, laissez-le détremper quelques minutes, puis mélangez pour éviter les grumeaux."
+      },
+      {
+        "q": "Quelle est la masse volumique du plâtre ?",
+        "a": "Le calcul repose sur la masse volumique du gypse (sulfate de calcium) : 2,58 kg/L. C'est une constante physique, identique quel que soit le type de plâtre (plâtre de Paris, plâtre céramique, etc.). Elle permet un dosage plus précis qu'un simple ratio volumique."
+      },
+      {
+        "q": "Comment mesurer le volume d'une pièce de forme irrégulière ?",
+        "a": "Plongez la pièce dans un récipient gradué rempli d'eau et notez la montée du niveau : la différence correspond à son volume. Vous pouvez aussi saisir ce volume directement dans le calculateur."
+      },
+      {
+        "q": "Combien d'eau pour 1 kg de plâtre ?",
+        "a": "À un ratio de 1,5, il faut environ 0,67 litre d'eau pour 1 kg de plâtre (1 ÷ ratio). À 1,3 comptez ~0,77 L, et à 1,8 environ 0,56 L. Le calculateur effectue ce calcul automatiquement pour le volume de votre moule."
+      }
+    ]
   },
   "scene": {
     "placeholder": "Visualisation 3D — bientôt disponible"
