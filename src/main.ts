@@ -7,7 +7,7 @@ import HomePage from "./pages/HomePage.vue";
 
 const routes: RouteRecordRaw[] = [
   { path: "/", component: HomePage, meta: { locale: "fr" } },
-  { path: "/en", component: HomePage, meta: { locale: "en" } },
+  { path: "/en/", component: HomePage, meta: { locale: "en" } },
 ];
 
 export const createApp = ViteSSG(

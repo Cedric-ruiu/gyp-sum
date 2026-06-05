@@ -10,7 +10,7 @@ const { t, locale } = useI18n();
 // locale. Order follows SUPPORTED_LOCALES.
 const links: { code: (typeof SUPPORTED_LOCALES)[number]; to: string }[] = [
   { code: "fr", to: "/" },
-  { code: "en", to: "/en" },
+  { code: "en", to: "/en/" },
 ];
 </script>
 
