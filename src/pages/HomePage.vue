@@ -50,6 +50,16 @@ import type { MixParams, PersistedState } from "@/types";
 
 const { t, tm, rt, locale } = useI18n();
 
+const ratioRows = computed(
+  () =>
+    tm("guide.ratioTable.rows") as {
+      ratio: string;
+      result: string;
+      use: string;
+      water: string;
+    }[],
+);
+
 // Per-locale SEO head. Pre-rendered by vite-ssg into each route's HTML and
 // reactive on the client when the locale switches. JSON-LD is built from the
 // same i18n data shown on the page, so schema always matches the visible copy.
@@ -261,6 +271,27 @@ const result = useCalculator(mold, object, mix);
           </h2>
           <div class="grid gap-3 text-sm font-light text-muted leading-relaxed">
             <p>{{ t("guide.ratioExplain") }}</p>
+            <table class="w-full border-collapse text-xs">
+              <caption class="mb-1 text-left text-xs font-medium text-ink">
+                {{ t("guide.ratioTable.caption") }}
+              </caption>
+              <thead>
+                <tr class="border-b border-line text-left text-ink">
+                  <th scope="col" class="py-1.5 pr-3 font-medium">{{ t("guide.ratioTable.colRatio") }}</th>
+                  <th scope="col" class="py-1.5 pr-3 font-medium">{{ t("guide.ratioTable.colResult") }}</th>
+                  <th scope="col" class="py-1.5 pr-3 font-medium">{{ t("guide.ratioTable.colUse") }}</th>
+                  <th scope="col" class="py-1.5 font-medium">{{ t("guide.ratioTable.colWater") }}</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr v-for="(row, i) in ratioRows" :key="i" class="border-b border-line last:border-0">
+                  <td class="py-1.5 pr-3 font-mono text-ink">{{ rt(row.ratio) }}</td>
+                  <td class="py-1.5 pr-3">{{ rt(row.result) }}</td>
+                  <td class="py-1.5 pr-3">{{ rt(row.use) }}</td>
+                  <td class="py-1.5 font-mono">{{ rt(row.water) }}</td>
+                </tr>
+              </tbody>
+            </table>
             <p>{{ t("guide.pourOrder") }}</p>
             <p>{{ t("guide.immersion") }}</p>
             <p class="font-mono text-xs text-ink">{{ t("guide.formula") }}</p>

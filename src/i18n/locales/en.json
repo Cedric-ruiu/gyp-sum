@@ -94,7 +94,34 @@
     "ratioExplain": "The plaster-to-water ratio sets the final hardness. 1.3 for a fine, fluid plaster, 1.5 for standard use, 1.8 for a hard, durable plaster. This ratio is the mass of plaster (in kg) per 1 liter of water.",
     "pourOrder": "Always add plaster to water, never the reverse.",
     "immersion": "To measure the volume of an irregular piece, dip it into a graduated container and read the rise in water level.",
-    "formula": "Formula: Water = Net volume ÷ (1 + Ratio ÷ 2.58)"
+    "formula": "Formula: Water = Net volume ÷ (1 + Ratio ÷ 2.58)",
+    "ratioTable": {
+      "caption": "Common plaster-to-water ratios",
+      "colRatio": "Ratio (kg/L)",
+      "colResult": "Result",
+      "colUse": "Use",
+      "colWater": "Water per kg",
+      "rows": [
+        {
+          "ratio": "1.3",
+          "result": "Fluid, detailed",
+          "use": "Fine casting, detail",
+          "water": "≈ 0.77 L"
+        },
+        {
+          "ratio": "1.5",
+          "result": "Balanced",
+          "use": "Everyday use",
+          "water": "≈ 0.67 L"
+        },
+        {
+          "ratio": "1.8",
+          "result": "Hard, durable",
+          "use": "Durable molds",
+          "water": "≈ 0.56 L"
+        }
+      ]
+    }
   },
   "footer": {
     "tagline": "Water / plaster calculator for mold making. Formulas based on the density of gypsum (2.58 kg/L). No data is sent — everything stays in your browser.",
