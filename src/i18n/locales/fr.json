@@ -191,6 +191,10 @@
       {
         "q": "Combien d'eau pour 1 kg de plâtre ?",
         "a": "À un ratio de 1,5, il faut environ 0,67 litre d'eau pour 1 kg de plâtre (1 ÷ ratio). À 1,3 comptez ~0,77 L, et à 1,8 environ 0,56 L. Le calculateur effectue ce calcul automatiquement pour le volume de votre moule."
+      },
+      {
+        "q": "Peut-on doser le plâtre en volume plutôt qu'au poids ?",
+        "a": "C'est possible, mais moins précis : doser en volume (godets, mesures) ignore la densité réelle du plâtre. Ce calculateur raisonne en masse à partir de la densité du gypse (2,58 kg/L) et donne le poids exact de plâtre et le volume d'eau pour remplir votre moule, sans excès ni manque."
       }
     ]
   },

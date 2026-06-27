@@ -191,6 +191,10 @@
       {
         "q": "How much water for 1 kg of plaster?",
         "a": "At a ratio of 1.5, you need about 0.67 liter of water for 1 kg of plaster (1 ÷ ratio). At 1.3 it's ~0.77 L, and at 1.8 about 0.56 L. The calculator does this automatically for your mold volume."
+      },
+      {
+        "q": "Can I measure plaster by volume instead of by weight?",
+        "a": "You can, but it is less accurate: measuring by volume (scoops, cups) ignores the plaster's real density. This calculator works by mass from the density of gypsum (2.58 kg/L) and gives the exact plaster weight and water volume to fill your mold, with no shortfall or waste."
       }
     ]
   },
