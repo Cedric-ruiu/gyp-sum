@@ -12,7 +12,7 @@ const props = defineProps<{
 
 const activeClass = computed(() =>
   props.variant === "accent-soft"
-    ? "border-accent-soft text-accent-soft"
+    ? "border-accent-soft text-accent-soft-strong"
     : "border-accent text-accent",
 );
 
