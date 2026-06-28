@@ -103,11 +103,13 @@ Volumes (cm → litres via `cm3ToLiters = v / 1000`) :
 
 Définie dans `src/assets/main.css`. Accessible via les classes canoniques Tailwind :
 `text-ink`, `text-muted`, `border-line`, `bg-surface`, `text-accent`,
-`text-accent-soft`, `text-danger`. La forme verbose `text-[color:var(--color-ink)]`
-fonctionne aussi mais préférer les alias courts.
+`text-accent-soft`, `text-accent-soft-strong`, `text-danger`. La forme verbose
+`text-[color:var(--color-ink)]` fonctionne aussi mais préférer les alias courts.
+`accent-soft-strong` est l'ambre foncé réservé au TEXTE (contraste WCAG AA) ;
+`accent-soft` reste pour les bordures/aplats/3D.
 
 Valeurs : ink `#1A1A1A`, muted `#6B7280`, line `#E5E7EB`, surface `#F9FAFB`,
-accent `#2563EB`, accent-soft `#F59E0B`, danger `#DC2626`.
+accent `#2563EB`, accent-soft `#F59E0B`, accent-soft-strong `#B45309`, danger `#DC2626`.
 
 ## Design
 

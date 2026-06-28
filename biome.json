@@ -17,7 +17,7 @@
   "linter": {
     "enabled": true,
     "rules": {
-      "recommended": true
+      "preset": "recommended"
     },
     "domains": {
       "vue": "recommended"
@@ -62,6 +62,12 @@
             "noUnusedImports": "off"
           }
         }
+      }
+    },
+    {
+      "includes": ["**/*.svg"],
+      "linter": {
+        "enabled": false
       }
     }
   ]

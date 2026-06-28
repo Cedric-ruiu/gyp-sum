@@ -15,6 +15,7 @@ import MoldConfigurator from "@/components/MoldConfigurator.vue";
 import ObjectConfigurator from "@/components/ObjectConfigurator.vue";
 import ResultPanel from "@/components/ResultPanel.vue";
 import LanguageSwitcher from "@/components/ui/LanguageSwitcher.vue";
+import PwaInstallPrompt from "@/components/ui/PwaInstallPrompt.vue";
 
 const SceneViewer = defineAsyncComponent(
   () => import("@/components/SceneViewer.vue"),
@@ -46,9 +47,22 @@ onUnmounted(() => {
 
 import { useCalculator } from "@/composables/useCalculator";
 import { useLocalStorage } from "@/composables/useLocalStorage";
+import { usePwaInstall } from "@/composables/usePwaInstall";
 import type { MixParams, PersistedState } from "@/types";
 
 const { t, tm, rt, locale } = useI18n();
+
+const { showFooterLink, triggerInstall } = usePwaInstall();
+
+const ratioRows = computed(
+  () =>
+    tm("guide.ratioTable.rows") as {
+      ratio: string;
+      result: string;
+      use: string;
+      water: string;
+    }[],
+);
 
 // Per-locale SEO head. Pre-rendered by vite-ssg into each route's HTML and
 // reactive on the client when the locale switches. JSON-LD is built from the
@@ -261,6 +275,27 @@ const result = useCalculator(mold, object, mix);
           </h2>
           <div class="grid gap-3 text-sm font-light text-muted leading-relaxed">
             <p>{{ t("guide.ratioExplain") }}</p>
+            <table class="w-full border-collapse text-xs">
+              <caption class="mb-1 text-left text-xs font-medium text-ink">
+                {{ t("guide.ratioTable.caption") }}
+              </caption>
+              <thead>
+                <tr class="border-b border-line text-left text-ink">
+                  <th scope="col" class="py-1.5 pr-3 font-medium">{{ t("guide.ratioTable.colRatio") }}</th>
+                  <th scope="col" class="py-1.5 pr-3 font-medium">{{ t("guide.ratioTable.colResult") }}</th>
+                  <th scope="col" class="py-1.5 pr-3 font-medium">{{ t("guide.ratioTable.colUse") }}</th>
+                  <th scope="col" class="py-1.5 font-medium">{{ t("guide.ratioTable.colWater") }}</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr v-for="(row, i) in ratioRows" :key="i" class="border-b border-line last:border-0">
+                  <td class="py-1.5 pr-3 font-mono text-ink">{{ rt(row.ratio) }}</td>
+                  <td class="py-1.5 pr-3">{{ rt(row.result) }}</td>
+                  <td class="py-1.5 pr-3">{{ rt(row.use) }}</td>
+                  <td class="py-1.5 font-mono">{{ rt(row.water) }}</td>
+                </tr>
+              </tbody>
+            </table>
             <p>{{ t("guide.pourOrder") }}</p>
             <p>{{ t("guide.immersion") }}</p>
             <p class="font-mono text-xs text-ink">{{ t("guide.formula") }}</p>
@@ -280,7 +315,7 @@ const result = useCalculator(mold, object, mix);
           <p class="text-xs font-light tracking-widest uppercase text-muted">GypSum</p>
           <p class="text-xs font-light text-muted leading-relaxed max-w-xs">{{ t("footer.tagline") }}</p>
           <p class="mt-1 text-xs font-light text-muted">
-            {{ t("footer.createdBy") }} <span class="text-ink">Cédric Ruiu</span>.
+            {{ t("footer.createdBy") }} <span class="text-ink">Cédric Ruiu</span>, {{ t("footer.authorRole") }}.
           </p>
         </div>
 
@@ -298,8 +333,21 @@ const result = useCalculator(mold, object, mix);
             Cedric-ruiu/gyp-sum
           </a>
           <p class="text-xs font-light text-muted max-w-xs leading-relaxed">{{ t("footer.openSource") }}</p>
+          <button
+            v-if="showFooterLink"
+            type="button"
+            class="inline-flex items-center gap-2 text-left text-xs font-light text-muted hover:text-ink transition-colors duration-150"
+            @click="triggerInstall"
+          >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 shrink-0" aria-hidden="true">
+              <path d="M12 3v12M8 11l4 4 4-4M5 19h14" />
+            </svg>
+            {{ t("pwa.footerLink") }}
+          </button>
         </div>
       </div>
     </footer>
+
+    <PwaInstallPrompt />
   </div>
 </template>

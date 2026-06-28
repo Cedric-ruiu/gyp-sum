@@ -94,13 +94,49 @@
     "ratioExplain": "Le ratio plâtre/eau détermine la dureté finale. 1.3 pour un plâtre fin et fluide, 1.5 pour un usage standard, 1.8 pour un plâtre dur et résistant. Ce ratio exprime la masse de plâtre (en kg) pour 1 litre d'eau.",
     "pourOrder": "Toujours verser le plâtre dans l'eau, jamais l'inverse.",
     "immersion": "Pour mesurer le volume d'une pièce irrégulière, plongez-la dans un récipient gradué et notez la montée d'eau.",
-    "formula": "Formule : Eau = Volume net ÷ (1 + Ratio ÷ 2.58)"
+    "formula": "Formule : Eau = Volume net ÷ (1 + Ratio ÷ 2.58)",
+    "ratioTable": {
+      "caption": "Ratios plâtre / eau courants",
+      "colRatio": "Ratio (kg/L)",
+      "colResult": "Rendu",
+      "colUse": "Usage",
+      "colWater": "Eau pour 1 kg",
+      "rows": [
+        {
+          "ratio": "1,3",
+          "result": "Fluide, détaillé",
+          "use": "Coulée fine, détails",
+          "water": "≈ 0,77 L"
+        },
+        {
+          "ratio": "1,5",
+          "result": "Équilibré",
+          "use": "Usage courant",
+          "water": "≈ 0,67 L"
+        },
+        {
+          "ratio": "1,8",
+          "result": "Dur, résistant",
+          "use": "Moules résistants",
+          "water": "≈ 0,56 L"
+        }
+      ]
+    }
   },
   "footer": {
     "tagline": "Calculateur de dosage eau / plâtre pour moulage. Formules basées sur la masse volumique du gypse (2,58 kg/L). Aucune donnée n'est envoyée — tout reste dans votre navigateur.",
     "createdBy": "Créé par",
+    "authorRole": "céramiste et bidouilleur",
     "contribute": "Contribuer",
     "openSource": "Projet open source — vos suggestions et retours sont les bienvenus."
+  },
+  "pwa": {
+    "title": "Installer GypSum",
+    "body": "Ajoutez l'application à votre écran d'accueil pour un accès rapide, même hors ligne.",
+    "installButton": "Installer",
+    "iosInstruction": "Appuyez sur Partager puis « Sur l'écran d'accueil ».",
+    "dismissLabel": "Fermer",
+    "footerLink": "Installer l'application"
   },
   "toc": {
     "label": "Sur cette page",
@@ -164,10 +200,15 @@
       {
         "q": "Combien d'eau pour 1 kg de plâtre ?",
         "a": "À un ratio de 1,5, il faut environ 0,67 litre d'eau pour 1 kg de plâtre (1 ÷ ratio). À 1,3 comptez ~0,77 L, et à 1,8 environ 0,56 L. Le calculateur effectue ce calcul automatiquement pour le volume de votre moule."
+      },
+      {
+        "q": "Peut-on doser le plâtre en volume plutôt qu'au poids ?",
+        "a": "C'est possible, mais moins précis : doser en volume (godets, mesures) ignore la densité réelle du plâtre. Ce calculateur raisonne en masse à partir de la densité du gypse (2,58 kg/L) et donne le poids exact de plâtre et le volume d'eau pour remplir votre moule, sans excès ni manque."
       }
     ]
   },
   "scene": {
-    "placeholder": "Visualisation 3D — bientôt disponible"
+    "placeholder": "Visualisation 3D — bientôt disponible",
+    "ariaLabel": "Aperçu 3D du moule et de la pièce à mouler"
   }
 }

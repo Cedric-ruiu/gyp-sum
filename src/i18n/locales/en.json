@@ -94,13 +94,49 @@
     "ratioExplain": "The plaster-to-water ratio sets the final hardness. 1.3 for a fine, fluid plaster, 1.5 for standard use, 1.8 for a hard, durable plaster. This ratio is the mass of plaster (in kg) per 1 liter of water.",
     "pourOrder": "Always add plaster to water, never the reverse.",
     "immersion": "To measure the volume of an irregular piece, dip it into a graduated container and read the rise in water level.",
-    "formula": "Formula: Water = Net volume ÷ (1 + Ratio ÷ 2.58)"
+    "formula": "Formula: Water = Net volume ÷ (1 + Ratio ÷ 2.58)",
+    "ratioTable": {
+      "caption": "Common plaster-to-water ratios",
+      "colRatio": "Ratio (kg/L)",
+      "colResult": "Result",
+      "colUse": "Use",
+      "colWater": "Water per kg",
+      "rows": [
+        {
+          "ratio": "1.3",
+          "result": "Fluid, detailed",
+          "use": "Fine casting, detail",
+          "water": "≈ 0.77 L"
+        },
+        {
+          "ratio": "1.5",
+          "result": "Balanced",
+          "use": "Everyday use",
+          "water": "≈ 0.67 L"
+        },
+        {
+          "ratio": "1.8",
+          "result": "Hard, durable",
+          "use": "Durable molds",
+          "water": "≈ 0.56 L"
+        }
+      ]
+    }
   },
   "footer": {
     "tagline": "Water / plaster calculator for mold making. Formulas based on the density of gypsum (2.58 kg/L). No data is sent — everything stays in your browser.",
     "createdBy": "Created by",
+    "authorRole": "potter and DIY maker",
     "contribute": "Contribute",
     "openSource": "Open source project — your suggestions and feedback are welcome."
+  },
+  "pwa": {
+    "title": "Install GypSum",
+    "body": "Add the app to your home screen for quick access, even offline.",
+    "installButton": "Install",
+    "iosInstruction": "Tap Share, then “Add to Home Screen”.",
+    "dismissLabel": "Close",
+    "footerLink": "Install the app"
   },
   "toc": {
     "label": "On this page",
@@ -164,10 +200,15 @@
       {
         "q": "How much water for 1 kg of plaster?",
         "a": "At a ratio of 1.5, you need about 0.67 liter of water for 1 kg of plaster (1 ÷ ratio). At 1.3 it's ~0.77 L, and at 1.8 about 0.56 L. The calculator does this automatically for your mold volume."
+      },
+      {
+        "q": "Can I measure plaster by volume instead of by weight?",
+        "a": "You can, but it is less accurate: measuring by volume (scoops, cups) ignores the plaster's real density. This calculator works by mass from the density of gypsum (2.58 kg/L) and gives the exact plaster weight and water volume to fill your mold, with no shortfall or waste."
       }
     ]
   },
   "scene": {
-    "placeholder": "3D view — coming soon"
+    "placeholder": "3D view — coming soon",
+    "ariaLabel": "3D preview of the mould and the object to cast"
   }
 }
