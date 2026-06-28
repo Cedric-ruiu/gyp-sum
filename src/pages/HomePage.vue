@@ -311,7 +311,7 @@ const result = useCalculator(mold, object, mix);
           <p class="text-xs font-light tracking-widest uppercase text-muted">GypSum</p>
           <p class="text-xs font-light text-muted leading-relaxed max-w-xs">{{ t("footer.tagline") }}</p>
           <p class="mt-1 text-xs font-light text-muted">
-            {{ t("footer.createdBy") }} <span class="text-ink">Cédric Ruiu</span>.
+            {{ t("footer.createdBy") }} <span class="text-ink">Cédric Ruiu</span>, {{ t("footer.authorRole") }}.
           </p>
         </div>
 

@@ -126,6 +126,7 @@
   "footer": {
     "tagline": "Calculateur de dosage eau / plâtre pour moulage. Formules basées sur la masse volumique du gypse (2,58 kg/L). Aucune donnée n'est envoyée — tout reste dans votre navigateur.",
     "createdBy": "Créé par",
+    "authorRole": "céramiste et bidouilleur",
     "contribute": "Contribuer",
     "openSource": "Projet open source — vos suggestions et retours sont les bienvenus."
   },
