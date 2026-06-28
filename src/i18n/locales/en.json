@@ -199,6 +199,7 @@
     ]
   },
   "scene": {
-    "placeholder": "3D view — coming soon"
+    "placeholder": "3D view — coming soon",
+    "ariaLabel": "3D preview of the mould and the object to cast"
   }
 }

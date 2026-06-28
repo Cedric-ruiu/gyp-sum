@@ -199,6 +199,7 @@
     ]
   },
   "scene": {
-    "placeholder": "Visualisation 3D — bientôt disponible"
+    "placeholder": "Visualisation 3D — bientôt disponible",
+    "ariaLabel": "Aperçu 3D du moule et de la pièce à mouler"
   }
 }
