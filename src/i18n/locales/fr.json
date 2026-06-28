@@ -130,6 +130,14 @@
     "contribute": "Contribuer",
     "openSource": "Projet open source — vos suggestions et retours sont les bienvenus."
   },
+  "pwa": {
+    "title": "Installer GypSum",
+    "body": "Ajoutez l'application à votre écran d'accueil pour un accès rapide, même hors ligne.",
+    "installButton": "Installer",
+    "iosInstruction": "Appuyez sur Partager puis « Sur l'écran d'accueil ».",
+    "dismissLabel": "Fermer",
+    "footerLink": "Installer l'application"
+  },
   "toc": {
     "label": "Sur cette page",
     "howto": "Mode d'emploi",

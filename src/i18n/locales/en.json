@@ -130,6 +130,14 @@
     "contribute": "Contribute",
     "openSource": "Open source project — your suggestions and feedback are welcome."
   },
+  "pwa": {
+    "title": "Install GypSum",
+    "body": "Add the app to your home screen for quick access, even offline.",
+    "installButton": "Install",
+    "iosInstruction": "Tap Share, then “Add to Home Screen”.",
+    "dismissLabel": "Close",
+    "footerLink": "Install the app"
+  },
   "toc": {
     "label": "On this page",
     "howto": "How-to",
