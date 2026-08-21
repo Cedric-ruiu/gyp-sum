@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       http-equiv="Content-Security-Policy"
-      content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'"
+      content="default-src 'self'; script-src 'self' https://stats.cedric-ruiu.fr; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://stats.cedric-ruiu.fr; object-src 'none'; base-uri 'self'"
     />
     <!-- Title, description, OG/Twitter, canonical, hreflang and JSON-LD are
          emitted per locale via useHead (see src/pages/HomePage.vue). -->
@@ -28,6 +28,13 @@
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="default" />
     <link rel="manifest" href="%BASE_URL%site.webmanifest" />
+
+    <script
+      defer
+      src="https://stats.cedric-ruiu.fr/m.js"
+      data-website-id="d472a9bf-c49b-41bb-a5dc-b66eb550f7a1"
+      data-domains="cedric-ruiu.github.io"
+    ></script>
   </head>
   <body>
     <div id="app"></div>
