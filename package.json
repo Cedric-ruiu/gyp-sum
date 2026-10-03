@@ -38,7 +38,7 @@
   },
   "packageManager": "yarn@4.13.0",
   "dependencies": {
-    "@unhead/vue": "3.1.6",
+    "@unhead/vue": "^2.1.2",
     "tailwindcss": "4.3.1",
     "three": "0.185.0",
     "vue": "3.5.39",
