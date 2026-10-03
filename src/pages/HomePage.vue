@@ -71,6 +71,7 @@ const ratioRows = computed(
 // reactive on the client when the locale switches. JSON-LD is built from the
 // same i18n data shown on the page, so schema always matches the visible copy.
 const OG_IMAGE = `${SITE_URL}/og-image.png`;
+const AUTHOR_URL = "https://cedric-ruiu.fr";
 
 useHead(() => {
   const isEn = locale.value === "en";
@@ -93,7 +94,12 @@ useHead(() => {
       price: "0",
       priceCurrency: isEn ? "USD" : "EUR",
     },
-    author: { "@type": "Person", name: "Cédric Ruiu" },
+    author: {
+      "@type": "Person",
+      name: "Cédric Ruiu",
+      url: AUTHOR_URL,
+      sameAs: ["https://github.com/Cedric-ruiu"],
+    },
     dateModified: "2026-05-29",
   };
 
@@ -315,7 +321,22 @@ const result = useCalculator(mold, object, mix);
           <p class="text-xs font-light tracking-widest uppercase text-muted">GypSum</p>
           <p class="text-xs font-light text-muted leading-relaxed max-w-xs">{{ t("footer.tagline") }}</p>
           <p class="mt-1 text-xs font-light text-muted">
-            {{ t("footer.createdBy") }} <span class="text-ink">Cédric Ruiu</span>, {{ t("footer.authorRole") }}.
+            {{ t("footer.createdBy") }}
+            <a
+              :href="AUTHOR_URL"
+              target="_blank"
+              rel="author noopener"
+              class="text-ink underline decoration-line underline-offset-2 hover:decoration-current transition-colors duration-150"
+            >Cédric Ruiu</a>, {{ t("footer.authorRole") }}.
+          </p>
+          <p class="text-xs font-light text-muted">
+            {{ t("footer.madeBy") }}
+            <a
+              :href="AUTHOR_URL"
+              target="_blank"
+              rel="noopener"
+              class="text-ink underline decoration-line underline-offset-2 hover:decoration-current transition-colors duration-150"
+            >cedric-ruiu.fr</a>, {{ t("footer.madeByRole") }}.
           </p>
         </div>
 
