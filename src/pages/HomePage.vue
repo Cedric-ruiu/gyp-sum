@@ -376,7 +376,7 @@ const result = useCalculator(mold, object, mix);
           <button
             v-if="showFooterLink"
             type="button"
-            class="inline-flex items-center gap-2 text-left text-xs font-light text-muted hover:text-ink transition-colors duration-150"
+            class="inline-flex cursor-pointer items-center gap-2 text-left text-xs font-light text-muted hover:text-ink transition-colors duration-150"
             @click="triggerInstall"
           >
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 shrink-0" aria-hidden="true">
