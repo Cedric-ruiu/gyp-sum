@@ -127,8 +127,19 @@
     "tagline": "Water / plaster calculator for mold making. Formulas based on the density of gypsum (2.58 kg/L). No data is sent — everything stays in your browser.",
     "createdBy": "Created by",
     "authorRole": "potter and DIY maker",
+    "madeBy": "Design & development:",
+    "madeByRole": "freelance web developer",
     "contribute": "Contribute",
-    "openSource": "Open source project — your suggestions and feedback are welcome."
+    "openSource": "Open source project — your suggestions and feedback are welcome.",
+    "issues": "Report a bug or suggest an idea",
+    "contactTitle": "Get in touch",
+    "contactText": "A question about a mix, a missing mold shape, or a mold you poured with GypSum? Send me a message — a photo is always welcome. I reply as soon as I can.",
+    "contactCta": "Send an email",
+    "contactCopy": "Copy",
+    "contactCopied": "Address copied",
+    "contactSubject": "GypSum — question or feedback",
+    "share": "Share this tool",
+    "shareCopied": "Link copied"
   },
   "pwa": {
     "title": "Install GypSum",

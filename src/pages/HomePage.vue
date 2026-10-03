@@ -14,8 +14,10 @@ import MixParameters from "@/components/MixParameters.vue";
 import MoldConfigurator from "@/components/MoldConfigurator.vue";
 import ObjectConfigurator from "@/components/ObjectConfigurator.vue";
 import ResultPanel from "@/components/ResultPanel.vue";
+import ContactLink from "@/components/ui/ContactLink.vue";
 import LanguageSwitcher from "@/components/ui/LanguageSwitcher.vue";
 import PwaInstallPrompt from "@/components/ui/PwaInstallPrompt.vue";
+import ShareButton from "@/components/ui/ShareButton.vue";
 
 const SceneViewer = defineAsyncComponent(
   () => import("@/components/SceneViewer.vue"),
@@ -48,6 +50,7 @@ onUnmounted(() => {
 import { useCalculator } from "@/composables/useCalculator";
 import { useLocalStorage } from "@/composables/useLocalStorage";
 import { usePwaInstall } from "@/composables/usePwaInstall";
+import { EN_URL, FR_URL, SITE_URL } from "@/seo";
 import type { MixParams, PersistedState } from "@/types";
 
 const { t, tm, rt, locale } = useI18n();
@@ -67,10 +70,8 @@ const ratioRows = computed(
 // Per-locale SEO head. Pre-rendered by vite-ssg into each route's HTML and
 // reactive on the client when the locale switches. JSON-LD is built from the
 // same i18n data shown on the page, so schema always matches the visible copy.
-const SITE_URL = "https://cedric-ruiu.github.io/gyp-sum";
-const FR_URL = `${SITE_URL}/`;
-const EN_URL = `${SITE_URL}/en/`;
 const OG_IMAGE = `${SITE_URL}/og-image.png`;
+const AUTHOR_URL = "https://cedric-ruiu.fr";
 
 useHead(() => {
   const isEn = locale.value === "en";
@@ -93,7 +94,12 @@ useHead(() => {
       price: "0",
       priceCurrency: isEn ? "USD" : "EUR",
     },
-    author: { "@type": "Person", name: "Cédric Ruiu" },
+    author: {
+      "@type": "Person",
+      name: "Cédric Ruiu",
+      url: AUTHOR_URL,
+      sameAs: ["https://github.com/Cedric-ruiu"],
+    },
     dateModified: "2026-05-29",
   };
 
@@ -315,8 +321,30 @@ const result = useCalculator(mold, object, mix);
           <p class="text-xs font-light tracking-widest uppercase text-muted">GypSum</p>
           <p class="text-xs font-light text-muted leading-relaxed max-w-xs">{{ t("footer.tagline") }}</p>
           <p class="mt-1 text-xs font-light text-muted">
-            {{ t("footer.createdBy") }} <span class="text-ink">Cédric Ruiu</span>, {{ t("footer.authorRole") }}.
+            {{ t("footer.createdBy") }}
+            <a
+              :href="AUTHOR_URL"
+              target="_blank"
+              rel="author noopener"
+              class="text-ink underline decoration-line underline-offset-2 hover:decoration-current transition-colors duration-150"
+            >Cédric Ruiu</a>, {{ t("footer.authorRole") }}.
           </p>
+          <p class="text-xs font-light text-muted">
+            {{ t("footer.madeBy") }}
+            <a
+              :href="AUTHOR_URL"
+              target="_blank"
+              rel="noopener"
+              class="text-ink underline decoration-line underline-offset-2 hover:decoration-current transition-colors duration-150"
+            >cedric-ruiu.fr</a>, {{ t("footer.madeByRole") }}.
+          </p>
+        </div>
+
+        <div class="flex flex-col gap-3">
+          <p class="text-xs font-light tracking-widest uppercase text-muted">{{ t("footer.contactTitle") }}</p>
+          <p class="text-xs font-light text-muted max-w-xs leading-relaxed">{{ t("footer.contactText") }}</p>
+          <ContactLink />
+          <ShareButton />
         </div>
 
         <div class="flex flex-col gap-3">
@@ -333,10 +361,22 @@ const result = useCalculator(mold, object, mix);
             Cedric-ruiu/gyp-sum
           </a>
           <p class="text-xs font-light text-muted max-w-xs leading-relaxed">{{ t("footer.openSource") }}</p>
+          <a
+            href="https://github.com/Cedric-ruiu/gyp-sum/issues"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex min-h-12 items-center gap-2 text-xs font-light text-muted hover:text-ink transition-colors duration-150 sm:min-h-0"
+          >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 shrink-0" aria-hidden="true">
+              <circle cx="12" cy="12" r="9" />
+              <path d="M12 8v5M12 16h.01" />
+            </svg>
+            {{ t("footer.issues") }}
+          </a>
           <button
             v-if="showFooterLink"
             type="button"
-            class="inline-flex items-center gap-2 text-left text-xs font-light text-muted hover:text-ink transition-colors duration-150"
+            class="inline-flex cursor-pointer items-center gap-2 text-left text-xs font-light text-muted hover:text-ink transition-colors duration-150"
             @click="triggerInstall"
           >
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 shrink-0" aria-hidden="true">
