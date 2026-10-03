@@ -128,7 +128,16 @@
     "createdBy": "Créé par",
     "authorRole": "céramiste et bidouilleur",
     "contribute": "Contribuer",
-    "openSource": "Projet open source — vos suggestions et retours sont les bienvenus."
+    "openSource": "Projet open source — vos suggestions et retours sont les bienvenus.",
+    "issues": "Signaler un bug ou proposer une idée",
+    "contactTitle": "Un mot ?",
+    "contactText": "Une question sur un dosage, une forme de moule qui manque, ou un moule coulé grâce à GypSum ? Envoyez-moi un message, une photo me fera toujours plaisir. Je réponds dès que possible.",
+    "contactCta": "Écrire un email",
+    "contactCopy": "Copier",
+    "contactCopied": "Adresse copiée",
+    "contactSubject": "GypSum — question ou retour",
+    "share": "Partager l'outil",
+    "shareCopied": "Lien copié"
   },
   "pwa": {
     "title": "Installer GypSum",

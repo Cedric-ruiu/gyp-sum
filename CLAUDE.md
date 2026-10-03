@@ -67,9 +67,16 @@ src/
 │       ├── NumberInput.vue  virgule/point acceptés, spinners masqués
 │       ├── ShapeSelector.vue  généré depuis ShapeDefinition[], prop noneOption
 │       ├── InfoTooltip.vue
-│       └── LanguageSwitcher.vue  liens FR/EN (RouterLink, hreflang, aria-current)
+│       ├── LanguageSwitcher.vue  liens FR/EN (RouterLink, hreflang, aria-current)
+│       ├── ContactLink.vue  lien mailto du footer, adresse décodée en onMounted
+│       └── ShareButton.vue  partage natif (mobile) / copie du lien (desktop)
+├── seo.ts                  URLs canoniques (SITE_URL, FR_URL, EN_URL)
 └── App.vue                 shell racine : <RouterView/> uniquement
 ```
+
+L'adresse email n'apparaît jamais en clair (ni HTML pré-rendu, ni bundle JS) :
+elle est stockée en base64 dans `ContactLink.vue` et décodée après montage.
+Ne pas l'ajouter au JSON-LD.
 
 ## Règle centrale : pas de switch/case sur les formes dans les composants
 
