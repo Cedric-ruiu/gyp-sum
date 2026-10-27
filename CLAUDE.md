@@ -18,7 +18,7 @@ SPA statique hébergée sur GitHub Pages (`base: '/gyp-sum/'`). Aucun backend.
 - `yarn build` = `vue-tsc --noEmit && vite-ssg build`
 - Pré-rendu statique **multi-pages via vite-ssg + vue-router** : `src/main.ts`
   exporte `createApp = ViteSSG(App, { routes, base }, …)`. Routes pré-rendues :
-  le calculateur `/` (FR), `/en/` (EN), `/es/` (ES), et le guide
+  le calculateur `/` (FR), `/en/` (EN), `/es/` (ES), `/de/` (DE), et le guide
   `/moule-en-platre/` (FR) / `/en/how-to-make-a-plaster-mold/` (EN)
   (`src/pages/MoldGuidePage.vue`, chargé à la demande) → `dist/<route>/index.html` (`ssgOptions.dirStyle: 'nested'`).
   Nouvelle locale : route dans `main.ts`, entrée dans `SITE_PAGES` et
@@ -62,8 +62,8 @@ src/
 │   ├── useLocalStorage.ts  ref + watch debounce 500 ms, clé 'plaster-calc-state'
 │   └── useThreeScene.ts    init/updateMold/updateObject/destroy (Three.js)
 ├── i18n/
-│   ├── index.ts            createAppI18n() (instance par app, SSG-safe), SUPPORTED_LOCALES = ['fr','en','es']
-│   └── locales/{fr,en,es}.json   toutes les chaînes UI (fr = défaut, en = x-default)
+│   ├── index.ts            createAppI18n() (instance par app, SSG-safe), SUPPORTED_LOCALES = ['fr','en','es','de']
+│   └── locales/{fr,en,es,de}.json   toutes les chaînes UI (fr = défaut, en = x-default)
 ├── pages/
 │   ├── HomePage.vue        le calculateur (ex-App.vue) + useHead SEO par locale
 │   └── MoldGuidePage.vue   guide « faire un moule en plâtre » (clés `moldGuide.*`,
@@ -169,13 +169,14 @@ accent `#2563EB`, accent-soft `#F59E0B`, accent-soft-strong `#B45309`, danger `#
 - Pas de dark mode
 - Sélecteur d'unités et de saisie du ratio sur la page EN uniquement (voir
   « Système d'unités »)
-- Sélecteur de langue FR/EN/ES dans le header (`ui/LanguageSwitcher.vue`)
+- Sélecteur de langue dans le header (une entrée par traduction de la page) (`ui/LanguageSwitcher.vue`)
 
 ## i18n
 
-Trois locales : `fr` (défaut), `en` (x-default) et `es` (espagnol neutre,
-tutoiement, « yeso » ; « escayola » cité une fois ; structure de `fr.json`,
-métrique). Toutes les chaînes UI passent
+Locales : `fr` (défaut), `en` (x-default), `es` (espagnol neutre, tutoiement,
+« yeso » ; « escayola » cité une fois) et `de` (tutoiement, « Gips-Wasser-
+Verhältnis », « einsumpfen ») : `es` et `de` reprennent la structure de
+`fr.json`, métriques. Toutes les chaînes UI passent
 par `t()` / `$t()`. Pas de texte en dur dans les templates. Clés : `app`, `lang`, `help`, `contribute`,
 `meta`, `intro`, `mold`, `object`, `shapes`, `fields`, `mix`, `results`,
 `errors`, `units`, `unitSystem`, `toc`, `howto`, `faq`, `guide`, `yourPlaster`,
@@ -189,7 +190,7 @@ tableaux de messages (steps, faq items), utiliser `tm()` + `rt()`.
   du style.
 - `meta.*` alimente le `<head>` par locale. Le `<head>` est généré par `useHead`
   dans `HomePage.vue` : title/description/keywords, canonical, hreflang
-  réciproques (fr/en/es/x-default, EN = x-default, FR à défaut ; `hreflangLinks()` de
+  réciproques (une par locale + x-default, EN = x-default, FR à défaut ; `hreflangLinks()` de
   `src/seo.ts`, même source que le sitemap), og/twitter, et les JSON-LD
   WebApplication/HowTo/FAQPage **construits depuis les mêmes clés i18n que le
   visible** (invariant schema == visible). `index.html` ne contient plus aucune
@@ -224,7 +225,7 @@ sans conversion aller-retour) et `convert` (affichages en lecture seule).
 - `RatioMode = 'ratio' | 'consistency'` : consistency = 100 ÷ ratio (parts
   d'eau pour 100 parts de plâtre, en poids) ; l'autre notation est affichée
   sous le champ.
-- Pages FR et ES : toujours métriques, ratio en kg/L, aucun sélecteur. Page EN :
+- Pages FR, ES et DE : toujours métriques, ratio en kg/L, aucun sélecteur. Page EN :
   métrique par défaut ; le pré-rendu est métrique et la préférence est lue
   dans `onMounted` (pas d'écart d'hydratation).
 - Les composants lisent `useUnits()` (injecté par `HomePage.vue`) ; un champ

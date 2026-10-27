@@ -16,6 +16,7 @@ const PRECACHE = [
   BASE,
   `${BASE}en/`,
   `${BASE}es/`,
+  `${BASE}de/`,
   `${BASE}site.webmanifest`,
   `${BASE}favicon.svg`,
   `${BASE}favicon-96x96.png`,

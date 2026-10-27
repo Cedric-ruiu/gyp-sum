@@ -9,6 +9,7 @@ const routes: RouteRecordRaw[] = [
   { path: "/", component: HomePage, meta: { locale: "fr" } },
   { path: "/en/", component: HomePage, meta: { locale: "en" } },
   { path: "/es/", component: HomePage, meta: { locale: "es" } },
+  { path: "/de/", component: HomePage, meta: { locale: "de" } },
   {
     path: "/moule-en-platre/",
     component: () => import("./pages/MoldGuidePage.vue"),

@@ -7,7 +7,8 @@
     "switcher": "Elegir idioma",
     "fr": "Français",
     "en": "English",
-    "es": "Español"
+    "es": "Español",
+    "de": "Deutsch"
   },
   "help": {
     "label": "Ayuda: {topic}"
