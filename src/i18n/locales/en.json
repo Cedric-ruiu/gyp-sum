@@ -200,6 +200,10 @@
         "a": "The ratio is expressed in kilograms of plaster per liter of water. Use 1.3 for a fluid, detailed plaster, 1.5 for standard use, and 1.8 for a hard, strong plaster. The higher the ratio, the denser and stronger the plaster. Expressed the other way around, that is a water-to-plaster ratio of about 0.77 down to 0.56."
       },
       {
+        "q": "How do I convert a consistency into a ratio?",
+        "a": "Divide 100 by the consistency: a consistency of 70 gives 100 ÷ 70 = 1.43 kg of plaster per liter of water. The other way round, consistency = 100 ÷ ratio, so 1.5 kg/L is a consistency of about 67. A water-to-plaster ratio of 0.7 is the same as a consistency of 70."
+      },
+      {
         "q": "How much plaster for a pottery or ceramic mold?",
         "a": "For ceramics you want a porous plaster that absorbs water from the slip: a ratio of 1.3 to 1.5 (kg of plaster per liter of water) suits most slip-casting molds. Enter your mold volume above to get the exact amounts."
       },
@@ -218,6 +222,10 @@
       {
         "q": "How much water for 1 kg of plaster?",
         "a": "At a ratio of 1.5, you need about 0.67 liter of water for 1 kg of plaster (1 ÷ ratio). At 1.3 it's ~0.77 L, and at 1.8 about 0.56 L. The calculator does this automatically for your mold volume."
+      },
+      {
+        "q": "How much water for 1 cup of plaster of Paris?",
+        "a": "It depends on what your cup of plaster weighs, which varies with the plaster and how tightly it is packed. Weigh one level cup of your plaster once, then multiply that weight by your water-to-plaster ratio: at a consistency of 67, 100 g of plaster takes about 67 ml of water. For a whole mold, the calculator gives the plaster by weight and the water directly."
       },
       {
         "q": "Can I measure plaster by volume instead of by weight?",
