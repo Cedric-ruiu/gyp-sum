@@ -58,13 +58,16 @@ const { t, tm, rt, locale } = useI18n();
 
 const { showFooterLink, triggerInstall } = usePwaInstall();
 
+const ratioValueCols = computed(
+  () => tm("guide.ratioTable.valueCols") as string[],
+);
 const ratioRows = computed(
   () =>
     tm("guide.ratioTable.rows") as {
       ratio: string;
       result: string;
       use: string;
-      water: string;
+      values: string[];
     }[],
 );
 
@@ -249,9 +252,9 @@ const result = useCalculator(mold, object, mix);
           <p class="text-base font-light leading-relaxed text-muted">{{ t("intro.lead") }}</p>
           <nav class="mt-4 flex flex-wrap items-center gap-x-4 gap-y-1 text-xs font-light text-muted">
             <span class="uppercase tracking-widest">{{ t("toc.label") }}</span>
+            <a href="#guide" class="hover:text-ink transition-colors duration-150">{{ t("toc.guide") }}</a>
             <a href="#how-to" class="hover:text-ink transition-colors duration-150">{{ t("toc.howto") }}</a>
             <a href="#faq" class="hover:text-ink transition-colors duration-150">{{ t("toc.faq") }}</a>
-            <a href="#guide" class="hover:text-ink transition-colors duration-150">{{ t("toc.guide") }}</a>
           </nav>
         </div>
 
@@ -290,7 +293,8 @@ const result = useCalculator(mold, object, mix);
             {{ t("guide.title") }}
           </h2>
           <div class="grid gap-3 text-sm font-light text-muted leading-relaxed">
-            <p>{{ t("guide.ratioExplain") }}</p>
+            <p>{{ t("guide.answer") }}</p>
+            <div class="overflow-x-auto">
             <table class="w-full border-collapse text-xs">
               <caption class="mb-1 text-left text-xs font-medium text-ink">
                 {{ t("guide.ratioTable.caption") }}
@@ -300,7 +304,12 @@ const result = useCalculator(mold, object, mix);
                   <th scope="col" class="py-1.5 pr-3 font-medium">{{ t("guide.ratioTable.colRatio") }}</th>
                   <th scope="col" class="py-1.5 pr-3 font-medium">{{ t("guide.ratioTable.colResult") }}</th>
                   <th scope="col" class="py-1.5 pr-3 font-medium">{{ t("guide.ratioTable.colUse") }}</th>
-                  <th scope="col" class="py-1.5 font-medium">{{ t("guide.ratioTable.colWater") }}</th>
+                  <th
+                    v-for="(col, j) in ratioValueCols"
+                    :key="j"
+                    scope="col"
+                    class="py-1.5 pr-3 font-medium last:pr-0"
+                  >{{ rt(col) }}</th>
                 </tr>
               </thead>
               <tbody>
@@ -308,10 +317,15 @@ const result = useCalculator(mold, object, mix);
                   <td class="py-1.5 pr-3 font-mono text-ink">{{ rt(row.ratio) }}</td>
                   <td class="py-1.5 pr-3">{{ rt(row.result) }}</td>
                   <td class="py-1.5 pr-3">{{ rt(row.use) }}</td>
-                  <td class="py-1.5 font-mono">{{ rt(row.water) }}</td>
+                  <td
+                    v-for="(value, j) in row.values"
+                    :key="j"
+                    class="py-1.5 pr-3 font-mono whitespace-nowrap last:pr-0"
+                  >{{ rt(value) }}</td>
                 </tr>
               </tbody>
             </table>
+            </div>
             <p>{{ t("guide.pourOrder") }}</p>
             <p>{{ t("guide.immersion") }}</p>
             <p>{{ t("guide.physics") }}</p>
