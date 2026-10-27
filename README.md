@@ -10,7 +10,7 @@
 
 ## What is it?
 
-**GypSum** is a precision plaster calculator for mold making. It computes the exact water and plaster quantities needed to fill a mold, based on the actual density of gypsum (2.58 kg/L) and the net volume between the mold and the object being cast.
+**GypSum** is a precision plaster calculator for mold making. It computes the exact water and plaster quantities needed to fill a mold, based on the density of powdered plaster (2.58 kg/L) and the net volume between the mold and the object being cast.
 
 No more guessing, no more wasted material. Just enter your mold dimensions, describe the object inside, set your mixing ratio and safety margin — GypSum does the math.
 
@@ -22,7 +22,7 @@ No more guessing, no more wasted material. Just enter your mold dimensions, desc
 - **Object configurator** — supports box, cylinder, sphere, and half-sphere shapes, or direct volume entry
 - **Mix parameters** — configurable plaster-to-water ratio and waste margin
 - **Live 3D scene** — interactive wireframe preview of the mold and object, with orbit controls and auto-rotation
-- **Precise formulas** — water and plaster amounts derived from gypsum density, not rule-of-thumb ratios
+- **Precise formulas** — water and plaster amounts derived from plaster density, not rule-of-thumb ratios
 - **State persistence** — your inputs are saved in `localStorage` and restored on next visit
 - **No installation** — runs entirely in the browser, no account or backend required
 
@@ -38,7 +38,9 @@ Water       = Net volume / (1 + Ratio / 2.58)
 Plaster     = Ratio × Water
 ```
 
-The constant **2.58 kg/L** is the density of gypsum (plâtre de Paris). All dimensions are entered in centimeters; results are displayed in liters and kilograms.
+The constant **2.58 kg/L** is the density of powdered plaster (calcium sulfate hemihydrate, CaSO₄·½H₂O). It varies slightly between plasters; the effect on the amounts stays below the default 10% safety margin.
+
+Dimensions are entered in centimeters and results are displayed in liters and kilograms. The English page can also show inches, US cups / fluid ounces and pounds / ounces, and accepts the ratio as a consistency (parts water per 100 parts plaster); calculations always run in metric.
 
 ---
 

@@ -3,7 +3,7 @@
   "type": "module",
   "version": "1.0.0",
   "name": "gyp-sum",
-  "description": "Calculateur de dosage eau / plâtre pour moulage — calcul précis basé sur la masse volumique du gypse (2,58 kg/L). SPA Vue 3, open source.",
+  "description": "Calculateur de dosage eau / plâtre pour moulage — calcul précis basé sur la masse volumique du plâtre en poudre (2,58 kg/L). SPA Vue 3, open source.",
   "keywords": [
     "plaster",
     "calculator",
