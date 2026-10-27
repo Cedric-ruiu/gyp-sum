@@ -3,6 +3,9 @@
     "title": "Plaster Calculator",
     "subtitle": "Water / plaster ratio for mold making"
   },
+  "format": {
+    "label": "{label}:"
+  },
   "lang": {
     "switcher": "Choose language",
     "fr": "Français",

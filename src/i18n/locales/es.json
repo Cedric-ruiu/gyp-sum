@@ -3,6 +3,9 @@
     "title": "Calculadora de yeso",
     "subtitle": "Proporción yeso / agua para moldes"
   },
+  "format": {
+    "label": "{label}:"
+  },
   "lang": {
     "switcher": "Elegir idioma",
     "fr": "Français",

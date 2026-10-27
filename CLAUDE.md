@@ -180,12 +180,18 @@ Verhältnis », « einsumpfen ») et `it` (tutoiement, « dosi gesso acqua », j
 tendance brésilienne, « você », og:locale pt_BR ; jamais « calculadora de gesso »
 seul, qui vise le drywall) : `es`, `de`, `it` et `pt` reprennent la structure
 de `fr.json`, métriques. Toutes les chaînes UI passent
-par `t()` / `$t()`. Pas de texte en dur dans les templates. Clés : `app`, `lang`, `help`, `contribute`,
+par `t()` / `$t()`. Pas de texte en dur dans les templates. Clés : `app`, `format`, `lang`, `help`, `contribute`,
 `meta`, `intro`, `mold`, `object`, `shapes`, `fields`, `mix`, `results`,
 `errors`, `units`, `unitSystem`, `toc`, `howto`, `faq`, `guide`, `yourPlaster`,
 `author`, `footer`, `scene`, `moldGuide` (fr et en ; pas en es : ses liens — sommaire, mode d'emploi, pied de page — n'apparaissent
 que si `localePage('moldGuide', locale)` existe). Pour les
 tableaux de messages (steps, faq items), utiliser `tm()` + `rt()`.
+
+- **Espaces insécables (fr)** : avant `? ! ; :` et à l'intérieur de `« »`, écrire
+  ` ` dans `fr.json`, jamais `&nbsp;` (les chaînes sont rendues en texte,
+  l'entité s'afficherait telle quelle). Un libellé suivi de deux-points passe
+  par `t("format.label", { label: … })` (`{label} :` en fr, `{label}:`
+  ailleurs), jamais un ` :` écrit dans le template.
 
 - **Date de modification** : `lastModified` de la page dans `SITE_PAGES`
   alimente `<lastmod>` du sitemap et `dateModified` du JSON-LD. À mettre à jour

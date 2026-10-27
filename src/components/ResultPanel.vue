@@ -42,7 +42,7 @@ function fmtSmall(v: number): string {
           = <span class="font-mono tnum">{{ fmtSmall(units.convert("smallVolume", result.waterWithMargin)) }} {{ t(units.labelKey("smallVolume")) }}</span>
         </div>
         <div class="mt-1 text-xs font-light text-muted">
-          {{ t("results.withoutMargin") }} :
+          {{ t("format.label", { label: t("results.withoutMargin") }) }}
           <span class="font-mono tnum">{{ fmt(units.convert("volume", result.water)) }} {{ t(units.labelKey("volume")) }}</span>
         </div>
       </div>
@@ -60,14 +60,14 @@ function fmtSmall(v: number): string {
           = <span class="font-mono tnum">{{ fmtSmall(units.convert("smallMass", result.plasterWithMargin)) }} {{ t(units.labelKey("smallMass")) }}</span>
         </div>
         <div class="mt-1 text-xs font-light text-muted">
-          {{ t("results.withoutMargin") }} :
+          {{ t("format.label", { label: t("results.withoutMargin") }) }}
           <span class="font-mono tnum">{{ fmt(units.convert("mass", result.plaster)) }} {{ t(units.labelKey("mass")) }}</span>
         </div>
       </div>
     </div>
 
     <div v-if="result.isValid" class="mt-5 text-xs font-light text-muted">
-      {{ t("results.netVolume") }} :
+      {{ t("format.label", { label: t("results.netVolume") }) }}
       <span class="font-mono tnum text-ink">
         {{ fmt(units.convert("volume", result.netVolume)) }} {{ t(units.labelKey("volume")) }}
       </span>

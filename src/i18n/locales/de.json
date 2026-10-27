@@ -3,6 +3,9 @@
     "title": "Gipsrechner",
     "subtitle": "Gips-Wasser-Verhältnis für Gipsformen"
   },
+  "format": {
+    "label": "{label}:"
+  },
   "lang": {
     "switcher": "Sprache wählen",
     "fr": "Français",

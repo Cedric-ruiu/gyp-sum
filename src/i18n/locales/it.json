@@ -3,6 +3,9 @@
     "title": "Calcolatore del gesso",
     "subtitle": "Dosi di gesso e acqua per stampi"
   },
+  "format": {
+    "label": "{label}:"
+  },
   "lang": {
     "switcher": "Scegli la lingua",
     "fr": "Français",

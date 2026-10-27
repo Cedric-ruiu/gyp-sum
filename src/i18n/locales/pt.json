@@ -3,6 +3,9 @@
     "title": "Calculadora de gesso para moldes",
     "subtitle": "Proporção gesso / água para moldes"
   },
+  "format": {
+    "label": "{label}:"
+  },
   "lang": {
     "switcher": "Escolher idioma",
     "fr": "Français",

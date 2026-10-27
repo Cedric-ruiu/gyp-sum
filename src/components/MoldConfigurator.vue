@@ -265,7 +265,7 @@ function adaptToObject() {
     </div>
 
     <p class="mt-4 text-xs font-light text-muted">
-      {{ t("mold.volume") }} :
+      {{ t("format.label", { label: t("mold.volume") }) }}
       <span class="font-mono tnum text-ink">
         {{ n(units.convert("volume", volume), { maximumFractionDigits: 2, minimumFractionDigits: 2 }) }} {{ t(units.labelKey("volume")) }}
       </span>

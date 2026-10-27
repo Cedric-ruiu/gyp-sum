@@ -3,6 +3,9 @@
     "title": "Calculateur de Plâtre",
     "subtitle": "Dosage eau / plâtre pour moulage"
   },
+  "format": {
+    "label": "{label}\u00a0:"
+  },
   "lang": {
     "switcher": "Choisir la langue",
     "fr": "Français",

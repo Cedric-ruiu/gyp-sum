@@ -131,7 +131,7 @@ const volume = computed(() => {
       </div>
 
       <p class="mt-4 text-xs font-light text-muted">
-        {{ t("object.volume") }} :
+        {{ t("format.label", { label: t("object.volume") }) }}
         <span class="font-mono tnum text-ink">
           {{ n(units.convert("volume", volume), { maximumFractionDigits: 2, minimumFractionDigits: 2 }) }} {{ t(units.labelKey("volume")) }}
         </span>

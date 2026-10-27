@@ -106,7 +106,7 @@ function updateMargin(v: number) {
     </div>
 
     <div class="mt-4 flex items-center text-xs font-light text-muted">
-      <span>{{ t("mix.density") }} :</span>
+      <span>{{ t("format.label", { label: t("mix.density") }) }}</span>
       <span class="ml-2 font-mono tnum text-ink">
         {{ modelValue.gypsumDensity }} {{ t("units.kg") }}/{{ t("units.liters") }}
       </span>
