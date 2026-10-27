@@ -13,20 +13,20 @@
     "pt": "Português"
   },
   "help": {
-    "label": "Aide : {topic}"
+    "label": "Aide\u00a0: {topic}"
   },
   "meta": {
-    "title": "Dosage eau / plâtre pour moulage : calculateur gratuit — GypSum",
-    "description": "Quelle proportion d'eau et de plâtre pour votre moulage ? Entrez les dimensions du moule et de la pièce : le calculateur donne l'eau et le plâtre. Gratuit.",
+    "title": "Dosage eau / plâtre pour moulage\u00a0: calculateur gratuit — GypSum",
+    "description": "Quelle proportion d'eau et de plâtre pour votre moulage\u00a0? Entrez les dimensions du moule et de la pièce\u00a0: le calculateur donne l'eau et le plâtre. Gratuit.",
     "keywords": "calculateur plâtre, dosage plâtre eau, ratio plâtre eau, proportion eau plâtre, plâtre de moulage, moule céramique, plâtre poterie, plâtre de Paris, quantité plâtre moule",
-    "ogTitle": "Dosage eau / plâtre pour moulage : calculateur gratuit",
-    "ogDescription": "Quelle proportion d'eau et de plâtre pour votre moulage ? Entrez les dimensions du moule et de la pièce : le calculateur donne l'eau et le plâtre.",
-    "twitterDescription": "Quelle proportion d'eau et de plâtre pour votre moulage ? Le calculateur donne l'eau et le plâtre, pièce déduite.",
+    "ogTitle": "Dosage eau / plâtre pour moulage\u00a0: calculateur gratuit",
+    "ogDescription": "Quelle proportion d'eau et de plâtre pour votre moulage\u00a0? Entrez les dimensions du moule et de la pièce\u00a0: le calculateur donne l'eau et le plâtre.",
+    "twitterDescription": "Quelle proportion d'eau et de plâtre pour votre moulage\u00a0? Le calculateur donne l'eau et le plâtre, pièce déduite.",
     "schemaApp": "Calculateur de dosage eau / plâtre pour le moulage (céramique, poterie, sculpture), basé sur la masse volumique du plâtre en poudre (2,58 kg/L)."
   },
   "intro": {
-    "h1": "Dosage eau et plâtre pour un moulage : le calculateur",
-    "lead": "Pour un moulage, comptez en général 1,5 kg de plâtre par litre d'eau, soit environ 0,67 L d'eau pour 1 kg de plâtre : 1,3 pour un plâtre fluide qui prend bien les détails, 1,8 pour un moule dur. Indiquez les dimensions de votre moule et de la pièce : le calculateur donne les quantités exactes, pièce déduite."
+    "h1": "Dosage eau et plâtre pour un moulage\u00a0: le calculateur",
+    "lead": "Pour un moulage, comptez en général 1,5 kg de plâtre par litre d'eau, soit environ 0,67 L d'eau pour 1 kg de plâtre\u00a0: 1,3 pour un plâtre fluide qui prend bien les détails, 1,8 pour un moule dur. Indiquez les dimensions de votre moule et de la pièce\u00a0: le calculateur donne les quantités exactes, pièce déduite."
   },
   "mold": {
     "title": "Moule",
@@ -74,7 +74,7 @@
     "ratioScale": "fin ← 1.3 — 1.5 — 1.8 → dur",
     "margin": "Marge de sécurité",
     "density": "Masse volumique du plâtre en poudre",
-    "densityTooltip": "Masse volumique du plâtre en poudre (semi-hydrate de sulfate de calcium, CaSO₄·½H₂O), qui sert à calculer le volume occupé par les grains. Elle varie un peu d'un plâtre à l'autre ; l'effet sur les quantités reste inférieur à la marge de sécurité par défaut."
+    "densityTooltip": "Masse volumique du plâtre en poudre (semi-hydrate de sulfate de calcium, CaSO₄·½H₂O), qui sert à calculer le volume occupé par les grains. Elle varie un peu d'un plâtre à l'autre\u00a0; l'effet sur les quantités reste inférieur à la marge de sécurité par défaut."
   },
   "results": {
     "title": "Résultats",
@@ -85,7 +85,7 @@
     "netVolume": "Volume net"
   },
   "contribute": {
-    "text": "Une forme manque ? {github} ou {email}.",
+    "text": "Une forme manque\u00a0? {github} ou {email}.",
     "github": "Proposez-la sur GitHub",
     "email": "écrivez-moi"
   },
@@ -100,12 +100,12 @@
     "percent": "%"
   },
   "guide": {
-    "title": "Quelle proportion d'eau et de plâtre pour un moulage ?",
+    "title": "Quelle proportion d'eau et de plâtre pour un moulage\u00a0?",
     "answer": "Pour un moulage, la proportion courante est de 1,5 kg de plâtre pour 1 litre d'eau, soit environ 0,67 L d'eau par kilo de plâtre. Descendez à 1,3 pour un plâtre fluide qui prend les détails, montez à 1,8 pour un moule dur. Si le fabricant indique un taux de gâchage, c'est lui qui prime.",
     "pourOrder": "Toujours verser le plâtre dans l'eau, jamais l'inverse.",
     "immersion": "Pour mesurer le volume d'une pièce irrégulière, plongez-la dans un récipient gradué et notez la montée d'eau.",
-    "physics": "Le calculateur repose sur la physique du mélange : quand on combine eau et plâtre, le volume final est la somme du volume d'eau et du volume occupé par les grains de plâtre (masse volumique du plâtre en poudre : 2,58 kg/L). Cette approche est plus précise qu'un simple ratio volumique.",
-    "formula": "Formule : Eau = Volume net ÷ (1 + Ratio ÷ 2.58)",
+    "physics": "Le calculateur repose sur la physique du mélange\u00a0: quand on combine eau et plâtre, le volume final est la somme du volume d'eau et du volume occupé par les grains de plâtre (masse volumique du plâtre en poudre\u00a0: 2,58 kg/L). Cette approche est plus précise qu'un simple ratio volumique.",
+    "formula": "Formule\u00a0: Eau = Volume net ÷ (1 + Ratio ÷ 2.58)",
     "ratioTable": {
       "caption": "Ratios plâtre / eau courants",
       "colRatio": "Ratio (kg/L)",
@@ -135,7 +135,7 @@
     }
   },
   "yourPlaster": {
-    "title": "Quel ratio saisir pour votre plâtre (Molda 3, plâtre céramique…) ?",
+    "title": "Quel ratio saisir pour votre plâtre (Molda 3, plâtre céramique…)\u00a0?",
     "paragraphs": [
       "Reportez le taux de gâchage indiqué sur le sac ou la fiche technique de votre plâtre. S'il est donné en litres d'eau pour 100 kg de plâtre (par exemple 70), le ratio à saisir est 100 ÷ 70 = 1,43. S'il est donné en rapport eau / plâtre (0,7), c'est 1 ÷ 0,7 = 1,43."
     ]
@@ -166,7 +166,7 @@
     "title": "Installer GypSum",
     "body": "Ajoutez l'application à votre écran d'accueil pour un accès rapide, même hors ligne.",
     "installButton": "Installer",
-    "iosInstruction": "Appuyez sur Partager puis « Sur l'écran d'accueil ».",
+    "iosInstruction": "Appuyez sur Partager puis «\u00a0Sur l'écran d'accueil\u00a0».",
     "dismissLabel": "Fermer",
     "footerLink": "Installer l'application"
   },
@@ -192,7 +192,7 @@
       },
       {
         "title": "Choisir le ratio plâtre / eau",
-        "text": "Le ratio (kg de plâtre par litre d'eau) fixe la dureté : 1,3 pour un plâtre fin et fluide, 1,5 pour un usage courant, 1,8 pour un plâtre dur et résistant."
+        "text": "Le ratio (kg de plâtre par litre d'eau) fixe la dureté\u00a0: 1,3 pour un plâtre fin et fluide, 1,5 pour un usage courant, 1,8 pour un plâtre dur et résistant."
       },
       {
         "title": "Ajouter une marge de sécurité",
@@ -203,7 +203,7 @@
         "text": "Versez toujours le plâtre dans l'eau, jamais l'inverse. Laissez détremper sans remuer, puis mélangez et coulez avant le début de prise."
       }
     ],
-    "moldGuideLink": "La suite, du coffrage au démoulage : comment faire un moule en plâtre"
+    "moldGuideLink": "La suite, du coffrage au démoulage\u00a0: comment faire un moule en plâtre"
   },
   "author": {
     "title": "Pourquoi cet outil",
@@ -213,36 +213,36 @@
     "title": "Questions fréquentes",
     "items": [
       {
-        "q": "Combien de plâtre faut-il pour un moule ?",
-        "a": "Cela dépend du volume net à remplir (volume du moule moins celui de la pièce) et du ratio plâtre/eau. Renseignez vos dimensions ci-dessus : le calculateur affiche les quantités exactes d'eau et de plâtre, marge de sécurité comprise."
+        "q": "Combien de plâtre faut-il pour un moule\u00a0?",
+        "a": "Cela dépend du volume net à remplir (volume du moule moins celui de la pièce) et du ratio plâtre/eau. Renseignez vos dimensions ci-dessus\u00a0: le calculateur affiche les quantités exactes d'eau et de plâtre, marge de sécurité comprise."
       },
       {
-        "q": "Quel est le bon ratio plâtre / eau ?",
+        "q": "Quel est le bon ratio plâtre / eau\u00a0?",
         "a": "Le ratio s'exprime en kilos de plâtre par litre d'eau. Comptez 1,3 pour un plâtre fluide et détaillé, 1,5 pour un usage standard, et 1,8 pour un plâtre dur et résistant. Plus le ratio est élevé, plus le plâtre est dense et solide."
       },
       {
-        "q": "Quel dosage de plâtre pour un moule en céramique ou poterie ?",
-        "a": "En céramique, on cherche un plâtre poreux qui absorbe l'eau de la barbotine : un ratio de 1,3 à 1,5 (kg de plâtre par litre d'eau) convient à la plupart des moules de coulage. Renseignez le volume de votre moule ci-dessus pour obtenir les quantités exactes."
+        "q": "Quel dosage de plâtre pour un moule en céramique ou poterie\u00a0?",
+        "a": "En céramique, on cherche un plâtre poreux qui absorbe l'eau de la barbotine\u00a0: un ratio de 1,3 à 1,5 (kg de plâtre par litre d'eau) convient à la plupart des moules de coulage. Renseignez le volume de votre moule ci-dessus pour obtenir les quantités exactes."
       },
       {
-        "q": "Faut-il verser le plâtre dans l'eau ou l'eau dans le plâtre ?",
+        "q": "Faut-il verser le plâtre dans l'eau ou l'eau dans le plâtre\u00a0?",
         "a": "Toujours le plâtre dans l'eau, jamais l'inverse. Saupoudrez le plâtre progressivement, laissez-le détremper quelques minutes, puis mélangez pour éviter les grumeaux."
       },
       {
-        "q": "Quelle est la masse volumique du plâtre ?",
-        "a": "Le calcul utilise la masse volumique du plâtre en poudre (semi-hydrate de sulfate de calcium, CaSO₄·½H₂O) : 2,58 kg/L. Elle varie un peu selon le type de plâtre ; l'effet sur les quantités calculées reste inférieur à la marge de sécurité par défaut. Elle permet un dosage plus précis qu'un simple ratio volumique."
+        "q": "Quelle est la masse volumique du plâtre\u00a0?",
+        "a": "Le calcul utilise la masse volumique du plâtre en poudre (semi-hydrate de sulfate de calcium, CaSO₄·½H₂O)\u00a0: 2,58 kg/L. Elle varie un peu selon le type de plâtre\u00a0; l'effet sur les quantités calculées reste inférieur à la marge de sécurité par défaut. Elle permet un dosage plus précis qu'un simple ratio volumique."
       },
       {
-        "q": "Comment mesurer le volume d'une pièce de forme irrégulière ?",
-        "a": "Plongez la pièce dans un récipient gradué rempli d'eau et notez la montée du niveau : la différence correspond à son volume. Vous pouvez aussi saisir ce volume directement dans le calculateur."
+        "q": "Comment mesurer le volume d'une pièce de forme irrégulière\u00a0?",
+        "a": "Plongez la pièce dans un récipient gradué rempli d'eau et notez la montée du niveau\u00a0: la différence correspond à son volume. Vous pouvez aussi saisir ce volume directement dans le calculateur."
       },
       {
-        "q": "Combien d'eau pour 1 kg de plâtre ?",
+        "q": "Combien d'eau pour 1 kg de plâtre\u00a0?",
         "a": "À un ratio de 1,5, il faut environ 0,67 litre d'eau pour 1 kg de plâtre (1 ÷ ratio), soit environ 67 ml pour 100 g de plâtre. À 1,3 comptez ~0,77 L, et à 1,8 environ 0,56 L. Le calculateur effectue ce calcul automatiquement pour le volume de votre moule."
       },
       {
-        "q": "Peut-on doser le plâtre en volume plutôt qu'au poids ?",
-        "a": "Oui, à condition d'étalonner votre mesure : remplissez à ras un verre ou un gobelet de votre plâtre, pesez-le une fois, puis utilisez ce même verre pour toutes vos gâchées. Un verre pris au hasard ne suffit pas : selon le plâtre et son tassement, un même volume ne pèse pas le même poids. Le calculateur donne le poids de plâtre : divisez-le par le poids de votre verre pour savoir combien en verser."
+        "q": "Peut-on doser le plâtre en volume plutôt qu'au poids\u00a0?",
+        "a": "Oui, à condition d'étalonner votre mesure\u00a0: remplissez à ras un verre ou un gobelet de votre plâtre, pesez-le une fois, puis utilisez ce même verre pour toutes vos gâchées. Un verre pris au hasard ne suffit pas\u00a0: selon le plâtre et son tassement, un même volume ne pèse pas le même poids. Le calculateur donne le poids de plâtre\u00a0: divisez-le par le poids de votre verre pour savoir combien en verser."
       }
     ]
   },
@@ -252,27 +252,27 @@
   },
   "moldGuide": {
     "meta": {
-      "title": "Faire un moule en plâtre pour la céramique : les étapes — GypSum",
-      "description": "Faire un moule en plâtre en deux parties pour la céramique : matériel, coffrage, préparation et coulée du plâtre, démoulage, clés et séchage, étape par étape.",
-      "ogTitle": "Faire un moule en plâtre pour la céramique : les étapes",
-      "ogDescription": "Matériel, coffrage, préparation et coulée du plâtre, démoulage, clés et séchage : la méthode pas à pas d'un moule en deux parties."
+      "title": "Faire un moule en plâtre pour la céramique\u00a0: les étapes — GypSum",
+      "description": "Faire un moule en plâtre en deux parties pour la céramique\u00a0: matériel, coffrage, préparation et coulée du plâtre, démoulage, clés et séchage, étape par étape.",
+      "ogTitle": "Faire un moule en plâtre pour la céramique\u00a0: les étapes",
+      "ogDescription": "Matériel, coffrage, préparation et coulée du plâtre, démoulage, clés et séchage\u00a0: la méthode pas à pas d'un moule en deux parties."
     },
     "h1": "Comment faire un moule en plâtre pour la céramique",
-    "lead": "Un moule en plâtre en deux parties se fait en deux coulées : on noie la moitié du modèle dans la terre, on coffre et on coule ; puis on creuse des encoches d'assemblage, on savonne et on coule la seconde moitié. Voici la méthode que j'emploie, étape par étape, avec le matériel et les temps.",
+    "lead": "Un moule en plâtre en deux parties se fait en deux coulées\u00a0: on noie la moitié du modèle dans la terre, on coffre et on coule\u00a0; puis on creuse des encoches d'assemblage, on savonne et on coule la seconde moitié. Voici la méthode que j'emploie, étape par étape, avec le matériel et les temps.",
     "tocLabel": "Sur cette page",
     "calculatorCta": "calculez l'eau et le plâtre pour votre moule",
     "backToCalculator": "Calculer l'eau et le plâtre pour votre moule",
     "sections": [
       {
         "id": "platre",
-        "title": "Quel plâtre utiliser pour faire un moule ?",
+        "title": "Quel plâtre utiliser pour faire un moule\u00a0?",
         "paragraphs": [
-          "J'utilise du Molda 3, que j'ai trouvé chez Point P, sur le conseil d'une céramiste professionnelle. Quel que soit votre plâtre, son taux de gâchage est indiqué sur le sac ou la fiche technique : c'est lui qui fixe la proportion d'eau et de plâtre à saisir dans le calculateur."
+          "J'utilise du Molda 3, que j'ai trouvé chez Point P, sur le conseil d'une céramiste professionnelle. Quel que soit votre plâtre, son taux de gâchage est indiqué sur le sac ou la fiche technique\u00a0: c'est lui qui fixe la proportion d'eau et de plâtre à saisir dans le calculateur."
         ]
       },
       {
         "id": "materiel",
-        "title": "De quoi a-t-on besoin ?",
+        "title": "De quoi a-t-on besoin\u00a0?",
         "table": {
           "caption": "Le matériel",
           "cols": ["Matériel", "À quoi il sert"],
@@ -309,36 +309,36 @@
       },
       {
         "id": "coffrage",
-        "title": "Comment préparer le modèle et le coffrage ?",
+        "title": "Comment préparer le modèle et le coffrage\u00a0?",
         "steps": [
           "Marquez la ligne de dépouille sur le modèle.",
           "Comblez les parties concaves si besoin (un pied creux, par exemple).",
-          "Remplissez la moitié inférieure avec de la terre réservée au plâtre. Gardez une pente vers le bas : le plâtre sera raboté ensuite, pour obtenir une surface plane exactement sur la ligne de dépouille.",
-          "Tracez sur la terre, de chaque côté, une ligne à 2,5 cm du modèle, et découpez la terre sur cette ligne : elle définit la taille du coffrage.",
+          "Remplissez la moitié inférieure avec de la terre réservée au plâtre. Gardez une pente vers le bas\u00a0: le plâtre sera raboté ensuite, pour obtenir une surface plane exactement sur la ligne de dépouille.",
+          "Tracez sur la terre, de chaque côté, une ligne à 2,5 cm du modèle, et découpez la terre sur cette ligne\u00a0: elle définit la taille du coffrage.",
           "Sur les côtés de la terre, gardez aussi une pente, vers l'intérieur, pour que le coffrage appuie bien sur la ligne de surface.",
           "Lissez bien la surface de la terre.",
-          "Savonnez le modèle si besoin (cela dépend de sa matière) : faites mousser le savon noir au pinceau, retirez les bulles, et recommencez trois fois.",
+          "Savonnez le modèle si besoin (cela dépend de sa matière)\u00a0: faites mousser le savon noir au pinceau, retirez les bulles, et recommencez trois fois.",
           "Montez le coffrage en planches et cerclez le tout avec les sangles ou un tendeur, le plus ajusté possible.",
-          "Marquez à l'intérieur du coffrage une ligne à 2,5 cm au-dessus du modèle : le plâtre sera coulé jusque-là.",
+          "Marquez à l'intérieur du coffrage une ligne à 2,5 cm au-dessus du modèle\u00a0: le plâtre sera coulé jusque-là.",
           "Comblez les jours avec de petits boudins de terre si nécessaire."
         ],
-        "note": "Une fois la terre posée, dépêchez-vous de couler : la terre sèche, et les joints ne tiennent plus."
+        "note": "Une fois la terre posée, dépêchez-vous de couler\u00a0: la terre sèche, et les joints ne tiennent plus."
       },
       {
         "id": "preparer",
-        "title": "Comment préparer le plâtre pour le moulage ?",
+        "title": "Comment préparer le plâtre pour le moulage\u00a0?",
         "steps": [
-          "Prenez toutes les mesures (intérieur du coffrage, hauteur jusqu'à la marque, modèle), puis {calculator} : le calculateur donne les quantités, pièce déduite.",
+          "Prenez toutes les mesures (intérieur du coffrage, hauteur jusqu'à la marque, modèle), puis {calculator}\u00a0: le calculateur donne les quantités, pièce déduite.",
           "Préparez le seau de nettoyage.",
           "Versez le plâtre dans l'eau, aux quantités calculées, jamais l'inverse.",
           "Laissez reposer 2 à 3 minutes sans toucher.",
           "Mélangez pendant 3 minutes avec le mélangeur à peinture monté sur la perceuse, en vitesse 2. Pour une très petite quantité, mélangez à la maryse, au moins 3 minutes aussi."
         ],
-        "example": "Exemple : un gros bol de 20 cm de diamètre au bord, 10 cm au pied et 10 cm de haut (forme « tronc de cône »), dans un coffrage carré de 25 × 25 cm coulé jusqu'à 12,5 cm, soit 2,5 cm de marge sur les côtés et au-dessus. Avec un ratio de 1,5 et 10 % de marge de sécurité, le calculateur donne 4,16 L d'eau et 6,24 kg de plâtre. Pour un moule en deux parties, refaites le calcul à chaque coulée, avec les mesures prises une fois le coffrage monté."
+        "example": "Exemple\u00a0: un gros bol de 20 cm de diamètre au bord, 10 cm au pied et 10 cm de haut (forme «\u00a0tronc de cône\u00a0»), dans un coffrage carré de 25 × 25 cm coulé jusqu'à 12,5 cm, soit 2,5 cm de marge sur les côtés et au-dessus. Avec un ratio de 1,5 et 10 % de marge de sécurité, le calculateur donne 4,16 L d'eau et 6,24 kg de plâtre. Pour un moule en deux parties, refaites le calcul à chaque coulée, avec les mesures prises une fois le coffrage monté."
       },
       {
         "id": "couler",
-        "title": "Comment couler le plâtre et éviter les bulles ?",
+        "title": "Comment couler le plâtre et éviter les bulles\u00a0?",
         "paragraphs": [
           "À partir de là, vous avez environ 5 minutes avant de couler."
         ],
@@ -349,12 +349,12 @@
           "Versez le plâtre à partir d'un coin du coffrage, jamais directement sur le modèle.",
           "Raclez bien tout le contenant avec la maryse.",
           "Tapotez la surface du plâtre du dessus de la main pour l'égaliser.",
-          "Nettoyez immédiatement les outils dans le seau de nettoyage. Rien dans l'évier : les canalisations se boucheraient."
+          "Nettoyez immédiatement les outils dans le seau de nettoyage. Rien dans l'évier\u00a0: les canalisations se boucheraient."
         ]
       },
       {
         "id": "demouler",
-        "title": "Combien de temps attendre avant de démouler ?",
+        "title": "Combien de temps attendre avant de démouler\u00a0?",
         "paragraphs": [
           "Le bon moment se lit sur le plâtre lui-même. Dès qu'il durcit, avant qu'il ne chauffe, retirez le coffrage et nettoyez-le à l'estèque. Dès qu'il commence à chauffer, vous pouvez démouler et passer aux finitions. Retirez la terre et emballez-la pour qu'elle ne sèche pas."
         ],
@@ -376,41 +376,41 @@
       },
       {
         "id": "deux-parties",
-        "title": "Comment faire un moule en plâtre en deux parties ?",
+        "title": "Comment faire un moule en plâtre en deux parties\u00a0?",
         "steps": [
           "Passez le rabot sur la surface de dépouille pour qu'elle soit la plus plane possible, et finissez à l'estèque.",
           "Faites des chanfreins sur la partie inférieure du moule, mais pas sur les côtés.",
-          "Sur la surface de dépouille, creusez une encoche dans chaque coin avec la mèche à chanfreiner montée sur la visseuse, et deux encoches dans l'un des coins : vous serez sûr du sens d'assemblage.",
+          "Sur la surface de dépouille, creusez une encoche dans chaque coin avec la mèche à chanfreiner montée sur la visseuse, et deux encoches dans l'un des coins\u00a0: vous serez sûr du sens d'assemblage.",
           "Nettoyez le tout, moule et modèle.",
-          "Refaites toutes les étapes du premier coulage : coffrage, marque à 2,5 cm, savonnage, coulée. Seule différence : savonnez absolument trois fois la surface de dépouille en plâtre, encoches comprises.",
-          "Le démoulage peut être plus difficile, surtout à cause d'un effet de succion : tapotez, retournez, essayez de séparer les deux parties.",
+          "Refaites toutes les étapes du premier coulage\u00a0: coffrage, marque à 2,5 cm, savonnage, coulée. Seule différence\u00a0: savonnez absolument trois fois la surface de dépouille en plâtre, encoches comprises.",
+          "Le démoulage peut être plus difficile, surtout à cause d'un effet de succion\u00a0: tapotez, retournez, essayez de séparer les deux parties.",
           "Une fois le moule ouvert, cassez la pointe des tenons, pour ne pas être gêné par un corps étranger qui se glisserait dedans.",
           "Vous pouvez maintenant chanfreiner toutes les arêtes du moule assemblé, côtés compris."
         ]
       },
       {
         "id": "decollage",
-        "title": "Comment faire pour que le plâtre ne colle pas au moule ?",
+        "title": "Comment faire pour que le plâtre ne colle pas au moule\u00a0?",
         "paragraphs": [
-          "Au savon noir, passé au pinceau : faites-le mousser, retirez les bulles, et recommencez trois fois. Sur le modèle, cela dépend de sa matière. Sur la surface de dépouille en plâtre, avant de couler la seconde partie, c'est indispensable, encoches comprises."
+          "Au savon noir, passé au pinceau\u00a0: faites-le mousser, retirez les bulles, et recommencez trois fois. Sur le modèle, cela dépend de sa matière. Sur la surface de dépouille en plâtre, avant de couler la seconde partie, c'est indispensable, encoches comprises."
         ]
       },
       {
         "id": "sechage",
-        "title": "Comment sécher le moule avant le coulage ?",
+        "title": "Comment sécher le moule avant le coulage\u00a0?",
         "paragraphs": [
           "Laissez sécher le moule plusieurs jours au chaud avant de vous en servir."
         ]
       },
       {
         "id": "erreurs",
-        "title": "Quelles erreurs éviter ?",
+        "title": "Quelles erreurs éviter\u00a0?",
         "list": [
-          "Attendre une fois la terre posée : elle sèche, et les joints ne tiennent plus.",
-          "Verser le plâtre directement sur le modèle : versez à partir d'un coin.",
-          "Rincer les outils dans l'évier : les canalisations se bouchent.",
+          "Attendre une fois la terre posée\u00a0: elle sèche, et les joints ne tiennent plus.",
+          "Verser le plâtre directement sur le modèle\u00a0: versez à partir d'un coin.",
+          "Rincer les outils dans l'évier\u00a0: les canalisations se bouchent.",
           "Oublier de savonner trois fois la surface de dépouille avant la seconde coulée.",
-          "Garder la pointe des tenons : un corps étranger peut s'y glisser et gêner l'assemblage."
+          "Garder la pointe des tenons\u00a0: un corps étranger peut s'y glisser et gêner l'assemblage."
         ]
       }
     ]
