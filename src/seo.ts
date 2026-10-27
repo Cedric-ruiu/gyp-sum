@@ -24,6 +24,12 @@ export const SITE_PAGES: SitePage[] = [
     group: "calculator",
     lastModified: "2026-10-27",
   },
+  {
+    path: "/es/",
+    locale: "es",
+    group: "calculator",
+    lastModified: "2026-10-27",
+  },
 ];
 
 // Locale whose page is served as x-default.
@@ -36,6 +42,7 @@ export const LOCALE_META: Record<
 > = {
   fr: { inLanguage: "fr-FR", ogLocale: "fr_FR", currency: "EUR" },
   en: { inLanguage: "en-US", ogLocale: "en_US", currency: "USD" },
+  es: { inLanguage: "es", ogLocale: "es_ES", currency: "EUR" },
 };
 
 // Page of `group` in `locale`, falling back to the default locale's page.

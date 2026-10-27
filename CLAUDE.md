@@ -6,7 +6,7 @@ SPA statique hébergée sur GitHub Pages (`base: '/gyp-sum/'`). Aucun backend.
 
 - Vue 3 Composition API + `<script setup>` + TypeScript
 - Vite 8, Tailwind CSS v4 (`@tailwindcss/vite`), vue-i18n 11 (`legacy: false`)
-- vue-router 5 (2 routes statiques pour le multi-pages i18n) + `@unhead/vue` 2
+- vue-router 5 (routes statiques pour le multi-pages i18n) + `@unhead/vue` 2
   (gestion du `<head>` par locale)
 - Three.js + OrbitControls pour la scène 3D
 - Biome 2.4 (lint + format + CSS Tailwind v4) — `yarn lint` (vérif) /
@@ -17,9 +17,12 @@ SPA statique hébergée sur GitHub Pages (`base: '/gyp-sum/'`). Aucun backend.
   (`tmp/`, `dist/`) sont exclus du lint.
 - `yarn build` = `vue-tsc --noEmit && vite-ssg build`
 - Pré-rendu statique **multi-pages via vite-ssg + vue-router** : `src/main.ts`
-  exporte `createApp = ViteSSG(App, { routes, base }, …)`. Deux routes
-  pré-rendues : `/` (FR) et `/en` (EN) → `dist/index.html` et
-  `dist/en/index.html` (`ssgOptions.dirStyle: 'nested'`). `App.vue` n'est qu'un
+  exporte `createApp = ViteSSG(App, { routes, base }, …)`. Trois routes
+  pré-rendues : `/` (FR), `/en/` (EN) et `/es/` (ES) → `dist/index.html`,
+  `dist/en/index.html`, `dist/es/index.html` (`ssgOptions.dirStyle: 'nested'`).
+  Nouvelle locale : route dans `main.ts`, entrée dans `SITE_PAGES` et
+  `LOCALE_META` (`src/seo.ts`), `SUPPORTED_LOCALES`, clé `lang.<code>` dans
+  toutes les locales, URL dans le `PRECACHE` de `public/sw.js`. `App.vue` n'est qu'un
   `<RouterView/>` ; la page est `src/pages/HomePage.vue`. La locale est pilotée
   par `route.meta.locale` via un guard `router.beforeEach`. Vite 8 utilise
   Rolldown — vue-i18n doit être bundlé côté SSR (`ssr.noExternal: ["vue-i18n"]`)
@@ -56,8 +59,8 @@ src/
 │   ├── useLocalStorage.ts  ref + watch debounce 500 ms, clé 'plaster-calc-state'
 │   └── useThreeScene.ts    init/updateMold/updateObject/destroy (Three.js)
 ├── i18n/
-│   ├── index.ts            createAppI18n() (instance par app, SSG-safe), SUPPORTED_LOCALES = ['fr','en']
-│   └── locales/{fr,en}.json   toutes les chaînes UI (fr = défaut/x-default)
+│   ├── index.ts            createAppI18n() (instance par app, SSG-safe), SUPPORTED_LOCALES = ['fr','en','es']
+│   └── locales/{fr,en,es}.json   toutes les chaînes UI (fr = défaut/x-default)
 ├── pages/
 │   └── HomePage.vue        la page (ex-App.vue) + useHead SEO par locale
 ├── components/
@@ -152,11 +155,13 @@ accent `#2563EB`, accent-soft `#F59E0B`, accent-soft-strong `#B45309`, danger `#
 - Pas de dark mode
 - Sélecteur d'unités et de saisie du ratio sur la page EN uniquement (voir
   « Système d'unités »)
-- Sélecteur de langue FR/EN dans le header (`ui/LanguageSwitcher.vue`)
+- Sélecteur de langue FR/EN/ES dans le header (`ui/LanguageSwitcher.vue`)
 
 ## i18n
 
-Deux locales : `fr` (défaut + x-default) et `en`. Toutes les chaînes UI passent
+Trois locales : `fr` (défaut + x-default), `en` et `es` (espagnol neutre,
+tutoiement, « yeso » ; « escayola » cité une fois ; structure de `fr.json`,
+métrique). Toutes les chaînes UI passent
 par `t()` / `$t()`. Pas de texte en dur dans les templates. Clés : `app`, `lang`,
 `meta`, `intro`, `mold`, `object`, `shapes`, `fields`, `mix`, `results`,
 `errors`, `units`, `unitSystem`, `toc`, `howto`, `faq`, `guide`, `yourPlaster`,
@@ -169,7 +174,7 @@ tableaux de messages (steps, faq items), utiliser `tm()` + `rt()`.
   du style.
 - `meta.*` alimente le `<head>` par locale. Le `<head>` est généré par `useHead`
   dans `HomePage.vue` : title/description/keywords, canonical, hreflang
-  réciproques (fr/en/x-default, FR = x-default ; `hreflangLinks()` de
+  réciproques (fr/en/es/x-default, FR = x-default ; `hreflangLinks()` de
   `src/seo.ts`, même source que le sitemap), og/twitter, et les JSON-LD
   WebApplication/HowTo/FAQPage **construits depuis les mêmes clés i18n que le
   visible** (invariant schema == visible). `index.html` ne contient plus aucune
@@ -204,7 +209,7 @@ sans conversion aller-retour) et `convert` (affichages en lecture seule).
 - `RatioMode = 'ratio' | 'consistency'` : consistency = 100 ÷ ratio (parts
   d'eau pour 100 parts de plâtre, en poids) ; l'autre notation est affichée
   sous le champ.
-- Page FR : toujours métrique, ratio en kg/L, aucun sélecteur. Page EN :
+- Pages FR et ES : toujours métriques, ratio en kg/L, aucun sélecteur. Page EN :
   métrique par défaut ; le pré-rendu est métrique et la préférence est lue
   dans `onMounted` (pas d'écart d'hydratation).
 - Les composants lisent `useUnits()` (injecté par `HomePage.vue`) ; un champ
@@ -227,7 +232,7 @@ sans conversion aller-retour) et `convert` (affichages en lecture seule).
 ## Ce qu'il ne faut pas faire
 
 - Pas de Pinia, pas de librairie UI (Vuetify, PrimeVue…). vue-router sert
-  uniquement au multi-pages SSG i18n (2 routes statiques) — pas de logique métier
+  uniquement au multi-pages SSG i18n (routes statiques) — pas de logique métier
   ni de routes dynamiques.
 - Pas de librairie de formulaires (VeeValidate…)
 - Pas de Google Fonts

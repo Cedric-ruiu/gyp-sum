@@ -1,8 +1,9 @@
 import { createI18n } from "vue-i18n";
 import en from "./locales/en.json";
+import es from "./locales/es.json";
 import fr from "./locales/fr.json";
 
-export const SUPPORTED_LOCALES = ["fr", "en"] as const;
+export const SUPPORTED_LOCALES = ["fr", "en", "es"] as const;
 export type AppLocale = (typeof SUPPORTED_LOCALES)[number];
 
 // Create a fresh i18n instance per app. During SSG, vite-ssg calls the app
@@ -13,6 +14,6 @@ export function createAppI18n() {
     legacy: false,
     locale: "fr",
     fallbackLocale: "fr",
-    messages: { fr, en },
+    messages: { fr, en, es },
   });
 }
