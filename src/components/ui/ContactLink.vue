@@ -58,7 +58,12 @@ async function copyAddress() {
       class="inline-flex min-h-12 cursor-pointer items-center text-sm font-light text-muted underline decoration-line underline-offset-2 hover:text-ink hover:decoration-current transition-colors duration-150 sm:min-h-8 sm:text-xs"
       @click="copyAddress"
     >
-      <span aria-live="polite">{{ copied ? t("footer.contactCopied") : t("footer.contactCopy") }}</span>
+      <!-- Both labels share one grid cell so the button keeps the width of the
+           longer one: confirming the copy never wraps the row. -->
+      <span class="grid justify-items-start" aria-live="polite">
+        <span class="col-start-1 row-start-1" :class="{ invisible: copied }">{{ t("footer.contactCopy") }}</span>
+        <span class="col-start-1 row-start-1" :class="{ invisible: !copied }">{{ t("footer.contactCopied") }}</span>
+      </span>
     </button>
   </div>
 </template>
