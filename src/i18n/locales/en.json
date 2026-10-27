@@ -10,7 +10,7 @@
   },
   "meta": {
     "title": "Pottery Plaster Calculator: Plaster to Water Ratio for Molds",
-    "description": "How much plaster and water for your mold? Enter the mold and object sizes and your plaster to water ratio to get the exact amounts. Free, no sign-up.",
+    "description": "How much plaster and water for your mold? Enter the mold and object sizes in cm or inches and your plaster to water ratio to get the exact amounts. Free.",
     "keywords": "plaster calculator, plaster to water ratio calculator, pottery plaster calculator, plaster of paris calculator, mold making, mould making, ceramic mold, slip casting plaster",
     "ogTitle": "Pottery Plaster Calculator: Plaster to Water Ratio for Molds",
     "ogDescription": "How much plaster and water for your mold? Enter the mold and object sizes and your plaster to water ratio to get the exact amounts.",
@@ -117,25 +117,30 @@
       "colRatio": "Ratio (kg/L)",
       "colResult": "Result",
       "colUse": "Use",
-      "valueCols": ["Consistency", "Water-to-plaster", "Water per kg"],
+      "valueCols": [
+        "Consistency",
+        "Water-to-plaster",
+        "Water per kg",
+        "Water per lb"
+      ],
       "rows": [
         {
           "ratio": "1.3",
           "result": "Fluid, detailed",
           "use": "Fine casting, detail",
-          "values": ["77", "0.77", "≈ 0.77 L"]
+          "values": ["77", "0.77", "≈ 0.77 L", "≈ 11.8 fl oz US"]
         },
         {
           "ratio": "1.5",
           "result": "Balanced",
           "use": "Everyday use",
-          "values": ["67", "0.67", "≈ 0.67 L"]
+          "values": ["67", "0.67", "≈ 0.67 L", "≈ 10.2 fl oz US"]
         },
         {
           "ratio": "1.8",
           "result": "Hard, durable",
           "use": "Durable molds",
-          "values": ["56", "0.56", "≈ 0.56 L"]
+          "values": ["56", "0.56", "≈ 0.56 L", "≈ 8.5 fl oz US"]
         }
       ]
     }
@@ -143,7 +148,7 @@
   "yourPlaster": {
     "title": "Which ratio for your plaster (pottery plaster, Hydrocal, Ultracal…)?",
     "paragraphs": [
-      "Read the consistency on the bag or data sheet: 70 means 70 parts water to 100 parts plaster by weight. Convert it to the ratio the calculator uses: kg of plaster per liter of water = 100 ÷ consistency, so 70 gives 1.43.",
+      "Read the consistency on the bag or data sheet: 70 means 70 parts water to 100 parts plaster by weight. Switch the ratio field to Consistency and enter it as is, or convert it: kg of plaster per liter of water = 100 ÷ consistency, so 70 gives 1.43.",
       "The same rule applies to plaster of Paris, sold for crafts: if the package gives a water ratio, convert it the same way before casting your mold (mould, in British English)."
     ]
   },
@@ -186,7 +191,7 @@
     "steps": [
       {
         "title": "Measure the mold volume",
-        "text": "Record the inside dimensions of your formwork (length, width, the fill height you want). This is the total volume to fill with plaster."
+        "text": "Record the inside dimensions of your formwork (length, width, the fill height you want), in centimeters or inches. This is the total volume to fill with plaster."
       },
       {
         "title": "Estimate the volume of the piece to mold",
@@ -211,7 +216,7 @@
     "items": [
       {
         "q": "How much plaster do I need for a mold?",
-        "a": "It depends on the net volume to fill (mold volume minus the piece) and the plaster-to-water ratio. Enter your dimensions above: the calculator shows the exact amounts of water and plaster, safety margin included."
+        "a": "It depends on the net volume to fill (mold volume minus the piece) and the plaster-to-water ratio. Enter your dimensions above, in centimeters or inches: the calculator shows the exact amounts of water and plaster, in liters and kilograms or in US cups, fluid ounces, pounds and ounces, safety margin included."
       },
       {
         "q": "What is the right plaster-to-water ratio?",
