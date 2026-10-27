@@ -363,6 +363,7 @@ const result = useCalculator(mold, object, mix);
           <p class="text-xs font-light tracking-widest uppercase text-muted">{{ t("footer.contribute") }}</p>
           <a
             href="https://github.com/Cedric-ruiu/gyp-sum"
+            data-umami-event="github-repo"
             target="_blank"
             rel="noopener noreferrer"
             class="inline-flex items-center gap-2 text-xs font-light text-muted hover:text-ink transition-colors duration-150"
@@ -375,6 +376,7 @@ const result = useCalculator(mold, object, mix);
           <p class="text-xs font-light text-muted max-w-xs leading-relaxed">{{ t("footer.openSource") }}</p>
           <a
             href="https://github.com/Cedric-ruiu/gyp-sum/issues"
+            data-umami-event="github-issues"
             target="_blank"
             rel="noopener noreferrer"
             class="inline-flex min-h-12 items-center gap-2 text-xs font-light text-muted hover:text-ink transition-colors duration-150 sm:min-h-0"

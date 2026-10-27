@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed, onMounted, onUnmounted, ref } from "vue";
 import { useI18n } from "vue-i18n";
+import { track } from "@/analytics";
 
 const { t } = useI18n();
 
@@ -28,6 +29,11 @@ const href = computed(() =>
     : undefined,
 );
 
+// Both ways of reaching out count as one contact event, told apart by method.
+function onMailtoClick() {
+  if (address.value) track("contact-email", { method: "mailto" });
+}
+
 // The mailto link does nothing without a configured mail app (common on
 // desktop with webmail), so the address is shown and can be copied.
 async function copyAddress() {
@@ -35,6 +41,7 @@ async function copyAddress() {
   try {
     await navigator.clipboard.writeText(address.value);
     copied.value = true;
+    track("contact-email", { method: "copy" });
     clearTimeout(copiedTimer);
     copiedTimer = setTimeout(() => {
       copied.value = false;
@@ -49,6 +56,7 @@ async function copyAddress() {
   <div class="flex flex-wrap items-center gap-x-3">
     <a
       :href="href"
+      @click="onMailtoClick"
       class="inline-flex min-h-12 items-center gap-2 text-xs font-light text-muted hover:text-ink transition-colors duration-150 sm:min-h-0"
     >
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 shrink-0" aria-hidden="true">

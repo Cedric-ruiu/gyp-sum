@@ -1,4 +1,5 @@
 import { computed, onMounted, ref } from "vue";
+import { track } from "@/analytics";
 
 // PWA install + offline orchestration. Mobile-only by design: the service
 // worker is registered only on phones/tablets, so desktop has no install
@@ -121,7 +122,8 @@ export function usePwaInstall() {
     const evt = deferredPrompt.value;
     if (!evt) return;
     await evt.prompt();
-    await evt.userChoice;
+    const { outcome } = await evt.userChoice;
+    track("pwa-install", { outcome });
     deferredPrompt.value = null;
   }
 

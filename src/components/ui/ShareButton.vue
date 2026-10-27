@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { onMounted, onUnmounted, ref } from "vue";
 import { useI18n } from "vue-i18n";
+import { track } from "@/analytics";
 import { EN_URL, FR_URL } from "@/seo";
 
 const { t, locale } = useI18n();
@@ -26,6 +27,7 @@ onUnmounted(() => clearTimeout(copiedTimer));
 
 async function share() {
   const url = locale.value === "en" ? EN_URL : FR_URL;
+  track("share", { method: useNativeShare.value ? "native" : "copy" });
   if (useNativeShare.value) {
     try {
       await navigator.share({
