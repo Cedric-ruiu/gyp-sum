@@ -58,6 +58,9 @@ const { t, tm, rt, locale } = useI18n();
 
 const { showFooterLink, triggerInstall } = usePwaInstall();
 
+const yourPlasterParagraphs = computed(
+  () => tm("yourPlaster.paragraphs") as string[],
+);
 const ratioValueCols = computed(
   () => tm("guide.ratioTable.valueCols") as string[],
 );
@@ -253,6 +256,7 @@ const result = useCalculator(mold, object, mix);
           <nav class="mt-4 flex flex-wrap items-center gap-x-4 gap-y-1 text-xs font-light text-muted">
             <span class="uppercase tracking-widest">{{ t("toc.label") }}</span>
             <a href="#guide" class="hover:text-ink transition-colors duration-150">{{ t("toc.guide") }}</a>
+            <a href="#your-plaster" class="hover:text-ink transition-colors duration-150">{{ t("toc.yourPlaster") }}</a>
             <a href="#how-to" class="hover:text-ink transition-colors duration-150">{{ t("toc.howto") }}</a>
             <a href="#faq" class="hover:text-ink transition-colors duration-150">{{ t("toc.faq") }}</a>
           </nav>
@@ -331,6 +335,15 @@ const result = useCalculator(mold, object, mix);
             <p>{{ t("guide.physics") }}</p>
             <p class="font-mono text-xs text-ink">{{ t("guide.formula") }}</p>
           </div>
+
+          <section id="your-plaster" class="mt-10 scroll-mt-6">
+            <h2 class="mb-4 text-xs font-medium tracking-widest uppercase text-muted">
+              {{ t("yourPlaster.title") }}
+            </h2>
+            <div class="grid gap-3 text-sm font-light text-muted leading-relaxed">
+              <p v-for="(para, i) in yourPlasterParagraphs" :key="i">{{ rt(para) }}</p>
+            </div>
+          </section>
         </div>
       </div>
 

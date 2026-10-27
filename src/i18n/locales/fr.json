@@ -122,6 +122,12 @@
       ]
     }
   },
+  "yourPlaster": {
+    "title": "Quel ratio saisir pour votre plâtre (Molda 3, plâtre céramique…) ?",
+    "paragraphs": [
+      "Reportez le taux de gâchage indiqué sur le sac ou la fiche technique de votre plâtre. S'il est donné en litres d'eau pour 100 kg de plâtre (par exemple 70), le ratio à saisir est 100 ÷ 70 = 1,43. S'il est donné en rapport eau / plâtre (0,7), c'est 1 ÷ 0,7 = 1,43."
+    ]
+  },
   "footer": {
     "tagline": "Calculateur de dosage eau / plâtre pour moulage. Formules basées sur la masse volumique du gypse (2,58 kg/L). Aucune donnée n'est envoyée — tout reste dans votre navigateur.",
     "createdBy": "Créé par",
@@ -150,9 +156,10 @@
   },
   "toc": {
     "label": "Sur cette page",
+    "guide": "Proportion eau / plâtre",
+    "yourPlaster": "Votre plâtre",
     "howto": "Mode d'emploi",
-    "faq": "Questions fréquentes",
-    "guide": "Proportion eau / plâtre"
+    "faq": "Questions fréquentes"
   },
   "howto": {
     "title": "Comment doser le plâtre pour un moulage",

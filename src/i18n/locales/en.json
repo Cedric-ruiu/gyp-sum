@@ -122,6 +122,13 @@
       ]
     }
   },
+  "yourPlaster": {
+    "title": "Which ratio for your plaster (pottery plaster, Hydrocal, Ultracal…)?",
+    "paragraphs": [
+      "Read the consistency on the bag or data sheet: 70 means 70 parts water to 100 parts plaster by weight. Convert it to the ratio the calculator uses: kg of plaster per liter of water = 100 ÷ consistency, so 70 gives 1.43.",
+      "The same rule applies to plaster of Paris, sold for crafts: if the package gives a water ratio, convert it the same way before casting your mold (mould, in British English)."
+    ]
+  },
   "footer": {
     "tagline": "Water / plaster calculator for mold making. Formulas based on the density of gypsum (2.58 kg/L). No data is sent — everything stays in your browser.",
     "createdBy": "Created by",
@@ -150,9 +157,10 @@
   },
   "toc": {
     "label": "On this page",
+    "guide": "Plaster to water ratio",
+    "yourPlaster": "Your plaster",
     "howto": "How-to",
-    "faq": "FAQ",
-    "guide": "Plaster to water ratio"
+    "faq": "FAQ"
   },
   "howto": {
     "title": "How to measure plaster for mold making",
