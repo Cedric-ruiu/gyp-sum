@@ -19,7 +19,7 @@ const { showFooterLink, triggerInstall } = usePwaInstall();
 // Shared by every footer link: a 48px touch target on mobile, compact rows
 // from sm up. Negative margins on the lists keep text rhythm unchanged.
 const linkClass =
-  "inline-flex min-h-12 items-center gap-2 text-left text-sm font-light text-muted hover:text-ink transition-colors duration-150 sm:min-h-8 sm:text-xs";
+  "link inline-flex min-h-12 items-center gap-2 text-left text-sm font-light sm:min-h-8 sm:text-xs";
 </script>
 
 <template>
@@ -99,7 +99,7 @@ const linkClass =
             :href="AUTHOR_URL"
             target="_blank"
             rel="author noopener"
-            class="text-ink underline decoration-line underline-offset-2 hover:decoration-current transition-colors duration-150"
+            class="link"
           >Cédric Ruiu</a>, {{ t("footer.authorRole") }}.
         </p>
         <p>
@@ -108,7 +108,7 @@ const linkClass =
             :href="AUTHOR_URL"
             target="_blank"
             rel="noopener"
-            class="text-ink underline decoration-line underline-offset-2 hover:decoration-current transition-colors duration-150"
+            class="link"
           >cedric-ruiu.fr</a>, {{ t("footer.madeByRole") }}.
         </p>
       </div>

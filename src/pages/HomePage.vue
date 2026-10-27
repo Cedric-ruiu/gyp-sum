@@ -287,11 +287,11 @@ function setUnitSystem(v: string) {
           <p class="text-base font-light leading-relaxed text-muted">{{ t("intro.lead") }}</p>
           <nav class="mt-4 flex flex-wrap items-center gap-x-4 gap-y-1 text-xs font-light text-muted">
             <span class="uppercase tracking-widest">{{ t("toc.label") }}</span>
-            <a href="#guide" class="hover:text-ink transition-colors duration-150">{{ t("toc.guide") }}</a>
-            <a href="#your-plaster" class="hover:text-ink transition-colors duration-150">{{ t("toc.yourPlaster") }}</a>
-            <a href="#how-to" class="hover:text-ink transition-colors duration-150">{{ t("toc.howto") }}</a>
-            <a href="#faq" class="hover:text-ink transition-colors duration-150">{{ t("toc.faq") }}</a>
-            <RouterLink v-if="moldGuidePage" :to="moldGuidePage.path" class="hover:text-ink transition-colors duration-150">{{ t("toc.moldGuide") }}</RouterLink>
+            <a href="#guide" class="link">{{ t("toc.guide") }}</a>
+            <a href="#your-plaster" class="link">{{ t("toc.yourPlaster") }}</a>
+            <a href="#how-to" class="link">{{ t("toc.howto") }}</a>
+            <a href="#faq" class="link">{{ t("toc.faq") }}</a>
+            <RouterLink v-if="moldGuidePage" :to="moldGuidePage.path" class="link">{{ t("toc.moldGuide") }}</RouterLink>
           </nav>
         </div>
 

@@ -35,7 +35,7 @@ const steps = computed(
     <p v-if="moldGuidePage" class="mt-5 text-sm font-light leading-relaxed">
       <RouterLink
         :to="moldGuidePage.path"
-        class="text-accent underline decoration-line underline-offset-2 hover:decoration-current transition-colors duration-150"
+        class="link"
       >{{ t("howto.moldGuideLink") }}</RouterLink>
     </p>
   </section>

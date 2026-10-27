@@ -17,13 +17,13 @@ const { href, trackContact } = useContactAddress("results");
         data-umami-event-placement="results"
         target="_blank"
         rel="noopener noreferrer"
-        class="text-ink underline decoration-line underline-offset-2 hover:decoration-current transition-colors duration-150"
+        class="link"
       >{{ t("contribute.github") }}</a>
     </template>
     <template #email>
       <a
         :href="href"
-        class="text-ink underline decoration-line underline-offset-2 hover:decoration-current transition-colors duration-150"
+        class="link"
         @click="trackContact('mailto')"
       >{{ t("contribute.email") }}</a>
     </template>

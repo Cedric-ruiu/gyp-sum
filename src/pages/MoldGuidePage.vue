@@ -99,7 +99,7 @@ useHead(() => {
             <li v-for="section in sections" :key="rt(section.id)">
               <a
                 :href="`#${rt(section.id)}`"
-                class="inline-flex min-h-12 items-center hover:text-ink transition-colors duration-150 sm:min-h-0"
+                class="link inline-flex min-h-12 items-center sm:min-h-0"
               >{{ rt(section.title) }}</a>
             </li>
           </ol>
@@ -123,7 +123,7 @@ useHead(() => {
                   <template #calculator>
                     <RouterLink
                       :to="calculatorPath"
-                      class="text-accent underline decoration-line underline-offset-2 hover:decoration-current transition-colors duration-150"
+                      class="link"
                     >{{ t("moldGuide.calculatorCta") }}</RouterLink>
                   </template>
                 </I18nT>
