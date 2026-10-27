@@ -1,37 +1,24 @@
 <script setup lang="ts">
-import { computed, onMounted, onUnmounted, ref } from "vue";
+import { onMounted, onUnmounted, ref } from "vue";
 import { useI18n } from "vue-i18n";
-import { track } from "@/analytics";
+import { useContactAddress } from "@/composables/useContactAddress";
 
 const { t } = useI18n();
 
-// Anti-harvesting: the address never appears in clear text, neither in the
-// pre-rendered HTML nor in the JS bundle. It is decoded only after mount, so
-// the server render and the first client render stay identical (no
-// hydration mismatch) and scrapers reading the static HTML get nothing.
-const ENCODED_ADDRESS = "Y29udGFjdEBjZWRyaWMtcnVpdS5mcg==";
-
-const address = ref<string | null>(null);
+const { address, href, trackContact } = useContactAddress();
 const canCopy = ref(false);
 const copied = ref(false);
 let copiedTimer: ReturnType<typeof setTimeout> | undefined;
 
 onMounted(() => {
-  address.value = atob(ENCODED_ADDRESS);
   canCopy.value = !!navigator.clipboard;
 });
 
 onUnmounted(() => clearTimeout(copiedTimer));
 
-const href = computed(() =>
-  address.value
-    ? `mailto:${address.value}?subject=${encodeURIComponent(t("footer.contactSubject"))}`
-    : undefined,
-);
-
 // Both ways of reaching out count as one contact event, told apart by method.
 function onMailtoClick() {
-  if (address.value) track("contact-email", { method: "mailto" });
+  trackContact("mailto");
 }
 
 // The mailto link does nothing without a configured mail app (common on
@@ -41,7 +28,7 @@ async function copyAddress() {
   try {
     await navigator.clipboard.writeText(address.value);
     copied.value = true;
-    track("contact-email", { method: "copy" });
+    trackContact("copy");
     clearTimeout(copiedTimer);
     copiedTimer = setTimeout(() => {
       copied.value = false;

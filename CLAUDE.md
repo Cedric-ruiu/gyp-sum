@@ -57,6 +57,8 @@ src/
 ├── composables/
 │   ├── useShapeVolume.ts   cm3ToLiters() — export nommé, utilisé par le registre
 │   ├── useCalculator.ts    computed<CalculationResult> (formules figées, voir ci-dessous)
+│   ├── useContactAddress.ts adresse e-mail encodée (décodée en onMounted), mailto,
+│   │                       événement contact-email
 │   ├── useLocalStorage.ts  ref + watch debounce 500 ms, clé 'plaster-calc-state'
 │   └── useThreeScene.ts    init/updateMold/updateObject/destroy (Three.js)
 ├── i18n/
