@@ -3,7 +3,7 @@ import { fileURLToPath, URL } from "node:url";
 import tailwindcss from "@tailwindcss/vite";
 import vue from "@vitejs/plugin-vue";
 import { defineConfig } from "vite";
-import { buildSitemap } from "./src/sitemap";
+import { buildSitemap } from "./src/sitemap.ts";
 
 // Routes actually pre-rendered by vite-ssg, captured for the sitemap.
 let renderedPaths: string[] = [];

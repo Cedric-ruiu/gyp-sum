@@ -1,6 +1,6 @@
 // Build-time only: sitemap.xml generated from the pre-rendered routes
 // (called from vite.config.ts once vite-ssg has written the pages).
-import { findPage, hreflangLinks, pageUrl } from "./seo";
+import { findPage, hreflangLinks, pageUrl } from "./seo.ts";
 
 export function buildSitemap(routePaths: string[]): string {
   const urls = routePaths.map((path) => {
