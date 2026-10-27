@@ -241,7 +241,7 @@ const result = useCalculator(mold, object, mix);
     </header>
 
     <main class="mx-auto max-w-6xl px-6 py-8">
-      <h1 class="mb-4 text-xs font-medium tracking-widest uppercase flex items-center">{{ t("intro.h1") }}</h1>
+      <h1 class="mb-4 text-2xl font-light leading-tight tracking-tight text-ink sm:text-3xl">{{ t("intro.h1") }}</h1>
 
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-x-6 gap-y-8 items-start">
         <!-- Intro (left col, row 1) -->

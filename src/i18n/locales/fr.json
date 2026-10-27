@@ -18,7 +18,7 @@
     "schemaApp": "Calculateur de dosage eau / plâtre pour le moulage (céramique, poterie, sculpture), basé sur la masse volumique du gypse (2,58 kg/L)."
   },
   "intro": {
-    "h1": "Calculateur de dosage eau et plâtre pour moulage",
+    "h1": "Dosage eau et plâtre pour un moulage : le calculateur",
     "p1": "Ce calculateur vous donne les quantités exactes d'eau et de plâtre nécessaires pour couler un moule — en céramique, en poterie ou en sculpture — en tenant compte du volume de la pièce à reproduire. L'objectif : ne pas gâcher un gramme — car un sac de 25 kg représente un coût réel, et chaque gâchée approximative finit à la poubelle.",
     "p2": "Il repose sur la physique du mélange : quand on combine eau et plâtre, le volume final est la somme du volume d'eau et du volume occupé par les grains de plâtre (masse volumique du gypse : 2,58 kg/L). Cette approche est plus précise qu'un simple ratio volumique.",
     "p3": "Le ratio plâtre/eau — exprimé en kg de plâtre par litre d'eau — détermine la dureté du résultat : 1,3 pour un plâtre fluide et détaillé, 1,5 pour un usage courant, 1,8 pour un plâtre dur et résistant."

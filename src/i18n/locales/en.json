@@ -18,7 +18,7 @@
     "schemaApp": "Plaster calculator for mold making (ceramics, pottery, sculpture), based on the density of gypsum (2.58 kg/L)."
   },
   "intro": {
-    "h1": "Plaster Calculator for Mold Making — Water & Plaster Ratio",
+    "h1": "Pottery Plaster Calculator for Molds — Plaster to Water Ratio",
     "p1": "This calculator gives you the exact amounts of water and plaster needed to pour a mold — for ceramics, pottery or sculpture — taking into account the volume of the piece you are reproducing. The goal: don't waste a gram — a 25 kg bag is a real cost, and every rough batch ends up in the bin.",
     "p2": "It is based on the physics of the mix: when you combine water and plaster, the final volume is the sum of the water volume and the volume taken up by the plaster grains (gypsum density: 2.58 kg/L). This is more accurate than a simple volume ratio.",
     "p3": "The plaster-to-water ratio — expressed in kg of plaster per liter of water — sets the final hardness: 1.3 for a fluid, detailed plaster, 1.5 for everyday use, 1.8 for a hard, durable plaster. (This is the inverse of the common water-to-plaster ratio.)"
