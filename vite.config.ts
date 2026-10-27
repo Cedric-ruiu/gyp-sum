@@ -1,7 +1,12 @@
+import { writeFileSync } from "node:fs";
 import { fileURLToPath, URL } from "node:url";
 import tailwindcss from "@tailwindcss/vite";
 import vue from "@vitejs/plugin-vue";
 import { defineConfig } from "vite";
+import { buildSitemap } from "./src/sitemap";
+
+// Routes actually pre-rendered by vite-ssg, captured for the sitemap.
+let renderedPaths: string[] = [];
 
 export default defineConfig(() => ({
   base: "/gyp-sum/",
@@ -10,6 +15,17 @@ export default defineConfig(() => ({
   // (`/en` -> `dist/en/index.html`, served at `/gyp-sum/en/`).
   ssgOptions: {
     dirStyle: "nested",
+    includedRoutes: (paths: string[]) => {
+      // Same filter as vite-ssg's default: static routes only.
+      renderedPaths = paths.filter((p) => !p.includes(":") && !p.includes("*"));
+      return renderedPaths;
+    },
+    onFinished: () => {
+      writeFileSync(
+        fileURLToPath(new URL("./dist/sitemap.xml", import.meta.url)),
+        buildSitemap(renderedPaths),
+      );
+    },
   },
   // Vue feature flags — required so externalised deps (vue-i18n) resolve them
   // during the vite-ssg server render.

@@ -53,7 +53,7 @@ import { track } from "@/analytics";
 import { useCalculator } from "@/composables/useCalculator";
 import { useLocalStorage } from "@/composables/useLocalStorage";
 import { markEngaged, usePwaInstall } from "@/composables/usePwaInstall";
-import { EN_URL, FR_URL, SITE_URL } from "@/seo";
+import { hreflangLinks, pageUrl, SITE_PAGES, SITE_URL } from "@/seo";
 import type {
   MixParams,
   PersistedState,
@@ -91,7 +91,11 @@ const AUTHOR_URL = "https://cedric-ruiu.fr";
 
 useHead(() => {
   const isEn = locale.value === "en";
-  const canonical = isEn ? EN_URL : FR_URL;
+  const page =
+    SITE_PAGES.find(
+      (p) => p.group === "calculator" && p.locale === locale.value,
+    ) ?? SITE_PAGES[0];
+  const canonical = pageUrl(page.path);
   const inLanguage = isEn ? "en-US" : "fr-FR";
 
   const appSchema = {
@@ -116,7 +120,7 @@ useHead(() => {
       url: AUTHOR_URL,
       sameAs: ["https://github.com/Cedric-ruiu"],
     },
-    dateModified: "2026-05-29",
+    dateModified: page.lastModified,
   };
 
   const howToSchema = {
@@ -167,9 +171,7 @@ useHead(() => {
     ],
     link: [
       { rel: "canonical", href: canonical },
-      { rel: "alternate", hreflang: "fr", href: FR_URL },
-      { rel: "alternate", hreflang: "en", href: EN_URL },
-      { rel: "alternate", hreflang: "x-default", href: FR_URL },
+      ...hreflangLinks(page).map((l) => ({ rel: "alternate", ...l })),
     ],
     script: [
       { type: "application/ld+json", innerHTML: JSON.stringify(appSchema) },

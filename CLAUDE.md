@@ -24,6 +24,11 @@ SPA statique hébergée sur GitHub Pages (`base: '/gyp-sum/'`). Aucun backend.
   par `route.meta.locale` via un guard `router.beforeEach`. Vite 8 utilise
   Rolldown — vue-i18n doit être bundlé côté SSR (`ssr.noExternal: ["vue-i18n"]`)
   et les flags Vue définis (`__VUE_PROD_DEVTOOLS__` etc.) dans `vite.config.ts`.
+- **Sitemap généré au build** : `ssgOptions.includedRoutes` relève les routes
+  pré-rendues, `onFinished` écrit `dist/sitemap.xml` (`src/sitemap.ts`), avec
+  les alternates hreflang et `lastmod`. Pas de `public/sitemap.xml`. Toute
+  route doit avoir son entrée dans `SITE_PAGES` (`src/seo.ts`), sinon le build
+  échoue.
 - L'instance i18n est créée **par app** (`createAppI18n()`), pas en singleton :
   vite-ssg appelle la factory une fois par route, et un singleton partagé fait
   fuiter la locale d'une page à l'autre.
@@ -73,7 +78,9 @@ src/
 │       ├── ContactLink.vue  lien mailto du footer, adresse décodée en onMounted
 │       ├── ShareButton.vue  partage natif (mobile) / copie du lien (desktop)
 │       └── SegmentedControl.vue  choix exclusif (unités, saisie du ratio)
-├── seo.ts                  URLs canoniques (SITE_URL, FR_URL, EN_URL)
+├── seo.ts                  URLs canoniques (SITE_URL, FR_URL, EN_URL), SITE_PAGES
+│                           (route, locale, groupe hreflang, lastModified)
+├── sitemap.ts              buildSitemap() : sitemap.xml au build (vite.config.ts)
 ├── units.ts                conversions d'affichage métrique ↔ US (provide/inject)
 ├── analytics.ts            track() : événements Umami, no-op si le script est absent
 └── App.vue                 shell racine : <RouterView/> uniquement
@@ -154,9 +161,14 @@ par `t()` / `$t()`. Pas de texte en dur dans les templates. Clés : `app`, `lang
 `author`, `footer`, `scene`. Pour les
 tableaux de messages (steps, faq items), utiliser `tm()` + `rt()`.
 
+- **Date de modification** : `lastModified` de la page dans `SITE_PAGES`
+  alimente `<lastmod>` du sitemap et `dateModified` du JSON-LD. À mettre à jour
+  quand le contenu visible change (textes i18n, sections), pas pour du code ou
+  du style.
 - `meta.*` alimente le `<head>` par locale. Le `<head>` est généré par `useHead`
   dans `HomePage.vue` : title/description/keywords, canonical, hreflang
-  réciproques (fr/en/x-default, FR = x-default), og/twitter, et les JSON-LD
+  réciproques (fr/en/x-default, FR = x-default ; `hreflangLinks()` de
+  `src/seo.ts`, même source que le sitemap), og/twitter, et les JSON-LD
   WebApplication/HowTo/FAQPage **construits depuis les mêmes clés i18n que le
   visible** (invariant schema == visible). `index.html` ne contient plus aucune
   balise locale-spécifique.
