@@ -155,7 +155,7 @@
   "footer": {
     "tagline": "Water / plaster calculator for mold making. Formulas based on the density of powdered plaster (2.58 kg/L). No data is sent — everything stays in your browser.",
     "createdBy": "Created by",
-    "authorRole": "potter and DIY maker",
+    "authorRole": "amateur potter for almost ten years",
     "madeBy": "Design & development:",
     "madeByRole": "freelance web developer",
     "contribute": "Contribute",
@@ -210,6 +210,10 @@
         "text": "Always add plaster to water, never the reverse. Let it slake without stirring, then mix and pour before it starts to set."
       }
     ]
+  },
+  "author": {
+    "title": "Why I built this tool",
+    "paragraphs": []
   },
   "faq": {
     "title": "Frequently asked questions",

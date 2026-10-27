@@ -131,7 +131,7 @@
   "footer": {
     "tagline": "Calculateur de dosage eau / plâtre pour moulage. Formules basées sur la masse volumique du plâtre en poudre (2,58 kg/L). Aucune donnée n'est envoyée — tout reste dans votre navigateur.",
     "createdBy": "Créé par",
-    "authorRole": "céramiste et bidouilleur",
+    "authorRole": "céramiste amateur depuis près de dix ans",
     "madeBy": "Conception et développement :",
     "madeByRole": "développeur web freelance",
     "contribute": "Contribuer",
@@ -186,6 +186,10 @@
         "text": "Versez toujours le plâtre dans l'eau, jamais l'inverse. Laissez détremper sans remuer, puis mélangez et coulez avant le début de prise."
       }
     ]
+  },
+  "author": {
+    "title": "Pourquoi cet outil",
+    "paragraphs": []
   },
   "faq": {
     "title": "Questions fréquentes",

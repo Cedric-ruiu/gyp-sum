@@ -8,6 +8,7 @@ import {
   ref,
 } from "vue";
 import { useI18n } from "vue-i18n";
+import AuthorNote from "@/components/AuthorNote.vue";
 import FaqSection from "@/components/FaqSection.vue";
 import HowToGuide from "@/components/HowToGuide.vue";
 import MixParameters from "@/components/MixParameters.vue";
@@ -397,6 +398,7 @@ function setUnitSystem(v: string) {
 
       <div class="mt-12 grid max-w-2xl gap-12">
         <HowToGuide />
+        <AuthorNote />
         <FaqSection />
       </div>
     </main>

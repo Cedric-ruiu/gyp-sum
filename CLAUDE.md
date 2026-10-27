@@ -62,6 +62,8 @@ src/
 │   ├── ResultPanel.vue
 │   ├── SceneViewer.vue     Three.js canvas, autoRotate + OrbitControls
 │   ├── HowToGuide.vue      section « Comment doser le plâtre » (tm()/rt())
+│   ├── AuthorNote.vue      « Pourquoi cet outil » : texte de l'auteur (author.paragraphs),
+│   │                       masqué tant que le tableau est vide
 │   ├── FaqSection.vue      FAQ accordéon <details> (tm()/rt()), sans JS
 │   └── ui/
 │       ├── NumberInput.vue  virgule/point acceptés, spinners masqués
@@ -148,7 +150,8 @@ accent `#2563EB`, accent-soft `#F59E0B`, accent-soft-strong `#B45309`, danger `#
 Deux locales : `fr` (défaut + x-default) et `en`. Toutes les chaînes UI passent
 par `t()` / `$t()`. Pas de texte en dur dans les templates. Clés : `app`, `lang`,
 `meta`, `intro`, `mold`, `object`, `shapes`, `fields`, `mix`, `results`,
-`errors`, `units`, `toc`, `howto`, `faq`, `guide`, `footer`, `scene`. Pour les
+`errors`, `units`, `unitSystem`, `toc`, `howto`, `faq`, `guide`, `yourPlaster`,
+`author`, `footer`, `scene`. Pour les
 tableaux de messages (steps, faq items), utiliser `tm()` + `rt()`.
 
 - `meta.*` alimente le `<head>` par locale. Le `<head>` est généré par `useHead`
