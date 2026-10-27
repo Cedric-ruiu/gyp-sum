@@ -10,6 +10,7 @@ import {
 import { useI18n } from "vue-i18n";
 import { RouterLink } from "vue-router";
 import AuthorNote from "@/components/AuthorNote.vue";
+import ContributeNote from "@/components/ContributeNote.vue";
 import FaqSection from "@/components/FaqSection.vue";
 import HowToGuide from "@/components/HowToGuide.vue";
 import MixParameters from "@/components/MixParameters.vue";
@@ -328,6 +329,7 @@ function setUnitSystem(v: string) {
               </div>
             </template>
           </ResultPanel>
+          <ContributeNote />
         </div>
 
         <!-- Guide (left col, row 3) -->

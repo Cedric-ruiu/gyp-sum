@@ -89,6 +89,11 @@
     "withoutMargin": "without margin",
     "netVolume": "Net volume"
   },
+  "contribute": {
+    "text": "Missing a shape? {github} or {email}.",
+    "github": "Suggest it on GitHub",
+    "email": "email me"
+  },
   "errors": {
     "volumeExceeded": "The object volume meets or exceeds the mold volume",
     "invalidRatio": "The ratio must be greater than 0"

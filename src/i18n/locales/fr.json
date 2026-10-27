@@ -81,6 +81,11 @@
     "withoutMargin": "sans marge",
     "netVolume": "Volume net"
   },
+  "contribute": {
+    "text": "Une forme manque ? {github} ou {email}.",
+    "github": "Proposez-la sur GitHub",
+    "email": "écrivez-moi"
+  },
   "errors": {
     "volumeExceeded": "Le volume de la pièce dépasse ou égale celui du moule",
     "invalidRatio": "Le ratio doit être supérieur à 0"

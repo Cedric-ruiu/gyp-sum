@@ -81,6 +81,11 @@
     "withoutMargin": "sin margen",
     "netVolume": "Volumen neto"
   },
+  "contribute": {
+    "text": "¿Falta una forma? {github} o {email}.",
+    "github": "Proponla en GitHub",
+    "email": "escríbeme"
+  },
   "errors": {
     "volumeExceeded": "El volumen de la pieza es igual o mayor que el del molde",
     "invalidRatio": "La proporción debe ser mayor que 0"

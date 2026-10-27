@@ -78,6 +78,8 @@ src/
 │   ├── ResultPanel.vue
 │   ├── SceneViewer.vue     Three.js canvas, autoRotate + OrbitControls
 │   ├── HowToGuide.vue      section « Comment doser le plâtre » (tm()/rt())
+│   ├── ContributeNote.vue  « Une forme manque ? » sous les résultats (issues GitHub +
+│   │                       e-mail, événements avec placement: results)
 │   ├── AuthorNote.vue      « Pourquoi cet outil » : texte de l'auteur (author.paragraphs),
 │   │                       masqué tant que le tableau est vide
 │   ├── FaqSection.vue      FAQ accordéon <details> (tm()/rt()), sans JS
@@ -108,7 +110,9 @@ autorisé par la CSP `connect-src`). Événements : `calculator-use` (`lang`), u
 fois par chargement, à la première valeur réellement modifiée par le visiteur
 (setters de `HomePage.vue` ; la restauration du localStorage n'est pas comptée),
 `contact-email` (`method` : mailto / copy), `share` (`method` : native / copy),
-`pwa-install` (`outcome`), `github-repo`, `github-issues`. Liens simples :
+`pwa-install` (`outcome`), `github-repo`, `github-issues`. Les liens
+d'appel à contribuer sous les résultats (`ContributeNote.vue`) envoient les
+mêmes événements `github-issues` / `contact-email`, avec `placement: results`. Liens simples :
 attribut `data-umami-event` ; tout élément qui a déjà un gestionnaire de clic :
 `track()` de `src/analytics.ts` dans ce gestionnaire (le traceur intercepte le
 clic des éléments porteurs de l'attribut).
@@ -172,7 +176,7 @@ accent `#2563EB`, accent-soft `#F59E0B`, accent-soft-strong `#B45309`, danger `#
 Trois locales : `fr` (défaut), `en` (x-default) et `es` (espagnol neutre,
 tutoiement, « yeso » ; « escayola » cité une fois ; structure de `fr.json`,
 métrique). Toutes les chaînes UI passent
-par `t()` / `$t()`. Pas de texte en dur dans les templates. Clés : `app`, `lang`, `help`,
+par `t()` / `$t()`. Pas de texte en dur dans les templates. Clés : `app`, `lang`, `help`, `contribute`,
 `meta`, `intro`, `mold`, `object`, `shapes`, `fields`, `mix`, `results`,
 `errors`, `units`, `unitSystem`, `toc`, `howto`, `faq`, `guide`, `yourPlaster`,
 `author`, `footer`, `scene`, `moldGuide` (fr et en ; pas en es : ses liens — sommaire, mode d'emploi, pied de page — n'apparaissent
