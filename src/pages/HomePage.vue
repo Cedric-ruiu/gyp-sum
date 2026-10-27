@@ -246,9 +246,7 @@ const result = useCalculator(mold, object, mix);
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-x-6 gap-y-8 items-start">
         <!-- Intro (left col, row 1) -->
         <div class="order-1 lg:order-0 lg:col-start-1 lg:row-start-1 max-w-2xl">
-          <p class="text-sm font-light leading-relaxed text-muted">{{ t("intro.p1") }}</p>
-          <p class="mt-3 text-sm font-light leading-relaxed text-muted">{{ t("intro.p2") }}</p>
-          <p class="mt-3 text-sm font-light leading-relaxed text-muted">{{ t("intro.p3") }}</p>
+          <p class="text-base font-light leading-relaxed text-muted">{{ t("intro.lead") }}</p>
           <nav class="mt-4 flex flex-wrap items-center gap-x-4 gap-y-1 text-xs font-light text-muted">
             <span class="uppercase tracking-widest">{{ t("toc.label") }}</span>
             <a href="#how-to" class="hover:text-ink transition-colors duration-150">{{ t("toc.howto") }}</a>
@@ -316,6 +314,7 @@ const result = useCalculator(mold, object, mix);
             </table>
             <p>{{ t("guide.pourOrder") }}</p>
             <p>{{ t("guide.immersion") }}</p>
+            <p>{{ t("guide.physics") }}</p>
             <p class="font-mono text-xs text-ink">{{ t("guide.formula") }}</p>
           </div>
         </div>

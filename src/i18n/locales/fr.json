@@ -19,9 +19,7 @@
   },
   "intro": {
     "h1": "Dosage eau et plâtre pour un moulage : le calculateur",
-    "p1": "Ce calculateur vous donne les quantités exactes d'eau et de plâtre nécessaires pour couler un moule — en céramique, en poterie ou en sculpture — en tenant compte du volume de la pièce à reproduire. L'objectif : ne pas gâcher un gramme — car un sac de 25 kg représente un coût réel, et chaque gâchée approximative finit à la poubelle.",
-    "p2": "Il repose sur la physique du mélange : quand on combine eau et plâtre, le volume final est la somme du volume d'eau et du volume occupé par les grains de plâtre (masse volumique du gypse : 2,58 kg/L). Cette approche est plus précise qu'un simple ratio volumique.",
-    "p3": "Le ratio plâtre/eau — exprimé en kg de plâtre par litre d'eau — détermine la dureté du résultat : 1,3 pour un plâtre fluide et détaillé, 1,5 pour un usage courant, 1,8 pour un plâtre dur et résistant."
+    "lead": "Pour un moulage, comptez en général 1,5 kg de plâtre par litre d'eau, soit environ 0,67 L d'eau pour 1 kg de plâtre : 1,3 pour un plâtre fluide qui prend bien les détails, 1,8 pour un moule dur. Indiquez les dimensions de votre moule et de la pièce : le calculateur donne les quantités exactes, pièce déduite."
   },
   "mold": {
     "title": "Moule",
@@ -94,6 +92,7 @@
     "ratioExplain": "Le ratio plâtre/eau détermine la dureté finale. 1.3 pour un plâtre fin et fluide, 1.5 pour un usage standard, 1.8 pour un plâtre dur et résistant. Ce ratio exprime la masse de plâtre (en kg) pour 1 litre d'eau.",
     "pourOrder": "Toujours verser le plâtre dans l'eau, jamais l'inverse.",
     "immersion": "Pour mesurer le volume d'une pièce irrégulière, plongez-la dans un récipient gradué et notez la montée d'eau.",
+    "physics": "Le calculateur repose sur la physique du mélange : quand on combine eau et plâtre, le volume final est la somme du volume d'eau et du volume occupé par les grains de plâtre (masse volumique du gypse : 2,58 kg/L). Cette approche est plus précise qu'un simple ratio volumique.",
     "formula": "Formule : Eau = Volume net ÷ (1 + Ratio ÷ 2.58)",
     "ratioTable": {
       "caption": "Ratios plâtre / eau courants",
