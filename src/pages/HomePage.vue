@@ -17,6 +17,7 @@ import ResultPanel from "@/components/ResultPanel.vue";
 import ContactLink from "@/components/ui/ContactLink.vue";
 import LanguageSwitcher from "@/components/ui/LanguageSwitcher.vue";
 import PwaInstallPrompt from "@/components/ui/PwaInstallPrompt.vue";
+import SegmentedControl from "@/components/ui/SegmentedControl.vue";
 import ShareButton from "@/components/ui/ShareButton.vue";
 
 const SceneViewer = defineAsyncComponent(
@@ -52,7 +53,14 @@ import { useCalculator } from "@/composables/useCalculator";
 import { useLocalStorage } from "@/composables/useLocalStorage";
 import { usePwaInstall } from "@/composables/usePwaInstall";
 import { EN_URL, FR_URL, SITE_URL } from "@/seo";
-import type { MixParams, PersistedState } from "@/types";
+import type {
+  MixParams,
+  PersistedState,
+  RatioMode,
+  UnitPrefs,
+  UnitSystem,
+} from "@/types";
+import { provideUnits } from "@/units";
 
 const { t, tm, rt, locale } = useI18n();
 
@@ -220,6 +228,39 @@ const mix = computed<MixParams>({
 });
 
 const result = useCalculator(mold, object, mix);
+
+// Unit preferences are display-only and stored apart from the calculator
+// state: switching units is not a calculator use. The French page is always
+// metric; the stored choice applies to the English page only.
+const unitPrefs = useLocalStorage<UnitPrefs>("plaster-calc-units", {
+  system: "metric",
+  ratioMode: "ratio",
+});
+const unitsSwitchable = computed(() => locale.value === "en");
+const unitSystem = computed<UnitSystem>(() =>
+  unitsSwitchable.value && unitPrefs.value.system === "us" ? "us" : "metric",
+);
+const ratioMode = computed<RatioMode>(() =>
+  unitsSwitchable.value && unitPrefs.value.ratioMode === "consistency"
+    ? "consistency"
+    : "ratio",
+);
+provideUnits({
+  system: unitSystem,
+  ratioMode,
+  switchable: unitsSwitchable,
+  setRatioMode: (mode) => {
+    unitPrefs.value = { ...unitPrefs.value, ratioMode: mode };
+  },
+});
+
+const unitOptions = computed(() => [
+  { value: "metric", label: t("unitSystem.metric") },
+  { value: "us", label: t("unitSystem.us") },
+]);
+function setUnitSystem(v: string) {
+  unitPrefs.value = { ...unitPrefs.value, system: v as UnitSystem };
+}
 </script>
 
 <template>
@@ -264,6 +305,13 @@ const result = useCalculator(mold, object, mix);
 
         <!-- Configurators (left col, row 2) -->
         <div class="order-2 lg:order-0 lg:col-start-1 lg:row-start-2 flex flex-col gap-4">
+          <SegmentedControl
+            v-if="unitsSwitchable"
+            :label="t('unitSystem.label')"
+            :options="unitOptions"
+            :model-value="unitSystem"
+            @update:model-value="setUnitSystem"
+          />
           <MoldConfigurator v-model="mold" :object-config="object" />
           <ObjectConfigurator v-model="object" />
           <MixParameters v-model="mix" />

@@ -9,11 +9,14 @@ const props = withDefaults(
     min?: number;
     max?: number;
     step?: number;
+    // Decimals kept when the field loses focus.
+    decimals?: number;
     invalid?: boolean;
     placeholder?: string;
   }>(),
   {
     step: 0.5,
+    decimals: 1,
   },
 );
 
@@ -55,7 +58,8 @@ function onBlur(e: Event) {
   const raw = (e.target as HTMLInputElement).value.replace(",", ".");
   const n = Number(raw);
   if (!Number.isNaN(n) && raw !== "") {
-    emit("update:modelValue", clamp(Math.round(n * 10) / 10));
+    const f = 10 ** props.decimals;
+    emit("update:modelValue", clamp(Math.round(n * f) / f));
   }
 }
 

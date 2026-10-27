@@ -6,6 +6,7 @@ import NumberInput from "@/components/ui/NumberInput.vue";
 import ShapeSelector from "@/components/ui/ShapeSelector.vue";
 import { moldShapeRegistry } from "@/shapes/registry";
 import type { Dimensions, MoldConfig, ObjectConfig } from "@/types";
+import { useUnits } from "@/units";
 
 const props = defineProps<{
   modelValue: MoldConfig;
@@ -13,17 +14,24 @@ const props = defineProps<{
 }>();
 const emit = defineEmits<(e: "update:modelValue", v: MoldConfig) => void>();
 
+const { t, n } = useI18n();
+const units = useUnits();
+
+// Stored in cm; shown and edited in the current length unit.
 const adaptMargin = ref(2.5);
 const editingMargin = ref(false);
 const marginRaw = ref("");
 const marginInputEl = ref<HTMLInputElement | null>(null);
 
+const adaptMarginShown = computed(() =>
+  units.toInput("length", adaptMargin.value),
+);
 const adaptMarginDisplay = computed(() =>
-  String(adaptMargin.value).replace(".", ","),
+  n(adaptMarginShown.value, { maximumFractionDigits: 2 }),
 );
 
 function startEditMargin() {
-  marginRaw.value = String(adaptMargin.value);
+  marginRaw.value = String(adaptMarginShown.value);
   editingMargin.value = true;
   nextTick(() => marginInputEl.value?.select());
 }
@@ -31,7 +39,11 @@ function startEditMargin() {
 function commitMargin() {
   const parsed = Number(marginRaw.value.replace(",", "."));
   if (!Number.isNaN(parsed) && parsed >= 0.1) {
-    adaptMargin.value = Math.round(parsed * 10) / 10;
+    adaptMargin.value = units.fromInput(
+      "length",
+      Math.round(parsed * 10) / 10,
+      adaptMargin.value,
+    );
   }
   editingMargin.value = false;
 }
@@ -42,12 +54,10 @@ function cancelEdit() {
 
 function stepMargin(delta: number) {
   const current = Number(marginRaw.value.replace(",", "."));
-  const base = Number.isNaN(current) ? adaptMargin.value : current;
+  const base = Number.isNaN(current) ? adaptMarginShown.value : current;
   const next = Math.max(0.1, Math.round((base + delta) * 10) / 10);
   marginRaw.value = String(next);
 }
-
-const { t, n } = useI18n();
 
 const currentShape = computed(
   () =>
@@ -68,7 +78,13 @@ function updateShape(type: string) {
   });
 }
 
-function updateField(key: string, val: number) {
+function fieldValue(key: string, fallback: number): number {
+  return props.modelValue.dimensions[key] ?? fallback;
+}
+
+function updateField(key: string, unitKey: string, shown: number) {
+  const current = props.modelValue.dimensions[key] ?? 0;
+  const val = units.fromInput(units.fieldQuantity(unitKey), shown, current);
   const dims: Dimensions = { ...props.modelValue.dimensions, [key]: val };
   emit("update:modelValue", { ...props.modelValue, dimensions: dims });
 }
@@ -193,10 +209,11 @@ function adaptToObject() {
         v-for="field in currentShape.fields"
         :key="field.key"
         :label="t(field.labelKey)"
-        :unit="t(field.unitKey)"
+        :unit="t(units.labelKey(units.fieldQuantity(field.unitKey)))"
         :min="field.min"
-        :model-value="modelValue.dimensions[field.key] ?? field.defaultValue"
-        @update:model-value="updateField(field.key, $event)"
+        :decimals="units.system.value === 'us' ? 2 : 1"
+        :model-value="units.toInput(units.fieldQuantity(field.unitKey), fieldValue(field.key, field.defaultValue))"
+        @update:model-value="updateField(field.key, field.unitKey, $event)"
       />
     </div>
     </div>
@@ -236,7 +253,7 @@ function adaptToObject() {
           @keydown.up.prevent="stepMargin(0.5)"
           @keydown.down.prevent="stepMargin(-0.5)"
         />
-        {{ t("units.cm") }}
+        {{ t(units.labelKey("length")) }}
       </span>
       <InfoTooltip :text="t('mold.adaptToObjectTooltip')" />
     </div>
@@ -244,7 +261,7 @@ function adaptToObject() {
     <p class="mt-4 text-xs font-light text-muted">
       {{ t("mold.volume") }} :
       <span class="font-mono tnum text-ink">
-        {{ n(volume, { maximumFractionDigits: 2, minimumFractionDigits: 2 }) }} {{ t("units.liters") }}
+        {{ n(units.convert("volume", volume), { maximumFractionDigits: 2, minimumFractionDigits: 2 }) }} {{ t(units.labelKey("volume")) }}
       </span>
     </p>
   </section>

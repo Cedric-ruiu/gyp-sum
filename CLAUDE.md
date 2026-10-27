@@ -69,8 +69,10 @@ src/
 │       ├── InfoTooltip.vue
 │       ├── LanguageSwitcher.vue  liens FR/EN (RouterLink, hreflang, aria-current)
 │       ├── ContactLink.vue  lien mailto du footer, adresse décodée en onMounted
-│       └── ShareButton.vue  partage natif (mobile) / copie du lien (desktop)
+│       ├── ShareButton.vue  partage natif (mobile) / copie du lien (desktop)
+│       └── SegmentedControl.vue  choix exclusif (unités, saisie du ratio)
 ├── seo.ts                  URLs canoniques (SITE_URL, FR_URL, EN_URL)
+├── units.ts                conversions d'affichage métrique ↔ US (provide/inject)
 ├── analytics.ts            track() : événements Umami, no-op si le script est absent
 └── App.vue                 shell racine : <RouterView/> uniquement
 ```
@@ -136,7 +138,9 @@ accent `#2563EB`, accent-soft `#F59E0B`, accent-soft-strong `#B45309`, danger `#
 - Police corps : Inter 300/400/500, valeurs numériques : JetBrains Mono 300/400
 - Bordures 1px, pas d'ombres, `rounded` max (pas `rounded-xl`)
 - Transitions 150–200 ms
-- Pas de dark mode, pas de sélecteur d'unités
+- Pas de dark mode
+- Sélecteur d'unités et de saisie du ratio sur la page EN uniquement (voir
+  « Système d'unités »)
 - Sélecteur de langue FR/EN dans le header (`ui/LanguageSwitcher.vue`)
 
 ## i18n
@@ -162,14 +166,33 @@ tableaux de messages (steps, faq items), utiliser `tm()` + `rt()`.
 ## Persistance localStorage
 
 Clé `plaster-calc-state`, objet `{ mold, object, mix }`. Fallback silencieux.
+Préférences d'affichage à part : clé `plaster-calc-units`,
+`{ system: 'metric' | 'us', ratioMode: 'ratio' | 'consistency' }` (changer
+d'unité n'est pas une utilisation du calculateur).
 Debounce 500 ms. La lecture du localStorage est **différée dans `onMounted`**
 (SSR-safe : le pré-rendu utilise toujours les valeurs par défaut pour éviter
 un mismatch d'hydratation).
 
 ## Système d'unités
 
-`UnitSystem = 'metric'` uniquement. Dimensions en cm, volumes en litres, poids en kg.
-`cm3ToLiters` isolée pour extension future — pas de sélecteur UI.
+L'état et les formules restent **toujours métriques** (cm, L, kg, ratio en
+kg/L). `src/units.ts` convertit seulement à l'affichage et à la saisie :
+`toInput` / `fromInput` (valeurs de champ arrondies à 2 décimales en US ;
+une valeur ré-émise inchangée au blur rend la valeur stockée telle quelle,
+sans conversion aller-retour) et `convert` (affichages en lecture seule).
+
+- `UnitSystem = 'metric' | 'us'`. US : pouces, tasses US (eau, volumes),
+  livres (plâtre), avec onces liquides US / onces sous les résultats. Jamais
+  le plâtre en tasses (pas de masse volumique apparente de poudre fiable).
+- `RatioMode = 'ratio' | 'consistency'` : consistency = 100 ÷ ratio (parts
+  d'eau pour 100 parts de plâtre, en poids) ; l'autre notation est affichée
+  sous le champ.
+- Page FR : toujours métrique, ratio en kg/L, aucun sélecteur. Page EN :
+  métrique par défaut ; le pré-rendu est métrique et la préférence est lue
+  dans `onMounted` (pas d'écart d'hydratation).
+- Les composants lisent `useUnits()` (injecté par `HomePage.vue`) ; un champ
+  de forme est converti selon son `unitKey` (`units.cm` → longueur,
+  `units.liters` → volume).
 
 ## Scène 3D (useThreeScene)
 
