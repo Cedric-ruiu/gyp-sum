@@ -1,0 +1,246 @@
+{
+  "app": {
+    "title": "Calcolatore del gesso",
+    "subtitle": "Dosi di gesso e acqua per stampi"
+  },
+  "lang": {
+    "switcher": "Scegli la lingua",
+    "fr": "Français",
+    "en": "English",
+    "es": "Español",
+    "de": "Deutsch",
+    "it": "Italiano"
+  },
+  "help": {
+    "label": "Aiuto: {topic}"
+  },
+  "meta": {
+    "title": "Dosi gesso e acqua per stampi: calcolatore gratuito — GypSum",
+    "description": "Quanta acqua e quanto gesso servono per il tuo stampo? Inserisci le misure dello stampo e del modello: il calcolatore ti dà l'acqua e il gesso. Gratis.",
+    "keywords": "dosi gesso acqua per stampi, quanta acqua per il gesso, rapporto gesso acqua, gesso per stampi, gesso per stampi da colaggio, stampi in gesso per ceramica, calcolare il gesso per uno stampo",
+    "ogTitle": "Dosi gesso e acqua per stampi: calcolatore gratuito",
+    "ogDescription": "Quanta acqua e quanto gesso servono per il tuo stampo? Inserisci le misure dello stampo e del modello: il calcolatore ti dà l'acqua e il gesso.",
+    "twitterDescription": "Quanta acqua e quanto gesso servono per il tuo stampo? Il calcolatore ti dà l'acqua e il gesso, modello già sottratto.",
+    "schemaApp": "Calcolatore delle dosi di acqua e gesso per stampi (ceramica, terracotta, scultura), basato sulla densità del gesso in polvere (2,58 kg/L)."
+  },
+  "intro": {
+    "h1": "Dosi di gesso e acqua per stampi: il calcolatore",
+    "lead": "Per uno stampo si contano di solito 1,5 kg di gesso per litro d'acqua, cioè circa 0,67 L d'acqua per 1 kg di gesso: 1,3 per un gesso fluido che riprende bene i dettagli, 1,8 per uno stampo duro. Inserisci le misure del tuo stampo e del modello: il calcolatore ti dà le quantità esatte, modello già sottratto."
+  },
+  "mold": {
+    "title": "Stampo",
+    "volume": "Volume dello stampo",
+    "titleTooltip": "Le misure sono quelle interne della tua cassaforma. L'altezza da inserire è quella fino a cui vuoi colare il gesso, non per forza l'altezza totale della cassaforma.",
+    "adaptToObject": "Adatta al modello",
+    "adaptToObjectTooltip": "Calcola le misure minime dello stampo a partire dal modello indicato, aggiungendo 2,5 cm di margine su ogni lato e sopra. Le misure dello stampo si aggiornano da sole: utile per dimensionare la cassaforma prima di iniziare.",
+    "margin": "margine",
+    "marginEditHint": "Clicca per modificare il margine"
+  },
+  "object": {
+    "title": "Modello",
+    "titleTooltip": "Se il tuo modello non ha esattamente una delle forme proposte, scegli quella più simile e arrotonda le misure per eccesso: il volume risulterà un po' sovrastimato, il che è meglio che restare senza materiale.",
+    "shape": {
+      "none": "Nessuno"
+    },
+    "manualEntry": "Inserisci direttamente un volume",
+    "dimensionEntry": "Inserisci le misure",
+    "manualVolume": "Volume",
+    "volume": "Volume del modello"
+  },
+  "shapes": {
+    "box": "Parallelepipedo",
+    "cylinder": "Cilindro",
+    "frustum": "Tronco di cono",
+    "sphere": "Sfera",
+    "halfSphere": "Semisfera",
+    "sphericalCap": "Calotta sferica",
+    "manual": "Volume libero"
+  },
+  "fields": {
+    "length": "Lunghezza",
+    "width": "Larghezza",
+    "height": "Altezza",
+    "diameter": "Diametro",
+    "diameterBottom": "Diametro inferiore",
+    "diameterTop": "Diametro superiore",
+    "volume": "Volume"
+  },
+  "mix": {
+    "title": "Parametri dell'impasto",
+    "titleTooltip": "I valori predefiniti vanno bene per la maggior parte degli usi. Cambiali solo se conosci bene il gesso e cerchi una durezza o un tempo di presa precisi.",
+    "ratio": "Rapporto gesso / acqua",
+    "ratioHint": "kg di gesso per litro d'acqua",
+    "ratioScale": "fine ← 1.3 — 1.5 — 1.8 → duro",
+    "margin": "Margine di sicurezza",
+    "density": "Densità del gesso in polvere",
+    "densityTooltip": "Densità del gesso in polvere (solfato di calcio emidrato, CaSO₄·½H₂O), che serve a calcolare il volume occupato dai granuli. Varia un po' da un gesso all'altro; l'effetto sulle quantità resta inferiore al margine di sicurezza predefinito."
+  },
+  "results": {
+    "title": "Risultati",
+    "water": "Acqua",
+    "plaster": "Gesso",
+    "withMargin": "con margine",
+    "withoutMargin": "senza margine",
+    "netVolume": "Volume netto"
+  },
+  "contribute": {
+    "text": "Manca una forma? {github} o {email}.",
+    "github": "Proponila su GitHub",
+    "email": "scrivimi"
+  },
+  "errors": {
+    "volumeExceeded": "Il volume del modello è uguale o superiore a quello dello stampo",
+    "invalidRatio": "Il rapporto deve essere maggiore di 0"
+  },
+  "units": {
+    "cm": "cm",
+    "liters": "L",
+    "kg": "kg",
+    "percent": "%"
+  },
+  "guide": {
+    "title": "Quali sono le dosi di gesso e acqua per uno stampo?",
+    "answer": "Per uno stampo il rapporto abituale è di 1,5 kg di gesso per 1 litro d'acqua, cioè circa 0,67 L d'acqua per chilo di gesso. Scendi a 1,3 per un gesso fluido che riprenda i dettagli, sali a 1,8 per uno stampo duro. Se il produttore indica un rapporto gesso-acqua, vale il suo.",
+    "pourOrder": "Versa sempre il gesso nell'acqua, mai il contrario.",
+    "immersion": "Per misurare il volume di un modello irregolare, immergilo in un recipiente graduato e annota di quanto sale l'acqua.",
+    "physics": "Il calcolatore si basa sulla fisica dell'impasto: mescolando acqua e gesso, il volume finale è la somma del volume dell'acqua e del volume occupato dai granuli di gesso (densità del gesso in polvere: 2,58 kg/L). È più preciso di un semplice rapporto in volume.",
+    "formula": "Formula: Acqua = Volume netto ÷ (1 + Rapporto ÷ 2.58)",
+    "ratioTable": {
+      "caption": "Rapporti gesso / acqua più comuni",
+      "colRatio": "Rapporto (kg/L)",
+      "colResult": "Risultato",
+      "colUse": "Uso",
+      "valueCols": ["Acqua per 1 kg", "Acqua per 100 g"],
+      "rows": [
+        {
+          "ratio": "1,3",
+          "result": "Fluido, dettagliato",
+          "use": "Colata fine, dettagli",
+          "values": ["≈ 0,77 L", "≈ 77 ml"]
+        },
+        {
+          "ratio": "1,5",
+          "result": "Equilibrato",
+          "use": "Uso comune",
+          "values": ["≈ 0,67 L", "≈ 67 ml"]
+        },
+        {
+          "ratio": "1,8",
+          "result": "Duro, resistente",
+          "use": "Stampi resistenti",
+          "values": ["≈ 0,56 L", "≈ 56 ml"]
+        }
+      ]
+    }
+  },
+  "yourPlaster": {
+    "title": "Che rapporto inserire per il tuo gesso (gesso per stampi, alabastrino…)?",
+    "paragraphs": [
+      "Riporta il rapporto indicato sul sacco o sulla scheda tecnica del tuo gesso. Se è dato in acqua per 100 parti di gesso, in peso (per esempio 70 g d'acqua ogni 100 g di gesso, o «70 % d'acqua»), il rapporto da inserire è 100 ÷ 70 = 1,43. Se è dato in parti, come «3 parti di polvere e 1 parte di acqua», è 3 ÷ 1 = 3. Se è dato come rapporto acqua / gesso (0,7), è 1 ÷ 0,7 = 1,43."
+    ]
+  },
+  "footer": {
+    "tagline": "Calcolatore delle dosi di acqua e gesso per stampi. Formule basate sulla densità del gesso in polvere (2,58 kg/L). Nessun dato viene inviato: tutto resta nel tuo browser.",
+    "createdBy": "Creato da",
+    "authorRole": "ceramista amatoriale da quasi dieci anni",
+    "madeBy": "Progettazione e sviluppo:",
+    "madeByRole": "sviluppatore web freelance",
+    "contribute": "Contribuisci",
+    "openSource": "Progetto open source: suggerimenti e commenti sono benvenuti.",
+    "issues": "Segnala un errore o proponi un'idea",
+    "contactTitle": "Due parole?",
+    "contactText": "Una domanda su una dose, una forma di stampo che manca, o uno stampo colato con GypSum? Scrivimi: una foto mi fa sempre piacere. Rispondo appena posso.",
+    "contactCta": "Scrivi un'email",
+    "contactCopy": "Copia",
+    "contactCopied": "Indirizzo copiato",
+    "contactSubject": "GypSum — domanda o commento",
+    "share": "Condividi lo strumento",
+    "shareCopied": "Link copiato"
+  },
+  "pwa": {
+    "title": "Installa GypSum",
+    "body": "Aggiungi l'app alla schermata Home per averla sempre a portata di mano, anche offline.",
+    "installButton": "Installa",
+    "iosInstruction": "Tocca Condividi e poi «Aggiungi alla schermata Home».",
+    "dismissLabel": "Chiudi",
+    "footerLink": "Installa l'app"
+  },
+  "toc": {
+    "label": "In questa pagina",
+    "guide": "Dosi gesso / acqua",
+    "yourPlaster": "Il tuo gesso",
+    "howto": "Istruzioni",
+    "faq": "Domande frequenti"
+  },
+  "howto": {
+    "title": "Come calcolare il gesso per uno stampo",
+    "intro": "In cinque passaggi, calcola e prepara la quantità giusta di gesso per riempire il tuo stampo senza sprechi.",
+    "steps": [
+      {
+        "title": "Misurare il volume dello stampo",
+        "text": "Prendi le misure interne della cassaforma (lunghezza, larghezza, altezza di colata che vuoi). È il volume totale da riempire di gesso."
+      },
+      {
+        "title": "Stimare il volume del modello",
+        "text": "Se nello stampo c'è un modello, sottrai il suo volume. Scegli la forma più simile, oppure misuralo immergendolo in un recipiente graduato."
+      },
+      {
+        "title": "Scegliere il rapporto gesso / acqua",
+        "text": "Il rapporto (kg di gesso per litro d'acqua) stabilisce la durezza: 1,3 per un gesso fine e fluido, 1,5 per l'uso comune, 1,8 per un gesso duro e resistente."
+      },
+      {
+        "title": "Aggiungere un margine di sicurezza",
+        "text": "Prevedi circa il 10 % di materiale in più per compensare le perdite (recipiente, traboccamenti, presa rapida)."
+      },
+      {
+        "title": "Impastare e colare",
+        "text": "Versa sempre il gesso nell'acqua, mai il contrario. Lascialo assorbire senza mescolare, poi mescola e cola prima che inizi la presa."
+      }
+    ]
+  },
+  "author": {
+    "title": "Perché ho creato questo strumento",
+    "paragraphs": []
+  },
+  "faq": {
+    "title": "Domande frequenti",
+    "items": [
+      {
+        "q": "Come calcolare quanto gesso serve per uno stampo?",
+        "a": "Dipende dal volume netto da riempire (volume dello stampo meno quello del modello) e dal rapporto gesso / acqua. Inserisci le tue misure qui sopra: il calcolatore mostra le quantità esatte di acqua e di gesso, margine di sicurezza compreso."
+      },
+      {
+        "q": "Qual è il giusto rapporto gesso / acqua?",
+        "a": "Il rapporto si esprime in chili di gesso per litro d'acqua. Conta 1,3 per un gesso fluido e dettagliato, 1,5 per l'uso comune e 1,8 per un gesso duro e resistente. Più il rapporto è alto, più il gesso è denso e solido."
+      },
+      {
+        "q": "Che dosi usare per uno stampo in gesso per ceramica?",
+        "a": "In ceramica serve un gesso poroso che assorba l'acqua della barbottina: un rapporto da 1,3 a 1,5 (kg di gesso per litro d'acqua) va bene per la maggior parte degli stampi da colaggio. Inserisci il volume del tuo stampo qui sopra per avere le quantità esatte."
+      },
+      {
+        "q": "Si versa il gesso nell'acqua o l'acqua nel gesso?",
+        "a": "Sempre il gesso nell'acqua, mai il contrario. Spargi il gesso poco alla volta, lascialo assorbire qualche minuto, poi mescola per evitare i grumi."
+      },
+      {
+        "q": "Qual è la densità del gesso?",
+        "a": "Il calcolo usa la densità del gesso in polvere (solfato di calcio emidrato, CaSO₄·½H₂O): 2,58 kg/L. Varia un po' a seconda del tipo di gesso; l'effetto sulle quantità calcolate resta inferiore al margine di sicurezza predefinito. Permette un dosaggio più preciso di un semplice rapporto in volume."
+      },
+      {
+        "q": "Come misurare il volume di un modello irregolare?",
+        "a": "Immergi il modello in un recipiente graduato pieno d'acqua e annota di quanto sale il livello: la differenza è il suo volume. Puoi anche inserire questo volume direttamente nel calcolatore."
+      },
+      {
+        "q": "Quanta acqua per 1 kg di gesso?",
+        "a": "Con un rapporto di 1,5 servono circa 0,67 litri d'acqua per 1 kg di gesso (1 ÷ rapporto), cioè circa 67 ml per 100 g di gesso. Con 1,3 conta ~0,77 L, con 1,8 circa 0,56 L. Il calcolatore fa questo conto per te in base al volume del tuo stampo."
+      },
+      {
+        "q": "Si può dosare il gesso a volume invece che a peso?",
+        "a": "Sì, a patto di tarare la tua misura: riempi a raso un bicchiere del tuo gesso, pesalo una volta, poi usa sempre lo stesso bicchiere per tutti gli impasti. Un bicchiere qualsiasi non basta: a seconda del gesso e di quanto è compatto, lo stesso volume non ha lo stesso peso. Il calcolatore dà il peso del gesso: dividilo per il peso del tuo bicchiere per sapere quanti versarne."
+      }
+    ]
+  },
+  "scene": {
+    "placeholder": "Vista 3D: presto disponibile",
+    "ariaLabel": "Anteprima 3D dello stampo e del modello"
+  }
+}

@@ -49,6 +49,12 @@ export const SITE_PAGES: SitePage[] = [
     lastModified: "2026-10-27",
   },
   {
+    path: "/it/",
+    locale: "it",
+    group: "calculator",
+    lastModified: "2026-10-27",
+  },
+  {
     path: "/moule-en-platre/",
     locale: "fr",
     group: "moldGuide",
@@ -79,6 +85,7 @@ export const LOCALE_META: Record<
   fr: { inLanguage: "fr-FR", ogLocale: "fr_FR", currency: "EUR" },
   en: { inLanguage: "en-US", ogLocale: "en_US", currency: "USD" },
   es: { inLanguage: "es", ogLocale: "es_ES", currency: "EUR" },
+  it: { inLanguage: "it", ogLocale: "it_IT", currency: "EUR" },
   de: { inLanguage: "de", ogLocale: "de_DE", currency: "EUR" },
 };
 
