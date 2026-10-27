@@ -1,0 +1,247 @@
+{
+  "app": {
+    "title": "Gipsrechner",
+    "subtitle": "Gips-Wasser-Verhältnis für Gipsformen"
+  },
+  "format": {
+    "label": "{label}:"
+  },
+  "lang": {
+    "switcher": "Sprache wählen",
+    "fr": "Français",
+    "en": "English",
+    "es": "Español",
+    "de": "Deutsch",
+    "it": "Italiano",
+    "pt": "Português"
+  },
+  "help": {
+    "label": "Hilfe: {topic}"
+  },
+  "meta": {
+    "title": "Gips-Wasser-Verhältnis für Gipsformen: kostenloser Rechner — GypSum",
+    "description": "Wie viel Wasser und Gips braucht deine Gipsform? Gib die Maße von Form und Modell ein: Der Rechner liefert die Wasser- und Gipsmenge. Kostenlos.",
+    "keywords": "Gips Wasser Verhältnis, Gips Mischverhältnis, Gips anrühren Verhältnis, Modellgips anrühren, Keramikgips, Gipsform, Gipsform für Keramik, Gipsmenge berechnen",
+    "ogTitle": "Gips-Wasser-Verhältnis für Gipsformen: kostenloser Rechner",
+    "ogDescription": "Wie viel Wasser und Gips braucht deine Gipsform? Gib die Maße von Form und Modell ein: Der Rechner liefert die Wasser- und Gipsmenge.",
+    "twitterDescription": "Wie viel Wasser und Gips braucht deine Gipsform? Der Rechner liefert die Wasser- und Gipsmenge, Modell bereits abgezogen.",
+    "schemaApp": "Rechner für das Gips-Wasser-Verhältnis von Gipsformen (Keramik, Töpfern, Bildhauerei), auf Basis der Dichte von Gipspulver (2,58 kg/L)."
+  },
+  "intro": {
+    "h1": "Gips-Wasser-Verhältnis für Gipsformen: der Rechner",
+    "lead": "Für eine Gipsform rechnet man meist mit 1,5 kg Gips pro Liter Wasser, also etwa 0,67 L Wasser auf 1 kg Gips: 1,3 für einen flüssigen Gips, der Details gut abformt, 1,8 für eine harte Form. Gib die Maße deiner Form und des Modells ein: Der Rechner liefert die genauen Mengen, das Modell bereits abgezogen."
+  },
+  "mold": {
+    "title": "Form",
+    "volume": "Formvolumen",
+    "titleTooltip": "Die Maße entsprechen der Innenseite deines Formkastens. Als Höhe gibst du die Füllhöhe an, bis zu der du Gips gießen willst, nicht unbedingt die Gesamthöhe des Formkastens.",
+    "adaptToObject": "An Modell anpassen",
+    "adaptToObjectTooltip": "Berechnet die Mindestmaße der Form aus dem angegebenen Modell, mit 2,5 cm Rand auf jeder Seite und darüber. Die Formmaße werden automatisch aktualisiert: praktisch, um den Formkasten vor dem Gießen zu bemessen.",
+    "margin": "Rand",
+    "marginEditHint": "Klicken, um den Rand zu ändern"
+  },
+  "object": {
+    "title": "Modell",
+    "titleTooltip": "Hat dein Modell keine der angebotenen Formen, wähle die ähnlichste und runde die Maße auf: Das Volumen wird leicht überschätzt, und das ist besser, als zu wenig Material zu haben.",
+    "shape": {
+      "none": "Keins"
+    },
+    "manualEntry": "Volumen direkt eingeben",
+    "dimensionEntry": "Maße eingeben",
+    "manualVolume": "Volumen",
+    "volume": "Modellvolumen"
+  },
+  "shapes": {
+    "box": "Quader",
+    "cylinder": "Zylinder",
+    "frustum": "Kegelstumpf",
+    "sphere": "Kugel",
+    "halfSphere": "Halbkugel",
+    "sphericalCap": "Kugelabschnitt",
+    "manual": "Freies Volumen"
+  },
+  "fields": {
+    "length": "Länge",
+    "width": "Breite",
+    "height": "Höhe",
+    "diameter": "Durchmesser",
+    "diameterBottom": "Durchmesser unten",
+    "diameterTop": "Durchmesser oben",
+    "volume": "Volumen"
+  },
+  "mix": {
+    "title": "Mischparameter",
+    "titleTooltip": "Die Standardwerte passen für die meisten Anwendungen. Ändere sie nur, wenn du dich mit Gips gut auskennst und eine bestimmte Härte oder Abbindezeit brauchst.",
+    "ratio": "Gips-Wasser-Verhältnis",
+    "ratioHint": "kg Gips pro Liter Wasser",
+    "ratioScale": "fein ← 1.3 — 1.5 — 1.8 → hart",
+    "margin": "Sicherheitszuschlag",
+    "density": "Dichte von Gipspulver",
+    "densityTooltip": "Dichte von Gipspulver (Calciumsulfat-Halbhydrat, CaSO₄·½H₂O), mit der das Volumen der Gipskörner berechnet wird. Sie schwankt leicht von Gips zu Gips; die Auswirkung auf die Mengen bleibt unter dem standardmäßigen Sicherheitszuschlag."
+  },
+  "results": {
+    "title": "Ergebnisse",
+    "water": "Wasser",
+    "plaster": "Gips",
+    "withMargin": "mit Zuschlag",
+    "withoutMargin": "ohne Zuschlag",
+    "netVolume": "Nettovolumen"
+  },
+  "contribute": {
+    "text": "Fehlt eine Form? {github} oder {email}.",
+    "github": "Schlag sie auf GitHub vor",
+    "email": "schreib mir"
+  },
+  "errors": {
+    "volumeExceeded": "Das Modellvolumen ist gleich groß wie oder größer als das der Form",
+    "invalidRatio": "Das Verhältnis muss größer als 0 sein"
+  },
+  "units": {
+    "cm": "cm",
+    "liters": "L",
+    "kg": "kg",
+    "percent": "%"
+  },
+  "guide": {
+    "title": "Welches Gips-Wasser-Verhältnis für eine Gipsform?",
+    "answer": "Für eine Gipsform ist das übliche Verhältnis 1,5 kg Gips auf 1 Liter Wasser, also etwa 0,67 L Wasser pro Kilo Gips. Geh auf 1,3 herunter für einen flüssigen Gips, der Details abformt, auf 1,8 hinauf für eine harte Form. Gibt der Hersteller ein Mischverhältnis an, gilt seines.",
+    "pourOrder": "Immer den Gips ins Wasser geben, nie umgekehrt.",
+    "immersion": "Um das Volumen eines unregelmäßigen Modells zu messen, tauche es in einen Messbecher und lies ab, wie weit das Wasser steigt.",
+    "physics": "Der Rechner beruht auf der Physik der Mischung: Mischt man Wasser und Gips, ist das Endvolumen die Summe aus dem Wasservolumen und dem Volumen der Gipskörner (Dichte von Gipspulver: 2,58 kg/L). Das ist genauer als ein einfaches Volumenverhältnis.",
+    "formula": "Formel: Wasser = Nettovolumen ÷ (1 + Verhältnis ÷ 2.58)",
+    "ratioTable": {
+      "caption": "Übliche Gips-Wasser-Verhältnisse",
+      "colRatio": "Verhältnis (kg/L)",
+      "colResult": "Ergebnis",
+      "colUse": "Verwendung",
+      "valueCols": ["Wasser für 1 kg", "Wasser für 100 g"],
+      "rows": [
+        {
+          "ratio": "1,3",
+          "result": "Flüssig, detailreich",
+          "use": "Feiner Guss, Details",
+          "values": ["≈ 0,77 L", "≈ 77 ml"]
+        },
+        {
+          "ratio": "1,5",
+          "result": "Ausgewogen",
+          "use": "Standard",
+          "values": ["≈ 0,67 L", "≈ 67 ml"]
+        },
+        {
+          "ratio": "1,8",
+          "result": "Hart, widerstandsfähig",
+          "use": "Strapazierfähige Formen",
+          "values": ["≈ 0,56 L", "≈ 56 ml"]
+        }
+      ]
+    }
+  },
+  "yourPlaster": {
+    "title": "Welches Verhältnis für deinen Gips (Modellgips, Keramikgips…)?",
+    "paragraphs": [
+      "Übernimm das Mischverhältnis von der Packung oder dem technischen Datenblatt deines Gipses. Ist es als Wasser auf 100 Teile Gips angegeben (zum Beispiel 70 g Wasser auf 100 g Gips), gibst du 100 ÷ 70 = 1,43 ein. Lautet es „2 Teile Gips auf 1 Teil Wasser“, ist es 2 ÷ 1 = 2. Als Wasser-Gips-Wert angegeben (0,7): 1 ÷ 0,7 = 1,43."
+    ]
+  },
+  "footer": {
+    "tagline": "Rechner für das Gips-Wasser-Verhältnis von Gipsformen. Formeln auf Basis der Dichte von Gipspulver (2,58 kg/L). Es werden keine Daten gesendet: Alles bleibt in deinem Browser.",
+    "credit": "Erstellt von {name}, Hobbykeramiker und freiberuflicher Webentwickler ({site}).",
+    "contribute": "Mitmachen",
+    "openSource": "Open-Source-Projekt: Vorschläge und Rückmeldungen sind willkommen.",
+    "issues": "Einen Fehler melden oder eine Idee vorschlagen",
+    "contactTitle": "Ein paar Worte?",
+    "contactText": "Eine Frage zu einem Mischverhältnis, eine fehlende Formart oder eine Form, die du mit GypSum gegossen hast? Schreib mir, über ein Foto freue ich mich immer. Ich antworte, so bald ich kann.",
+    "contactCta": "E-Mail schreiben",
+    "contactCopy": "Kopieren",
+    "contactCopied": "Adresse kopiert",
+    "contactSubject": "GypSum — Frage oder Rückmeldung",
+    "share": "Tool teilen",
+    "shareCopied": "Link kopiert"
+  },
+  "pwa": {
+    "title": "GypSum installieren",
+    "body": "Füge die App deinem Startbildschirm hinzu, für schnellen Zugriff, auch offline.",
+    "installButton": "Installieren",
+    "iosInstruction": "Tippe auf Teilen und dann auf „Zum Home-Bildschirm“.",
+    "dismissLabel": "Schließen",
+    "footerLink": "App installieren"
+  },
+  "toc": {
+    "label": "Auf dieser Seite",
+    "guide": "Gips-Wasser-Verhältnis",
+    "yourPlaster": "Dein Gips",
+    "howto": "Anleitung",
+    "faq": "Häufige Fragen"
+  },
+  "howto": {
+    "title": "So berechnest du den Gips für eine Gipsform",
+    "intro": "In fünf Schritten berechnest und mischst du die richtige Gipsmenge, um deine Form ohne Verschwendung zu füllen.",
+    "steps": [
+      {
+        "title": "Formvolumen messen",
+        "text": "Miss die Innenmaße deines Formkastens (Länge, Breite, gewünschte Füllhöhe). Das ist das Gesamtvolumen, das mit Gips gefüllt wird."
+      },
+      {
+        "title": "Volumen des Modells schätzen",
+        "text": "Steht ein Modell in der Form, zieh sein Volumen ab. Wähle die ähnlichste Form oder miss es durch Eintauchen in einen Messbecher."
+      },
+      {
+        "title": "Gips-Wasser-Verhältnis wählen",
+        "text": "Das Verhältnis (kg Gips pro Liter Wasser) bestimmt die Härte: 1,3 für einen feinen, flüssigen Gips, 1,5 für den Standard, 1,8 für einen harten, widerstandsfähigen Gips."
+      },
+      {
+        "title": "Sicherheitszuschlag einplanen",
+        "text": "Plane etwa 10 % mehr Material ein, um Verluste auszugleichen (Gefäß, Überlaufen, schnelles Abbinden)."
+      },
+      {
+        "title": "Anrühren und gießen",
+        "text": "Gib den Gips immer ins Wasser, nie umgekehrt. Lass ihn ohne Rühren einsumpfen, rühre dann um und gieße, bevor er anzieht."
+      }
+    ]
+  },
+  "author": {
+    "title": "Warum ich dieses Tool gebaut habe",
+    "paragraphs": []
+  },
+  "faq": {
+    "title": "Häufige Fragen",
+    "items": [
+      {
+        "q": "Wie viel Gips brauche ich für eine Gipsform?",
+        "a": "Das hängt vom zu füllenden Nettovolumen ab (Formvolumen minus Modellvolumen) und vom Gips-Wasser-Verhältnis. Gib oben deine Maße ein: Der Rechner zeigt die genauen Wasser- und Gipsmengen, inklusive Sicherheitszuschlag."
+      },
+      {
+        "q": "In welchem Verhältnis mischt man Gips mit Wasser?",
+        "a": "Das Verhältnis wird in Kilo Gips pro Liter Wasser angegeben. Rechne mit 1,3 für einen flüssigen, detailreichen Gips, 1,5 für den Standard und 1,8 für einen harten, widerstandsfähigen Gips. Je höher das Verhältnis, desto dichter und fester wird der Gips."
+      },
+      {
+        "q": "Welches Mischverhältnis für Gipsformen in der Keramik?",
+        "a": "In der Keramik braucht man einen porösen Gips, der das Wasser des Gießschlickers aufnimmt: Ein Verhältnis von 1,3 bis 1,5 (kg Gips pro Liter Wasser) passt für die meisten Gießformen. Gib oben das Volumen deiner Form ein, um die genauen Mengen zu erhalten."
+      },
+      {
+        "q": "Gips ins Wasser oder Wasser in den Gips?",
+        "a": "Immer den Gips ins Wasser, nie umgekehrt. Streu den Gips nach und nach ein, lass ihn einige Minuten einsumpfen und rühre dann um, damit keine Klumpen entstehen."
+      },
+      {
+        "q": "Wie hoch ist die Dichte von Gips?",
+        "a": "Die Berechnung nutzt die Dichte von Gipspulver (Calciumsulfat-Halbhydrat, CaSO₄·½H₂O): 2,58 kg/L. Sie schwankt leicht je nach Gipsart; die Auswirkung auf die berechneten Mengen bleibt unter dem standardmäßigen Sicherheitszuschlag. Damit wird die Dosierung genauer als mit einem einfachen Volumenverhältnis."
+      },
+      {
+        "q": "Wie misst man das Volumen eines unregelmäßigen Modells?",
+        "a": "Tauche das Modell in einen mit Wasser gefüllten Messbecher und lies ab, wie weit der Wasserstand steigt: Die Differenz ist sein Volumen. Du kannst dieses Volumen auch direkt in den Rechner eingeben."
+      },
+      {
+        "q": "Wie viel Wasser für 1 kg Gips?",
+        "a": "Bei einem Verhältnis von 1,5 brauchst du etwa 0,67 Liter Wasser für 1 kg Gips (1 ÷ Verhältnis), also etwa 67 ml für 100 g Gips. Bei 1,3 rechne mit ~0,77 L, bei 1,8 mit etwa 0,56 L. Der Rechner erledigt das automatisch für das Volumen deiner Form."
+      },
+      {
+        "q": "Kann man Gips nach Volumen statt nach Gewicht abmessen?",
+        "a": "Ja, wenn du dein Maß vorher eichst: Füll ein Glas oder einen Becher randvoll mit deinem Gips, wiege es einmal und nimm dann dasselbe Glas für alle Mischungen. Ein beliebiges Glas reicht nicht: Je nach Gips und wie stark er sich setzt, wiegt dasselbe Volumen nicht gleich viel. Der Rechner gibt das Gipsgewicht an: Teile es durch das Gewicht deines Glases, um zu wissen, wie viele Gläser du brauchst."
+      }
+    ]
+  },
+  "scene": {
+    "placeholder": "3D-Ansicht: bald verfügbar",
+    "ariaLabel": "3D-Vorschau von Form und Modell"
+  }
+}

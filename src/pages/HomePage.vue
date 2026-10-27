@@ -8,16 +8,19 @@ import {
   ref,
 } from "vue";
 import { useI18n } from "vue-i18n";
+import { RouterLink } from "vue-router";
+import AuthorNote from "@/components/AuthorNote.vue";
+import ContributeNote from "@/components/ContributeNote.vue";
 import FaqSection from "@/components/FaqSection.vue";
 import HowToGuide from "@/components/HowToGuide.vue";
 import MixParameters from "@/components/MixParameters.vue";
 import MoldConfigurator from "@/components/MoldConfigurator.vue";
 import ObjectConfigurator from "@/components/ObjectConfigurator.vue";
 import ResultPanel from "@/components/ResultPanel.vue";
-import ContactLink from "@/components/ui/ContactLink.vue";
-import LanguageSwitcher from "@/components/ui/LanguageSwitcher.vue";
+import SiteFooter from "@/components/SiteFooter.vue";
+import SiteHeader from "@/components/SiteHeader.vue";
 import PwaInstallPrompt from "@/components/ui/PwaInstallPrompt.vue";
-import ShareButton from "@/components/ui/ShareButton.vue";
+import SegmentedControl from "@/components/ui/SegmentedControl.vue";
 
 const SceneViewer = defineAsyncComponent(
   () => import("@/components/SceneViewer.vue"),
@@ -47,36 +50,62 @@ onUnmounted(() => {
   sceneObserver = null;
 });
 
+import { track } from "@/analytics";
 import { useCalculator } from "@/composables/useCalculator";
 import { useLocalStorage } from "@/composables/useLocalStorage";
-import { usePwaInstall } from "@/composables/usePwaInstall";
-import { EN_URL, FR_URL, SITE_URL } from "@/seo";
-import type { MixParams, PersistedState } from "@/types";
+import { markEngaged } from "@/composables/usePwaInstall";
+import {
+  AUTHOR_SCHEMA,
+  hreflangLinks,
+  LOCALE_META,
+  localePage,
+  OG_IMAGE,
+  pageFor,
+  pageUrl,
+  SITE_PAGES,
+} from "@/seo";
+import type {
+  MixParams,
+  PersistedState,
+  RatioMode,
+  UnitPrefs,
+  UnitSystem,
+} from "@/types";
+import { provideUnits } from "@/units";
 
 const { t, tm, rt, locale } = useI18n();
 
-const { showFooterLink, triggerInstall } = usePwaInstall();
+// The mold-making guide exists in French only for now.
+const moldGuidePage = computed(() => localePage("moldGuide", locale.value));
 
+const yourPlasterParagraphs = computed(
+  () => tm("yourPlaster.paragraphs") as string[],
+);
+const ratioValueCols = computed(
+  () => tm("guide.ratioTable.valueCols") as string[],
+);
 const ratioRows = computed(
   () =>
     tm("guide.ratioTable.rows") as {
       ratio: string;
       result: string;
       use: string;
-      water: string;
+      values: string[];
     }[],
 );
 
 // Per-locale SEO head. Pre-rendered by vite-ssg into each route's HTML and
 // reactive on the client when the locale switches. JSON-LD is built from the
 // same i18n data shown on the page, so schema always matches the visible copy.
-const OG_IMAGE = `${SITE_URL}/og-image.png`;
-const AUTHOR_URL = "https://cedric-ruiu.fr";
 
 useHead(() => {
-  const isEn = locale.value === "en";
-  const canonical = isEn ? EN_URL : FR_URL;
-  const inLanguage = isEn ? "en-US" : "fr-FR";
+  const page = pageFor("calculator", locale.value);
+  const localeMeta = LOCALE_META[page.locale];
+  const canonical = pageUrl(page.path);
+  const inLanguage = localeMeta.inLanguage;
+  const alternateOgLocales = SITE_PAGES.filter(
+    (p) => p.group === page.group && p.locale !== page.locale,
+  ).map((p) => LOCALE_META[p.locale].ogLocale);
 
   const appSchema = {
     "@context": "https://schema.org",
@@ -92,15 +121,10 @@ useHead(() => {
     offers: {
       "@type": "Offer",
       price: "0",
-      priceCurrency: isEn ? "USD" : "EUR",
+      priceCurrency: localeMeta.currency,
     },
-    author: {
-      "@type": "Person",
-      name: "Cédric Ruiu",
-      url: AUTHOR_URL,
-      sameAs: ["https://github.com/Cedric-ruiu"],
-    },
-    dateModified: "2026-05-29",
+    author: AUTHOR_SCHEMA,
+    dateModified: page.lastModified,
   };
 
   const howToSchema = {
@@ -131,15 +155,18 @@ useHead(() => {
   };
 
   return {
-    htmlAttrs: { lang: isEn ? "en" : "fr" },
+    htmlAttrs: { lang: page.locale },
     title: t("meta.title"),
     meta: [
       { name: "description", content: t("meta.description") },
       { name: "keywords", content: t("meta.keywords") },
       { property: "og:type", content: "website" },
       { property: "og:site_name", content: "GypSum" },
-      { property: "og:locale", content: isEn ? "en_US" : "fr_FR" },
-      { property: "og:locale:alternate", content: isEn ? "fr_FR" : "en_US" },
+      { property: "og:locale", content: localeMeta.ogLocale },
+      ...alternateOgLocales.map((content) => ({
+        property: "og:locale:alternate",
+        content,
+      })),
       { property: "og:title", content: t("meta.ogTitle") },
       { property: "og:description", content: t("meta.ogDescription") },
       { property: "og:url", content: canonical },
@@ -151,9 +178,7 @@ useHead(() => {
     ],
     link: [
       { rel: "canonical", href: canonical },
-      { rel: "alternate", hreflang: "fr", href: FR_URL },
-      { rel: "alternate", hreflang: "en", href: EN_URL },
-      { rel: "alternate", hreflang: "x-default", href: FR_URL },
+      ...hreflangLinks(page).map((l) => ({ rel: "alternate", ...l })),
     ],
     script: [
       { type: "application/ld+json", innerHTML: JSON.stringify(appSchema) },
@@ -181,72 +206,104 @@ const defaults: PersistedState = {
 
 const state = useLocalStorage<PersistedState>("plaster-calc-state", defaults);
 
+// Every visitor edit goes through these setters; the localStorage restore
+// writes `state` directly, so it is never counted as a use. One event per
+// page load, on the first value that actually changes (a blur re-emits the
+// same value).
+let calculatorUseTracked = false;
+function updateState(patch: Partial<PersistedState>) {
+  const next = { ...state.value, ...patch };
+  if (
+    !calculatorUseTracked &&
+    JSON.stringify(next) !== JSON.stringify(state.value)
+  ) {
+    calculatorUseTracked = true;
+    track("calculator-use", { lang: locale.value });
+    markEngaged();
+  }
+  state.value = next;
+}
+
 const mold = computed({
   get: () => state.value.mold,
-  set: (v) => {
-    state.value = { ...state.value, mold: v };
-  },
+  set: (v) => updateState({ mold: v }),
 });
 const object = computed({
   get: () => state.value.object,
-  set: (v) => {
-    state.value = { ...state.value, object: v };
-  },
+  set: (v) => updateState({ object: v }),
 });
 
 const mix = computed<MixParams>({
   get: () => ({ ...state.value.mix, gypsumDensity: 2.58 }),
-  set: (v) => {
-    state.value = { ...state.value, mix: { ratio: v.ratio, margin: v.margin } };
-  },
+  set: (v) => updateState({ mix: { ratio: v.ratio, margin: v.margin } }),
 });
 
 const result = useCalculator(mold, object, mix);
+
+// Unit preferences are display-only and stored apart from the calculator
+// state: switching units is not a calculator use. The French page is always
+// metric; the stored choice applies to the English page only.
+const unitPrefs = useLocalStorage<UnitPrefs>("plaster-calc-units", {
+  system: "metric",
+  ratioMode: "ratio",
+});
+const unitsSwitchable = computed(() => locale.value === "en");
+const unitSystem = computed<UnitSystem>(() =>
+  unitsSwitchable.value && unitPrefs.value.system === "us" ? "us" : "metric",
+);
+const ratioMode = computed<RatioMode>(() =>
+  unitsSwitchable.value && unitPrefs.value.ratioMode === "consistency"
+    ? "consistency"
+    : "ratio",
+);
+provideUnits({
+  system: unitSystem,
+  ratioMode,
+  switchable: unitsSwitchable,
+  setRatioMode: (mode) => {
+    unitPrefs.value = { ...unitPrefs.value, ratioMode: mode };
+  },
+});
+
+const unitOptions = computed(() => [
+  { value: "metric", label: t("unitSystem.metric") },
+  { value: "us", label: t("unitSystem.us") },
+]);
+function setUnitSystem(v: string) {
+  unitPrefs.value = { ...unitPrefs.value, system: v as UnitSystem };
+}
 </script>
 
 <template>
   <div class="min-h-full bg-white text-[color:var(--color-ink)]">
-    <header class="border-b border-[color:var(--color-line)] py-4">
-      <div class="mx-auto max-w-6xl px-6 flex items-center justify-between">
-        <a href="." aria-label="GypSum">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 190 44" class="-ml-1.25 h-7 w-31.25" aria-hidden="true">
-            <g stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5">
-              <path d="M4 10h30v30H4zM4 10l6-6h30l-6 6zM34 10l6-6M34 40l6-6M40 4v30"/>
-            </g>
-            <g stroke="#2563eb" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5">
-              <path d="M4 27h30M34 27l6-6"/>
-            </g>
-            <text x="54" y="34" fill="currentColor" font-family="Inter, system-ui, sans-serif" font-size="36" font-weight="300" letter-spacing="-.5">GypSum</text>
-          </svg>
-        </a>
-        <div class="flex items-center gap-4">
-          <p class="text-xs font-light text-muted hidden sm:block">
-            {{ t("app.subtitle") }}
-          </p>
-          <LanguageSwitcher />
-        </div>
-      </div>
-    </header>
+    <SiteHeader />
 
     <main class="mx-auto max-w-6xl px-6 py-8">
-      <h1 class="mb-4 text-xs font-medium tracking-widest uppercase flex items-center">{{ t("intro.h1") }}</h1>
+      <h1 class="mb-4 text-2xl font-light leading-tight tracking-tight text-ink sm:text-3xl">{{ t("intro.h1") }}</h1>
 
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-x-6 gap-y-8 items-start">
         <!-- Intro (left col, row 1) -->
         <div class="order-1 lg:order-0 lg:col-start-1 lg:row-start-1 max-w-2xl">
-          <p class="text-sm font-light leading-relaxed text-muted">{{ t("intro.p1") }}</p>
-          <p class="mt-3 text-sm font-light leading-relaxed text-muted">{{ t("intro.p2") }}</p>
-          <p class="mt-3 text-sm font-light leading-relaxed text-muted">{{ t("intro.p3") }}</p>
+          <p class="text-base font-light leading-relaxed text-muted">{{ t("intro.lead") }}</p>
           <nav class="mt-4 flex flex-wrap items-center gap-x-4 gap-y-1 text-xs font-light text-muted">
             <span class="uppercase tracking-widest">{{ t("toc.label") }}</span>
-            <a href="#how-to" class="hover:text-ink transition-colors duration-150">{{ t("toc.howto") }}</a>
-            <a href="#faq" class="hover:text-ink transition-colors duration-150">{{ t("toc.faq") }}</a>
-            <a href="#guide" class="hover:text-ink transition-colors duration-150">{{ t("toc.guide") }}</a>
+            <a href="#guide" class="link">{{ t("toc.guide") }}</a>
+            <a href="#your-plaster" class="link">{{ t("toc.yourPlaster") }}</a>
+            <a href="#how-to" class="link">{{ t("toc.howto") }}</a>
+            <a href="#faq" class="link">{{ t("toc.faq") }}</a>
+            <RouterLink v-if="moldGuidePage" :to="moldGuidePage.path" class="link">{{ t("toc.moldGuide") }}</RouterLink>
           </nav>
         </div>
 
         <!-- Configurators (left col, row 2) -->
         <div class="order-2 lg:order-0 lg:col-start-1 lg:row-start-2 flex flex-col gap-4">
+          <SegmentedControl
+            v-if="unitsSwitchable"
+            :label="t('unitSystem.label')"
+            :options="unitOptions"
+            :model-value="unitSystem"
+            @update:model-value="setUnitSystem"
+          />
           <MoldConfigurator v-model="mold" :object-config="object" />
           <ObjectConfigurator v-model="object" />
           <MixParameters v-model="mix" />
@@ -272,6 +329,7 @@ const result = useCalculator(mold, object, mix);
               </div>
             </template>
           </ResultPanel>
+          <ContributeNote />
         </div>
 
         <!-- Guide (left col, row 3) -->
@@ -280,7 +338,8 @@ const result = useCalculator(mold, object, mix);
             {{ t("guide.title") }}
           </h2>
           <div class="grid gap-3 text-sm font-light text-muted leading-relaxed">
-            <p>{{ t("guide.ratioExplain") }}</p>
+            <p>{{ t("guide.answer") }}</p>
+            <div class="overflow-x-auto">
             <table class="w-full border-collapse text-xs">
               <caption class="mb-1 text-left text-xs font-medium text-ink">
                 {{ t("guide.ratioTable.caption") }}
@@ -290,7 +349,12 @@ const result = useCalculator(mold, object, mix);
                   <th scope="col" class="py-1.5 pr-3 font-medium">{{ t("guide.ratioTable.colRatio") }}</th>
                   <th scope="col" class="py-1.5 pr-3 font-medium">{{ t("guide.ratioTable.colResult") }}</th>
                   <th scope="col" class="py-1.5 pr-3 font-medium">{{ t("guide.ratioTable.colUse") }}</th>
-                  <th scope="col" class="py-1.5 font-medium">{{ t("guide.ratioTable.colWater") }}</th>
+                  <th
+                    v-for="(col, j) in ratioValueCols"
+                    :key="j"
+                    scope="col"
+                    class="py-1.5 pr-3 font-medium last:pr-0"
+                  >{{ rt(col) }}</th>
                 </tr>
               </thead>
               <tbody>
@@ -298,95 +362,40 @@ const result = useCalculator(mold, object, mix);
                   <td class="py-1.5 pr-3 font-mono text-ink">{{ rt(row.ratio) }}</td>
                   <td class="py-1.5 pr-3">{{ rt(row.result) }}</td>
                   <td class="py-1.5 pr-3">{{ rt(row.use) }}</td>
-                  <td class="py-1.5 font-mono">{{ rt(row.water) }}</td>
+                  <td
+                    v-for="(value, j) in row.values"
+                    :key="j"
+                    class="py-1.5 pr-3 font-mono whitespace-nowrap last:pr-0"
+                  >{{ rt(value) }}</td>
                 </tr>
               </tbody>
             </table>
+            </div>
             <p>{{ t("guide.pourOrder") }}</p>
             <p>{{ t("guide.immersion") }}</p>
+            <p>{{ t("guide.physics") }}</p>
             <p class="font-mono text-xs text-ink">{{ t("guide.formula") }}</p>
           </div>
+
+          <section id="your-plaster" class="mt-10 scroll-mt-6">
+            <h2 class="mb-4 text-xs font-medium tracking-widest uppercase text-muted">
+              {{ t("yourPlaster.title") }}
+            </h2>
+            <div class="grid gap-3 text-sm font-light text-muted leading-relaxed">
+              <p v-for="(para, i) in yourPlasterParagraphs" :key="i">{{ rt(para) }}</p>
+            </div>
+          </section>
         </div>
       </div>
 
       <div class="mt-12 grid max-w-2xl gap-12">
         <HowToGuide />
+        <AuthorNote />
         <FaqSection />
       </div>
     </main>
 
-    <footer class="border-t border-line">
-      <div class="mx-auto max-w-6xl px-6 py-10 flex flex-col sm:flex-row gap-8 justify-between">
-        <div class="flex flex-col gap-2">
-          <p class="text-xs font-light tracking-widest uppercase text-muted">GypSum</p>
-          <p class="text-xs font-light text-muted leading-relaxed max-w-xs">{{ t("footer.tagline") }}</p>
-          <p class="mt-1 text-xs font-light text-muted">
-            {{ t("footer.createdBy") }}
-            <a
-              :href="AUTHOR_URL"
-              target="_blank"
-              rel="author noopener"
-              class="text-ink underline decoration-line underline-offset-2 hover:decoration-current transition-colors duration-150"
-            >Cédric Ruiu</a>, {{ t("footer.authorRole") }}.
-          </p>
-          <p class="text-xs font-light text-muted">
-            {{ t("footer.madeBy") }}
-            <a
-              :href="AUTHOR_URL"
-              target="_blank"
-              rel="noopener"
-              class="text-ink underline decoration-line underline-offset-2 hover:decoration-current transition-colors duration-150"
-            >cedric-ruiu.fr</a>, {{ t("footer.madeByRole") }}.
-          </p>
-        </div>
-
-        <div class="flex flex-col gap-3">
-          <p class="text-xs font-light tracking-widest uppercase text-muted">{{ t("footer.contactTitle") }}</p>
-          <p class="text-xs font-light text-muted max-w-xs leading-relaxed">{{ t("footer.contactText") }}</p>
-          <ContactLink />
-          <ShareButton />
-        </div>
-
-        <div class="flex flex-col gap-3">
-          <p class="text-xs font-light tracking-widest uppercase text-muted">{{ t("footer.contribute") }}</p>
-          <a
-            href="https://github.com/Cedric-ruiu/gyp-sum"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="inline-flex items-center gap-2 text-xs font-light text-muted hover:text-ink transition-colors duration-150"
-          >
-            <svg viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4 shrink-0" aria-hidden="true">
-              <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/>
-            </svg>
-            Cedric-ruiu/gyp-sum
-          </a>
-          <p class="text-xs font-light text-muted max-w-xs leading-relaxed">{{ t("footer.openSource") }}</p>
-          <a
-            href="https://github.com/Cedric-ruiu/gyp-sum/issues"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="inline-flex min-h-12 items-center gap-2 text-xs font-light text-muted hover:text-ink transition-colors duration-150 sm:min-h-0"
-          >
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 shrink-0" aria-hidden="true">
-              <circle cx="12" cy="12" r="9" />
-              <path d="M12 8v5M12 16h.01" />
-            </svg>
-            {{ t("footer.issues") }}
-          </a>
-          <button
-            v-if="showFooterLink"
-            type="button"
-            class="inline-flex cursor-pointer items-center gap-2 text-left text-xs font-light text-muted hover:text-ink transition-colors duration-150"
-            @click="triggerInstall"
-          >
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 shrink-0" aria-hidden="true">
-              <path d="M12 3v12M8 11l4 4 4-4M5 19h14" />
-            </svg>
-            {{ t("pwa.footerLink") }}
-          </button>
-        </div>
-      </div>
-    </footer>
+    <SiteFooter />
 
     <PwaInstallPrompt />
   </div>

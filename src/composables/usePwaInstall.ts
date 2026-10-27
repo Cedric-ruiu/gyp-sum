@@ -1,4 +1,5 @@
 import { computed, onMounted, ref } from "vue";
+import { track } from "@/analytics";
 
 // PWA install + offline orchestration. Mobile-only by design: the service
 // worker is registered only on phones/tablets, so desktop has no install
@@ -12,6 +13,7 @@ interface BeforeInstallPromptEvent extends Event {
 
 const DISMISS_KEY = "pwa-install-dismissed";
 const DISMISS_TTL_MS = 30 * 24 * 60 * 60 * 1000; // re-offer after ~30 days
+const VISITS_KEY = "pwa-visits";
 
 // Module-scoped shared state: every caller (banner + footer link) reads the
 // same flags, and the beforeinstallprompt event is captured even if it fires
@@ -21,6 +23,9 @@ const isIosSafari = ref(false);
 const isInstalled = ref(false);
 const isMobileDevice = ref(false);
 const dismissed = ref(false);
+// The banner must not compete with the calculator on a first visit: it waits
+// for a first calculator use (markEngaged) or a return visit.
+const engaged = ref(false);
 const ready = ref(false);
 
 let initialized = false;
@@ -75,6 +80,23 @@ function readDismissed(): boolean {
   }
 }
 
+// Counts browsing sessions, once per tab session.
+function countVisit(): number {
+  try {
+    const stored = Number(localStorage.getItem(VISITS_KEY)) || 0;
+    if (sessionStorage.getItem(VISITS_KEY)) return Math.max(stored, 1);
+    sessionStorage.setItem(VISITS_KEY, "1");
+    localStorage.setItem(VISITS_KEY, String(stored + 1));
+    return stored + 1;
+  } catch {
+    return 1;
+  }
+}
+
+export function markEngaged(): void {
+  engaged.value = true;
+}
+
 function init(): void {
   if (initialized || typeof window === "undefined") return;
   initialized = true;
@@ -83,6 +105,7 @@ function init(): void {
   isIosSafari.value = detectIosSafari();
   isInstalled.value = isStandalone();
   dismissed.value = readDismissed();
+  if (countVisit() >= 2) engaged.value = true;
   ready.value = true;
 
   // Register the service worker on mobile only — desktop is intentionally
@@ -101,14 +124,16 @@ export function usePwaInstall() {
 
   const deferredAvailable = computed(() => deferredPrompt.value !== null);
 
-  // The banner shows on mobile when not installed, not dismissed, and we have
-  // either an Android prompt to fire or an iOS Safari session to instruct.
+  // The banner shows on mobile when not installed, not dismissed, after a
+  // first use or on a return visit, and we have either an Android prompt to
+  // fire or an iOS Safari session to instruct.
   const showBanner = computed(
     () =>
       ready.value &&
       isMobileDevice.value &&
       !isInstalled.value &&
       !dismissed.value &&
+      engaged.value &&
       (deferredAvailable.value || isIosSafari.value),
   );
 
@@ -121,7 +146,8 @@ export function usePwaInstall() {
     const evt = deferredPrompt.value;
     if (!evt) return;
     await evt.prompt();
-    await evt.userChoice;
+    const { outcome } = await evt.userChoice;
+    track("pwa-install", { outcome });
     deferredPrompt.value = null;
   }
 

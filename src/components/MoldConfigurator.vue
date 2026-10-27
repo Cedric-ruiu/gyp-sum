@@ -6,6 +6,7 @@ import NumberInput from "@/components/ui/NumberInput.vue";
 import ShapeSelector from "@/components/ui/ShapeSelector.vue";
 import { moldShapeRegistry } from "@/shapes/registry";
 import type { Dimensions, MoldConfig, ObjectConfig } from "@/types";
+import { useUnits } from "@/units";
 
 const props = defineProps<{
   modelValue: MoldConfig;
@@ -13,17 +14,24 @@ const props = defineProps<{
 }>();
 const emit = defineEmits<(e: "update:modelValue", v: MoldConfig) => void>();
 
+const { t, n } = useI18n();
+const units = useUnits();
+
+// Stored in cm; shown and edited in the current length unit.
 const adaptMargin = ref(2.5);
 const editingMargin = ref(false);
 const marginRaw = ref("");
 const marginInputEl = ref<HTMLInputElement | null>(null);
 
+const adaptMarginShown = computed(() =>
+  units.toInput("length", adaptMargin.value),
+);
 const adaptMarginDisplay = computed(() =>
-  String(adaptMargin.value).replace(".", ","),
+  n(adaptMarginShown.value, { maximumFractionDigits: 1 }),
 );
 
 function startEditMargin() {
-  marginRaw.value = String(adaptMargin.value);
+  marginRaw.value = String(adaptMarginShown.value);
   editingMargin.value = true;
   nextTick(() => marginInputEl.value?.select());
 }
@@ -31,7 +39,11 @@ function startEditMargin() {
 function commitMargin() {
   const parsed = Number(marginRaw.value.replace(",", "."));
   if (!Number.isNaN(parsed) && parsed >= 0.1) {
-    adaptMargin.value = Math.round(parsed * 10) / 10;
+    adaptMargin.value = units.fromInput(
+      "length",
+      Math.round(parsed * 10) / 10,
+      adaptMargin.value,
+    );
   }
   editingMargin.value = false;
 }
@@ -42,12 +54,10 @@ function cancelEdit() {
 
 function stepMargin(delta: number) {
   const current = Number(marginRaw.value.replace(",", "."));
-  const base = Number.isNaN(current) ? adaptMargin.value : current;
+  const base = Number.isNaN(current) ? adaptMarginShown.value : current;
   const next = Math.max(0.1, Math.round((base + delta) * 10) / 10);
   marginRaw.value = String(next);
 }
-
-const { t, n } = useI18n();
 
 const currentShape = computed(
   () =>
@@ -68,7 +78,13 @@ function updateShape(type: string) {
   });
 }
 
-function updateField(key: string, val: number) {
+function fieldValue(key: string, fallback: number): number {
+  return props.modelValue.dimensions[key] ?? fallback;
+}
+
+function updateField(key: string, unitKey: string, shown: number) {
+  const current = props.modelValue.dimensions[key] ?? 0;
+  const val = units.fromInput(units.fieldQuantity(unitKey), shown, current);
   const dims: Dimensions = { ...props.modelValue.dimensions, [key]: val };
   emit("update:modelValue", { ...props.modelValue, dimensions: dims });
 }
@@ -174,9 +190,12 @@ function adaptToObject() {
 
 <template>
   <section class="rounded border border-line bg-blue-50/40 px-5 py-5">
-    <h2 class="mb-4 text-xs font-medium tracking-widest uppercase text-accent flex items-center">
-      {{ t("mold.title") }}<InfoTooltip :text="t('mold.titleTooltip')" />
-    </h2>
+    <div class="mb-4 flex items-center">
+      <h2 class="text-xs font-medium tracking-widest uppercase text-accent">
+        {{ t("mold.title") }}
+      </h2>
+      <InfoTooltip :text="t('mold.titleTooltip')" :label="t('mold.title')" />
+    </div>
 
     <ShapeSelector
       :shapes="moldShapeRegistry"
@@ -193,10 +212,11 @@ function adaptToObject() {
         v-for="field in currentShape.fields"
         :key="field.key"
         :label="t(field.labelKey)"
-        :unit="t(field.unitKey)"
+        :unit="t(units.labelKey(units.fieldQuantity(field.unitKey)))"
         :min="field.min"
-        :model-value="modelValue.dimensions[field.key] ?? field.defaultValue"
-        @update:model-value="updateField(field.key, $event)"
+        :decimals="units.system.value === 'us' ? 2 : 1"
+        :model-value="units.toInput(units.fieldQuantity(field.unitKey), fieldValue(field.key, field.defaultValue))"
+        @update:model-value="updateField(field.key, field.unitKey, $event)"
       />
     </div>
     </div>
@@ -204,7 +224,7 @@ function adaptToObject() {
     <div class="mt-3 flex items-center gap-1.5">
       <button
         type="button"
-        class="inline-flex cursor-pointer items-center gap-1.5 rounded border border-line px-3 py-1.5 text-xs font-light text-muted transition-colors duration-150 hover:border-accent hover:bg-accent/5 hover:text-accent disabled:cursor-not-allowed disabled:opacity-35"
+        class="inline-flex min-h-12 cursor-pointer items-center gap-1.5 rounded border border-line px-3 py-1.5 text-xs sm:min-h-0 font-light text-muted transition-colors duration-150 hover:border-accent hover:bg-accent/5 hover:text-accent disabled:cursor-not-allowed disabled:opacity-35"
         :disabled="!canAdapt"
         @click="adaptToObject"
       >
@@ -219,7 +239,7 @@ function adaptToObject() {
         <button
           v-if="!editingMargin"
           type="button"
-          class="p-2 font-mono text-ink underline decoration-dashed underline-offset-2 transition-colors duration-150 hover:text-accent"
+          class="min-h-12 min-w-12 p-2 font-mono text-ink underline sm:min-h-0 sm:min-w-0 decoration-dashed underline-offset-2 transition-colors duration-150 hover:text-accent"
           :title="t('mold.marginEditHint')"
           @click="startEditMargin"
         >{{ adaptMarginDisplay }}</button>
@@ -229,22 +249,25 @@ function adaptToObject() {
           v-model="marginRaw"
           type="text"
           inputmode="decimal"
-          class="w-8 border-b border-ink bg-transparent font-mono text-xs text-ink outline-none text-center"
+          class="w-12 border-b border-ink bg-transparent font-mono text-base text-ink outline-none text-center sm:w-8 sm:text-xs"
           @blur="commitMargin"
           @keydown.enter.prevent="commitMargin"
           @keydown.escape="cancelEdit"
           @keydown.up.prevent="stepMargin(0.5)"
           @keydown.down.prevent="stepMargin(-0.5)"
         />
-        {{ t("units.cm") }}
+        {{ t(units.labelKey("length")) }}
       </span>
-      <InfoTooltip :text="t('mold.adaptToObjectTooltip')" />
+      <InfoTooltip
+        :text="t('mold.adaptToObjectTooltip')"
+        :label="t('mold.adaptToObject')"
+      />
     </div>
 
     <p class="mt-4 text-xs font-light text-muted">
-      {{ t("mold.volume") }} :
+      {{ t("format.label", { label: t("mold.volume") }) }}
       <span class="font-mono tnum text-ink">
-        {{ n(volume, { maximumFractionDigits: 2, minimumFractionDigits: 2 }) }} {{ t("units.liters") }}
+        {{ n(units.convert("volume", volume), { maximumFractionDigits: 2, minimumFractionDigits: 2 }) }} {{ t(units.labelKey("volume")) }}
       </span>
     </p>
   </section>

@@ -3,32 +3,40 @@
     "title": "Plaster Calculator",
     "subtitle": "Water / plaster ratio for mold making"
   },
+  "format": {
+    "label": "{label}:"
+  },
   "lang": {
     "switcher": "Choose language",
     "fr": "Français",
-    "en": "English"
+    "en": "English",
+    "es": "Español",
+    "de": "Deutsch",
+    "it": "Italiano",
+    "pt": "Português"
+  },
+  "help": {
+    "label": "Help: {topic}"
   },
   "meta": {
-    "title": "Plaster Calculator for Mold Making: Water Ratio — GypSum",
-    "description": "Calculate the exact water and plaster amounts for your molds (ceramics, pottery, sculpture) from the mold volume and plaster-to-water ratio. Free.",
+    "title": "Pottery Plaster Calculator: Plaster to Water Ratio for Molds",
+    "description": "How much plaster and water for your mold? Enter the mold and object sizes in cm or inches and your plaster to water ratio to get the exact amounts. Free.",
     "keywords": "plaster calculator, plaster to water ratio calculator, pottery plaster calculator, plaster of paris calculator, mold making, mould making, ceramic mold, slip casting plaster",
-    "ogTitle": "Plaster Calculator for Mold Making",
-    "ogDescription": "Precise water / plaster amounts for your molds (ceramics, pottery, sculpture). Stop wasting plaster.",
-    "twitterDescription": "Precise water / plaster amounts for your molds (ceramics, pottery, sculpture).",
-    "schemaApp": "Plaster calculator for mold making (ceramics, pottery, sculpture), based on the density of gypsum (2.58 kg/L)."
+    "ogTitle": "Pottery Plaster Calculator: Plaster to Water Ratio for Molds",
+    "ogDescription": "How much plaster and water for your mold? Enter the mold and object sizes and your plaster to water ratio to get the exact amounts.",
+    "twitterDescription": "How much plaster and water for your mold? Enter its size and your ratio: the calculator does the rest.",
+    "schemaApp": "Plaster calculator for mold making (ceramics, pottery, sculpture), based on the density of powdered plaster (2.58 kg/L)."
   },
   "intro": {
-    "h1": "Plaster Calculator for Mold Making — Water & Plaster Ratio",
-    "p1": "This calculator gives you the exact amounts of water and plaster needed to pour a mold — for ceramics, pottery or sculpture — taking into account the volume of the piece you are reproducing. The goal: don't waste a gram — a 25 kg bag is a real cost, and every rough batch ends up in the bin.",
-    "p2": "It is based on the physics of the mix: when you combine water and plaster, the final volume is the sum of the water volume and the volume taken up by the plaster grains (gypsum density: 2.58 kg/L). This is more accurate than a simple volume ratio.",
-    "p3": "The plaster-to-water ratio — expressed in kg of plaster per liter of water — sets the final hardness: 1.3 for a fluid, detailed plaster, 1.5 for everyday use, 1.8 for a hard, durable plaster. (This is the inverse of the common water-to-plaster ratio.)"
+    "h1": "Pottery Plaster Calculator for Molds — Plaster to Water Ratio",
+    "lead": "For most molds, mix about 1.5 kg of plaster per liter of water: a consistency of about 67, or 0.67 parts water to 1 part plaster by weight. Use 1.3 for a fluid, detailed cast and 1.8 for a hard mold. Enter your mold and object sizes: the calculator gives the exact amounts, with the object volume subtracted."
   },
   "mold": {
     "title": "Mold",
     "volume": "Mold volume",
     "titleTooltip": "These dimensions are those of the inside of your formwork. The height to enter is how high you want to fill with plaster, not necessarily the full height of the formwork.",
     "adaptToObject": "Fit to object",
-    "adaptToObjectTooltip": "Computes the minimum mold dimensions from the defined piece, adding 2.5 cm of margin on each side and on top. The mold dimensions update automatically — useful to size your formwork before you start.",
+    "adaptToObjectTooltip": "Computes the minimum mold dimensions from the defined piece, adding a margin (2.5 cm, about 1 in, by default) on each side and on top. The mold dimensions update automatically — useful to size your formwork before you start.",
     "margin": "margin",
     "marginEditHint": "Click to edit the margin"
   },
@@ -64,12 +72,20 @@
   "mix": {
     "title": "Mix parameters",
     "titleTooltip": "The default values suit most uses. Only change these parameters if you understand plaster chemistry and have specific requirements for hardness or setting time.",
+    "modeLabel": "Enter as",
+    "modeRatio": "kg/L",
+    "modeConsistency": "Consistency",
     "ratio": "Plaster-to-water ratio",
     "ratioHint": "kg of plaster per liter of water",
     "ratioScale": "fine ← 1.3 — 1.5 — 1.8 → hard",
+    "consistency": "Consistency",
+    "consistencyHint": "parts water per 100 parts plaster, by weight",
+    "consistencyScale": "fine ← 77 — 67 — 56 → hard",
+    "equivalentConsistency": "= consistency {value}",
+    "equivalentRatio": "= {value} kg of plaster per liter of water",
     "margin": "Safety margin",
-    "density": "Gypsum density",
-    "densityTooltip": "Physical constant of calcium sulfate (CaSO₄·2H₂O). Identical whatever type of plaster you use."
+    "density": "Powdered plaster density",
+    "densityTooltip": "Density of powdered plaster (calcium sulfate hemihydrate, CaSO₄·½H₂O), used to work out the volume taken up by the plaster grains. It varies slightly from one plaster to another; the effect on the amounts stays below the default safety margin."
   },
   "results": {
     "title": "Results",
@@ -79,6 +95,11 @@
     "withoutMargin": "without margin",
     "netVolume": "Net volume"
   },
+  "contribute": {
+    "text": "Missing a shape? {github} or {email}.",
+    "github": "Suggest it on GitHub",
+    "email": "email me"
+  },
   "errors": {
     "volumeExceeded": "The object volume meets or exceeds the mold volume",
     "invalidRatio": "The ratio must be greater than 0"
@@ -87,48 +108,68 @@
     "cm": "cm",
     "liters": "L",
     "kg": "kg",
-    "percent": "%"
+    "percent": "%",
+    "in": "in",
+    "cupsUs": "cups US",
+    "flOzUs": "fl oz US",
+    "lb": "lb",
+    "oz": "oz"
+  },
+  "unitSystem": {
+    "label": "Units",
+    "metric": "Metric (cm, L, kg)",
+    "us": "US (in, cups, lb)"
   },
   "guide": {
-    "title": "How to use",
-    "ratioExplain": "The plaster-to-water ratio sets the final hardness. 1.3 for a fine, fluid plaster, 1.5 for standard use, 1.8 for a hard, durable plaster. This ratio is the mass of plaster (in kg) per 1 liter of water.",
+    "title": "What is the plaster to water ratio for molds?",
+    "answer": "For molds, the usual ratio is 1.5 kg of plaster per liter of water: a consistency of about 67, or 0.67 water-to-plaster by weight. Go down to 1.3 (consistency 77) for a fluid, detailed cast, up to 1.8 (consistency 56) for a hard mold. If the manufacturer gives a consistency, use theirs.",
     "pourOrder": "Always add plaster to water, never the reverse.",
     "immersion": "To measure the volume of an irregular piece, dip it into a graduated container and read the rise in water level.",
+    "physics": "The calculator is based on the physics of the mix: when you combine water and plaster, the final volume is the sum of the water volume and the volume taken up by the plaster grains (powdered plaster density: 2.58 kg/L). This is more accurate than a simple volume ratio.",
     "formula": "Formula: Water = Net volume ÷ (1 + Ratio ÷ 2.58)",
     "ratioTable": {
       "caption": "Common plaster-to-water ratios",
       "colRatio": "Ratio (kg/L)",
       "colResult": "Result",
       "colUse": "Use",
-      "colWater": "Water per kg",
+      "valueCols": [
+        "Consistency",
+        "Water-to-plaster",
+        "Water per kg",
+        "Water per lb"
+      ],
       "rows": [
         {
           "ratio": "1.3",
           "result": "Fluid, detailed",
           "use": "Fine casting, detail",
-          "water": "≈ 0.77 L"
+          "values": ["77", "0.77", "≈ 0.77 L", "≈ 11.8 fl oz US"]
         },
         {
           "ratio": "1.5",
           "result": "Balanced",
           "use": "Everyday use",
-          "water": "≈ 0.67 L"
+          "values": ["67", "0.67", "≈ 0.67 L", "≈ 10.2 fl oz US"]
         },
         {
           "ratio": "1.8",
           "result": "Hard, durable",
           "use": "Durable molds",
-          "water": "≈ 0.56 L"
+          "values": ["56", "0.56", "≈ 0.56 L", "≈ 8.5 fl oz US"]
         }
       ]
     }
   },
+  "yourPlaster": {
+    "title": "Which ratio for your plaster (pottery plaster, Hydrocal, Ultracal…)?",
+    "paragraphs": [
+      "Read the consistency on the bag or data sheet: 70 means 70 parts water to 100 parts plaster by weight. Switch the ratio field to Consistency and enter it as is, or convert it: kg of plaster per liter of water = 100 ÷ consistency, so 70 gives 1.43.",
+      "The same rule applies to plaster of Paris, sold for crafts: if the package gives a water ratio, convert it the same way before casting your mold (mould, in British English)."
+    ]
+  },
   "footer": {
-    "tagline": "Water / plaster calculator for mold making. Formulas based on the density of gypsum (2.58 kg/L). No data is sent — everything stays in your browser.",
-    "createdBy": "Created by",
-    "authorRole": "potter and DIY maker",
-    "madeBy": "Design & development:",
-    "madeByRole": "freelance web developer",
+    "tagline": "Water / plaster calculator for mold making. Formulas based on the density of powdered plaster (2.58 kg/L). No data is sent — everything stays in your browser.",
+    "credit": "Created by {name}, amateur potter and freelance web developer ({site}).",
     "contribute": "Contribute",
     "openSource": "Open source project — your suggestions and feedback are welcome.",
     "issues": "Report a bug or suggest an idea",
@@ -139,7 +180,11 @@
     "contactCopied": "Address copied",
     "contactSubject": "GypSum — question or feedback",
     "share": "Share this tool",
-    "shareCopied": "Link copied"
+    "shareCopied": "Link copied",
+    "pages": {
+      "calculator": "Plaster calculator",
+      "moldGuide": "How to make a plaster mold"
+    }
   },
   "pwa": {
     "title": "Install GypSum",
@@ -151,9 +196,11 @@
   },
   "toc": {
     "label": "On this page",
+    "guide": "Plaster to water ratio",
+    "yourPlaster": "Your plaster",
     "howto": "How-to",
     "faq": "FAQ",
-    "guide": "How to use"
+    "moldGuide": "Make a plaster mold"
   },
   "howto": {
     "title": "How to measure plaster for mold making",
@@ -161,7 +208,7 @@
     "steps": [
       {
         "title": "Measure the mold volume",
-        "text": "Record the inside dimensions of your formwork (length, width, the fill height you want). This is the total volume to fill with plaster."
+        "text": "Record the inside dimensions of your formwork (length, width, the fill height you want), in centimeters or inches. This is the total volume to fill with plaster."
       },
       {
         "title": "Estimate the volume of the piece to mold",
@@ -179,18 +226,27 @@
         "title": "Mix and pour",
         "text": "Always add plaster to water, never the reverse. Let it slake without stirring, then mix and pour before it starts to set."
       }
-    ]
+    ],
+    "moldGuideLink": "What comes next, from mold box to demolding: how to make a plaster mold"
+  },
+  "author": {
+    "title": "Why I built this tool",
+    "paragraphs": []
   },
   "faq": {
     "title": "Frequently asked questions",
     "items": [
       {
         "q": "How much plaster do I need for a mold?",
-        "a": "It depends on the net volume to fill (mold volume minus the piece) and the plaster-to-water ratio. Enter your dimensions above: the calculator shows the exact amounts of water and plaster, safety margin included."
+        "a": "It depends on the net volume to fill (mold volume minus the piece) and the plaster-to-water ratio. Enter your dimensions above, in centimeters or inches: the calculator shows the exact amounts of water and plaster, in liters and kilograms or in US cups, fluid ounces, pounds and ounces, safety margin included."
       },
       {
         "q": "What is the right plaster-to-water ratio?",
         "a": "The ratio is expressed in kilograms of plaster per liter of water. Use 1.3 for a fluid, detailed plaster, 1.5 for standard use, and 1.8 for a hard, strong plaster. The higher the ratio, the denser and stronger the plaster. Expressed the other way around, that is a water-to-plaster ratio of about 0.77 down to 0.56."
+      },
+      {
+        "q": "How do I convert a consistency into a ratio?",
+        "a": "Divide 100 by the consistency: a consistency of 70 gives 100 ÷ 70 = 1.43 kg of plaster per liter of water. The other way round, consistency = 100 ÷ ratio, so 1.5 kg/L is a consistency of about 67. A water-to-plaster ratio of 0.7 is the same as a consistency of 70."
       },
       {
         "q": "How much plaster for a pottery or ceramic mold?",
@@ -202,7 +258,7 @@
       },
       {
         "q": "What is the density of plaster (Plaster of Paris)?",
-        "a": "The calculation is based on the density of gypsum (calcium sulfate): 2.58 kg/L. It is a physical constant, the same whatever the type of plaster (Plaster of Paris, pottery plaster, etc.). It allows more accurate dosing than a simple volume ratio."
+        "a": "The calculation uses the density of powdered plaster (calcium sulfate hemihydrate, CaSO₄·½H₂O): 2.58 kg/L. It varies slightly between plasters (plaster of Paris, pottery plaster, etc.); the effect on the calculated amounts stays below the default safety margin. It allows more accurate dosing than a simple volume ratio."
       },
       {
         "q": "How do I measure the volume of an irregular object?",
@@ -213,13 +269,186 @@
         "a": "At a ratio of 1.5, you need about 0.67 liter of water for 1 kg of plaster (1 ÷ ratio). At 1.3 it's ~0.77 L, and at 1.8 about 0.56 L. The calculator does this automatically for your mold volume."
       },
       {
+        "q": "How much water for 1 cup of plaster of Paris?",
+        "a": "It depends on what your cup of plaster weighs, which varies with the plaster and how tightly it is packed. Weigh one level cup of your plaster once, then multiply that weight by your water-to-plaster ratio: at a consistency of 67, 100 g of plaster takes about 67 ml of water. For a whole mold, the calculator gives the plaster by weight and the water directly."
+      },
+      {
         "q": "Can I measure plaster by volume instead of by weight?",
-        "a": "You can, but it is less accurate: measuring by volume (scoops, cups) ignores the plaster's real density. This calculator works by mass from the density of gypsum (2.58 kg/L) and gives the exact plaster weight and water volume to fill your mold, with no shortfall or waste."
+        "a": "You can, but it is less accurate: measuring by volume (scoops, cups) ignores the plaster's real density. This calculator works by mass from the density of powdered plaster (2.58 kg/L) and gives the exact plaster weight and water volume to fill your mold, with no shortfall or waste."
       }
     ]
   },
   "scene": {
     "placeholder": "3D view — coming soon",
     "ariaLabel": "3D preview of the mould and the object to cast"
+  },
+  "moldGuide": {
+    "meta": {
+      "title": "How to Make a Plaster Mold for Pottery — GypSum",
+      "description": "How to make a two-part plaster mold for pottery: tools, mold box, mixing and pouring the plaster, demolding, keys and drying, step by step.",
+      "ogTitle": "How to Mix Plaster and Make a Mold for Pottery",
+      "ogDescription": "Tools, mold box, mixing and pouring, demolding, keys and drying: a step-by-step method for a two-part plaster mold."
+    },
+    "h1": "How to Mix Plaster and Make a Mold for Pottery",
+    "lead": "A two-part plaster mold takes two pours: bed the lower half of the model in clay, build the mold box and pour; then carve keys, soap the plaster and pour the second half. Here is the method I use, step by step, with the tools and timings.",
+    "tocLabel": "On this page",
+    "calculatorCta": "work out the water and plaster for your mold",
+    "backToCalculator": "Work out the water and plaster for your mold",
+    "sections": [
+      {
+        "id": "plaster",
+        "title": "What kind of plaster do you use for molds?",
+        "paragraphs": [
+          "I use Molda 3, a plaster I bought at a building supplier on the advice of a professional ceramist. Whatever your plaster, its consistency (the water to plaster ratio) is printed on the bag or the data sheet: that is the number to enter in the calculator."
+        ]
+      },
+      {
+        "id": "tools",
+        "title": "What do you need?",
+        "table": {
+          "caption": "Tools and materials",
+          "cols": ["Item", "What it is for"],
+          "rows": [
+            ["Tape measure", "Measuring the model and the mold box"],
+            [
+              "Clay set aside for mold making",
+              "Bedding the lower half of the model, sealing gaps in the mold box"
+            ],
+            ["Mold boards", "The walls of the mold box"],
+            [
+              "2 ratchet straps",
+              "Clamping the mold boards as tight as possible"
+            ],
+            [
+              "Mold soap and a brush (I use soft potash soap)",
+              "Sealing the model and the parting surface so the plaster does not stick"
+            ],
+            [
+              "Plaster (Molda 3) and water",
+              "The mix, measured with the calculator"
+            ],
+            ["Drill and paddle mixer", "Mixing the plaster"],
+            [
+              "Rubber spatula",
+              "Mixing very small batches, scraping the bucket clean"
+            ],
+            ["Rinse bucket", "Cleaning tools, never in the sink"],
+            [
+              "Metal rib",
+              "Cleaning the mold boards, finishing the parting surface"
+            ],
+            ["Wood plane", "Leveling the parting surface"],
+            ["Countersink bit", "Carving the keys that line up the two halves"]
+          ]
+        }
+      },
+      {
+        "id": "mold-box",
+        "title": "How do you prepare the model and the mold box?",
+        "steps": [
+          "Mark the parting line on the model.",
+          "Fill any undercuts if needed (a hollow foot ring, for instance).",
+          "Bed the lower half of the model in clay. Keep the clay bed sloping downward: the plaster will be planed afterwards to get a flat surface exactly on the parting line.",
+          "On the clay bed, draw a line 1 in (2.5 cm) from the model on every side, and trim the clay along it: this sets the size of the mold box.",
+          "Slope the sides of the clay bed inward too, so the mold boards press firmly against its top edge.",
+          "Smooth the clay surface well.",
+          "Soap the model if needed (it depends on what it is made of): work the soap into a lather with the brush, wipe off the bubbles, and repeat three times.",
+          "Set up the mold boards around the clay bed and strap them together, as tight as possible.",
+          "Mark a line inside the mold box 1 in (2.5 cm) above the model: that is how high you will pour.",
+          "Seal any gaps with small coils of clay if needed."
+        ],
+        "note": "Once the clay is in place, pour quickly: the clay dries out and the seals stop holding."
+      },
+      {
+        "id": "mixing",
+        "title": "How do you mix plaster for a mold?",
+        "steps": [
+          "Take all the measurements (inside of the mold box, height up to the mark, model), then {calculator}: the calculator gives the amounts, with the model's volume subtracted.",
+          "Fill the rinse bucket.",
+          "Add the plaster to the water, in the amounts you worked out, never the other way round.",
+          "Let it slake for 2 to 3 minutes without stirring.",
+          "Mix for 3 minutes with the paddle mixer on the drill, at low speed (setting 2). For a very small batch, mix with the rubber spatula, also for at least 3 minutes."
+        ],
+        "example": "Example: a large bowl 8 in (20 cm) across at the rim, 4 in (10 cm) at the foot and 4 in (10 cm) tall (the “Cone frustum” shape), in a 10 × 10 in (25 × 25 cm) mold box poured to 5 in (12.5 cm), which leaves 1 in (2.5 cm) on the sides and above. With a ratio of 1.5 (consistency 67) and a 10% safety margin, the calculator in US units gives 18.44 US cups of water and 14.43 lb of plaster. For a two-part mold, run the numbers again for each pour, measuring once the mold box is set up."
+      },
+      {
+        "id": "pouring",
+        "title": "How do you pour plaster without air bubbles?",
+        "paragraphs": ["From here, you have about 5 minutes before pouring."],
+        "steps": [
+          "Vibrate the bucket to bring the air bubbles up.",
+          "Skim the bubbles off the surface.",
+          "Stir one last time for an even mix.",
+          "Pour into a corner of the mold box, never straight onto the model.",
+          "Scrape the bucket clean with the rubber spatula.",
+          "Tap the surface of the plaster with the back of your hand to level it.",
+          "Clean your tools right away in the rinse bucket. Nothing down the sink: plaster clogs drains."
+        ]
+      },
+      {
+        "id": "demolding",
+        "title": "How long to let plaster sit in the mold?",
+        "paragraphs": [
+          "Go by the plaster itself, not by the clock. As soon as it hardens, before it heats up, take the mold boards off and clean them with the metal rib. As soon as it starts to heat up, you can demold and move on to finishing. Remove the clay and wrap it so it does not dry out."
+        ],
+        "table": {
+          "caption": "Timings, from mixing to drying",
+          "cols": ["Step", "Time or cue"],
+          "rows": [
+            ["Slaking, without stirring", "2 to 3 minutes"],
+            ["Mixing", "3 minutes"],
+            ["Vibrating, skimming, pouring", "about 5 minutes"],
+            [
+              "Taking the mold boards off",
+              "as soon as the plaster hardens, before it heats up"
+            ],
+            [
+              "Demolding and finishing",
+              "as soon as the plaster starts to heat up"
+            ],
+            ["Drying the finished mold", "several days somewhere warm"]
+          ]
+        }
+      },
+      {
+        "id": "two-part",
+        "title": "How do you make a two-part plaster mold?",
+        "steps": [
+          "Plane the parting surface as flat as possible, and finish it with the metal rib.",
+          "Bevel the bottom edges of the mold, but not the sides.",
+          "On the parting surface, drill a key in each corner with the countersink bit, and two keys in one corner: you will always know which way the halves go together.",
+          "Clean everything, mold and model.",
+          "Repeat every step of the first pour: mold boards, 1 in mark, soaping, pouring. One difference only: you must soap the plaster parting surface three times, keys included.",
+          "Demolding can be harder, mostly because of suction: tap, flip the mold over, and work the two halves apart.",
+          "Once the mold is open, break off the tips of the keys on the second half, so no debris gets trapped on them.",
+          "You can now bevel every edge of the assembled mold, sides included."
+        ]
+      },
+      {
+        "id": "release",
+        "title": "How do you keep plaster from sticking to the mold?",
+        "paragraphs": [
+          "Mold soap, brushed on: work it into a lather, wipe off the bubbles, and repeat three times. On the model, it depends on what it is made of. On the plaster parting surface, before pouring the second half, it is essential, keys included."
+        ]
+      },
+      {
+        "id": "drying",
+        "title": "How do you dry a plaster mold before casting?",
+        "paragraphs": [
+          "Let the mold dry for several days somewhere warm before using it."
+        ]
+      },
+      {
+        "id": "mistakes",
+        "title": "What mistakes should you avoid?",
+        "list": [
+          "Waiting once the clay is in place: it dries out and the seals stop holding.",
+          "Pouring straight onto the model: pour into a corner.",
+          "Rinsing tools in the sink: plaster clogs drains.",
+          "Forgetting to soap the parting surface three times before the second pour.",
+          "Leaving the tips of the keys on: debris gets trapped on them and the halves no longer fit."
+        ]
+      }
+    ]
   }
 }

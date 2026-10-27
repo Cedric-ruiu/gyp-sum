@@ -1,8 +1,12 @@
 <script setup lang="ts">
 import { computed } from "vue";
 import { useI18n } from "vue-i18n";
+import { RouterLink } from "vue-router";
+import { localePage } from "@/seo";
 
-const { t, tm, rt } = useI18n();
+const { t, tm, rt, locale } = useI18n();
+
+const moldGuidePage = computed(() => localePage("moldGuide", locale.value));
 
 const steps = computed(
   () => tm("howto.steps") as { title: string; text: string }[],
@@ -28,5 +32,11 @@ const steps = computed(
         </div>
       </li>
     </ol>
+    <p v-if="moldGuidePage" class="mt-5 text-sm font-light leading-relaxed">
+      <RouterLink
+        :to="moldGuidePage.path"
+        class="link"
+      >{{ t("howto.moldGuideLink") }}</RouterLink>
+    </p>
   </section>
 </template>

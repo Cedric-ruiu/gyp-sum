@@ -1,9 +1,12 @@
 <script setup lang="ts">
 import { onMounted, onUnmounted, ref } from "vue";
 import { useI18n } from "vue-i18n";
-import { EN_URL, FR_URL } from "@/seo";
+import { useRoute } from "vue-router";
+import { track } from "@/analytics";
+import { findPage, pageFor, pageUrl } from "@/seo";
 
 const { t, locale } = useI18n();
+const route = useRoute();
 
 // Rendered during pre-render so the footer keeps its final layout (no CLS).
 // Hidden after mount only when neither the native share sheet nor the
@@ -25,7 +28,10 @@ onMounted(() => {
 onUnmounted(() => clearTimeout(copiedTimer));
 
 async function share() {
-  const url = locale.value === "en" ? EN_URL : FR_URL;
+  // Share the page being read; the calculator if the route is unknown.
+  const page = findPage(route.path) ?? pageFor("calculator", locale.value);
+  const url = pageUrl(page.path);
+  track("share", { method: useNativeShare.value ? "native" : "copy" });
   if (useNativeShare.value) {
     try {
       await navigator.share({
@@ -55,7 +61,7 @@ async function share() {
   <button
     v-if="supported"
     type="button"
-    class="inline-flex min-h-12 cursor-pointer items-center gap-2 text-left text-xs font-light text-muted hover:text-ink transition-colors duration-150 sm:min-h-0"
+    class="link inline-flex min-h-8 cursor-pointer items-center gap-2 text-left text-sm font-light sm:text-xs"
     @click="share"
   >
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 shrink-0" aria-hidden="true">

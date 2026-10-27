@@ -1,32 +1,25 @@
 <script setup lang="ts">
-import { computed, onMounted, onUnmounted, ref } from "vue";
+import { onMounted, onUnmounted, ref } from "vue";
 import { useI18n } from "vue-i18n";
+import { useContactAddress } from "@/composables/useContactAddress";
 
 const { t } = useI18n();
 
-// Anti-harvesting: the address never appears in clear text, neither in the
-// pre-rendered HTML nor in the JS bundle. It is decoded only after mount, so
-// the server render and the first client render stay identical (no
-// hydration mismatch) and scrapers reading the static HTML get nothing.
-const ENCODED_ADDRESS = "Y29udGFjdEBjZWRyaWMtcnVpdS5mcg==";
-
-const address = ref<string | null>(null);
+const { address, href, trackContact } = useContactAddress();
 const canCopy = ref(false);
 const copied = ref(false);
 let copiedTimer: ReturnType<typeof setTimeout> | undefined;
 
 onMounted(() => {
-  address.value = atob(ENCODED_ADDRESS);
   canCopy.value = !!navigator.clipboard;
 });
 
 onUnmounted(() => clearTimeout(copiedTimer));
 
-const href = computed(() =>
-  address.value
-    ? `mailto:${address.value}?subject=${encodeURIComponent(t("footer.contactSubject"))}`
-    : undefined,
-);
+// Both ways of reaching out count as one contact event, told apart by method.
+function onMailtoClick() {
+  trackContact("mailto");
+}
 
 // The mailto link does nothing without a configured mail app (common on
 // desktop with webmail), so the address is shown and can be copied.
@@ -35,6 +28,7 @@ async function copyAddress() {
   try {
     await navigator.clipboard.writeText(address.value);
     copied.value = true;
+    trackContact("copy");
     clearTimeout(copiedTimer);
     copiedTimer = setTimeout(() => {
       copied.value = false;
@@ -46,10 +40,11 @@ async function copyAddress() {
 </script>
 
 <template>
-  <div class="flex flex-wrap items-center gap-x-3">
+  <div class="flex flex-wrap items-center gap-x-4">
     <a
       :href="href"
-      class="inline-flex min-h-12 items-center gap-2 text-xs font-light text-muted hover:text-ink transition-colors duration-150 sm:min-h-0"
+      @click="onMailtoClick"
+      class="link inline-flex min-h-8 items-center gap-2 text-sm font-light sm:text-xs"
     >
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 shrink-0" aria-hidden="true">
         <rect x="3" y="5" width="18" height="14" rx="1" />
@@ -60,10 +55,15 @@ async function copyAddress() {
     <button
       v-if="canCopy"
       type="button"
-      class="inline-flex min-h-12 cursor-pointer items-center text-xs font-light text-muted underline decoration-line underline-offset-2 hover:text-ink hover:decoration-current transition-colors duration-150 sm:min-h-0"
+      class="link inline-flex min-h-8 cursor-pointer items-center text-sm font-light sm:text-xs"
       @click="copyAddress"
     >
-      <span aria-live="polite">{{ copied ? t("footer.contactCopied") : t("footer.contactCopy") }}</span>
+      <!-- Both labels share one grid cell so the button keeps the width of the
+           longer one: confirming the copy never wraps the row. -->
+      <span class="grid justify-items-start" aria-live="polite">
+        <span class="col-start-1 row-start-1" :class="{ invisible: copied }">{{ t("footer.contactCopy") }}</span>
+        <span class="col-start-1 row-start-1" :class="{ invisible: !copied }">{{ t("footer.contactCopied") }}</span>
+      </span>
     </button>
   </div>
 </template>

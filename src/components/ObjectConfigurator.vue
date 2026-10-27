@@ -6,11 +6,13 @@ import NumberInput from "@/components/ui/NumberInput.vue";
 import ShapeSelector from "@/components/ui/ShapeSelector.vue";
 import { objectShapeRegistry } from "@/shapes/registry";
 import type { Dimensions, ObjectConfig } from "@/types";
+import { useUnits } from "@/units";
 
 const props = defineProps<{ modelValue: ObjectConfig }>();
 const emit = defineEmits<(e: "update:modelValue", v: ObjectConfig) => void>();
 
 const { t, n } = useI18n();
+const units = useUnits();
 
 const isNone = computed(() => props.modelValue.shape === "none");
 const isManual = computed(
@@ -53,12 +55,20 @@ function updateShape(type: string) {
   });
 }
 
-function updateField(key: string, val: number) {
+function fieldValue(key: string, fallback: number): number {
+  return props.modelValue.dimensions?.[key] ?? fallback;
+}
+
+function updateField(key: string, unitKey: string, shown: number) {
+  const current = props.modelValue.dimensions?.[key] ?? 0;
+  const val = units.fromInput(units.fieldQuantity(unitKey), shown, current);
   const dims: Dimensions = { ...props.modelValue.dimensions, [key]: val };
   emit("update:modelValue", { ...props.modelValue, dimensions: dims });
 }
 
-function updateManual(v: number) {
+function updateManual(shown: number) {
+  const current = props.modelValue.manualVolume ?? 0;
+  const v = units.fromInput("volume", shown, current);
   emit("update:modelValue", { ...props.modelValue, manualVolume: v });
 }
 
@@ -75,9 +85,12 @@ const volume = computed(() => {
 
 <template>
   <section class="rounded border border-line px-5 py-5" style="background: rgba(245,158,11,0.06)">
-    <h2 class="mb-4 text-xs font-medium tracking-widest uppercase text-accent-soft-strong flex items-center">
-      {{ t("object.title") }}<InfoTooltip :text="t('object.titleTooltip')" />
-    </h2>
+    <div class="mb-4 flex items-center">
+      <h2 class="text-xs font-medium tracking-widest uppercase text-accent-soft-strong">
+        {{ t("object.title") }}
+      </h2>
+      <InfoTooltip :text="t('object.titleTooltip')" :label="t('object.title')" />
+    </div>
 
     <ShapeSelector
       :shapes="objectShapeRegistry"
@@ -91,9 +104,10 @@ const volume = computed(() => {
       <div v-if="isManual">
         <NumberInput
           :label="t('object.manualVolume')"
-          :unit="t('units.liters')"
+          :unit="t(units.labelKey('volume'))"
           :min="0"
-          :model-value="modelValue.manualVolume ?? 0"
+          :decimals="units.system.value === 'us' ? 2 : 1"
+          :model-value="units.toInput('volume', modelValue.manualVolume ?? 0)"
           @update:model-value="updateManual"
         />
       </div>
@@ -107,18 +121,19 @@ const volume = computed(() => {
             v-for="field in currentShape.fields"
             :key="field.key"
             :label="t(field.labelKey)"
-            :unit="t(field.unitKey)"
+            :unit="t(units.labelKey(units.fieldQuantity(field.unitKey)))"
             :min="field.min"
-            :model-value="modelValue.dimensions?.[field.key] ?? field.defaultValue"
-            @update:model-value="updateField(field.key, $event)"
+            :decimals="units.system.value === 'us' ? 2 : 1"
+            :model-value="units.toInput(units.fieldQuantity(field.unitKey), fieldValue(field.key, field.defaultValue))"
+            @update:model-value="updateField(field.key, field.unitKey, $event)"
           />
         </div>
       </div>
 
       <p class="mt-4 text-xs font-light text-muted">
-        {{ t("object.volume") }} :
+        {{ t("format.label", { label: t("object.volume") }) }}
         <span class="font-mono tnum text-ink">
-          {{ n(volume, { maximumFractionDigits: 2, minimumFractionDigits: 2 }) }} {{ t("units.liters") }}
+          {{ n(units.convert("volume", volume), { maximumFractionDigits: 2, minimumFractionDigits: 2 }) }} {{ t(units.labelKey("volume")) }}
         </span>
       </p>
     </div>

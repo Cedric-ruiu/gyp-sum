@@ -15,6 +15,10 @@ const BASE = new URL(self.registration.scope).pathname;
 const PRECACHE = [
   BASE,
   `${BASE}en/`,
+  `${BASE}es/`,
+  `${BASE}pt/`,
+  `${BASE}it/`,
+  `${BASE}de/`,
   `${BASE}site.webmanifest`,
   `${BASE}favicon.svg`,
   `${BASE}favicon-96x96.png`,

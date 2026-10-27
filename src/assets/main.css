@@ -94,6 +94,12 @@ input[type="number"] {
   appearance: textfield;
 }
 
+/* The single link style, in running text and navigation lists alike: ink
+   against the muted body text, underlined so color is never the only cue. */
+@utility link {
+  @apply text-ink underline decoration-muted/50 underline-offset-2 transition-colors duration-150 hover:decoration-current;
+}
+
 .font-mono {
   font-family: var(--font-mono);
 }
@@ -118,7 +124,8 @@ input[type="number"] {
   }
 }
 
-@container (max-width: 280px) {
+/* One field per row on phones: room for 48px +/- touch targets. */
+@container (max-width: 340px) {
   .fields-grid {
     grid-template-columns: 1fr;
   }

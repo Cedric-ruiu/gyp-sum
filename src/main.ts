@@ -8,6 +8,20 @@ import HomePage from "./pages/HomePage.vue";
 const routes: RouteRecordRaw[] = [
   { path: "/", component: HomePage, meta: { locale: "fr" } },
   { path: "/en/", component: HomePage, meta: { locale: "en" } },
+  { path: "/es/", component: HomePage, meta: { locale: "es" } },
+  { path: "/de/", component: HomePage, meta: { locale: "de" } },
+  { path: "/it/", component: HomePage, meta: { locale: "it" } },
+  { path: "/pt/", component: HomePage, meta: { locale: "pt" } },
+  {
+    path: "/moule-en-platre/",
+    component: () => import("./pages/MoldGuidePage.vue"),
+    meta: { locale: "fr" },
+  },
+  {
+    path: "/en/how-to-make-a-plaster-mold/",
+    component: () => import("./pages/MoldGuidePage.vue"),
+    meta: { locale: "en" },
+  },
 ];
 
 export const createApp = ViteSSG(

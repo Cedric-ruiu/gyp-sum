@@ -8,12 +8,17 @@ export type ObjectShapeType =
   | "spherical-cap"
   | "none";
 
-// Préparation système d'unités (Phase ultérieure)
-// Pour l'instant seul 'metric' est implémenté.
-// Quand 'imperial' sera ajouté, les dimensions seront en inches,
-// les volumes en cubic inches (puis convertis en litres pour le calcul),
-// et les poids en lbs.
-export type UnitSystem = "metric"; // | 'imperial' (futur)
+// Display units only: the state and formulas stay metric (see src/units.ts).
+// "us" = inches, US cups / fluid ounces, pounds / ounces.
+export type UnitSystem = "metric" | "us";
+// How the ratio is entered: kg of plaster per liter of water, or
+// consistency (parts water per 100 parts plaster by weight).
+export type RatioMode = "ratio" | "consistency";
+
+export interface UnitPrefs {
+  system: UnitSystem;
+  ratioMode: RatioMode;
+}
 
 // Dimensions stockées sous forme générique pour s'aligner avec le registre
 // dynamique de formes. Les clés correspondent à `ShapeField.key`

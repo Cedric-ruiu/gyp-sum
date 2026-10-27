@@ -6,7 +6,7 @@ SPA statique hébergée sur GitHub Pages (`base: '/gyp-sum/'`). Aucun backend.
 
 - Vue 3 Composition API + `<script setup>` + TypeScript
 - Vite 8, Tailwind CSS v4 (`@tailwindcss/vite`), vue-i18n 11 (`legacy: false`)
-- vue-router 5 (2 routes statiques pour le multi-pages i18n) + `@unhead/vue` 2
+- vue-router 5 (routes statiques pour le multi-pages i18n) + `@unhead/vue` 2
   (gestion du `<head>` par locale)
 - Three.js + OrbitControls pour la scène 3D
 - Biome 2.4 (lint + format + CSS Tailwind v4) — `yarn lint` (vérif) /
@@ -17,13 +17,22 @@ SPA statique hébergée sur GitHub Pages (`base: '/gyp-sum/'`). Aucun backend.
   (`tmp/`, `dist/`) sont exclus du lint.
 - `yarn build` = `vue-tsc --noEmit && vite-ssg build`
 - Pré-rendu statique **multi-pages via vite-ssg + vue-router** : `src/main.ts`
-  exporte `createApp = ViteSSG(App, { routes, base }, …)`. Deux routes
-  pré-rendues : `/` (FR) et `/en` (EN) → `dist/index.html` et
-  `dist/en/index.html` (`ssgOptions.dirStyle: 'nested'`). `App.vue` n'est qu'un
+  exporte `createApp = ViteSSG(App, { routes, base }, …)`. Routes pré-rendues :
+  le calculateur `/` (FR), `/en/` (EN), `/es/` (ES), `/de/` (DE), `/it/` (IT), `/pt/` (PT), et le guide
+  `/moule-en-platre/` (FR) / `/en/how-to-make-a-plaster-mold/` (EN)
+  (`src/pages/MoldGuidePage.vue`, chargé à la demande) → `dist/<route>/index.html` (`ssgOptions.dirStyle: 'nested'`).
+  Nouvelle locale : route dans `main.ts`, entrée dans `SITE_PAGES` et
+  `LOCALE_META` (`src/seo.ts`), `SUPPORTED_LOCALES`, clé `lang.<code>` dans
+  toutes les locales, URL dans le `PRECACHE` de `public/sw.js`. `App.vue` n'est qu'un
   `<RouterView/>` ; la page est `src/pages/HomePage.vue`. La locale est pilotée
   par `route.meta.locale` via un guard `router.beforeEach`. Vite 8 utilise
   Rolldown — vue-i18n doit être bundlé côté SSR (`ssr.noExternal: ["vue-i18n"]`)
   et les flags Vue définis (`__VUE_PROD_DEVTOOLS__` etc.) dans `vite.config.ts`.
+- **Sitemap généré au build** : `ssgOptions.includedRoutes` relève les routes
+  pré-rendues, `onFinished` écrit `dist/sitemap.xml` (`src/sitemap.ts`), avec
+  les alternates hreflang et `lastmod`. Pas de `public/sitemap.xml`. Toute
+  route doit avoir son entrée dans `SITE_PAGES` (`src/seo.ts`), sinon le build
+  échoue.
 - L'instance i18n est créée **par app** (`createAppI18n()`), pas en singleton :
   vite-ssg appelle la factory une fois par route, et un singleton partagé fait
   fuiter la locale d'une page à l'autre.
@@ -48,31 +57,65 @@ src/
 ├── composables/
 │   ├── useShapeVolume.ts   cm3ToLiters() — export nommé, utilisé par le registre
 │   ├── useCalculator.ts    computed<CalculationResult> (formules figées, voir ci-dessous)
+│   ├── useContactAddress.ts adresse e-mail encodée (décodée en onMounted), mailto,
+│   │                       événement contact-email
 │   ├── useLocalStorage.ts  ref + watch debounce 500 ms, clé 'plaster-calc-state'
 │   └── useThreeScene.ts    init/updateMold/updateObject/destroy (Three.js)
 ├── i18n/
-│   ├── index.ts            createAppI18n() (instance par app, SSG-safe), SUPPORTED_LOCALES = ['fr','en']
-│   └── locales/{fr,en}.json   toutes les chaînes UI (fr = défaut/x-default)
+│   ├── index.ts            createAppI18n() (instance par app, SSG-safe), SUPPORTED_LOCALES = ['fr','en','es','de','it','pt']
+│   └── locales/{fr,en,es,de,it,pt}.json   toutes les chaînes UI (fr = défaut, en = x-default)
 ├── pages/
-│   └── HomePage.vue        la page (ex-App.vue) + useHead SEO par locale
+│   ├── HomePage.vue        le calculateur (ex-App.vue) + useHead SEO par locale
+│   └── MoldGuidePage.vue   guide « faire un moule en plâtre » (clés `moldGuide.*`,
+│                           fr et en) + JSON-LD Article
 ├── components/
+│   ├── SiteHeader.vue      logo (lien vers le calculateur de la locale) + sélecteur
+│   │                       de langue du groupe de pages (prop `group`)
+│   ├── SiteFooter.vue      pied de page commun (auteur, contact, partage, GitHub, PWA)
 │   ├── MoldConfigurator.vue
 │   ├── ObjectConfigurator.vue  (toggle saisie directe de volume)
 │   ├── MixParameters.vue
 │   ├── ResultPanel.vue
 │   ├── SceneViewer.vue     Three.js canvas, autoRotate + OrbitControls
 │   ├── HowToGuide.vue      section « Comment doser le plâtre » (tm()/rt())
+│   ├── ContributeNote.vue  « Une forme manque ? » sous les résultats (issues GitHub +
+│   │                       e-mail, événements avec placement: results)
+│   ├── AuthorNote.vue      « Pourquoi cet outil » : texte de l'auteur (author.paragraphs),
+│   │                       masqué tant que le tableau est vide
 │   ├── FaqSection.vue      FAQ accordéon <details> (tm()/rt()), sans JS
 │   └── ui/
 │       ├── NumberInput.vue  virgule/point acceptés, spinners masqués
 │       ├── ShapeSelector.vue  généré depuis ShapeDefinition[], prop noneOption
-│       ├── InfoTooltip.vue
-│       ├── LanguageSwitcher.vue  liens FR/EN (RouterLink, hreflang, aria-current)
+│       ├── InfoTooltip.vue  bouton « ? » hors des <h2> (prop `label` → « Aide : … »),
+│       │                    texte rendu dans la page (v-show + aria-describedby)
+│       ├── LanguageSwitcher.vue  un lien par traduction du groupe (RouterLink, hreflang,
+│       │                         aria-current), masqué si la page n'existe qu'en une langue
 │       ├── ContactLink.vue  lien mailto du footer, adresse décodée en onMounted
-│       └── ShareButton.vue  partage natif (mobile) / copie du lien (desktop)
-├── seo.ts                  URLs canoniques (SITE_URL, FR_URL, EN_URL)
+│       ├── ShareButton.vue  partage natif (mobile) / copie du lien (desktop)
+│       └── SegmentedControl.vue  choix exclusif (unités, saisie du ratio)
+├── seo.ts                  SITE_URL, SITE_PAGES (route, locale, groupe hreflang,
+│                           lastModified), LOCALE_META (lang, og:locale, devise),
+│                           pageFor() : source du head, du sitemap, du sélecteur
+│                           de langue et du partage
+├── sitemap.ts              buildSitemap() : sitemap.xml au build (vite.config.ts)
+├── units.ts                conversions d'affichage métrique ↔ US (provide/inject)
+├── analytics.ts            track() : événements Umami, no-op si le script est absent
 └── App.vue                 shell racine : <RouterView/> uniquement
 ```
+
+## Mesure (Umami)
+
+Script `stats.cedric-ruiu.fr/m.js` dans `index.html` (envoi vers le même hôte,
+autorisé par la CSP `connect-src`). Événements : `calculator-use` (`lang`), une
+fois par chargement, à la première valeur réellement modifiée par le visiteur
+(setters de `HomePage.vue` ; la restauration du localStorage n'est pas comptée),
+`contact-email` (`method` : mailto / copy), `share` (`method` : native / copy),
+`pwa-install` (`outcome`), `github-repo`, `github-issues`. Les liens
+d'appel à contribuer sous les résultats (`ContributeNote.vue`) envoient les
+mêmes événements `github-issues` / `contact-email`, avec `placement: results`. Liens simples :
+attribut `data-umami-event` ; tout élément qui a déjà un gestionnaire de clic :
+`track()` de `src/analytics.ts` dans ce gestionnaire (le traceur intercepte le
+clic des éléments porteurs de l'attribut).
 
 L'adresse email n'apparaît jamais en clair (ni HTML pré-rendu, ni bundle JS) :
 elle est stockée en base64 dans `ContactLink.vue` et décodée après montage.
@@ -123,20 +166,41 @@ accent `#2563EB`, accent-soft `#F59E0B`, accent-soft-strong `#B45309`, danger `#
 - Police corps : Inter 300/400/500, valeurs numériques : JetBrains Mono 300/400
 - Bordures 1px, pas d'ombres, `rounded` max (pas `rounded-xl`)
 - Transitions 150–200 ms
-- Pas de dark mode, pas de sélecteur d'unités
-- Sélecteur de langue FR/EN dans le header (`ui/LanguageSwitcher.vue`)
+- Pas de dark mode
+- Sélecteur d'unités et de saisie du ratio sur la page EN uniquement (voir
+  « Système d'unités »)
+- Sélecteur de langue dans le header (une entrée par traduction de la page) (`ui/LanguageSwitcher.vue`)
 
 ## i18n
 
-Deux locales : `fr` (défaut + x-default) et `en`. Toutes les chaînes UI passent
-par `t()` / `$t()`. Pas de texte en dur dans les templates. Clés : `app`, `lang`,
+Locales : `fr` (défaut), `en` (x-default), `es` (espagnol neutre, tutoiement,
+« yeso » ; « escayola » cité une fois) `de` (tutoiement, « Gips-Wasser-
+Verhältnis », « einsumpfen ») et `it` (tutoiement, « dosi gesso acqua », jamais
+« gesso ceramico », qui désigne en Italie une poudre de loisirs) et `pt` (portugais neutre à
+tendance brésilienne, « você », og:locale pt_BR ; jamais « calculadora de gesso »
+seul, qui vise le drywall) : `es`, `de`, `it` et `pt` reprennent la structure
+de `fr.json`, métriques. Toutes les chaînes UI passent
+par `t()` / `$t()`. Pas de texte en dur dans les templates. Clés : `app`, `format`, `lang`, `help`, `contribute`,
 `meta`, `intro`, `mold`, `object`, `shapes`, `fields`, `mix`, `results`,
-`errors`, `units`, `toc`, `howto`, `faq`, `guide`, `footer`, `scene`. Pour les
+`errors`, `units`, `unitSystem`, `toc`, `howto`, `faq`, `guide`, `yourPlaster`,
+`author`, `footer`, `scene`, `moldGuide` (fr et en ; pas en es : ses liens — sommaire, mode d'emploi, pied de page — n'apparaissent
+que si `localePage('moldGuide', locale)` existe). Pour les
 tableaux de messages (steps, faq items), utiliser `tm()` + `rt()`.
 
+- **Espaces insécables (fr)** : avant `? ! ; :` et à l'intérieur de `« »`, écrire
+  ` ` dans `fr.json`, jamais `&nbsp;` (les chaînes sont rendues en texte,
+  l'entité s'afficherait telle quelle). Un libellé suivi de deux-points passe
+  par `t("format.label", { label: … })` (`{label} :` en fr, `{label}:`
+  ailleurs), jamais un ` :` écrit dans le template.
+
+- **Date de modification** : `lastModified` de la page dans `SITE_PAGES`
+  alimente `<lastmod>` du sitemap et `dateModified` du JSON-LD. À mettre à jour
+  quand le contenu visible change (textes i18n, sections), pas pour du code ou
+  du style.
 - `meta.*` alimente le `<head>` par locale. Le `<head>` est généré par `useHead`
   dans `HomePage.vue` : title/description/keywords, canonical, hreflang
-  réciproques (fr/en/x-default, FR = x-default), og/twitter, et les JSON-LD
+  réciproques (une par locale + x-default, EN = x-default, FR à défaut ; `hreflangLinks()` de
+  `src/seo.ts`, même source que le sitemap), og/twitter, et les JSON-LD
   WebApplication/HowTo/FAQPage **construits depuis les mêmes clés i18n que le
   visible** (invariant schema == visible). `index.html` ne contient plus aucune
   balise locale-spécifique.
@@ -149,14 +213,33 @@ tableaux de messages (steps, faq items), utiliser `tm()` + `rt()`.
 ## Persistance localStorage
 
 Clé `plaster-calc-state`, objet `{ mold, object, mix }`. Fallback silencieux.
+Préférences d'affichage à part : clé `plaster-calc-units`,
+`{ system: 'metric' | 'us', ratioMode: 'ratio' | 'consistency' }` (changer
+d'unité n'est pas une utilisation du calculateur).
 Debounce 500 ms. La lecture du localStorage est **différée dans `onMounted`**
 (SSR-safe : le pré-rendu utilise toujours les valeurs par défaut pour éviter
 un mismatch d'hydratation).
 
 ## Système d'unités
 
-`UnitSystem = 'metric'` uniquement. Dimensions en cm, volumes en litres, poids en kg.
-`cm3ToLiters` isolée pour extension future — pas de sélecteur UI.
+L'état et les formules restent **toujours métriques** (cm, L, kg, ratio en
+kg/L). `src/units.ts` convertit seulement à l'affichage et à la saisie :
+`toInput` / `fromInput` (valeurs de champ arrondies à 2 décimales en US ;
+une valeur ré-émise inchangée au blur rend la valeur stockée telle quelle,
+sans conversion aller-retour) et `convert` (affichages en lecture seule).
+
+- `UnitSystem = 'metric' | 'us'`. US : pouces, tasses US (eau, volumes),
+  livres (plâtre), avec onces liquides US / onces sous les résultats. Jamais
+  le plâtre en tasses (pas de masse volumique apparente de poudre fiable).
+- `RatioMode = 'ratio' | 'consistency'` : consistency = 100 ÷ ratio (parts
+  d'eau pour 100 parts de plâtre, en poids) ; l'autre notation est affichée
+  sous le champ.
+- Pages FR, ES, DE, IT et PT : toujours métriques, ratio en kg/L, aucun sélecteur. Page EN :
+  métrique par défaut ; le pré-rendu est métrique et la préférence est lue
+  dans `onMounted` (pas d'écart d'hydratation).
+- Les composants lisent `useUnits()` (injecté par `HomePage.vue`) ; un champ
+  de forme est converti selon son `unitKey` (`units.cm` → longueur,
+  `units.liters` → volume).
 
 ## Scène 3D (useThreeScene)
 
@@ -174,7 +257,7 @@ un mismatch d'hydratation).
 ## Ce qu'il ne faut pas faire
 
 - Pas de Pinia, pas de librairie UI (Vuetify, PrimeVue…). vue-router sert
-  uniquement au multi-pages SSG i18n (2 routes statiques) — pas de logique métier
+  uniquement au multi-pages SSG i18n (routes statiques) — pas de logique métier
   ni de routes dynamiques.
 - Pas de librairie de formulaires (VeeValidate…)
 - Pas de Google Fonts

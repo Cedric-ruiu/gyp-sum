@@ -1,7 +1,15 @@
 <script setup lang="ts">
-import { nextTick, onUnmounted, ref } from "vue";
+import { nextTick, onUnmounted, ref, useId } from "vue";
+import { useI18n } from "vue-i18n";
 
-defineProps<{ text: string }>();
+// `label` names what the help is about, for the button's accessible name.
+defineProps<{ text: string; label: string }>();
+
+const { t } = useI18n();
+
+// The help text is rendered in the page (pre-rendered HTML included) and only
+// shown on hover/focus; aria-describedby ties it to the button.
+const tooltipId = useId();
 
 const open = ref(false);
 const buttonRef = ref<HTMLButtonElement | null>(null);
@@ -63,24 +71,25 @@ onUnmounted(handleClose);
     <button
       ref="buttonRef"
       type="button"
-      class="ml-1 inline-flex h-4 w-4 items-center justify-center border border-line text-[10px] font-light normal-case tracking-normal text-muted hover:text-ink hover:border-ink transition-colors cursor-help"
+      class="relative ml-1 inline-flex h-4 w-4 items-center justify-center border before:absolute before:-inset-4 sm:before:inset-0 border-line text-[10px] font-light normal-case tracking-normal text-muted hover:text-ink hover:border-ink transition-colors cursor-help"
       @mouseenter="handleOpen"
       @mouseleave="handleClose"
       @focus="handleOpen"
       @blur="handleClose"
-      aria-label="info"
+      :aria-label="t('help.label', { topic: label })"
+      :aria-describedby="tooltipId"
     >
       ?
     </button>
-    <Teleport to="body">
-      <span
-        v-if="open"
-        ref="tooltipRef"
-        :style="tooltipStyle"
-        class="pointer-events-none fixed z-50 w-64 max-w-[calc(100vw-1rem)] border border-line bg-white p-2 text-xs font-light normal-case tracking-normal text-ink"
-      >
-        {{ text }}
-      </span>
-    </Teleport>
+    <span
+      v-show="open"
+      :id="tooltipId"
+      ref="tooltipRef"
+      role="tooltip"
+      :style="tooltipStyle"
+      class="pointer-events-none fixed z-50 w-64 max-w-[calc(100vw-1rem)] border border-line bg-white p-2 text-xs font-light normal-case tracking-normal text-ink"
+    >
+      {{ text }}
+    </span>
   </span>
 </template>

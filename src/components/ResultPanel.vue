@@ -1,13 +1,20 @@
 <script setup lang="ts">
 import { useI18n } from "vue-i18n";
 import type { CalculationResult } from "@/types";
+import { useUnits } from "@/units";
 
 defineProps<{ result: CalculationResult }>();
 
 const { t, n } = useI18n();
+const units = useUnits();
 
 function fmt(v: number): string {
   return n(v, { maximumFractionDigits: 2, minimumFractionDigits: 2 });
+}
+
+// US fluid ounces and ounces, shown under the cups / pounds totals.
+function fmtSmall(v: number): string {
+  return n(v, { maximumFractionDigits: 1, minimumFractionDigits: 1 });
 }
 </script>
 
@@ -28,12 +35,15 @@ function fmt(v: number): string {
           <span class="ml-1 normal-case tracking-normal">({{ t("results.withMargin") }})</span>
         </div>
         <div class="mt-1 font-mono tnum text-3xl font-light text-accent">
-          {{ fmt(result.waterWithMargin) }}
-          <span class="ml-1 text-base text-muted">{{ t("units.liters") }}</span>
+          {{ fmt(units.convert("volume", result.waterWithMargin)) }}
+          <span class="ml-1 text-base text-muted">{{ t(units.labelKey("volume")) }}</span>
+        </div>
+        <div v-if="units.system.value === 'us'" class="mt-1 text-xs font-light text-muted">
+          = <span class="font-mono tnum">{{ fmtSmall(units.convert("smallVolume", result.waterWithMargin)) }} {{ t(units.labelKey("smallVolume")) }}</span>
         </div>
         <div class="mt-1 text-xs font-light text-muted">
-          {{ t("results.withoutMargin") }} :
-          <span class="font-mono tnum">{{ fmt(result.water) }} {{ t("units.liters") }}</span>
+          {{ t("format.label", { label: t("results.withoutMargin") }) }}
+          <span class="font-mono tnum">{{ fmt(units.convert("volume", result.water)) }} {{ t(units.labelKey("volume")) }}</span>
         </div>
       </div>
 
@@ -43,20 +53,23 @@ function fmt(v: number): string {
           <span class="ml-1 normal-case tracking-normal">({{ t("results.withMargin") }})</span>
         </div>
         <div class="mt-1 font-mono tnum text-3xl font-light text-accent">
-          {{ fmt(result.plasterWithMargin) }}
-          <span class="ml-1 text-base text-muted">{{ t("units.kg") }}</span>
+          {{ fmt(units.convert("mass", result.plasterWithMargin)) }}
+          <span class="ml-1 text-base text-muted">{{ t(units.labelKey("mass")) }}</span>
+        </div>
+        <div v-if="units.system.value === 'us'" class="mt-1 text-xs font-light text-muted">
+          = <span class="font-mono tnum">{{ fmtSmall(units.convert("smallMass", result.plasterWithMargin)) }} {{ t(units.labelKey("smallMass")) }}</span>
         </div>
         <div class="mt-1 text-xs font-light text-muted">
-          {{ t("results.withoutMargin") }} :
-          <span class="font-mono tnum">{{ fmt(result.plaster) }} {{ t("units.kg") }}</span>
+          {{ t("format.label", { label: t("results.withoutMargin") }) }}
+          <span class="font-mono tnum">{{ fmt(units.convert("mass", result.plaster)) }} {{ t(units.labelKey("mass")) }}</span>
         </div>
       </div>
     </div>
 
     <div v-if="result.isValid" class="mt-5 text-xs font-light text-muted">
-      {{ t("results.netVolume") }} :
+      {{ t("format.label", { label: t("results.netVolume") }) }}
       <span class="font-mono tnum text-ink">
-        {{ fmt(result.netVolume) }} {{ t("units.liters") }}
+        {{ fmt(units.convert("volume", result.netVolume)) }} {{ t(units.labelKey("volume")) }}
       </span>
     </div>
 

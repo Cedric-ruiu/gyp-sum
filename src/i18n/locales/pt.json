@@ -1,0 +1,247 @@
+{
+  "app": {
+    "title": "Calculadora de gesso para moldes",
+    "subtitle": "Proporção gesso / água para moldes"
+  },
+  "format": {
+    "label": "{label}:"
+  },
+  "lang": {
+    "switcher": "Escolher idioma",
+    "fr": "Français",
+    "en": "English",
+    "es": "Español",
+    "de": "Deutsch",
+    "it": "Italiano",
+    "pt": "Português"
+  },
+  "help": {
+    "label": "Ajuda: {topic}"
+  },
+  "meta": {
+    "title": "Proporção gesso e água para moldes: calculadora grátis — GypSum",
+    "description": "Quanta água e quanto gesso o seu molde precisa? Indique as medidas do molde e da peça: a calculadora dá a água e o gesso. Grátis.",
+    "keywords": "proporção gesso água, proporção de gesso e água para moldes, quantidade de gesso para molde, gesso para moldes, molde de gesso para cerâmica, moldes de enchimento, barbotina",
+    "ogTitle": "Proporção gesso e água para moldes: calculadora grátis",
+    "ogDescription": "Quanta água e quanto gesso o seu molde precisa? Indique as medidas do molde e da peça: a calculadora dá a água e o gesso.",
+    "twitterDescription": "Quanta água e quanto gesso o seu molde precisa? A calculadora dá a água e o gesso, já descontando a peça.",
+    "schemaApp": "Calculadora da proporção de água e gesso para moldes (cerâmica, olaria, escultura), baseada na densidade do gesso em pó (2,58 kg/L)."
+  },
+  "intro": {
+    "h1": "Proporção de gesso e água para moldes: a calculadora",
+    "lead": "Para um molde, a proporção habitual é de 1,5 kg de gesso por litro de água, ou seja, cerca de 0,67 L de água para 1 kg de gesso: 1,3 para um gesso fluido que copia bem os detalhes, 1,8 para um molde duro. Indique as medidas do seu molde e da peça: a calculadora dá as quantidades exatas, já descontando a peça."
+  },
+  "mold": {
+    "title": "Molde",
+    "volume": "Volume do molde",
+    "titleTooltip": "As medidas são as do interior da caixa de moldagem (as paredes que seguram o gesso). A altura a indicar é aquela até onde você quer encher de gesso, não necessariamente a altura total da caixa.",
+    "adaptToObject": "Ajustar à peça",
+    "adaptToObjectTooltip": "Calcula as medidas mínimas do molde a partir da peça indicada, com 2,5 cm de margem em cada lado e por cima. As medidas do molde são atualizadas automaticamente: útil para dimensionar a caixa de moldagem antes de começar.",
+    "margin": "margem",
+    "marginEditHint": "Clique para mudar a margem"
+  },
+  "object": {
+    "title": "Peça a moldar",
+    "titleTooltip": "Se a sua peça não tiver exatamente uma das formas propostas, escolha a mais parecida e arredonde as medidas para cima: o volume fica um pouco superestimado, o que é melhor do que ficar sem material.",
+    "shape": {
+      "none": "Nenhuma"
+    },
+    "manualEntry": "Indicar um volume diretamente",
+    "dimensionEntry": "Indicar medidas",
+    "manualVolume": "Volume",
+    "volume": "Volume da peça"
+  },
+  "shapes": {
+    "box": "Paralelepípedo",
+    "cylinder": "Cilindro",
+    "frustum": "Tronco de cone",
+    "sphere": "Esfera",
+    "halfSphere": "Semiesfera",
+    "sphericalCap": "Calota esférica",
+    "manual": "Volume livre"
+  },
+  "fields": {
+    "length": "Comprimento",
+    "width": "Largura",
+    "height": "Altura",
+    "diameter": "Diâmetro",
+    "diameterBottom": "Diâmetro inferior",
+    "diameterTop": "Diâmetro superior",
+    "volume": "Volume"
+  },
+  "mix": {
+    "title": "Parâmetros da mistura",
+    "titleTooltip": "Os valores padrão servem para a maioria dos usos. Só os mude se conhecer bem o gesso e precisar de uma dureza ou de um tempo de pega específicos.",
+    "ratio": "Proporção gesso / água",
+    "ratioHint": "kg de gesso por litro de água",
+    "ratioScale": "fino ← 1.3 — 1.5 — 1.8 → duro",
+    "margin": "Margem de segurança",
+    "density": "Densidade do gesso em pó",
+    "densityTooltip": "Densidade do gesso em pó (sulfato de cálcio hemi-hidratado, CaSO₄·½H₂O), usada para calcular o volume ocupado pelos grãos. Varia um pouco de um gesso para outro; o efeito nas quantidades fica abaixo da margem de segurança padrão."
+  },
+  "results": {
+    "title": "Resultados",
+    "water": "Água",
+    "plaster": "Gesso",
+    "withMargin": "com margem",
+    "withoutMargin": "sem margem",
+    "netVolume": "Volume líquido"
+  },
+  "contribute": {
+    "text": "Falta uma forma? {github} ou {email}.",
+    "github": "Sugira no GitHub",
+    "email": "me escreva"
+  },
+  "errors": {
+    "volumeExceeded": "O volume da peça é igual ou maior que o do molde",
+    "invalidRatio": "A proporção deve ser maior que 0"
+  },
+  "units": {
+    "cm": "cm",
+    "liters": "L",
+    "kg": "kg",
+    "percent": "%"
+  },
+  "guide": {
+    "title": "Qual é a proporção de gesso e água para moldes?",
+    "answer": "Para um molde, a proporção habitual é de 1,5 kg de gesso para 1 litro de água, ou seja, cerca de 0,67 L de água por quilo de gesso. Desça para 1,3 para um gesso fluido que copie os detalhes, suba para 1,8 para um molde duro. Se o fabricante indicar uma relação água/pó, vale a dele.",
+    "pourOrder": "Coloque sempre o gesso na água, nunca o contrário.",
+    "immersion": "Para medir o volume de uma peça irregular, mergulhe-a num recipiente graduado e anote quanto a água sobe.",
+    "physics": "A calculadora se baseia na física da mistura: ao juntar água e gesso, o volume final é a soma do volume da água e do volume ocupado pelos grãos de gesso (densidade do gesso em pó: 2,58 kg/L). É mais preciso do que uma simples proporção em volume.",
+    "formula": "Fórmula: Água = Volume líquido ÷ (1 + Proporção ÷ 2.58)",
+    "ratioTable": {
+      "caption": "Proporções gesso / água mais comuns",
+      "colRatio": "Proporção (kg/L)",
+      "colResult": "Resultado",
+      "colUse": "Uso",
+      "valueCols": ["Água para 1 kg", "Água para 100 g"],
+      "rows": [
+        {
+          "ratio": "1,3",
+          "result": "Fluido, detalhado",
+          "use": "Enchimento fino, detalhes",
+          "values": ["≈ 0,77 L", "≈ 77 ml"]
+        },
+        {
+          "ratio": "1,5",
+          "result": "Equilibrado",
+          "use": "Uso geral",
+          "values": ["≈ 0,67 L", "≈ 67 ml"]
+        },
+        {
+          "ratio": "1,8",
+          "result": "Duro, resistente",
+          "use": "Moldes resistentes",
+          "values": ["≈ 0,56 L", "≈ 56 ml"]
+        }
+      ]
+    }
+  },
+  "yourPlaster": {
+    "title": "Que proporção indicar para o seu gesso (gesso para moldes, gesso cerâmico…)?",
+    "paragraphs": [
+      "Use a proporção indicada na embalagem ou na ficha técnica do seu gesso. Se vier em água para cada 1 kg de gesso (por exemplo 750 ml para cada 1 kg), a proporção a indicar é 1 ÷ 0,75 = 1,33. Se vier em partes, como «2 partes de gesso para 1 de água», é 2 ÷ 1 = 2. Se vier como relação água/pó (0,7), é 1 ÷ 0,7 = 1,43."
+    ]
+  },
+  "footer": {
+    "tagline": "Calculadora da proporção de água e gesso para moldes. Fórmulas baseadas na densidade do gesso em pó (2,58 kg/L). Nenhum dado é enviado: tudo fica no seu navegador.",
+    "credit": "Criado por {name}, ceramista amador e desenvolvedor web freelancer ({site}).",
+    "contribute": "Contribuir",
+    "openSource": "Projeto de código aberto: sugestões e comentários são bem-vindos.",
+    "issues": "Relatar um erro ou sugerir uma ideia",
+    "contactTitle": "Uma palavra?",
+    "contactText": "Uma dúvida sobre uma proporção, uma forma de molde que falta, ou um molde feito com o GypSum? Me escreva: uma foto sempre me deixa feliz. Respondo assim que puder.",
+    "contactCta": "Enviar um e-mail",
+    "contactCopy": "Copiar",
+    "contactCopied": "Endereço copiado",
+    "contactSubject": "GypSum — dúvida ou comentário",
+    "share": "Compartilhar a ferramenta",
+    "shareCopied": "Link copiado"
+  },
+  "pwa": {
+    "title": "Instalar o GypSum",
+    "body": "Adicione o aplicativo à tela inicial para ter acesso rápido, mesmo sem internet.",
+    "installButton": "Instalar",
+    "iosInstruction": "Toque em Compartilhar e depois em «Adicionar à Tela de Início».",
+    "dismissLabel": "Fechar",
+    "footerLink": "Instalar o aplicativo"
+  },
+  "toc": {
+    "label": "Nesta página",
+    "guide": "Proporção água / gesso",
+    "yourPlaster": "O seu gesso",
+    "howto": "Modo de usar",
+    "faq": "Perguntas frequentes"
+  },
+  "howto": {
+    "title": "Como calcular o gesso para um molde",
+    "intro": "Em cinco passos, calcule e prepare a quantidade certa de gesso para encher o seu molde sem desperdício.",
+    "steps": [
+      {
+        "title": "Medir o volume do molde",
+        "text": "Anote as medidas internas da caixa de moldagem (comprimento, largura, altura de enchimento desejada). É o volume total a encher de gesso."
+      },
+      {
+        "title": "Calcular o volume da peça",
+        "text": "Se houver uma peça dentro do molde, desconte o volume dela. Escolha a forma mais parecida, ou meça-o mergulhando a peça num recipiente graduado."
+      },
+      {
+        "title": "Escolher a proporção gesso / água",
+        "text": "A proporção (kg de gesso por litro de água) define a dureza: 1,3 para um gesso fino e fluido, 1,5 para uso geral, 1,8 para um gesso duro e resistente."
+      },
+      {
+        "title": "Acrescentar uma margem de segurança",
+        "text": "Prepare cerca de 10 % a mais de material para compensar as perdas (recipiente, transbordamentos, pega rápida)."
+      },
+      {
+        "title": "Misturar e despejar",
+        "text": "Coloque sempre o gesso na água, nunca o contrário. Deixe-o hidratar sem mexer, depois misture e despeje antes de começar a pega."
+      }
+    ]
+  },
+  "author": {
+    "title": "Por que criei esta ferramenta",
+    "paragraphs": []
+  },
+  "faq": {
+    "title": "Perguntas frequentes",
+    "items": [
+      {
+        "q": "Como descobrir a quantidade de gesso que o molde precisa?",
+        "a": "Depende do volume líquido a encher (volume do molde menos o da peça) e da proporção gesso / água. Indique as suas medidas acima: a calculadora mostra as quantidades exatas de água e de gesso, já com a margem de segurança."
+      },
+      {
+        "q": "Qual é a proporção certa de gesso e água?",
+        "a": "A proporção é expressa em quilos de gesso por litro de água. Conte 1,3 para um gesso fluido e detalhado, 1,5 para uso geral e 1,8 para um gesso duro e resistente. Quanto maior a proporção, mais denso e sólido fica o gesso."
+      },
+      {
+        "q": "Qual proporção usar num molde de gesso para cerâmica?",
+        "a": "Na cerâmica, procura-se um gesso poroso que absorva a água da barbotina: uma proporção de 1,3 a 1,5 (kg de gesso por litro de água) serve para a maioria dos moldes de enchimento. Indique o volume do seu molde acima para obter as quantidades exatas."
+      },
+      {
+        "q": "Coloca-se o gesso na água ou a água no gesso?",
+        "a": "Sempre o gesso na água, nunca o contrário. Polvilhe o gesso aos poucos, deixe-o hidratar alguns minutos e depois misture para evitar grumos."
+      },
+      {
+        "q": "Qual é a densidade do gesso?",
+        "a": "O cálculo usa a densidade do gesso em pó (sulfato de cálcio hemi-hidratado, CaSO₄·½H₂O): 2,58 kg/L. Ela varia um pouco conforme o tipo de gesso; o efeito nas quantidades calculadas fica abaixo da margem de segurança padrão. Assim a dosagem é mais precisa do que com uma simples proporção em volume."
+      },
+      {
+        "q": "Como medir o volume de uma peça irregular?",
+        "a": "Mergulhe a peça num recipiente graduado com água e anote quanto o nível sobe: a diferença é o volume dela. Você também pode indicar esse volume diretamente na calculadora."
+      },
+      {
+        "q": "Quanta água para 1 kg de gesso?",
+        "a": "Com uma proporção de 1,5, são precisos cerca de 0,67 litro de água para 1 kg de gesso (1 ÷ proporção), ou seja, cerca de 67 ml para 100 g de gesso. Com 1,3 conte ~0,77 L, e com 1,8 cerca de 0,56 L. A calculadora faz essa conta para o volume do seu molde."
+      },
+      {
+        "q": "Dá para medir o gesso por volume em vez de por peso?",
+        "a": "Sim, desde que você calibre a sua medida: encha um copo de gesso até a borda, pese-o uma vez e use depois esse mesmo copo em todas as misturas. Um copo qualquer não basta: conforme o gesso e o quanto ele está compactado, o mesmo volume não pesa o mesmo. A calculadora dá o peso do gesso: divida-o pelo peso do seu copo para saber quantos copos usar."
+      }
+    ]
+  },
+  "scene": {
+    "placeholder": "Visualização 3D: disponível em breve",
+    "ariaLabel": "Pré-visualização 3D do molde e da peça"
+  }
+}

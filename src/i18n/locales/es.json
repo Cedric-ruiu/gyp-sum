@@ -1,0 +1,247 @@
+{
+  "app": {
+    "title": "Calculadora de yeso",
+    "subtitle": "Proporción yeso / agua para moldes"
+  },
+  "format": {
+    "label": "{label}:"
+  },
+  "lang": {
+    "switcher": "Elegir idioma",
+    "fr": "Français",
+    "en": "English",
+    "es": "Español",
+    "de": "Deutsch",
+    "it": "Italiano",
+    "pt": "Português"
+  },
+  "help": {
+    "label": "Ayuda: {topic}"
+  },
+  "meta": {
+    "title": "Proporción yeso agua para moldes: calculadora gratuita — GypSum",
+    "description": "¿Qué proporción de agua y yeso necesita tu molde? Introduce las medidas del molde y de la pieza: la calculadora te da el agua y el yeso. Gratis.",
+    "keywords": "calculadora de yeso para moldes, proporción yeso agua, proporción de yeso y agua para moldes, cantidad de yeso para un molde, yeso cerámico, yeso para moldes, escayola, moldes de cerámica",
+    "ogTitle": "Proporción yeso agua para moldes: calculadora gratuita",
+    "ogDescription": "¿Qué proporción de agua y yeso necesita tu molde? Introduce las medidas del molde y de la pieza: la calculadora te da el agua y el yeso.",
+    "twitterDescription": "¿Qué proporción de agua y yeso necesita tu molde? La calculadora te da el agua y el yeso, descontando la pieza.",
+    "schemaApp": "Calculadora de la proporción de agua y yeso para moldes (cerámica, alfarería, escultura), basada en la densidad del yeso en polvo (2,58 kg/L)."
+  },
+  "intro": {
+    "h1": "Proporción de yeso y agua para moldes: la calculadora",
+    "lead": "Para un molde, la proporción habitual es de 1,5 kg de yeso por litro de agua, es decir, unos 0,67 L de agua por kilo de yeso: 1,3 para un yeso fluido que copia bien los detalles, 1,8 para un molde duro. Indica las medidas de tu molde y de la pieza: la calculadora te da las cantidades exactas, descontando la pieza."
+  },
+  "mold": {
+    "title": "Molde",
+    "volume": "Volumen del molde",
+    "titleTooltip": "Las medidas son las del interior de tu encofrado. La altura que debes indicar es la altura hasta la que quieres llenar de yeso, no necesariamente la altura total del encofrado.",
+    "adaptToObject": "Ajustar a la pieza",
+    "adaptToObjectTooltip": "Calcula las medidas mínimas del molde a partir de la pieza definida, con 2,5 cm de margen en cada lado y por encima. Las medidas del molde se actualizan solas: útil para preparar el encofrado antes de empezar.",
+    "margin": "margen",
+    "marginEditHint": "Haz clic para cambiar el margen"
+  },
+  "object": {
+    "title": "Pieza que vas a moldear",
+    "titleTooltip": "Si tu pieza no tiene exactamente una de las formas propuestas, elige la más parecida y redondea las medidas hacia arriba: el volumen quedará un poco sobrestimado, y siempre es mejor que quedarse corto de material.",
+    "shape": {
+      "none": "Ninguna"
+    },
+    "manualEntry": "Introducir un volumen directamente",
+    "dimensionEntry": "Introducir medidas",
+    "manualVolume": "Volumen",
+    "volume": "Volumen de la pieza"
+  },
+  "shapes": {
+    "box": "Prisma",
+    "cylinder": "Cilindro",
+    "frustum": "Tronco de cono",
+    "sphere": "Esfera",
+    "halfSphere": "Semiesfera",
+    "sphericalCap": "Casquete esférico",
+    "manual": "Volumen libre"
+  },
+  "fields": {
+    "length": "Largo",
+    "width": "Ancho",
+    "height": "Alto",
+    "diameter": "Diámetro",
+    "diameterBottom": "Diámetro inferior",
+    "diameterTop": "Diámetro superior",
+    "volume": "Volumen"
+  },
+  "mix": {
+    "title": "Parámetros de la mezcla",
+    "titleTooltip": "Los valores por defecto sirven para la mayoría de los usos. Cámbialos solo si conoces bien el yeso y buscas una dureza o un tiempo de fraguado concretos.",
+    "ratio": "Proporción yeso / agua",
+    "ratioHint": "kg de yeso por litro de agua",
+    "ratioScale": "fino ← 1.3 — 1.5 — 1.8 → duro",
+    "margin": "Margen de seguridad",
+    "density": "Densidad del yeso en polvo",
+    "densityTooltip": "Densidad del yeso en polvo (sulfato de calcio semihidratado, CaSO₄·½H₂O), que sirve para calcular el volumen que ocupan los granos. Varía un poco de un yeso a otro; el efecto sobre las cantidades es menor que el margen de seguridad por defecto."
+  },
+  "results": {
+    "title": "Resultados",
+    "water": "Agua",
+    "plaster": "Yeso",
+    "withMargin": "con margen",
+    "withoutMargin": "sin margen",
+    "netVolume": "Volumen neto"
+  },
+  "contribute": {
+    "text": "¿Falta una forma? {github} o {email}.",
+    "github": "Proponla en GitHub",
+    "email": "escríbeme"
+  },
+  "errors": {
+    "volumeExceeded": "El volumen de la pieza es igual o mayor que el del molde",
+    "invalidRatio": "La proporción debe ser mayor que 0"
+  },
+  "units": {
+    "cm": "cm",
+    "liters": "L",
+    "kg": "kg",
+    "percent": "%"
+  },
+  "guide": {
+    "title": "¿Cuál es la proporción de agua y yeso para hacer moldes?",
+    "answer": "Para un molde, la proporción habitual es de 1,5 kg de yeso por 1 litro de agua, es decir, unos 0,67 L de agua por kilo de yeso. Baja a 1,3 para un yeso fluido que copie los detalles, sube a 1,8 para un molde duro. Si el fabricante indica una proporción, manda la suya.",
+    "pourOrder": "Echa siempre el yeso en el agua, nunca al revés.",
+    "immersion": "Para medir el volumen de una pieza irregular, sumérgela en un recipiente graduado y anota cuánto sube el agua.",
+    "physics": "La calculadora se basa en la física de la mezcla: al juntar agua y yeso, el volumen final es la suma del volumen del agua y del volumen que ocupan los granos de yeso (densidad del yeso en polvo: 2,58 kg/L). Es más preciso que una simple proporción en volumen.",
+    "formula": "Fórmula: Agua = Volumen neto ÷ (1 + Proporción ÷ 2.58)",
+    "ratioTable": {
+      "caption": "Proporciones yeso / agua habituales",
+      "colRatio": "Proporción (kg/L)",
+      "colResult": "Resultado",
+      "colUse": "Uso",
+      "valueCols": ["Agua por 1 kg", "Agua por 100 g"],
+      "rows": [
+        {
+          "ratio": "1,3",
+          "result": "Fluido, detallado",
+          "use": "Colada fina, detalles",
+          "values": ["≈ 0,77 L", "≈ 77 ml"]
+        },
+        {
+          "ratio": "1,5",
+          "result": "Equilibrado",
+          "use": "Uso general",
+          "values": ["≈ 0,67 L", "≈ 67 ml"]
+        },
+        {
+          "ratio": "1,8",
+          "result": "Duro, resistente",
+          "use": "Moldes resistentes",
+          "values": ["≈ 0,56 L", "≈ 56 ml"]
+        }
+      ]
+    }
+  },
+  "yourPlaster": {
+    "title": "¿Qué proporción introducir para tu yeso (yeso cerámico, escayola…)?",
+    "paragraphs": [
+      "Usa la proporción que indica el saco o la ficha técnica de tu yeso. Si viene en partes de agua por 100 partes de yeso, en peso (por ejemplo 70, o «70 % de agua»), la proporción que debes introducir es 100 ÷ 70 = 1,43; con un 60 % de agua, 100 ÷ 60 = 1,67. Si viene como relación agua / yeso (0,7), es 1 ÷ 0,7 = 1,43."
+    ]
+  },
+  "footer": {
+    "tagline": "Calculadora de la proporción de agua y yeso para moldes. Fórmulas basadas en la densidad del yeso en polvo (2,58 kg/L). No se envía ningún dato: todo se queda en tu navegador.",
+    "credit": "Creado por {name}, ceramista aficionado y desarrollador web freelance ({site}).",
+    "contribute": "Contribuir",
+    "openSource": "Proyecto de código abierto: tus sugerencias y comentarios son bienvenidos.",
+    "issues": "Informar de un error o proponer una idea",
+    "contactTitle": "¿Unas palabras?",
+    "contactText": "¿Una duda sobre una proporción, una forma de molde que falta, o un molde hecho con GypSum? Escríbeme: una foto siempre me hace ilusión. Respondo en cuanto puedo.",
+    "contactCta": "Escribir un correo",
+    "contactCopy": "Copiar",
+    "contactCopied": "Dirección copiada",
+    "contactSubject": "GypSum — pregunta o comentario",
+    "share": "Compartir la herramienta",
+    "shareCopied": "Enlace copiado"
+  },
+  "pwa": {
+    "title": "Instalar GypSum",
+    "body": "Añade la aplicación a tu pantalla de inicio para tenerla a mano, incluso sin conexión.",
+    "installButton": "Instalar",
+    "iosInstruction": "Pulsa Compartir y luego «Añadir a pantalla de inicio».",
+    "dismissLabel": "Cerrar",
+    "footerLink": "Instalar la aplicación"
+  },
+  "toc": {
+    "label": "En esta página",
+    "guide": "Proporción agua / yeso",
+    "yourPlaster": "Tu yeso",
+    "howto": "Modo de uso",
+    "faq": "Preguntas frecuentes"
+  },
+  "howto": {
+    "title": "Cómo calcular el yeso para un molde",
+    "intro": "En cinco pasos, calcula y prepara la cantidad justa de yeso para llenar tu molde sin desperdiciar.",
+    "steps": [
+      {
+        "title": "Medir el volumen del molde",
+        "text": "Toma las medidas interiores de tu encofrado (largo, ancho y altura de llenado que quieres). Es el volumen total que hay que llenar de yeso."
+      },
+      {
+        "title": "Calcular el volumen de la pieza",
+        "text": "Si hay una pieza dentro del molde, resta su volumen. Elige la forma más parecida, o mídelo sumergiéndola en un recipiente graduado."
+      },
+      {
+        "title": "Elegir la proporción yeso / agua",
+        "text": "La proporción (kg de yeso por litro de agua) fija la dureza: 1,3 para un yeso fino y fluido, 1,5 para un uso general, 1,8 para un yeso duro y resistente."
+      },
+      {
+        "title": "Añadir un margen de seguridad",
+        "text": "Prepara alrededor de un 10 % más de material para compensar las pérdidas (recipiente, derrames, fraguado rápido)."
+      },
+      {
+        "title": "Mezclar y verter",
+        "text": "Echa siempre el yeso en el agua, nunca al revés. Déjalo reposar sin remover, luego mezcla y vierte antes de que empiece a fraguar."
+      }
+    ]
+  },
+  "author": {
+    "title": "Por qué hice esta herramienta",
+    "paragraphs": []
+  },
+  "faq": {
+    "title": "Preguntas frecuentes",
+    "items": [
+      {
+        "q": "¿Cómo calcular la cantidad de yeso para un molde?",
+        "a": "Depende del volumen neto que hay que llenar (volumen del molde menos el de la pieza) y de la proporción yeso / agua. Introduce tus medidas más arriba: la calculadora muestra las cantidades exactas de agua y de yeso, con el margen de seguridad incluido."
+      },
+      {
+        "q": "¿Cuál es la proporción correcta de yeso y agua?",
+        "a": "La proporción se expresa en kilos de yeso por litro de agua. Cuenta 1,3 para un yeso fluido y detallado, 1,5 para un uso general y 1,8 para un yeso duro y resistente. Cuanto más alta es la proporción, más denso y sólido es el yeso."
+      },
+      {
+        "q": "¿Qué proporción usar para un molde de cerámica?",
+        "a": "En cerámica se busca un yeso poroso que absorba el agua de la barbotina: una proporción de 1,3 a 1,5 (kg de yeso por litro de agua) sirve para la mayoría de los moldes de colada. Introduce el volumen de tu molde más arriba para obtener las cantidades exactas."
+      },
+      {
+        "q": "¿Se echa el yeso en el agua o el agua en el yeso?",
+        "a": "Siempre el yeso en el agua, nunca al revés. Espolvorea el yeso poco a poco, déjalo reposar unos minutos y luego mezcla para evitar los grumos."
+      },
+      {
+        "q": "¿Cuál es la densidad del yeso?",
+        "a": "El cálculo usa la densidad del yeso en polvo (sulfato de calcio semihidratado, CaSO₄·½H₂O): 2,58 kg/L. Varía un poco según el tipo de yeso; el efecto sobre las cantidades calculadas es menor que el margen de seguridad por defecto. Permite una dosificación más precisa que una simple proporción en volumen."
+      },
+      {
+        "q": "¿Cómo medir el volumen de una pieza irregular?",
+        "a": "Sumerge la pieza en un recipiente graduado lleno de agua y anota cuánto sube el nivel: la diferencia es su volumen. También puedes introducir ese volumen directamente en la calculadora."
+      },
+      {
+        "q": "¿Cuánta agua se le pone a un kilo de yeso?",
+        "a": "Con una proporción de 1,5, hacen falta unos 0,67 litros de agua por 1 kg de yeso (1 ÷ proporción), es decir, unos 67 ml por 100 g de yeso. Con 1,3 cuenta ~0,77 L, y con 1,8 unos 0,56 L. La calculadora hace este cálculo por ti según el volumen de tu molde."
+      },
+      {
+        "q": "¿Se puede medir el yeso por volumen en lugar de por peso?",
+        "a": "Sí, si antes calibras tu medida: llena a ras un vaso de tu yeso, pésalo una vez y usa ese mismo vaso para todas tus mezclas. Un vaso cualquiera no basta: según el yeso y lo compacto que esté, un mismo volumen no pesa lo mismo. La calculadora da el peso del yeso: divídelo entre el peso de tu vaso para saber cuántos echar."
+      }
+    ]
+  },
+  "scene": {
+    "placeholder": "Vista 3D: disponible pronto",
+    "ariaLabel": "Vista previa 3D del molde y de la pieza"
+  }
+}
