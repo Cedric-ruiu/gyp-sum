@@ -5,8 +5,9 @@ import { RouterLink } from "vue-router";
 import LanguageSwitcher from "@/components/ui/LanguageSwitcher.vue";
 import { pageFor } from "@/seo";
 
-// `languages: false` on pages that exist in a single language.
-withDefaults(defineProps<{ languages?: boolean }>(), { languages: true });
+// `group`: the page group whose translations the language switcher offers
+// (hidden when the page exists in a single language).
+withDefaults(defineProps<{ group?: string }>(), { group: "calculator" });
 
 const { t, locale } = useI18n();
 
@@ -31,7 +32,7 @@ const homePath = computed(() => pageFor("calculator", locale.value).path);
         <p class="text-xs font-light text-muted hidden sm:block">
           {{ t("app.subtitle") }}
         </p>
-        <LanguageSwitcher v-if="languages" />
+        <LanguageSwitcher :group="group" />
       </div>
     </div>
   </header>

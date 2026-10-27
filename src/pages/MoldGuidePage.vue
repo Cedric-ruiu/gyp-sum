@@ -86,7 +86,7 @@ useHead(() => {
 
 <template>
   <div class="min-h-full bg-white text-[color:var(--color-ink)]">
-    <SiteHeader :languages="false" />
+    <SiteHeader group="moldGuide" />
 
     <main class="mx-auto max-w-2xl px-6 py-8">
       <article>

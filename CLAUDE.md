@@ -68,7 +68,7 @@ src/
 │                           fr seul) + JSON-LD Article
 ├── components/
 │   ├── SiteHeader.vue      logo (lien vers le calculateur de la locale) + sélecteur
-│   │                       de langue (prop `languages`, false sur une page monolingue)
+│   │                       de langue du groupe de pages (prop `group`)
 │   ├── SiteFooter.vue      pied de page commun (auteur, contact, partage, GitHub, PWA)
 │   ├── MoldConfigurator.vue
 │   ├── ObjectConfigurator.vue  (toggle saisie directe de volume)
@@ -83,7 +83,8 @@ src/
 │       ├── NumberInput.vue  virgule/point acceptés, spinners masqués
 │       ├── ShapeSelector.vue  généré depuis ShapeDefinition[], prop noneOption
 │       ├── InfoTooltip.vue
-│       ├── LanguageSwitcher.vue  un lien par locale (RouterLink, hreflang, aria-current)
+│       ├── LanguageSwitcher.vue  un lien par traduction du groupe (RouterLink, hreflang,
+│       │                         aria-current), masqué si la page n'existe qu'en une langue
 │       ├── ContactLink.vue  lien mailto du footer, adresse décodée en onMounted
 │       ├── ShareButton.vue  partage natif (mobile) / copie du lien (desktop)
 │       └── SegmentedControl.vue  choix exclusif (unités, saisie du ratio)
