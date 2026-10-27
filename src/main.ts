@@ -14,6 +14,11 @@ const routes: RouteRecordRaw[] = [
     component: () => import("./pages/MoldGuidePage.vue"),
     meta: { locale: "fr" },
   },
+  {
+    path: "/en/how-to-make-a-plaster-mold/",
+    component: () => import("./pages/MoldGuidePage.vue"),
+    meta: { locale: "en" },
+  },
 ];
 
 export const createApp = ViteSSG(

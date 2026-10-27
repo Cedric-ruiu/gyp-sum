@@ -169,7 +169,11 @@
     "contactCopied": "Address copied",
     "contactSubject": "GypSum — question or feedback",
     "share": "Share this tool",
-    "shareCopied": "Link copied"
+    "shareCopied": "Link copied",
+    "pages": {
+      "calculator": "Plaster calculator",
+      "moldGuide": "How to make a plaster mold"
+    }
   },
   "pwa": {
     "title": "Install GypSum",
@@ -184,7 +188,8 @@
     "guide": "Plaster to water ratio",
     "yourPlaster": "Your plaster",
     "howto": "How-to",
-    "faq": "FAQ"
+    "faq": "FAQ",
+    "moldGuide": "Make a plaster mold"
   },
   "howto": {
     "title": "How to measure plaster for mold making",
@@ -210,7 +215,8 @@
         "title": "Mix and pour",
         "text": "Always add plaster to water, never the reverse. Let it slake without stirring, then mix and pour before it starts to set."
       }
-    ]
+    ],
+    "moldGuideLink": "What comes next, from mold box to demolding: how to make a plaster mold"
   },
   "author": {
     "title": "Why I built this tool",
@@ -264,5 +270,174 @@
   "scene": {
     "placeholder": "3D view — coming soon",
     "ariaLabel": "3D preview of the mould and the object to cast"
+  },
+  "moldGuide": {
+    "meta": {
+      "title": "How to Make a Plaster Mold for Pottery — GypSum",
+      "description": "How to make a two-part plaster mold for pottery: tools, mold box, mixing and pouring the plaster, demolding, keys and drying, step by step.",
+      "ogTitle": "How to Mix Plaster and Make a Mold for Pottery",
+      "ogDescription": "Tools, mold box, mixing and pouring, demolding, keys and drying: a step-by-step method for a two-part plaster mold."
+    },
+    "h1": "How to Mix Plaster and Make a Mold for Pottery",
+    "lead": "A two-part plaster mold takes two pours: bed the lower half of the model in clay, build the mold box and pour; then carve keys, soap the plaster and pour the second half. Here is the method I use, step by step, with the tools and timings.",
+    "tocLabel": "On this page",
+    "calculatorCta": "work out the water and plaster for your mold",
+    "backToCalculator": "Work out the water and plaster for your mold",
+    "sections": [
+      {
+        "id": "plaster",
+        "title": "What kind of plaster do you use for molds?",
+        "paragraphs": [
+          "I use Molda 3, a plaster I bought at a building supplier on the advice of a professional ceramist. Whatever your plaster, its consistency (the water to plaster ratio) is printed on the bag or the data sheet: that is the number to enter in the calculator."
+        ]
+      },
+      {
+        "id": "tools",
+        "title": "What do you need?",
+        "table": {
+          "caption": "Tools and materials",
+          "cols": ["Item", "What it is for"],
+          "rows": [
+            ["Tape measure", "Measuring the model and the mold box"],
+            [
+              "Clay set aside for mold making",
+              "Bedding the lower half of the model, sealing gaps in the mold box"
+            ],
+            ["Mold boards", "The walls of the mold box"],
+            [
+              "2 ratchet straps",
+              "Clamping the mold boards as tight as possible"
+            ],
+            [
+              "Mold soap and a brush (I use soft potash soap)",
+              "Sealing the model and the parting surface so the plaster does not stick"
+            ],
+            [
+              "Plaster (Molda 3) and water",
+              "The mix, measured with the calculator"
+            ],
+            ["Drill and paddle mixer", "Mixing the plaster"],
+            [
+              "Rubber spatula",
+              "Mixing very small batches, scraping the bucket clean"
+            ],
+            ["Rinse bucket", "Cleaning tools, never in the sink"],
+            [
+              "Metal rib",
+              "Cleaning the mold boards, finishing the parting surface"
+            ],
+            ["Wood plane", "Leveling the parting surface"],
+            ["Countersink bit", "Carving the keys that line up the two halves"]
+          ]
+        }
+      },
+      {
+        "id": "mold-box",
+        "title": "How do you prepare the model and the mold box?",
+        "steps": [
+          "Mark the parting line on the model.",
+          "Fill any undercuts if needed (a hollow foot ring, for instance).",
+          "Bed the lower half of the model in clay. Keep the clay bed sloping downward: the plaster will be planed afterwards to get a flat surface exactly on the parting line.",
+          "On the clay bed, draw a line 1 in (2.5 cm) from the model on every side, and trim the clay along it: this sets the size of the mold box.",
+          "Slope the sides of the clay bed inward too, so the mold boards press firmly against its top edge.",
+          "Smooth the clay surface well.",
+          "Soap the model if needed (it depends on what it is made of): work the soap into a lather with the brush, wipe off the bubbles, and repeat three times.",
+          "Set up the mold boards around the clay bed and strap them together, as tight as possible.",
+          "Mark a line inside the mold box 1 in (2.5 cm) above the model: that is how high you will pour.",
+          "Seal any gaps with small coils of clay if needed."
+        ],
+        "note": "Once the clay is in place, pour quickly: the clay dries out and the seals stop holding."
+      },
+      {
+        "id": "mixing",
+        "title": "How do you mix plaster for a mold?",
+        "steps": [
+          "Take all the measurements (inside of the mold box, height up to the mark, model), then {calculator}: the calculator gives the amounts, with the model's volume subtracted.",
+          "Fill the rinse bucket.",
+          "Add the plaster to the water, in the amounts you worked out, never the other way round.",
+          "Let it slake for 2 to 3 minutes without stirring.",
+          "Mix for 3 minutes with the paddle mixer on the drill, at low speed (setting 2). For a very small batch, mix with the rubber spatula, also for at least 3 minutes."
+        ],
+        "example": "Example: a large bowl 8 in (20 cm) across at the rim, 4 in (10 cm) at the foot and 4 in (10 cm) tall (the “Cone frustum” shape), in a 10 × 10 in (25 × 25 cm) mold box poured to 5 in (12.5 cm), which leaves 1 in (2.5 cm) on the sides and above. With a ratio of 1.5 (consistency 67) and a 10% safety margin, the calculator in US units gives 18.44 US cups of water and 14.43 lb of plaster. For a two-part mold, run the numbers again for each pour, measuring once the mold box is set up."
+      },
+      {
+        "id": "pouring",
+        "title": "How do you pour plaster without air bubbles?",
+        "paragraphs": ["From here, you have about 5 minutes before pouring."],
+        "steps": [
+          "Vibrate the bucket to bring the air bubbles up.",
+          "Skim the bubbles off the surface.",
+          "Stir one last time for an even mix.",
+          "Pour into a corner of the mold box, never straight onto the model.",
+          "Scrape the bucket clean with the rubber spatula.",
+          "Tap the surface of the plaster with the back of your hand to level it.",
+          "Clean your tools right away in the rinse bucket. Nothing down the sink: plaster clogs drains."
+        ]
+      },
+      {
+        "id": "demolding",
+        "title": "How long to let plaster sit in the mold?",
+        "paragraphs": [
+          "Go by the plaster itself, not by the clock. As soon as it hardens, before it heats up, take the mold boards off and clean them with the metal rib. As soon as it starts to heat up, you can demold and move on to finishing. Remove the clay and wrap it so it does not dry out."
+        ],
+        "table": {
+          "caption": "Timings, from mixing to drying",
+          "cols": ["Step", "Time or cue"],
+          "rows": [
+            ["Slaking, without stirring", "2 to 3 minutes"],
+            ["Mixing", "3 minutes"],
+            ["Vibrating, skimming, pouring", "about 5 minutes"],
+            [
+              "Taking the mold boards off",
+              "as soon as the plaster hardens, before it heats up"
+            ],
+            [
+              "Demolding and finishing",
+              "as soon as the plaster starts to heat up"
+            ],
+            ["Drying the finished mold", "several days somewhere warm"]
+          ]
+        }
+      },
+      {
+        "id": "two-part",
+        "title": "How do you make a two-part plaster mold?",
+        "steps": [
+          "Plane the parting surface as flat as possible, and finish it with the metal rib.",
+          "Bevel the bottom edges of the mold, but not the sides.",
+          "On the parting surface, drill a key in each corner with the countersink bit, and two keys in one corner: you will always know which way the halves go together.",
+          "Clean everything, mold and model.",
+          "Repeat every step of the first pour: mold boards, 1 in mark, soaping, pouring. One difference only: you must soap the plaster parting surface three times, keys included.",
+          "Demolding can be harder, mostly because of suction: tap, flip the mold over, and work the two halves apart.",
+          "Once the mold is open, break off the tips of the keys on the second half, so no debris gets trapped on them.",
+          "You can now bevel every edge of the assembled mold, sides included."
+        ]
+      },
+      {
+        "id": "release",
+        "title": "How do you keep plaster from sticking to the mold?",
+        "paragraphs": [
+          "Mold soap, brushed on: work it into a lather, wipe off the bubbles, and repeat three times. On the model, it depends on what it is made of. On the plaster parting surface, before pouring the second half, it is essential, keys included."
+        ]
+      },
+      {
+        "id": "drying",
+        "title": "How do you dry a plaster mold before casting?",
+        "paragraphs": [
+          "Let the mold dry for several days somewhere warm before using it."
+        ]
+      },
+      {
+        "id": "mistakes",
+        "title": "What mistakes should you avoid?",
+        "list": [
+          "Waiting once the clay is in place: it dries out and the seals stop holding.",
+          "Pouring straight onto the model: pour into a corner.",
+          "Rinsing tools in the sink: plaster clogs drains.",
+          "Forgetting to soap the parting surface three times before the second pour.",
+          "Leaving the tips of the keys on: debris gets trapped on them and the halves no longer fit."
+        ]
+      }
+    ]
   }
 }

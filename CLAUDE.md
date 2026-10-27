@@ -19,8 +19,8 @@ SPA statique hébergée sur GitHub Pages (`base: '/gyp-sum/'`). Aucun backend.
 - Pré-rendu statique **multi-pages via vite-ssg + vue-router** : `src/main.ts`
   exporte `createApp = ViteSSG(App, { routes, base }, …)`. Routes pré-rendues :
   le calculateur `/` (FR), `/en/` (EN), `/es/` (ES), et le guide
-  `/moule-en-platre/` (FR seul, `src/pages/MoldGuidePage.vue`, chargé à la
-  demande) → `dist/<route>/index.html` (`ssgOptions.dirStyle: 'nested'`).
+  `/moule-en-platre/` (FR) / `/en/how-to-make-a-plaster-mold/` (EN)
+  (`src/pages/MoldGuidePage.vue`, chargé à la demande) → `dist/<route>/index.html` (`ssgOptions.dirStyle: 'nested'`).
   Nouvelle locale : route dans `main.ts`, entrée dans `SITE_PAGES` et
   `LOCALE_META` (`src/seo.ts`), `SUPPORTED_LOCALES`, clé `lang.<code>` dans
   toutes les locales, URL dans le `PRECACHE` de `public/sw.js`. `App.vue` n'est qu'un
@@ -65,7 +65,7 @@ src/
 ├── pages/
 │   ├── HomePage.vue        le calculateur (ex-App.vue) + useHead SEO par locale
 │   └── MoldGuidePage.vue   guide « faire un moule en plâtre » (clés `moldGuide.*`,
-│                           fr seul) + JSON-LD Article
+│                           fr et en) + JSON-LD Article
 ├── components/
 │   ├── SiteHeader.vue      logo (lien vers le calculateur de la locale) + sélecteur
 │   │                       de langue du groupe de pages (prop `group`)
@@ -172,8 +172,7 @@ métrique). Toutes les chaînes UI passent
 par `t()` / `$t()`. Pas de texte en dur dans les templates. Clés : `app`, `lang`,
 `meta`, `intro`, `mold`, `object`, `shapes`, `fields`, `mix`, `results`,
 `errors`, `units`, `unitSystem`, `toc`, `howto`, `faq`, `guide`, `yourPlaster`,
-`author`, `footer`, `scene`, `moldGuide` (fr seul : la page n'existe qu'en
-français ; ses liens — sommaire, mode d'emploi, pied de page — n'apparaissent
+`author`, `footer`, `scene`, `moldGuide` (fr et en ; pas en es : ses liens — sommaire, mode d'emploi, pied de page — n'apparaissent
 que si `localePage('moldGuide', locale)` existe). Pour les
 tableaux de messages (steps, faq items), utiliser `tm()` + `rt()`.
 

@@ -49,6 +49,13 @@ export const SITE_PAGES: SitePage[] = [
     published: "2026-10-27",
     lastModified: "2026-10-27",
   },
+  {
+    path: "/en/how-to-make-a-plaster-mold/",
+    locale: "en",
+    group: "moldGuide",
+    published: "2026-10-27",
+    lastModified: "2026-10-27",
+  },
 ];
 
 // Locale whose page is served as x-default.
