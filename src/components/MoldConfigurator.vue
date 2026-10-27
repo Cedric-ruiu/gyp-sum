@@ -221,7 +221,7 @@ function adaptToObject() {
     <div class="mt-3 flex items-center gap-1.5">
       <button
         type="button"
-        class="inline-flex cursor-pointer items-center gap-1.5 rounded border border-line px-3 py-1.5 text-xs font-light text-muted transition-colors duration-150 hover:border-accent hover:bg-accent/5 hover:text-accent disabled:cursor-not-allowed disabled:opacity-35"
+        class="inline-flex min-h-12 cursor-pointer items-center gap-1.5 rounded border border-line px-3 py-1.5 text-xs sm:min-h-0 font-light text-muted transition-colors duration-150 hover:border-accent hover:bg-accent/5 hover:text-accent disabled:cursor-not-allowed disabled:opacity-35"
         :disabled="!canAdapt"
         @click="adaptToObject"
       >
@@ -236,7 +236,7 @@ function adaptToObject() {
         <button
           v-if="!editingMargin"
           type="button"
-          class="p-2 font-mono text-ink underline decoration-dashed underline-offset-2 transition-colors duration-150 hover:text-accent"
+          class="min-h-12 min-w-12 p-2 font-mono text-ink underline sm:min-h-0 sm:min-w-0 decoration-dashed underline-offset-2 transition-colors duration-150 hover:text-accent"
           :title="t('mold.marginEditHint')"
           @click="startEditMargin"
         >{{ adaptMarginDisplay }}</button>
@@ -246,7 +246,7 @@ function adaptToObject() {
           v-model="marginRaw"
           type="text"
           inputmode="decimal"
-          class="w-8 border-b border-ink bg-transparent font-mono text-xs text-ink outline-none text-center"
+          class="w-12 border-b border-ink bg-transparent font-mono text-base text-ink outline-none text-center sm:w-8 sm:text-xs"
           @blur="commitMargin"
           @keydown.enter.prevent="commitMargin"
           @keydown.escape="cancelEdit"

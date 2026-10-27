@@ -63,7 +63,7 @@ onUnmounted(handleClose);
     <button
       ref="buttonRef"
       type="button"
-      class="ml-1 inline-flex h-4 w-4 items-center justify-center border border-line text-[10px] font-light normal-case tracking-normal text-muted hover:text-ink hover:border-ink transition-colors cursor-help"
+      class="relative ml-1 inline-flex h-4 w-4 items-center justify-center border before:absolute before:-inset-4 sm:before:inset-0 border-line text-[10px] font-light normal-case tracking-normal text-muted hover:text-ink hover:border-ink transition-colors cursor-help"
       @mouseenter="handleOpen"
       @mouseleave="handleClose"
       @focus="handleOpen"

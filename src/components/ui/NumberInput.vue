@@ -107,7 +107,7 @@ const isInvalid = computed(() => {
         aria-label="−"
         tabindex="-1"
         :disabled="!canDecrement"
-        class="flex w-9 shrink-0 items-center justify-center border-r border-line text-base font-light text-muted transition-colors duration-150 hover:bg-surface disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:bg-transparent"
+        class="flex min-h-12 w-12 shrink-0 items-center justify-center sm:min-h-0 sm:w-9 border-r border-line text-base font-light text-muted transition-colors duration-150 hover:bg-surface disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:bg-transparent"
         @click="decrement"
       >
         −
@@ -117,7 +117,7 @@ const isInvalid = computed(() => {
         inputmode="decimal"
         :value="display"
         :placeholder="placeholder"
-        class="w-full min-w-0 bg-transparent px-3 py-2 font-mono text-sm font-light tnum text-ink outline-none"
+        class="w-full min-w-0 bg-transparent px-2 py-2 font-mono text-base font-light sm:px-3 sm:text-sm tnum text-ink outline-none"
         @beforeinput="onBeforeInput"
         @input="onInput"
         @blur="onBlur"
@@ -135,7 +135,7 @@ const isInvalid = computed(() => {
         aria-label="+"
         tabindex="-1"
         :disabled="!canIncrement"
-        class="flex w-9 shrink-0 items-center justify-center border-l border-line text-base font-light text-muted transition-colors duration-150 hover:bg-surface disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:bg-transparent"
+        class="flex min-h-12 w-12 shrink-0 items-center justify-center sm:min-h-0 sm:w-9 border-l border-line text-base font-light text-muted transition-colors duration-150 hover:bg-surface disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:bg-transparent"
         @click="increment"
       >
         +

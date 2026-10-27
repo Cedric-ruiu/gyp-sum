@@ -26,7 +26,7 @@ const { t } = useI18n();
     <button
       v-if="noneOption"
       type="button"
-      class="flex items-center gap-1.5 border px-2.5 py-1.5 text-[11px] font-light tracking-wide uppercase transition-colors duration-150 cursor-pointer"
+      class="flex min-h-12 items-center gap-1.5 border px-2.5 py-1.5 text-[11px] sm:min-h-0 font-light tracking-wide uppercase transition-colors duration-150 cursor-pointer"
       :class="
         modelValue === noneOption.value
           ? activeClass
@@ -43,7 +43,7 @@ const { t } = useI18n();
       v-for="shape in shapes"
       :key="shape.type"
       type="button"
-      class="flex items-center gap-1.5 border px-2.5 py-1.5 text-[11px] font-light tracking-wide uppercase transition-colors duration-150 cursor-pointer"
+      class="flex min-h-12 items-center gap-1.5 border px-2.5 py-1.5 text-[11px] sm:min-h-0 font-light tracking-wide uppercase transition-colors duration-150 cursor-pointer"
       :class="
         modelValue === shape.type
           ? activeClass

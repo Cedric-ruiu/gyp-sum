@@ -118,7 +118,8 @@ input[type="number"] {
   }
 }
 
-@container (max-width: 280px) {
+/* One field per row on phones: room for 48px +/- touch targets. */
+@container (max-width: 340px) {
   .fields-grid {
     grid-template-columns: 1fr;
   }
