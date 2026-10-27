@@ -145,10 +145,7 @@
   },
   "footer": {
     "tagline": "Calculadora de la proporción de agua y yeso para moldes. Fórmulas basadas en la densidad del yeso en polvo (2,58 kg/L). No se envía ningún dato: todo se queda en tu navegador.",
-    "createdBy": "Creado por",
-    "authorRole": "ceramista aficionado desde hace casi diez años",
-    "madeBy": "Diseño y desarrollo:",
-    "madeByRole": "desarrollador web freelance",
+    "credit": "Creado por {name}, ceramista aficionado y desarrollador web freelance ({site}).",
     "contribute": "Contribuir",
     "openSource": "Proyecto de código abierto: tus sugerencias y comentarios son bienvenidos.",
     "issues": "Informar de un error o proponer una idea",

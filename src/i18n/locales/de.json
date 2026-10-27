@@ -145,10 +145,7 @@
   },
   "footer": {
     "tagline": "Rechner für das Gips-Wasser-Verhältnis von Gipsformen. Formeln auf Basis der Dichte von Gipspulver (2,58 kg/L). Es werden keine Daten gesendet: Alles bleibt in deinem Browser.",
-    "createdBy": "Erstellt von",
-    "authorRole": "Hobbykeramiker seit fast zehn Jahren",
-    "madeBy": "Konzept und Entwicklung:",
-    "madeByRole": "freiberuflicher Webentwickler",
+    "credit": "Erstellt von {name}, Hobbykeramiker und freiberuflicher Webentwickler ({site}).",
     "contribute": "Mitmachen",
     "openSource": "Open-Source-Projekt: Vorschläge und Rückmeldungen sind willkommen.",
     "issues": "Einen Fehler melden oder eine Idee vorschlagen",

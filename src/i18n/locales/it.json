@@ -145,10 +145,7 @@
   },
   "footer": {
     "tagline": "Calcolatore delle dosi di acqua e gesso per stampi. Formule basate sulla densità del gesso in polvere (2,58 kg/L). Nessun dato viene inviato: tutto resta nel tuo browser.",
-    "createdBy": "Creato da",
-    "authorRole": "ceramista amatoriale da quasi dieci anni",
-    "madeBy": "Progettazione e sviluppo:",
-    "madeByRole": "sviluppatore web freelance",
+    "credit": "Creato da {name}, ceramista amatoriale e sviluppatore web freelance ({site}).",
     "contribute": "Contribuisci",
     "openSource": "Progetto open source: suggerimenti e commenti sono benvenuti.",
     "issues": "Segnala un errore o proponi un'idea",

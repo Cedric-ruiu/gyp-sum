@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed } from "vue";
-import { useI18n } from "vue-i18n";
+import { I18nT, useI18n } from "vue-i18n";
 import { RouterLink } from "vue-router";
 import ContactLink from "@/components/ui/ContactLink.vue";
 import ShareButton from "@/components/ui/ShareButton.vue";
@@ -92,26 +92,14 @@ const linkClass =
         </section>
       </div>
 
-      <div class="mt-10 flex flex-col gap-1 border-t border-line pt-6 text-xs font-light leading-relaxed text-muted lg:flex-row lg:justify-between lg:gap-8">
-        <p>
-          {{ t("footer.createdBy") }}
-          <a
-            :href="AUTHOR_URL"
-            target="_blank"
-            rel="author noopener"
-            class="link"
-          >Cédric Ruiu</a>, {{ t("footer.authorRole") }}.
-        </p>
-        <p>
-          {{ t("footer.madeBy") }}
-          <a
-            :href="AUTHOR_URL"
-            target="_blank"
-            rel="noopener"
-            class="link"
-          >cedric-ruiu.fr</a>, {{ t("footer.madeByRole") }}.
-        </p>
-      </div>
+      <I18nT keypath="footer.credit" tag="p" class="mt-10 border-t border-line pt-6 text-xs font-light leading-relaxed text-muted">
+        <template #name>
+          <a :href="AUTHOR_URL" target="_blank" rel="author noopener" class="link">Cédric Ruiu</a>
+        </template>
+        <template #site>
+          <a :href="AUTHOR_URL" target="_blank" rel="noopener" class="link">cedric-ruiu.fr</a>
+        </template>
+      </I18nT>
     </div>
   </footer>
 </template>

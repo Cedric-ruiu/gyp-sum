@@ -145,10 +145,7 @@
   },
   "footer": {
     "tagline": "Calculadora da proporção de água e gesso para moldes. Fórmulas baseadas na densidade do gesso em pó (2,58 kg/L). Nenhum dado é enviado: tudo fica no seu navegador.",
-    "createdBy": "Criado por",
-    "authorRole": "ceramista amador há quase dez anos",
-    "madeBy": "Concepção e desenvolvimento:",
-    "madeByRole": "desenvolvedor web freelancer",
+    "credit": "Criado por {name}, ceramista amador e desenvolvedor web freelancer ({site}).",
     "contribute": "Contribuir",
     "openSource": "Projeto de código aberto: sugestões e comentários são bem-vindos.",
     "issues": "Relatar um erro ou sugerir uma ideia",

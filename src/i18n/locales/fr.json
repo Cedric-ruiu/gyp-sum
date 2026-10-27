@@ -145,10 +145,7 @@
   },
   "footer": {
     "tagline": "Calculateur de dosage eau / plâtre pour moulage. Formules basées sur la masse volumique du plâtre en poudre (2,58 kg/L). Aucune donnée n'est envoyée — tout reste dans votre navigateur.",
-    "createdBy": "Créé par",
-    "authorRole": "céramiste amateur depuis près de dix ans",
-    "madeBy": "Conception et développement\u00a0:",
-    "madeByRole": "développeur web freelance",
+    "credit": "Créé par {name}, céramiste amateur et développeur web freelance ({site}).",
     "contribute": "Contribuer",
     "openSource": "Projet open source — vos suggestions et retours sont les bienvenus.",
     "issues": "Signaler un bug ou proposer une idée",
