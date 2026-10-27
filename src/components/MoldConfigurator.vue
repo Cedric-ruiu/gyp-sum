@@ -190,9 +190,12 @@ function adaptToObject() {
 
 <template>
   <section class="rounded border border-line bg-blue-50/40 px-5 py-5">
-    <h2 class="mb-4 text-xs font-medium tracking-widest uppercase text-accent flex items-center">
-      {{ t("mold.title") }}<InfoTooltip :text="t('mold.titleTooltip')" />
-    </h2>
+    <div class="mb-4 flex items-center">
+      <h2 class="text-xs font-medium tracking-widest uppercase text-accent">
+        {{ t("mold.title") }}
+      </h2>
+      <InfoTooltip :text="t('mold.titleTooltip')" :label="t('mold.title')" />
+    </div>
 
     <ShapeSelector
       :shapes="moldShapeRegistry"
@@ -255,7 +258,10 @@ function adaptToObject() {
         />
         {{ t(units.labelKey("length")) }}
       </span>
-      <InfoTooltip :text="t('mold.adaptToObjectTooltip')" />
+      <InfoTooltip
+        :text="t('mold.adaptToObjectTooltip')"
+        :label="t('mold.adaptToObject')"
+      />
     </div>
 
     <p class="mt-4 text-xs font-light text-muted">

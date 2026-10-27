@@ -44,9 +44,12 @@ function updateMargin(v: number) {
 
 <template>
   <section class="rounded border border-line px-5 py-5">
-    <h2 class="mb-4 text-xs font-medium tracking-widest uppercase text-muted flex items-center">
-      {{ t("mix.title") }}<InfoTooltip :text="t('mix.titleTooltip')" />
-    </h2>
+    <div class="mb-4 flex items-center">
+      <h2 class="text-xs font-medium tracking-widest uppercase text-muted">
+        {{ t("mix.title") }}
+      </h2>
+      <InfoTooltip :text="t('mix.titleTooltip')" :label="t('mix.title')" />
+    </div>
 
     <SegmentedControl
       v-if="units.switchable.value"
@@ -107,7 +110,7 @@ function updateMargin(v: number) {
       <span class="ml-2 font-mono tnum text-ink">
         {{ modelValue.gypsumDensity }} {{ t("units.kg") }}/{{ t("units.liters") }}
       </span>
-      <InfoTooltip :text="t('mix.densityTooltip')" />
+      <InfoTooltip :text="t('mix.densityTooltip')" :label="t('mix.density')" />
     </div>
   </section>
 </template>

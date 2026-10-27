@@ -9,6 +9,9 @@
     "en": "English",
     "es": "Español"
   },
+  "help": {
+    "label": "Help: {topic}"
+  },
   "meta": {
     "title": "Pottery Plaster Calculator: Plaster to Water Ratio for Molds",
     "description": "How much plaster and water for your mold? Enter the mold and object sizes in cm or inches and your plaster to water ratio to get the exact amounts. Free.",

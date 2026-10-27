@@ -9,6 +9,9 @@
     "en": "English",
     "es": "Español"
   },
+  "help": {
+    "label": "Ayuda: {topic}"
+  },
   "meta": {
     "title": "Proporción yeso agua para moldes: calculadora gratuita — GypSum",
     "description": "¿Qué proporción de agua y yeso necesita tu molde? Introduce las medidas del molde y de la pieza: la calculadora te da el agua y el yeso. Gratis.",

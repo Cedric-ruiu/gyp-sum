@@ -82,7 +82,8 @@ src/
 │   └── ui/
 │       ├── NumberInput.vue  virgule/point acceptés, spinners masqués
 │       ├── ShapeSelector.vue  généré depuis ShapeDefinition[], prop noneOption
-│       ├── InfoTooltip.vue
+│       ├── InfoTooltip.vue  bouton « ? » hors des <h2> (prop `label` → « Aide : … »),
+│       │                    texte rendu dans la page (v-show + aria-describedby)
 │       ├── LanguageSwitcher.vue  un lien par traduction du groupe (RouterLink, hreflang,
 │       │                         aria-current), masqué si la page n'existe qu'en une langue
 │       ├── ContactLink.vue  lien mailto du footer, adresse décodée en onMounted
@@ -169,7 +170,7 @@ accent `#2563EB`, accent-soft `#F59E0B`, accent-soft-strong `#B45309`, danger `#
 Trois locales : `fr` (défaut), `en` (x-default) et `es` (espagnol neutre,
 tutoiement, « yeso » ; « escayola » cité une fois ; structure de `fr.json`,
 métrique). Toutes les chaînes UI passent
-par `t()` / `$t()`. Pas de texte en dur dans les templates. Clés : `app`, `lang`,
+par `t()` / `$t()`. Pas de texte en dur dans les templates. Clés : `app`, `lang`, `help`,
 `meta`, `intro`, `mold`, `object`, `shapes`, `fields`, `mix`, `results`,
 `errors`, `units`, `unitSystem`, `toc`, `howto`, `faq`, `guide`, `yourPlaster`,
 `author`, `footer`, `scene`, `moldGuide` (fr et en ; pas en es : ses liens — sommaire, mode d'emploi, pied de page — n'apparaissent

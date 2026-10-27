@@ -9,6 +9,9 @@
     "en": "English",
     "es": "Español"
   },
+  "help": {
+    "label": "Aide : {topic}"
+  },
   "meta": {
     "title": "Dosage eau / plâtre pour moulage : calculateur gratuit — GypSum",
     "description": "Quelle proportion d'eau et de plâtre pour votre moulage ? Entrez les dimensions du moule et de la pièce : le calculateur donne l'eau et le plâtre. Gratuit.",

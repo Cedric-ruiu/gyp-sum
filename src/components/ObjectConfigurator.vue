@@ -85,9 +85,12 @@ const volume = computed(() => {
 
 <template>
   <section class="rounded border border-line px-5 py-5" style="background: rgba(245,158,11,0.06)">
-    <h2 class="mb-4 text-xs font-medium tracking-widest uppercase text-accent-soft-strong flex items-center">
-      {{ t("object.title") }}<InfoTooltip :text="t('object.titleTooltip')" />
-    </h2>
+    <div class="mb-4 flex items-center">
+      <h2 class="text-xs font-medium tracking-widest uppercase text-accent-soft-strong">
+        {{ t("object.title") }}
+      </h2>
+      <InfoTooltip :text="t('object.titleTooltip')" :label="t('object.title')" />
+    </div>
 
     <ShapeSelector
       :shapes="objectShapeRegistry"
