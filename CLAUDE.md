@@ -17,9 +17,10 @@ SPA statique hébergée sur GitHub Pages (`base: '/gyp-sum/'`). Aucun backend.
   (`tmp/`, `dist/`) sont exclus du lint.
 - `yarn build` = `vue-tsc --noEmit && vite-ssg build`
 - Pré-rendu statique **multi-pages via vite-ssg + vue-router** : `src/main.ts`
-  exporte `createApp = ViteSSG(App, { routes, base }, …)`. Trois routes
-  pré-rendues : `/` (FR), `/en/` (EN) et `/es/` (ES) → `dist/index.html`,
-  `dist/en/index.html`, `dist/es/index.html` (`ssgOptions.dirStyle: 'nested'`).
+  exporte `createApp = ViteSSG(App, { routes, base }, …)`. Routes pré-rendues :
+  le calculateur `/` (FR), `/en/` (EN), `/es/` (ES), et le guide
+  `/moule-en-platre/` (FR seul, `src/pages/MoldGuidePage.vue`, chargé à la
+  demande) → `dist/<route>/index.html` (`ssgOptions.dirStyle: 'nested'`).
   Nouvelle locale : route dans `main.ts`, entrée dans `SITE_PAGES` et
   `LOCALE_META` (`src/seo.ts`), `SUPPORTED_LOCALES`, clé `lang.<code>` dans
   toutes les locales, URL dans le `PRECACHE` de `public/sw.js`. `App.vue` n'est qu'un
@@ -62,7 +63,9 @@ src/
 │   ├── index.ts            createAppI18n() (instance par app, SSG-safe), SUPPORTED_LOCALES = ['fr','en','es']
 │   └── locales/{fr,en,es}.json   toutes les chaînes UI (fr = défaut/x-default)
 ├── pages/
-│   └── HomePage.vue        la page (ex-App.vue) + useHead SEO par locale
+│   ├── HomePage.vue        le calculateur (ex-App.vue) + useHead SEO par locale
+│   └── MoldGuidePage.vue   guide « faire un moule en plâtre » (clés `moldGuide.*`,
+│                           fr seul) + JSON-LD Article
 ├── components/
 │   ├── SiteHeader.vue      logo (lien vers le calculateur de la locale) + sélecteur
 │   │                       de langue (prop `languages`, false sur une page monolingue)
@@ -168,7 +171,9 @@ métrique). Toutes les chaînes UI passent
 par `t()` / `$t()`. Pas de texte en dur dans les templates. Clés : `app`, `lang`,
 `meta`, `intro`, `mold`, `object`, `shapes`, `fields`, `mix`, `results`,
 `errors`, `units`, `unitSystem`, `toc`, `howto`, `faq`, `guide`, `yourPlaster`,
-`author`, `footer`, `scene`. Pour les
+`author`, `footer`, `scene`, `moldGuide` (fr seul : la page n'existe qu'en
+français ; ses liens — sommaire, mode d'emploi, pied de page — n'apparaissent
+que si `localePage('moldGuide', locale)` existe). Pour les
 tableaux de messages (steps, faq items), utiliser `tm()` + `rt()`.
 
 - **Date de modification** : `lastModified` de la page dans `SITE_PAGES`

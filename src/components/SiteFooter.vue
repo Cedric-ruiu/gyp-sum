@@ -1,11 +1,18 @@
 <script setup lang="ts">
+import { computed } from "vue";
 import { useI18n } from "vue-i18n";
+import { RouterLink } from "vue-router";
 import ContactLink from "@/components/ui/ContactLink.vue";
 import ShareButton from "@/components/ui/ShareButton.vue";
 import { usePwaInstall } from "@/composables/usePwaInstall";
-import { AUTHOR_URL } from "@/seo";
+import { AUTHOR_URL, SITE_PAGES } from "@/seo";
 
-const { t } = useI18n();
+const { t, locale } = useI18n();
+
+// Links between the pages of the current locale, when it has several.
+const localePages = computed(() =>
+  SITE_PAGES.filter((p) => p.locale === locale.value),
+);
 
 const { showFooterLink, triggerInstall } = usePwaInstall();
 </script>
@@ -16,6 +23,14 @@ const { showFooterLink, triggerInstall } = usePwaInstall();
       <div class="flex flex-col gap-2">
         <p class="text-xs font-light tracking-widest uppercase text-muted">GypSum</p>
         <p class="text-xs font-light text-muted leading-relaxed max-w-xs">{{ t("footer.tagline") }}</p>
+        <nav v-if="localePages.length > 1" class="flex flex-col">
+          <RouterLink
+            v-for="page in localePages"
+            :key="page.path"
+            :to="page.path"
+            class="inline-flex min-h-12 items-center text-xs font-light text-muted hover:text-ink transition-colors duration-150 sm:min-h-0 sm:py-0.5"
+          >{{ t(`footer.pages.${page.group}`) }}</RouterLink>
+        </nav>
         <p class="mt-1 text-xs font-light text-muted">
           {{ t("footer.createdBy") }}
           <a

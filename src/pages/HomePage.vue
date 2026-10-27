@@ -8,6 +8,7 @@ import {
   ref,
 } from "vue";
 import { useI18n } from "vue-i18n";
+import { RouterLink } from "vue-router";
 import AuthorNote from "@/components/AuthorNote.vue";
 import FaqSection from "@/components/FaqSection.vue";
 import HowToGuide from "@/components/HowToGuide.vue";
@@ -53,13 +54,14 @@ import { useCalculator } from "@/composables/useCalculator";
 import { useLocalStorage } from "@/composables/useLocalStorage";
 import { markEngaged } from "@/composables/usePwaInstall";
 import {
-  AUTHOR_URL,
+  AUTHOR_SCHEMA,
   hreflangLinks,
   LOCALE_META,
+  localePage,
+  OG_IMAGE,
   pageFor,
   pageUrl,
   SITE_PAGES,
-  SITE_URL,
 } from "@/seo";
 import type {
   MixParams,
@@ -71,6 +73,9 @@ import type {
 import { provideUnits } from "@/units";
 
 const { t, tm, rt, locale } = useI18n();
+
+// The mold-making guide exists in French only for now.
+const moldGuidePage = computed(() => localePage("moldGuide", locale.value));
 
 const yourPlasterParagraphs = computed(
   () => tm("yourPlaster.paragraphs") as string[],
@@ -91,7 +96,6 @@ const ratioRows = computed(
 // Per-locale SEO head. Pre-rendered by vite-ssg into each route's HTML and
 // reactive on the client when the locale switches. JSON-LD is built from the
 // same i18n data shown on the page, so schema always matches the visible copy.
-const OG_IMAGE = `${SITE_URL}/og-image.png`;
 
 useHead(() => {
   const page = pageFor("calculator", locale.value);
@@ -118,12 +122,7 @@ useHead(() => {
       price: "0",
       priceCurrency: localeMeta.currency,
     },
-    author: {
-      "@type": "Person",
-      name: "Cédric Ruiu",
-      url: AUTHOR_URL,
-      sameAs: ["https://github.com/Cedric-ruiu"],
-    },
+    author: AUTHOR_SCHEMA,
     dateModified: page.lastModified,
   };
 
@@ -291,6 +290,7 @@ function setUnitSystem(v: string) {
             <a href="#your-plaster" class="hover:text-ink transition-colors duration-150">{{ t("toc.yourPlaster") }}</a>
             <a href="#how-to" class="hover:text-ink transition-colors duration-150">{{ t("toc.howto") }}</a>
             <a href="#faq" class="hover:text-ink transition-colors duration-150">{{ t("toc.faq") }}</a>
+            <RouterLink v-if="moldGuidePage" :to="moldGuidePage.path" class="hover:text-ink transition-colors duration-150">{{ t("toc.moldGuide") }}</RouterLink>
           </nav>
         </div>
 

@@ -1,10 +1,12 @@
 <script setup lang="ts">
 import { onMounted, onUnmounted, ref } from "vue";
 import { useI18n } from "vue-i18n";
+import { useRoute } from "vue-router";
 import { track } from "@/analytics";
-import { pageFor, pageUrl } from "@/seo";
+import { findPage, pageFor, pageUrl } from "@/seo";
 
 const { t, locale } = useI18n();
+const route = useRoute();
 
 // Rendered during pre-render so the footer keeps its final layout (no CLS).
 // Hidden after mount only when neither the native share sheet nor the
@@ -26,7 +28,9 @@ onMounted(() => {
 onUnmounted(() => clearTimeout(copiedTimer));
 
 async function share() {
-  const url = pageUrl(pageFor("calculator", locale.value).path);
+  // Share the page being read; the calculator if the route is unknown.
+  const page = findPage(route.path) ?? pageFor("calculator", locale.value);
+  const url = pageUrl(page.path);
   track("share", { method: useNativeShare.value ? "native" : "copy" });
   if (useNativeShare.value) {
     try {

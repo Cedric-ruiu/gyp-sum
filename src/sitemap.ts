@@ -22,7 +22,9 @@ export function buildSitemap(routePaths: string[]): string {
       alternates,
       `    <lastmod>${page.lastModified}</lastmod>`,
       "  </url>",
-    ].join("\n");
+    ]
+      .filter(Boolean)
+      .join("\n");
   });
 
   return [

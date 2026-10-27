@@ -145,7 +145,11 @@
     "contactCopied": "Adresse copiée",
     "contactSubject": "GypSum — question ou retour",
     "share": "Partager l'outil",
-    "shareCopied": "Lien copié"
+    "shareCopied": "Lien copié",
+    "pages": {
+      "calculator": "Calculateur de plâtre",
+      "moldGuide": "Faire un moule en plâtre"
+    }
   },
   "pwa": {
     "title": "Installer GypSum",
@@ -160,7 +164,8 @@
     "guide": "Proportion eau / plâtre",
     "yourPlaster": "Votre plâtre",
     "howto": "Mode d'emploi",
-    "faq": "Questions fréquentes"
+    "faq": "Questions fréquentes",
+    "moldGuide": "Faire un moule en plâtre"
   },
   "howto": {
     "title": "Comment doser le plâtre pour un moulage",
@@ -186,7 +191,8 @@
         "title": "Mélanger et couler",
         "text": "Versez toujours le plâtre dans l'eau, jamais l'inverse. Laissez détremper sans remuer, puis mélangez et coulez avant le début de prise."
       }
-    ]
+    ],
+    "moldGuideLink": "La suite, du coffrage au démoulage : comment faire un moule en plâtre"
   },
   "author": {
     "title": "Pourquoi cet outil",
@@ -232,5 +238,170 @@
   "scene": {
     "placeholder": "Visualisation 3D — bientôt disponible",
     "ariaLabel": "Aperçu 3D du moule et de la pièce à mouler"
+  },
+  "moldGuide": {
+    "meta": {
+      "title": "Faire un moule en plâtre pour la céramique : les étapes — GypSum",
+      "description": "Faire un moule en plâtre en deux parties pour la céramique : matériel, coffrage, préparation et coulée du plâtre, démoulage, clés et séchage, étape par étape.",
+      "ogTitle": "Faire un moule en plâtre pour la céramique : les étapes",
+      "ogDescription": "Matériel, coffrage, préparation et coulée du plâtre, démoulage, clés et séchage : la méthode pas à pas d'un moule en deux parties."
+    },
+    "h1": "Comment faire un moule en plâtre pour la céramique",
+    "lead": "Un moule en plâtre en deux parties se fait en deux coulées : on noie la moitié du modèle dans la terre, on coffre et on coule ; puis on creuse des encoches d'assemblage, on savonne et on coule la seconde moitié. Voici la méthode que j'emploie, étape par étape, avec le matériel et les temps.",
+    "tocLabel": "Sur cette page",
+    "calculatorCta": "calculez l'eau et le plâtre pour votre moule",
+    "backToCalculator": "Calculer l'eau et le plâtre pour votre moule",
+    "sections": [
+      {
+        "id": "platre",
+        "title": "Quel plâtre utiliser pour faire un moule ?",
+        "paragraphs": [
+          "J'utilise du Molda 3, que j'ai trouvé chez Point P, sur le conseil d'une céramiste professionnelle. Quel que soit votre plâtre, son taux de gâchage est indiqué sur le sac ou la fiche technique : c'est lui qui fixe la proportion d'eau et de plâtre à saisir dans le calculateur."
+        ]
+      },
+      {
+        "id": "materiel",
+        "title": "De quoi a-t-on besoin ?",
+        "table": {
+          "caption": "Le matériel",
+          "cols": ["Matériel", "À quoi il sert"],
+          "rows": [
+            ["Mètre", "Mesurer le modèle et le coffrage"],
+            [
+              "Terre réservée au plâtre",
+              "Noyer la moitié inférieure du modèle, boucher les jours du coffrage"
+            ],
+            ["Planches de coffrage", "Former les parois du moule"],
+            ["2 sangles de serrage", "Serrer le coffrage au plus juste"],
+            [
+              "Savon noir et pinceau",
+              "Savonner le modèle et la surface de dépouille pour que le plâtre ne colle pas"
+            ],
+            ["Plâtre (Molda 3) et eau", "Le mélange, dosé avec le calculateur"],
+            ["Perceuse-visseuse et mélangeur à peinture", "Mélanger le plâtre"],
+            [
+              "Maryse",
+              "Mélanger les très petites quantités, racler le contenant"
+            ],
+            ["Seau de nettoyage", "Rincer les outils, jamais dans l'évier"],
+            [
+              "Estèque métallique",
+              "Nettoyer le coffrage, finir la surface de dépouille"
+            ],
+            ["Rabot à bois", "Aplanir la surface de dépouille"],
+            [
+              "Mèche à chanfreiner",
+              "Creuser les encoches d'assemblage des deux parties"
+            ]
+          ]
+        }
+      },
+      {
+        "id": "coffrage",
+        "title": "Comment préparer le modèle et le coffrage ?",
+        "steps": [
+          "Marquez la ligne de dépouille sur le modèle.",
+          "Comblez les parties concaves si besoin (un pied creux, par exemple).",
+          "Remplissez la moitié inférieure avec de la terre réservée au plâtre. Gardez une pente vers le bas : le plâtre sera raboté ensuite, pour obtenir une surface plane exactement sur la ligne de dépouille.",
+          "Tracez sur la terre, de chaque côté, une ligne à 2,5 cm du modèle, et découpez la terre sur cette ligne : elle définit la taille du coffrage.",
+          "Sur les côtés de la terre, gardez aussi une pente, vers l'intérieur, pour que le coffrage appuie bien sur la ligne de surface.",
+          "Lissez bien la surface de la terre.",
+          "Savonnez le modèle si besoin (cela dépend de sa matière) : faites mousser le savon noir au pinceau, retirez les bulles, et recommencez trois fois.",
+          "Montez le coffrage en planches et cerclez le tout avec les sangles ou un tendeur, le plus ajusté possible.",
+          "Marquez à l'intérieur du coffrage une ligne à 2,5 cm au-dessus du modèle : le plâtre sera coulé jusque-là.",
+          "Comblez les jours avec de petits boudins de terre si nécessaire."
+        ],
+        "note": "Une fois la terre posée, dépêchez-vous de couler : la terre sèche, et les joints ne tiennent plus."
+      },
+      {
+        "id": "preparer",
+        "title": "Comment préparer le plâtre pour le moulage ?",
+        "steps": [
+          "Prenez toutes les mesures (intérieur du coffrage, hauteur jusqu'à la marque, modèle), puis {calculator} : le calculateur donne les quantités, pièce déduite.",
+          "Préparez le seau de nettoyage.",
+          "Versez le plâtre dans l'eau, aux quantités calculées, jamais l'inverse.",
+          "Laissez reposer 2 à 3 minutes sans toucher.",
+          "Mélangez pendant 3 minutes avec le mélangeur à peinture monté sur la perceuse, en vitesse 2. Pour une très petite quantité, mélangez à la maryse, au moins 3 minutes aussi."
+        ],
+        "example": "Exemple : un gros bol de 20 cm de diamètre au bord, 10 cm au pied et 10 cm de haut (forme « tronc de cône »), dans un coffrage carré de 25 × 25 cm coulé jusqu'à 12,5 cm, soit 2,5 cm de marge sur les côtés et au-dessus. Avec un ratio de 1,5 et 10 % de marge de sécurité, le calculateur donne 4,16 L d'eau et 6,24 kg de plâtre. Pour un moule en deux parties, refaites le calcul à chaque coulée, avec les mesures prises une fois le coffrage monté."
+      },
+      {
+        "id": "couler",
+        "title": "Comment couler le plâtre et éviter les bulles ?",
+        "paragraphs": [
+          "À partir de là, vous avez environ 5 minutes avant de couler."
+        ],
+        "steps": [
+          "Faites vibrer le plâtre pour faire remonter les bulles.",
+          "Retirez les bulles en surface.",
+          "Remuez une dernière fois pour obtenir un mélange homogène.",
+          "Versez le plâtre à partir d'un coin du coffrage, jamais directement sur le modèle.",
+          "Raclez bien tout le contenant avec la maryse.",
+          "Tapotez la surface du plâtre du dessus de la main pour l'égaliser.",
+          "Nettoyez immédiatement les outils dans le seau de nettoyage. Rien dans l'évier : les canalisations se boucheraient."
+        ]
+      },
+      {
+        "id": "demouler",
+        "title": "Combien de temps attendre avant de démouler ?",
+        "paragraphs": [
+          "Le bon moment se lit sur le plâtre lui-même. Dès qu'il durcit, avant qu'il ne chauffe, retirez le coffrage et nettoyez-le à l'estèque. Dès qu'il commence à chauffer, vous pouvez démouler et passer aux finitions. Retirez la terre et emballez-la pour qu'elle ne sèche pas."
+        ],
+        "table": {
+          "caption": "Les temps, de la gâchée au séchage",
+          "cols": ["Étape", "Durée ou repère"],
+          "rows": [
+            ["Repos du plâtre dans l'eau, sans toucher", "2 à 3 minutes"],
+            ["Mélange", "3 minutes"],
+            ["Vibrer, retirer les bulles, couler", "environ 5 minutes"],
+            [
+              "Retrait du coffrage",
+              "dès que le plâtre durcit, avant qu'il ne chauffe"
+            ],
+            ["Démoulage et finitions", "dès que le plâtre commence à chauffer"],
+            ["Séchage du moule terminé", "plusieurs jours au chaud"]
+          ]
+        }
+      },
+      {
+        "id": "deux-parties",
+        "title": "Comment faire un moule en plâtre en deux parties ?",
+        "steps": [
+          "Passez le rabot sur la surface de dépouille pour qu'elle soit la plus plane possible, et finissez à l'estèque.",
+          "Faites des chanfreins sur la partie inférieure du moule, mais pas sur les côtés.",
+          "Sur la surface de dépouille, creusez une encoche dans chaque coin avec la mèche à chanfreiner montée sur la visseuse, et deux encoches dans l'un des coins : vous serez sûr du sens d'assemblage.",
+          "Nettoyez le tout, moule et modèle.",
+          "Refaites toutes les étapes du premier coulage : coffrage, marque à 2,5 cm, savonnage, coulée. Seule différence : savonnez absolument trois fois la surface de dépouille en plâtre, encoches comprises.",
+          "Le démoulage peut être plus difficile, surtout à cause d'un effet de succion : tapotez, retournez, essayez de séparer les deux parties.",
+          "Une fois le moule ouvert, cassez la pointe des tenons, pour ne pas être gêné par un corps étranger qui se glisserait dedans.",
+          "Vous pouvez maintenant chanfreiner toutes les arêtes du moule assemblé, côtés compris."
+        ]
+      },
+      {
+        "id": "decollage",
+        "title": "Comment faire pour que le plâtre ne colle pas au moule ?",
+        "paragraphs": [
+          "Au savon noir, passé au pinceau : faites-le mousser, retirez les bulles, et recommencez trois fois. Sur le modèle, cela dépend de sa matière. Sur la surface de dépouille en plâtre, avant de couler la seconde partie, c'est indispensable, encoches comprises."
+        ]
+      },
+      {
+        "id": "sechage",
+        "title": "Comment sécher le moule avant le coulage ?",
+        "paragraphs": [
+          "Laissez sécher le moule plusieurs jours au chaud avant de vous en servir."
+        ]
+      },
+      {
+        "id": "erreurs",
+        "title": "Quelles erreurs éviter ?",
+        "list": [
+          "Attendre une fois la terre posée : elle sèche, et les joints ne tiennent plus.",
+          "Verser le plâtre directement sur le modèle : versez à partir d'un coin.",
+          "Rincer les outils dans l'évier : les canalisations se bouchent.",
+          "Oublier de savonner trois fois la surface de dépouille avant la seconde coulée.",
+          "Garder la pointe des tenons : un corps étranger peut s'y glisser et gêner l'assemblage."
+        ]
+      }
+    ]
   }
 }
