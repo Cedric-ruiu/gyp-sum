@@ -16,6 +16,7 @@ const PRECACHE = [
   BASE,
   `${BASE}en/`,
   `${BASE}es/`,
+  `${BASE}pt/`,
   `${BASE}it/`,
   `${BASE}de/`,
   `${BASE}site.webmanifest`,
