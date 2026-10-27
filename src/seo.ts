@@ -58,8 +58,12 @@ export const SITE_PAGES: SitePage[] = [
   },
 ];
 
-// Locale whose page is served as x-default.
+// Fallback locale when a page group has no version in the requested one.
 const DEFAULT_LOCALE = "fr";
+// Locale served as x-default (visitors whose language has no version): the
+// English page reaches an international audience. Falls back to
+// DEFAULT_LOCALE when the group has no English page.
+const X_DEFAULT_LOCALE = "en";
 
 // Per-locale values of the SEO head (html lang, JSON-LD, Open Graph).
 export const LOCALE_META: Record<
@@ -106,7 +110,9 @@ export function hreflangLinks(page: SitePage) {
     hreflang: p.locale,
     href: pageUrl(p.path),
   }));
-  const fallback = siblings.find((p) => p.locale === DEFAULT_LOCALE);
+  const fallback =
+    siblings.find((p) => p.locale === X_DEFAULT_LOCALE) ??
+    siblings.find((p) => p.locale === DEFAULT_LOCALE);
   if (fallback)
     links.push({ hreflang: "x-default", href: pageUrl(fallback.path) });
   return links;

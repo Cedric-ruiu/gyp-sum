@@ -61,7 +61,7 @@ src/
 │   └── useThreeScene.ts    init/updateMold/updateObject/destroy (Three.js)
 ├── i18n/
 │   ├── index.ts            createAppI18n() (instance par app, SSG-safe), SUPPORTED_LOCALES = ['fr','en','es']
-│   └── locales/{fr,en,es}.json   toutes les chaînes UI (fr = défaut/x-default)
+│   └── locales/{fr,en,es}.json   toutes les chaînes UI (fr = défaut, en = x-default)
 ├── pages/
 │   ├── HomePage.vue        le calculateur (ex-App.vue) + useHead SEO par locale
 │   └── MoldGuidePage.vue   guide « faire un moule en plâtre » (clés `moldGuide.*`,
@@ -166,7 +166,7 @@ accent `#2563EB`, accent-soft `#F59E0B`, accent-soft-strong `#B45309`, danger `#
 
 ## i18n
 
-Trois locales : `fr` (défaut + x-default), `en` et `es` (espagnol neutre,
+Trois locales : `fr` (défaut), `en` (x-default) et `es` (espagnol neutre,
 tutoiement, « yeso » ; « escayola » cité une fois ; structure de `fr.json`,
 métrique). Toutes les chaînes UI passent
 par `t()` / `$t()`. Pas de texte en dur dans les templates. Clés : `app`, `lang`,
@@ -182,7 +182,7 @@ tableaux de messages (steps, faq items), utiliser `tm()` + `rt()`.
   du style.
 - `meta.*` alimente le `<head>` par locale. Le `<head>` est généré par `useHead`
   dans `HomePage.vue` : title/description/keywords, canonical, hreflang
-  réciproques (fr/en/es/x-default, FR = x-default ; `hreflangLinks()` de
+  réciproques (fr/en/es/x-default, EN = x-default, FR à défaut ; `hreflangLinks()` de
   `src/seo.ts`, même source que le sitemap), og/twitter, et les JSON-LD
   WebApplication/HowTo/FAQPage **construits depuis les mêmes clés i18n que le
   visible** (invariant schema == visible). `index.html` ne contient plus aucune
