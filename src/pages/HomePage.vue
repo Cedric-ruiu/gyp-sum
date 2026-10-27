@@ -47,6 +47,7 @@ onUnmounted(() => {
   sceneObserver = null;
 });
 
+import { track } from "@/analytics";
 import { useCalculator } from "@/composables/useCalculator";
 import { useLocalStorage } from "@/composables/useLocalStorage";
 import { usePwaInstall } from "@/composables/usePwaInstall";
@@ -181,24 +182,35 @@ const defaults: PersistedState = {
 
 const state = useLocalStorage<PersistedState>("plaster-calc-state", defaults);
 
+// Every visitor edit goes through these setters; the localStorage restore
+// writes `state` directly, so it is never counted as a use. One event per
+// page load, on the first value that actually changes (a blur re-emits the
+// same value).
+let calculatorUseTracked = false;
+function updateState(patch: Partial<PersistedState>) {
+  const next = { ...state.value, ...patch };
+  if (
+    !calculatorUseTracked &&
+    JSON.stringify(next) !== JSON.stringify(state.value)
+  ) {
+    calculatorUseTracked = true;
+    track("calculator-use", { lang: locale.value });
+  }
+  state.value = next;
+}
+
 const mold = computed({
   get: () => state.value.mold,
-  set: (v) => {
-    state.value = { ...state.value, mold: v };
-  },
+  set: (v) => updateState({ mold: v }),
 });
 const object = computed({
   get: () => state.value.object,
-  set: (v) => {
-    state.value = { ...state.value, object: v };
-  },
+  set: (v) => updateState({ object: v }),
 });
 
 const mix = computed<MixParams>({
   get: () => ({ ...state.value.mix, gypsumDensity: 2.58 }),
-  set: (v) => {
-    state.value = { ...state.value, mix: { ratio: v.ratio, margin: v.margin } };
-  },
+  set: (v) => updateState({ mix: { ratio: v.ratio, margin: v.margin } }),
 });
 
 const result = useCalculator(mold, object, mix);

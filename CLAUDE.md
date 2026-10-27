@@ -71,8 +71,21 @@ src/
 │       ├── ContactLink.vue  lien mailto du footer, adresse décodée en onMounted
 │       └── ShareButton.vue  partage natif (mobile) / copie du lien (desktop)
 ├── seo.ts                  URLs canoniques (SITE_URL, FR_URL, EN_URL)
+├── analytics.ts            track() : événements Umami, no-op si le script est absent
 └── App.vue                 shell racine : <RouterView/> uniquement
 ```
+
+## Mesure (Umami)
+
+Script `stats.cedric-ruiu.fr/m.js` dans `index.html` (envoi vers le même hôte,
+autorisé par la CSP `connect-src`). Événements : `calculator-use` (`lang`), une
+fois par chargement, à la première valeur réellement modifiée par le visiteur
+(setters de `HomePage.vue` ; la restauration du localStorage n'est pas comptée),
+`contact-email` (`method` : mailto / copy), `share` (`method` : native / copy),
+`pwa-install` (`outcome`), `github-repo`, `github-issues`. Liens simples :
+attribut `data-umami-event` ; tout élément qui a déjà un gestionnaire de clic :
+`track()` de `src/analytics.ts` dans ce gestionnaire (le traceur intercepte le
+clic des éléments porteurs de l'attribut).
 
 L'adresse email n'apparaît jamais en clair (ni HTML pré-rendu, ni bundle JS) :
 elle est stockée en base64 dans `ContactLink.vue` et décodée après montage.
