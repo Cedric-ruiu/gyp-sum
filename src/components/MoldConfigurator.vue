@@ -27,7 +27,7 @@ const adaptMarginShown = computed(() =>
   units.toInput("length", adaptMargin.value),
 );
 const adaptMarginDisplay = computed(() =>
-  n(adaptMarginShown.value, { maximumFractionDigits: 2 }),
+  n(adaptMarginShown.value, { maximumFractionDigits: 1 }),
 );
 
 function startEditMargin() {
