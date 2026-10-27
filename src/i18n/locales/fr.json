@@ -15,7 +15,7 @@
     "ogTitle": "Dosage eau / plâtre pour moulage : calculateur gratuit",
     "ogDescription": "Quelle proportion d'eau et de plâtre pour votre moulage ? Entrez les dimensions du moule et de la pièce : le calculateur donne l'eau et le plâtre.",
     "twitterDescription": "Quelle proportion d'eau et de plâtre pour votre moulage ? Le calculateur donne l'eau et le plâtre, pièce déduite.",
-    "schemaApp": "Calculateur de dosage eau / plâtre pour le moulage (céramique, poterie, sculpture), basé sur la masse volumique du gypse (2,58 kg/L)."
+    "schemaApp": "Calculateur de dosage eau / plâtre pour le moulage (céramique, poterie, sculpture), basé sur la masse volumique du plâtre en poudre (2,58 kg/L)."
   },
   "intro": {
     "h1": "Dosage eau et plâtre pour un moulage : le calculateur",
@@ -66,8 +66,8 @@
     "ratioHint": "kg de plâtre par litre d'eau",
     "ratioScale": "fin ← 1.3 — 1.5 — 1.8 → dur",
     "margin": "Marge de sécurité",
-    "density": "Masse volumique du gypse",
-    "densityTooltip": "Constante physique du sulfate de calcium (CaSO₄·2H₂O). Identique quel que soit le type de plâtre utilisé."
+    "density": "Masse volumique du plâtre en poudre",
+    "densityTooltip": "Masse volumique du plâtre en poudre (semi-hydrate de sulfate de calcium, CaSO₄·½H₂O), qui sert à calculer le volume occupé par les grains. Elle varie un peu d'un plâtre à l'autre ; l'effet sur les quantités reste inférieur à la marge de sécurité par défaut."
   },
   "results": {
     "title": "Résultats",
@@ -92,7 +92,7 @@
     "answer": "Pour un moulage, la proportion courante est de 1,5 kg de plâtre pour 1 litre d'eau, soit environ 0,67 L d'eau par kilo de plâtre. Descendez à 1,3 pour un plâtre fluide qui prend les détails, montez à 1,8 pour un moule dur. Si le fabricant indique un taux de gâchage, c'est lui qui prime.",
     "pourOrder": "Toujours verser le plâtre dans l'eau, jamais l'inverse.",
     "immersion": "Pour mesurer le volume d'une pièce irrégulière, plongez-la dans un récipient gradué et notez la montée d'eau.",
-    "physics": "Le calculateur repose sur la physique du mélange : quand on combine eau et plâtre, le volume final est la somme du volume d'eau et du volume occupé par les grains de plâtre (masse volumique du gypse : 2,58 kg/L). Cette approche est plus précise qu'un simple ratio volumique.",
+    "physics": "Le calculateur repose sur la physique du mélange : quand on combine eau et plâtre, le volume final est la somme du volume d'eau et du volume occupé par les grains de plâtre (masse volumique du plâtre en poudre : 2,58 kg/L). Cette approche est plus précise qu'un simple ratio volumique.",
     "formula": "Formule : Eau = Volume net ÷ (1 + Ratio ÷ 2.58)",
     "ratioTable": {
       "caption": "Ratios plâtre / eau courants",
@@ -129,7 +129,7 @@
     ]
   },
   "footer": {
-    "tagline": "Calculateur de dosage eau / plâtre pour moulage. Formules basées sur la masse volumique du gypse (2,58 kg/L). Aucune donnée n'est envoyée — tout reste dans votre navigateur.",
+    "tagline": "Calculateur de dosage eau / plâtre pour moulage. Formules basées sur la masse volumique du plâtre en poudre (2,58 kg/L). Aucune donnée n'est envoyée — tout reste dans votre navigateur.",
     "createdBy": "Créé par",
     "authorRole": "céramiste et bidouilleur",
     "madeBy": "Conception et développement :",
@@ -208,7 +208,7 @@
       },
       {
         "q": "Quelle est la masse volumique du plâtre ?",
-        "a": "Le calcul repose sur la masse volumique du gypse (sulfate de calcium) : 2,58 kg/L. C'est une constante physique, identique quel que soit le type de plâtre (plâtre de Paris, plâtre céramique, etc.). Elle permet un dosage plus précis qu'un simple ratio volumique."
+        "a": "Le calcul utilise la masse volumique du plâtre en poudre (semi-hydrate de sulfate de calcium, CaSO₄·½H₂O) : 2,58 kg/L. Elle varie un peu selon le type de plâtre ; l'effet sur les quantités calculées reste inférieur à la marge de sécurité par défaut. Elle permet un dosage plus précis qu'un simple ratio volumique."
       },
       {
         "q": "Comment mesurer le volume d'une pièce de forme irrégulière ?",

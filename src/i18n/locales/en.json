@@ -15,7 +15,7 @@
     "ogTitle": "Pottery Plaster Calculator: Plaster to Water Ratio for Molds",
     "ogDescription": "How much plaster and water for your mold? Enter the mold and object sizes and your plaster to water ratio to get the exact amounts.",
     "twitterDescription": "How much plaster and water for your mold? Enter its size and your ratio: the calculator does the rest.",
-    "schemaApp": "Plaster calculator for mold making (ceramics, pottery, sculpture), based on the density of gypsum (2.58 kg/L)."
+    "schemaApp": "Plaster calculator for mold making (ceramics, pottery, sculpture), based on the density of powdered plaster (2.58 kg/L)."
   },
   "intro": {
     "h1": "Pottery Plaster Calculator for Molds — Plaster to Water Ratio",
@@ -74,8 +74,8 @@
     "equivalentConsistency": "= consistency {value}",
     "equivalentRatio": "= {value} kg of plaster per liter of water",
     "margin": "Safety margin",
-    "density": "Gypsum density",
-    "densityTooltip": "Physical constant of calcium sulfate (CaSO₄·2H₂O). Identical whatever type of plaster you use."
+    "density": "Powdered plaster density",
+    "densityTooltip": "Density of powdered plaster (calcium sulfate hemihydrate, CaSO₄·½H₂O), used to work out the volume taken up by the plaster grains. It varies slightly from one plaster to another; the effect on the amounts stays below the default safety margin."
   },
   "results": {
     "title": "Results",
@@ -110,7 +110,7 @@
     "answer": "For molds, the usual ratio is 1.5 kg of plaster per liter of water: a consistency of about 67, or 0.67 water-to-plaster by weight. Go down to 1.3 (consistency 77) for a fluid, detailed cast, up to 1.8 (consistency 56) for a hard mold. If the manufacturer gives a consistency, use theirs.",
     "pourOrder": "Always add plaster to water, never the reverse.",
     "immersion": "To measure the volume of an irregular piece, dip it into a graduated container and read the rise in water level.",
-    "physics": "The calculator is based on the physics of the mix: when you combine water and plaster, the final volume is the sum of the water volume and the volume taken up by the plaster grains (gypsum density: 2.58 kg/L). This is more accurate than a simple volume ratio.",
+    "physics": "The calculator is based on the physics of the mix: when you combine water and plaster, the final volume is the sum of the water volume and the volume taken up by the plaster grains (powdered plaster density: 2.58 kg/L). This is more accurate than a simple volume ratio.",
     "formula": "Formula: Water = Net volume ÷ (1 + Ratio ÷ 2.58)",
     "ratioTable": {
       "caption": "Common plaster-to-water ratios",
@@ -153,7 +153,7 @@
     ]
   },
   "footer": {
-    "tagline": "Water / plaster calculator for mold making. Formulas based on the density of gypsum (2.58 kg/L). No data is sent — everything stays in your browser.",
+    "tagline": "Water / plaster calculator for mold making. Formulas based on the density of powdered plaster (2.58 kg/L). No data is sent — everything stays in your browser.",
     "createdBy": "Created by",
     "authorRole": "potter and DIY maker",
     "madeBy": "Design & development:",
@@ -236,7 +236,7 @@
       },
       {
         "q": "What is the density of plaster (Plaster of Paris)?",
-        "a": "The calculation is based on the density of gypsum (calcium sulfate): 2.58 kg/L. It is a physical constant, the same whatever the type of plaster (Plaster of Paris, pottery plaster, etc.). It allows more accurate dosing than a simple volume ratio."
+        "a": "The calculation uses the density of powdered plaster (calcium sulfate hemihydrate, CaSO₄·½H₂O): 2.58 kg/L. It varies slightly between plasters (plaster of Paris, pottery plaster, etc.); the effect on the calculated amounts stays below the default safety margin. It allows more accurate dosing than a simple volume ratio."
       },
       {
         "q": "How do I measure the volume of an irregular object?",
@@ -252,7 +252,7 @@
       },
       {
         "q": "Can I measure plaster by volume instead of by weight?",
-        "a": "You can, but it is less accurate: measuring by volume (scoops, cups) ignores the plaster's real density. This calculator works by mass from the density of gypsum (2.58 kg/L) and gives the exact plaster weight and water volume to fill your mold, with no shortfall or waste."
+        "a": "You can, but it is less accurate: measuring by volume (scoops, cups) ignores the plaster's real density. This calculator works by mass from the density of powdered plaster (2.58 kg/L) and gives the exact plaster weight and water volume to fill your mold, with no shortfall or waste."
       }
     ]
   },
