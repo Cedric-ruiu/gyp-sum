@@ -33,7 +33,7 @@ const links = SUPPORTED_LOCALES.flatMap((code) => {
       :hreflang="link.code"
       :aria-label="t(`lang.${link.code}`)"
       :aria-current="locale === link.code ? 'true' : undefined"
-      class="px-2.5 py-1 uppercase tracking-wide transition-colors duration-150"
+      class="px-2 py-1 uppercase sm:px-2.5 tracking-wide transition-colors duration-150"
       :class="[
         i > 0 ? 'border-l border-line' : '',
         locale === link.code ? 'text-ink' : 'text-muted hover:text-ink',
