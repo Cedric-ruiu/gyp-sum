@@ -64,6 +64,9 @@ src/
 ├── pages/
 │   └── HomePage.vue        la page (ex-App.vue) + useHead SEO par locale
 ├── components/
+│   ├── SiteHeader.vue      logo (lien vers le calculateur de la locale) + sélecteur
+│   │                       de langue (prop `languages`, false sur une page monolingue)
+│   ├── SiteFooter.vue      pied de page commun (auteur, contact, partage, GitHub, PWA)
 │   ├── MoldConfigurator.vue
 │   ├── ObjectConfigurator.vue  (toggle saisie directe de volume)
 │   ├── MixParameters.vue

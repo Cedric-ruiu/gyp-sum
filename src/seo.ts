@@ -1,6 +1,7 @@
 // Canonical public URLs and pre-rendered pages, shared by the SEO head, the
 // sitemap, the language switcher and the share button.
 export const SITE_URL = "https://cedric-ruiu.github.io/gyp-sum";
+export const AUTHOR_URL = "https://cedric-ruiu.fr";
 
 export interface SitePage {
   // Route path, as declared in the router (relative to the `/gyp-sum/` base).
