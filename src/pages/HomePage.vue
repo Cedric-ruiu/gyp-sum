@@ -52,7 +52,7 @@ onUnmounted(() => {
 import { track } from "@/analytics";
 import { useCalculator } from "@/composables/useCalculator";
 import { useLocalStorage } from "@/composables/useLocalStorage";
-import { usePwaInstall } from "@/composables/usePwaInstall";
+import { markEngaged, usePwaInstall } from "@/composables/usePwaInstall";
 import { EN_URL, FR_URL, SITE_URL } from "@/seo";
 import type {
   MixParams,
@@ -210,6 +210,7 @@ function updateState(patch: Partial<PersistedState>) {
   ) {
     calculatorUseTracked = true;
     track("calculator-use", { lang: locale.value });
+    markEngaged();
   }
   state.value = next;
 }
