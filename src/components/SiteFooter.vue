@@ -16,10 +16,10 @@ const localePages = computed(() =>
 
 const { showFooterLink, triggerInstall } = usePwaInstall();
 
-// Shared by every footer link: a 48px touch target on mobile, compact rows
-// from sm up. Negative margins on the lists keep text rhythm unchanged.
+// Shared by every footer link: compact 32px rows (above the 24px WCAG
+// minimum). Negative margins on the lists keep text rhythm unchanged.
 const linkClass =
-  "link inline-flex min-h-12 items-center gap-2 text-left text-sm font-light sm:min-h-8 sm:text-xs";
+  "link inline-flex min-h-8 items-center gap-2 text-left text-sm font-light sm:text-xs";
 </script>
 
 <template>
@@ -30,7 +30,7 @@ const linkClass =
           <p class="text-xs font-light tracking-widest uppercase text-muted">GypSum</p>
           <p class="max-w-sm text-sm font-light leading-relaxed text-muted sm:text-xs">{{ t("footer.tagline") }}</p>
           <nav v-if="localePages.length > 1">
-            <ul class="-my-2 flex flex-col sm:my-0">
+            <ul class="-my-1.5 flex flex-col">
               <li v-for="page in localePages" :key="page.path">
                 <RouterLink :to="page.path" :class="linkClass">{{ t(`footer.pages.${page.group}`) }}</RouterLink>
               </li>
@@ -41,7 +41,7 @@ const linkClass =
         <section class="flex flex-col gap-3">
           <p class="text-xs font-light tracking-widest uppercase text-muted">{{ t("footer.contactTitle") }}</p>
           <p class="max-w-sm text-sm font-light leading-relaxed text-muted sm:text-xs">{{ t("footer.contactText") }}</p>
-          <ul class="-my-2 flex flex-col sm:my-0">
+          <ul class="-my-1.5 flex flex-col">
             <li><ContactLink /></li>
             <li><ShareButton /></li>
           </ul>
@@ -50,7 +50,7 @@ const linkClass =
         <section class="flex flex-col gap-3">
           <p class="text-xs font-light tracking-widest uppercase text-muted">{{ t("footer.contribute") }}</p>
           <p class="max-w-sm text-sm font-light leading-relaxed text-muted sm:text-xs">{{ t("footer.openSource") }}</p>
-          <ul class="-my-2 flex flex-col sm:my-0">
+          <ul class="-my-1.5 flex flex-col">
             <li>
               <a
                 href="https://github.com/Cedric-ruiu/gyp-sum"
