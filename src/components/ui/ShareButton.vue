@@ -2,7 +2,7 @@
 import { onMounted, onUnmounted, ref } from "vue";
 import { useI18n } from "vue-i18n";
 import { track } from "@/analytics";
-import { EN_URL, FR_URL } from "@/seo";
+import { pageFor, pageUrl } from "@/seo";
 
 const { t, locale } = useI18n();
 
@@ -26,7 +26,7 @@ onMounted(() => {
 onUnmounted(() => clearTimeout(copiedTimer));
 
 async function share() {
-  const url = locale.value === "en" ? EN_URL : FR_URL;
+  const url = pageUrl(pageFor("calculator", locale.value).path);
   track("share", { method: useNativeShare.value ? "native" : "copy" });
   if (useNativeShare.value) {
     try {

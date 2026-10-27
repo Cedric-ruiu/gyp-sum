@@ -1,7 +1,6 @@
-// Canonical public URLs, shared by the SEO head and the share button.
+// Canonical public URLs and pre-rendered pages, shared by the SEO head, the
+// sitemap, the language switcher and the share button.
 export const SITE_URL = "https://cedric-ruiu.github.io/gyp-sum";
-export const FR_URL = `${SITE_URL}/`;
-export const EN_URL = `${SITE_URL}/en/`;
 
 export interface SitePage {
   // Route path, as declared in the router (relative to the `/gyp-sum/` base).
@@ -29,6 +28,25 @@ export const SITE_PAGES: SitePage[] = [
 
 // Locale whose page is served as x-default.
 const DEFAULT_LOCALE = "fr";
+
+// Per-locale values of the SEO head (html lang, JSON-LD, Open Graph).
+export const LOCALE_META: Record<
+  string,
+  { inLanguage: string; ogLocale: string; currency: string }
+> = {
+  fr: { inLanguage: "fr-FR", ogLocale: "fr_FR", currency: "EUR" },
+  en: { inLanguage: "en-US", ogLocale: "en_US", currency: "USD" },
+};
+
+// Page of `group` in `locale`, falling back to the default locale's page.
+export function pageFor(group: string, locale: string): SitePage {
+  const pages = SITE_PAGES.filter((p) => p.group === group);
+  const page =
+    pages.find((p) => p.locale === locale) ??
+    pages.find((p) => p.locale === DEFAULT_LOCALE);
+  if (!page) throw new Error(`[seo] no page for group "${group}"`);
+  return page;
+}
 
 export function pageUrl(path: string): string {
   return `${SITE_URL}${path}`;

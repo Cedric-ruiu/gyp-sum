@@ -74,12 +74,14 @@ src/
 │       ├── NumberInput.vue  virgule/point acceptés, spinners masqués
 │       ├── ShapeSelector.vue  généré depuis ShapeDefinition[], prop noneOption
 │       ├── InfoTooltip.vue
-│       ├── LanguageSwitcher.vue  liens FR/EN (RouterLink, hreflang, aria-current)
+│       ├── LanguageSwitcher.vue  un lien par locale (RouterLink, hreflang, aria-current)
 │       ├── ContactLink.vue  lien mailto du footer, adresse décodée en onMounted
 │       ├── ShareButton.vue  partage natif (mobile) / copie du lien (desktop)
 │       └── SegmentedControl.vue  choix exclusif (unités, saisie du ratio)
-├── seo.ts                  URLs canoniques (SITE_URL, FR_URL, EN_URL), SITE_PAGES
-│                           (route, locale, groupe hreflang, lastModified)
+├── seo.ts                  SITE_URL, SITE_PAGES (route, locale, groupe hreflang,
+│                           lastModified), LOCALE_META (lang, og:locale, devise),
+│                           pageFor() : source du head, du sitemap, du sélecteur
+│                           de langue et du partage
 ├── sitemap.ts              buildSitemap() : sitemap.xml au build (vite.config.ts)
 ├── units.ts                conversions d'affichage métrique ↔ US (provide/inject)
 ├── analytics.ts            track() : événements Umami, no-op si le script est absent

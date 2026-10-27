@@ -53,7 +53,14 @@ import { track } from "@/analytics";
 import { useCalculator } from "@/composables/useCalculator";
 import { useLocalStorage } from "@/composables/useLocalStorage";
 import { markEngaged, usePwaInstall } from "@/composables/usePwaInstall";
-import { hreflangLinks, pageUrl, SITE_PAGES, SITE_URL } from "@/seo";
+import {
+  hreflangLinks,
+  LOCALE_META,
+  pageFor,
+  pageUrl,
+  SITE_PAGES,
+  SITE_URL,
+} from "@/seo";
 import type {
   MixParams,
   PersistedState,
@@ -90,13 +97,13 @@ const OG_IMAGE = `${SITE_URL}/og-image.png`;
 const AUTHOR_URL = "https://cedric-ruiu.fr";
 
 useHead(() => {
-  const isEn = locale.value === "en";
-  const page =
-    SITE_PAGES.find(
-      (p) => p.group === "calculator" && p.locale === locale.value,
-    ) ?? SITE_PAGES[0];
+  const page = pageFor("calculator", locale.value);
+  const localeMeta = LOCALE_META[page.locale];
   const canonical = pageUrl(page.path);
-  const inLanguage = isEn ? "en-US" : "fr-FR";
+  const inLanguage = localeMeta.inLanguage;
+  const alternateOgLocales = SITE_PAGES.filter(
+    (p) => p.group === page.group && p.locale !== page.locale,
+  ).map((p) => LOCALE_META[p.locale].ogLocale);
 
   const appSchema = {
     "@context": "https://schema.org",
@@ -112,7 +119,7 @@ useHead(() => {
     offers: {
       "@type": "Offer",
       price: "0",
-      priceCurrency: isEn ? "USD" : "EUR",
+      priceCurrency: localeMeta.currency,
     },
     author: {
       "@type": "Person",
@@ -151,15 +158,18 @@ useHead(() => {
   };
 
   return {
-    htmlAttrs: { lang: isEn ? "en" : "fr" },
+    htmlAttrs: { lang: page.locale },
     title: t("meta.title"),
     meta: [
       { name: "description", content: t("meta.description") },
       { name: "keywords", content: t("meta.keywords") },
       { property: "og:type", content: "website" },
       { property: "og:site_name", content: "GypSum" },
-      { property: "og:locale", content: isEn ? "en_US" : "fr_FR" },
-      { property: "og:locale:alternate", content: isEn ? "fr_FR" : "en_US" },
+      { property: "og:locale", content: localeMeta.ogLocale },
+      ...alternateOgLocales.map((content) => ({
+        property: "og:locale:alternate",
+        content,
+      })),
       { property: "og:title", content: t("meta.ogTitle") },
       { property: "og:description", content: t("meta.ogDescription") },
       { property: "og:url", content: canonical },
