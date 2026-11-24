@@ -30,10 +30,11 @@ const adaptMarginDisplay = computed(() =>
   n(adaptMarginShown.value, { maximumFractionDigits: 1 }),
 );
 
-function startEditMargin() {
+async function startEditMargin() {
   marginRaw.value = String(adaptMarginShown.value);
   editingMargin.value = true;
-  nextTick(() => marginInputEl.value?.select());
+  await nextTick();
+  marginInputEl.value?.select();
 }
 
 function commitMargin() {
