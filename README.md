@@ -51,16 +51,16 @@ Dimensions are entered in centimeters and results are displayed in liters and ki
 
 ## Tech stack
 
-| Layer | Technology |
-|---|---|
+| Layer     | Technology                                 |
+| --------- | ------------------------------------------ |
 | Framework | Vue 3 — Composition API + `<script setup>` |
-| Build | Vite 8 |
-| Language | TypeScript 6 |
-| Styling | Tailwind CSS v4 (`@tailwindcss/vite`) |
-| 3D | Three.js + OrbitControls |
-| i18n | vue-i18n 11 (French, English, Spanish) |
-| Linting | Biome 2.4 |
-| Hosting | GitHub Pages (static SPA) |
+| Build     | Vite 8                                     |
+| Language  | TypeScript 6                               |
+| Styling   | Tailwind CSS v4 (`@tailwindcss/vite`)      |
+| 3D        | Three.js + OrbitControls                   |
+| i18n      | vue-i18n 11 (French, English, Spanish)     |
+| Linting   | Biome 2.6                                  |
+| Hosting   | GitHub Pages (static SPA)                  |
 
 ---
 

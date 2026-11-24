@@ -9,7 +9,7 @@ SPA statique hébergée sur GitHub Pages (`base: '/gyp-sum/'`). Aucun backend.
 - vue-router 5 (routes statiques pour le multi-pages i18n) + `@unhead/vue` 2
   (gestion du `<head>` par locale)
 - Three.js + OrbitControls pour la scène 3D
-- Biome 2.4 (lint + format + CSS Tailwind v4) — `yarn lint` (vérif) /
+- Biome 2.6 (lint + format + CSS Tailwind v4) — `yarn lint` (vérif) /
   `yarn format` (= `biome check . --write --unsafe`, auto-fix complet : format,
   lint safe + unsafe, organize imports). Toujours lancer `yarn format` avant
   commit. `css.parser.tailwindDirectives: true` est requis pour `@theme`, `@apply`.
