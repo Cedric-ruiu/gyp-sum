@@ -77,7 +77,7 @@
     "ratioScale": "fino ← 1.3 — 1.5 — 1.8 → duro",
     "margin": "Margen de seguridad",
     "density": "Densidad del yeso en polvo",
-    "densityTooltip": "Densidad del yeso en polvo (sulfato de calcio semihidratado, CaSO₄·½H₂O), que sirve para calcular el volumen que ocupan los granos. Varía un poco de un yeso a otro; el efecto sobre las cantidades es menor que el margen de seguridad por defecto."
+    "densityTooltip": "Densidad de los granos de yeso (sulfato de calcio semihidratado, CaSO₄·½H₂O), que sirve para calcular el volumen que ocupan. 2,63 kg/L es el valor del yeso β (fuente: ficha ICSC 1217, OIT/OMS), el tipo de los yesos de moldeo habituales como el Molda 3, que se amasa con unas 65 partes de agua por 100 de yeso. Un yeso α (yeso duro), que necesita de 30 a 40, tiene 2,76 kg/L: la diferencia en las cantidades queda por debajo del 3\u00a0%, cubierta por el margen de seguridad."
   },
   "results": {
     "title": "Resultados",
@@ -224,7 +224,8 @@
       },
       {
         "q": "¿Cuál es la densidad del yeso?",
-        "a": "El cálculo usa la densidad del yeso en polvo (sulfato de calcio semihidratado, CaSO₄·½H₂O): 2,63 kg/L. Varía un poco según el tipo de yeso; el efecto sobre las cantidades calculadas es menor que el margen de seguridad por defecto. Permite una dosificación más precisa que una simple proporción en volumen."
+        "a": "El cálculo usa la densidad de los granos de yeso (sulfato de calcio semihidratado, CaSO₄·½H₂O): 2,63 kg/L, el valor del yeso β, el tipo de los yesos de moldeo habituales como el Molda 3, que se amasa con unas 65 partes de agua por 100 de yeso. Un yeso α (yeso duro), que necesita de 30 a 40, tiene 2,76 kg/L: la diferencia en las cantidades calculadas queda por debajo del 3\u00a0%, cubierta por el margen de seguridad por defecto. No la confundas con la densidad aparente del polvo suelto (unos 0,6, aire incluido), que indican algunas fichas técnicas.",
+        "source": "density"
       },
       {
         "q": "¿Cómo medir el volumen de una pieza irregular?",
@@ -239,6 +240,14 @@
         "a": "Sí, si antes calibras tu medida: llena a ras un vaso de tu yeso, pésalo una vez y usa ese mismo vaso para todas tus mezclas. Un vaso cualquiera no basta: según el yeso y lo compacto que esté, un mismo volumen no pesa lo mismo. La calculadora da el peso del yeso: divídelo entre el peso de tu vaso para saber cuántos echar."
       }
     ]
+  },
+  "sources": {
+    "label": "Fuente",
+    "density": {
+      "short": "ICSC 1217",
+      "name": "Ficha Internacional de Seguridad Química ICSC 1217 (OIT/OMS)",
+      "url": "https://chemicalsafety.ilo.org/dyn/icsc/showcard.display?p_card_id=1217&p_version=2&p_lang=es"
+    }
   },
   "scene": {
     "placeholder": "Vista 3D: disponible pronto",

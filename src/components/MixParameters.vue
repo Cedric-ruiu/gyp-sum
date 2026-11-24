@@ -105,12 +105,24 @@ function updateMargin(v: number) {
       </div>
     </div>
 
-    <div class="mt-4 flex items-center text-xs font-light text-muted">
+    <div class="mt-4 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs font-light text-muted">
       <span>{{ t("format.label", { label: t("mix.density") }) }}</span>
-      <span class="ml-2 font-mono tnum text-ink">
-        {{ modelValue.gypsumDensity }} {{ t("units.kg") }}/{{ t("units.liters") }}
+      <span class="inline-flex items-center">
+        <span class="font-mono tnum text-ink">
+          {{ n(modelValue.gypsumDensity) }} {{ t("units.kg") }}/{{ t("units.liters") }}
+        </span>
+        <InfoTooltip :text="t('mix.densityTooltip')" :label="t('mix.density')" />
       </span>
-      <InfoTooltip :text="t('mix.densityTooltip')" :label="t('mix.density')" />
+      <span>
+        {{ t("format.label", { label: t("sources.label") }) }}
+        <a
+          :href="t('sources.density.url')"
+          :title="t('sources.density.name')"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="link"
+        >{{ t("sources.density.short") }}</a>
+      </span>
     </div>
   </section>
 </template>

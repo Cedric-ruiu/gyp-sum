@@ -85,7 +85,7 @@
     "equivalentRatio": "= {value} kg of plaster per liter of water",
     "margin": "Safety margin",
     "density": "Powdered plaster density",
-    "densityTooltip": "Density of powdered plaster (calcium sulfate hemihydrate, CaSO₄·½H₂O), used to work out the volume taken up by the plaster grains. It varies slightly from one plaster to another; the effect on the amounts stays below the default safety margin."
+    "densityTooltip": "Density of the plaster grains (calcium sulfate hemihydrate, CaSO₄·½H₂O), used to work out the volume they take up. 2.63 kg/L is the value for β plaster (source: ICSC 1217, ILO/WHO), the type of common mold-making plasters such as Molda 3, mixed at about 65 parts water per 100 parts plaster. An α plaster (hard plaster), which takes 30 to 40, is 2.76 kg/L: the difference in the amounts stays under 3%, covered by the safety margin."
   },
   "results": {
     "title": "Results",
@@ -258,7 +258,8 @@
       },
       {
         "q": "What is the density of plaster (Plaster of Paris)?",
-        "a": "The calculation uses the density of powdered plaster (calcium sulfate hemihydrate, CaSO₄·½H₂O): 2.63 kg/L. It varies slightly between plasters (plaster of Paris, pottery plaster, etc.); the effect on the calculated amounts stays below the default safety margin. It allows more accurate dosing than a simple volume ratio."
+        "a": "The calculation uses the density of the plaster grains (calcium sulfate hemihydrate, CaSO₄·½H₂O): 2.63 kg/L. That is the value for β plaster, the type of plaster of Paris and common pottery plasters such as Molda 3, mixed at about 65 parts water per 100 parts plaster. An α plaster (hard plaster), which takes 30 to 40, is 2.76 kg/L: the difference in the calculated amounts stays under 3%, covered by the default safety margin. Don't confuse it with the bulk density of loose powder (around 0.6, air included) given on some data sheets.",
+        "source": "density"
       },
       {
         "q": "How do I measure the volume of an irregular object?",
@@ -277,6 +278,14 @@
         "a": "You can, but it is less accurate: measuring by volume (scoops, cups) ignores the plaster's real density. This calculator works by mass from the density of powdered plaster (2.63 kg/L) and gives the exact plaster weight and water volume to fill your mold, with no shortfall or waste."
       }
     ]
+  },
+  "sources": {
+    "label": "Source",
+    "density": {
+      "short": "ICSC 1217",
+      "name": "International Chemical Safety Card ICSC 1217 (ILO/WHO)",
+      "url": "https://chemicalsafety.ilo.org/dyn/icsc/showcard.display?p_card_id=1217&p_version=2&p_lang=en"
+    }
   },
   "scene": {
     "placeholder": "3D view — coming soon",

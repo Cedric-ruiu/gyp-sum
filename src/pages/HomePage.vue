@@ -143,14 +143,24 @@ useHead(() => {
     ),
   };
 
+  // Same answer and source line as FaqSection.vue (HTML links are allowed).
+  const faqAnswer = (it: { a: string; source?: string }) => {
+    if (!it.source) return rt(it.a);
+    const key = `sources.${rt(it.source)}`;
+    const label = t("format.label", { label: t("sources.label") });
+    return `${rt(it.a)} ${label} <a href="${t(`${key}.url`)}">${t(`${key}.name`)}</a>`;
+  };
+
   const faqSchema = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
     inLanguage,
-    mainEntity: (tm("faq.items") as { q: string; a: string }[]).map((it) => ({
+    mainEntity: (
+      tm("faq.items") as { q: string; a: string; source?: string }[]
+    ).map((it) => ({
       "@type": "Question",
       name: rt(it.q),
-      acceptedAnswer: { "@type": "Answer", text: rt(it.a) },
+      acceptedAnswer: { "@type": "Answer", text: faqAnswer(it) },
     })),
   };
 

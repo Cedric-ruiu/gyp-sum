@@ -74,7 +74,7 @@ src/
 │   ├── SiteFooter.vue      pied de page commun (auteur, contact, partage, GitHub, PWA)
 │   ├── MoldConfigurator.vue
 │   ├── ObjectConfigurator.vue  (toggle saisie directe de volume)
-│   ├── MixParameters.vue
+│   ├── MixParameters.vue   ratio, marge, masse volumique + lien vers sa source
 │   ├── ResultPanel.vue
 │   ├── SceneViewer.vue     Three.js canvas, autoRotate + OrbitControls
 │   ├── HowToGuide.vue      section « Comment doser le plâtre » (tm()/rt())
@@ -82,7 +82,8 @@ src/
 │   │                       e-mail, événements avec placement: results)
 │   ├── AuthorNote.vue      « Pourquoi cet outil » : texte de l'auteur (author.paragraphs),
 │   │                       masqué tant que le tableau est vide
-│   ├── FaqSection.vue      FAQ accordéon <details> (tm()/rt()), sans JS
+│   ├── FaqSection.vue      FAQ accordéon <details> (tm()/rt()), sans JS, ligne
+│   │                       « Source » sous la réponse si l'entrée a un `source`
 │   └── ui/
 │       ├── NumberInput.vue  virgule/point acceptés, spinners masqués
 │       ├── ShapeSelector.vue  généré depuis ShapeDefinition[], prop noneOption
@@ -189,8 +190,10 @@ de `fr.json`, métriques. Toutes les chaînes UI passent
 par `t()` / `$t()`. Pas de texte en dur dans les templates. Clés : `app`, `format`, `lang`, `help`, `contribute`,
 `meta`, `intro`, `mold`, `object`, `shapes`, `fields`, `mix`, `results`,
 `errors`, `units`, `unitSystem`, `toc`, `howto`, `faq`, `guide`, `yourPlaster`,
-`author`, `footer`, `scene`, `moldGuide` (fr et en ; pas en es : ses liens — sommaire, mode d'emploi, pied de page — n'apparaissent
-que si `localePage('moldGuide', locale)` existe). Pour les
+`author`, `footer`, `sources`, `scene`, `moldGuide` (fr et en ; pas en es : ses liens — sommaire, mode d'emploi, pied de page — n'apparaissent
+que si `localePage('moldGuide', locale)` existe). `sources.<id>` = `{ short,
+name, url }` d'une source citée (URL dans la langue de la locale) ; une entrée
+de `faq.items` la cite via `"source": "<id>"`. Pour les
 tableaux de messages (steps, faq items), utiliser `tm()` + `rt()`.
 
 - **Espaces insécables (fr)** : avant `? ! ; :` et à l'intérieur de `« »`, écrire

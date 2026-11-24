@@ -41,7 +41,9 @@ Water       = Net volume / (1 + Ratio / 2.63)
 Plaster     = Ratio × Water
 ```
 
-The constant **2.63 kg/L** is the density of powdered plaster (calcium sulfate hemihydrate, CaSO₄·½H₂O). It varies slightly between plasters; the effect on the amounts stays below the default 10% safety margin.
+The constant **2.63 kg/L** is the density of the plaster grains (calcium sulfate hemihydrate, CaSO₄·½H₂O) for β plaster. Source: [International Chemical Safety Card ICSC 1217 (ILO/WHO)](https://chemicalsafety.ilo.org/dyn/icsc/showcard.display?p_card_id=1217&p_version=2&p_lang=en), which gives 2.63 g/cm³ for β and 2.76 g/cm³ for α hemihydrate. Data sheets of common mold-making plasters such as Molda 3 do not state the type, but their water demand (about 65 parts water per 100 parts plaster, against 30 to 40 for α) is that of a β plaster. With an α (hard) plaster, the amounts come out less than 3% low, within the default 10% safety margin. It is not the bulk density of loose powder (around 0.6 kg/L, air included) found on some data sheets.
+
+Before November 2026, GypSum used 2.58 kg/L, the density of soluble anhydrite (CaSO₄ III), not of hemihydrate; amounts are now 0.3–1% higher depending on the ratio.
 
 Dimensions are entered in centimeters and results are displayed in liters and kilograms. The English page can also show inches, US cups / fluid ounces and pounds / ounces, and accepts the ratio as a consistency (parts water per 100 parts plaster); calculations always run in metric.
 

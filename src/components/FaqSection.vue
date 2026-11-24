@@ -4,7 +4,16 @@ import { useI18n } from "vue-i18n";
 
 const { t, tm, rt } = useI18n();
 
-const items = computed(() => tm("faq.items") as { q: string; a: string }[]);
+// `source` names an entry of `sources.*` cited under the answer.
+const items = computed(() =>
+  (tm("faq.items") as { q: string; a: string; source?: string }[]).map(
+    (item) => ({
+      q: rt(item.q),
+      a: rt(item.a),
+      source: item.source ? `sources.${rt(item.source)}` : null,
+    }),
+  ),
+);
 </script>
 
 <template>
@@ -21,7 +30,7 @@ const items = computed(() => tm("faq.items") as { q: string; a: string }[]);
         <summary
           class="flex cursor-pointer list-none items-center justify-between gap-3 text-sm font-medium text-ink [&::-webkit-details-marker]:hidden"
         >
-          {{ rt(item.q) }}
+          {{ item.q }}
           <span
             class="shrink-0 font-mono text-xs font-light text-muted transition-transform duration-150 group-open:rotate-45"
             aria-hidden="true"
@@ -30,7 +39,16 @@ const items = computed(() => tm("faq.items") as { q: string; a: string }[]);
           </span>
         </summary>
         <p class="mt-2 text-sm font-light leading-relaxed text-muted">
-          {{ rt(item.a) }}
+          {{ item.a }}
+        </p>
+        <p v-if="item.source" class="mt-2 text-xs font-light text-muted">
+          {{ t("format.label", { label: t("sources.label") }) }}
+          <a
+            :href="t(`${item.source}.url`)"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="link"
+          >{{ t(`${item.source}.name`) }}</a>
         </p>
       </details>
     </div>
