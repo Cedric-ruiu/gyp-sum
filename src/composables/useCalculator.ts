@@ -11,6 +11,9 @@ import type {
   ObjectConfig,
 } from "@/types";
 
+// β-hemihydrate particle density in kg/L (ICSC 1217, ILO/WHO).
+export const PLASTER_DENSITY = 2.63;
+
 function computeVolumeFromConfig(
   shapeType: string,
   dims: Record<string, number> | null,

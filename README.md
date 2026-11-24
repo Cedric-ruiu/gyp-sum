@@ -12,7 +12,7 @@
 
 ## What is it?
 
-**GypSum** is a precision plaster calculator for mold making. It computes the exact water and plaster quantities needed to fill a mold, based on the density of powdered plaster (2.58 kg/L) and the net volume between the mold and the object being cast.
+**GypSum** is a precision plaster calculator for mold making. It computes the exact water and plaster quantities needed to fill a mold, based on the density of powdered plaster (2.63 kg/L) and the net volume between the mold and the object being cast.
 
 No more guessing, no more wasted material. Just enter your mold dimensions, describe the object inside, set your mixing ratio and safety margin — GypSum does the math.
 
@@ -37,11 +37,11 @@ GypSum uses the following formula, fixed and not user-configurable:
 
 ```
 Net volume  = Mold volume − Object volume
-Water       = Net volume / (1 + Ratio / 2.58)
+Water       = Net volume / (1 + Ratio / 2.63)
 Plaster     = Ratio × Water
 ```
 
-The constant **2.58 kg/L** is the density of powdered plaster (calcium sulfate hemihydrate, CaSO₄·½H₂O). It varies slightly between plasters; the effect on the amounts stays below the default 10% safety margin.
+The constant **2.63 kg/L** is the density of powdered plaster (calcium sulfate hemihydrate, CaSO₄·½H₂O). It varies slightly between plasters; the effect on the amounts stays below the default 10% safety margin.
 
 Dimensions are entered in centimeters and results are displayed in liters and kilograms. The English page can also show inches, US cups / fluid ounces and pounds / ounces, and accepts the ratio as a consistency (parts water per 100 parts plaster); calculations always run in metric.
 

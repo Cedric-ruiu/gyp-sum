@@ -25,7 +25,7 @@
     "ogTitle": "Dosi gesso e acqua per stampi: calcolatore gratuito",
     "ogDescription": "Quanta acqua e quanto gesso servono per il tuo stampo? Inserisci le misure dello stampo e del modello: il calcolatore ti dà l'acqua e il gesso.",
     "twitterDescription": "Quanta acqua e quanto gesso servono per il tuo stampo? Il calcolatore ti dà l'acqua e il gesso, modello già sottratto.",
-    "schemaApp": "Calcolatore delle dosi di acqua e gesso per stampi (ceramica, terracotta, scultura), basato sulla densità del gesso in polvere (2,58 kg/L)."
+    "schemaApp": "Calcolatore delle dosi di acqua e gesso per stampi (ceramica, terracotta, scultura), basato sulla densità del gesso in polvere (2,63 kg/L)."
   },
   "intro": {
     "h1": "Dosi di gesso e acqua per stampi: il calcolatore",
@@ -107,8 +107,8 @@
     "answer": "Per uno stampo il rapporto abituale è di 1,5 kg di gesso per 1 litro d'acqua, cioè circa 0,67 L d'acqua per chilo di gesso. Scendi a 1,3 per un gesso fluido che riprenda i dettagli, sali a 1,8 per uno stampo duro. Se il produttore indica un rapporto gesso-acqua, vale il suo.",
     "pourOrder": "Versa sempre il gesso nell'acqua, mai il contrario.",
     "immersion": "Per misurare il volume di un modello irregolare, immergilo in un recipiente graduato e annota di quanto sale l'acqua.",
-    "physics": "Il calcolatore si basa sulla fisica dell'impasto: mescolando acqua e gesso, il volume finale è la somma del volume dell'acqua e del volume occupato dai granuli di gesso (densità del gesso in polvere: 2,58 kg/L). È più preciso di un semplice rapporto in volume.",
-    "formula": "Formula: Acqua = Volume netto ÷ (1 + Rapporto ÷ 2.58)",
+    "physics": "Il calcolatore si basa sulla fisica dell'impasto: mescolando acqua e gesso, il volume finale è la somma del volume dell'acqua e del volume occupato dai granuli di gesso (densità del gesso in polvere: 2,63 kg/L). È più preciso di un semplice rapporto in volume.",
+    "formula": "Formula: Acqua = Volume netto ÷ (1 + Rapporto ÷ 2.63)",
     "ratioTable": {
       "caption": "Rapporti gesso / acqua più comuni",
       "colRatio": "Rapporto (kg/L)",
@@ -144,7 +144,7 @@
     ]
   },
   "footer": {
-    "tagline": "Calcolatore delle dosi di acqua e gesso per stampi. Formule basate sulla densità del gesso in polvere (2,58 kg/L). Nessun dato viene inviato: tutto resta nel tuo browser.",
+    "tagline": "Calcolatore delle dosi di acqua e gesso per stampi. Formule basate sulla densità del gesso in polvere (2,63 kg/L). Nessun dato viene inviato: tutto resta nel tuo browser.",
     "credit": "Creato da {name}, ceramista amatoriale e sviluppatore web freelance ({site}).",
     "contribute": "Contribuisci",
     "openSource": "Progetto open source: suggerimenti e commenti sono benvenuti.",
@@ -224,7 +224,7 @@
       },
       {
         "q": "Qual è la densità del gesso?",
-        "a": "Il calcolo usa la densità del gesso in polvere (solfato di calcio emidrato, CaSO₄·½H₂O): 2,58 kg/L. Varia un po' a seconda del tipo di gesso; l'effetto sulle quantità calcolate resta inferiore al margine di sicurezza predefinito. Permette un dosaggio più preciso di un semplice rapporto in volume."
+        "a": "Il calcolo usa la densità del gesso in polvere (solfato di calcio emidrato, CaSO₄·½H₂O): 2,63 kg/L. Varia un po' a seconda del tipo di gesso; l'effetto sulle quantità calcolate resta inferiore al margine di sicurezza predefinito. Permette un dosaggio più preciso di un semplice rapporto in volume."
       },
       {
         "q": "Come misurare il volume di un modello irregolare?",

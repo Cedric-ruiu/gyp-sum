@@ -54,7 +54,7 @@ export interface ObjectConfig {
 export interface MixParams {
   ratio: number; // kg/L, défaut 1.5
   margin: number; // 0-0.5, défaut 0.1
-  gypsumDensity: number; // constante 2.58
+  gypsumDensity: number; // constante 2.63 (PLASTER_DENSITY)
 }
 
 export interface CalculationResult {

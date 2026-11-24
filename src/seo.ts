@@ -2,7 +2,7 @@
 // sitemap, the language switcher and the share button.
 export const SITE_URL = "https://cedric-ruiu.github.io/gyp-sum";
 export const AUTHOR_URL = "https://cedric-ruiu.fr";
-export const OG_IMAGE = `${SITE_URL}/og-image.png`;
+export const OG_IMAGE = `${SITE_URL}/og-image.png?v=2`;
 
 // schema.org author, shared by every page's JSON-LD.
 export const AUTHOR_SCHEMA = {
@@ -65,14 +65,14 @@ export const SITE_PAGES: SitePage[] = [
     locale: "fr",
     group: "moldGuide",
     published: "2026-10-27",
-    lastModified: "2026-10-27",
+    lastModified: "2026-11-24",
   },
   {
     path: "/en/how-to-make-a-plaster-mold/",
     locale: "en",
     group: "moldGuide",
     published: "2026-10-27",
-    lastModified: "2026-10-27",
+    lastModified: "2026-11-24",
   },
 ];
 

@@ -133,11 +133,17 @@ avec des branches par forme (inévitable avec l'API Three.js).
 
 ## Formules de calcul — NE PAS MODIFIER
 
-Constante : `gypsumDensity = 2.58` kg/L (non exposée à l'utilisateur).
+Constante : `PLASTER_DENSITY = 2.63` kg/L (`useCalculator.ts`, passée en
+`gypsumDensity`, non exposée à l'utilisateur). Masse volumique des grains de
+plâtre β, source : fiche ICSC 1217 (OIT/OMS), qui donne β 2,63 / α 2,76.
+La fiche Molda 3 ne précise pas le type : β est déduit de son gâchage (65 parts
+d'eau pour 100 de plâtre, contre 30 à 40 pour un α), formulation reprise dans
+les textes. Jusqu'au 2026-11-24 la valeur était 2,58,
+masse volumique de l'anhydrite soluble (CaSO₄ III), pas du semi-hydrate.
 
 ```
 netVolume  = moldVolume − objectVolume
-water      = netVolume / (1 + ratio / 2.58)
+water      = netVolume / (1 + ratio / 2.63)
 plaster    = ratio × water
 waterWithMargin   = water   × (1 + margin)
 plasterWithMargin = plaster × (1 + margin)

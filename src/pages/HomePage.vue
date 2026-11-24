@@ -51,7 +51,7 @@ onUnmounted(() => {
 });
 
 import { track } from "@/analytics";
-import { useCalculator } from "@/composables/useCalculator";
+import { PLASTER_DENSITY, useCalculator } from "@/composables/useCalculator";
 import { useLocalStorage } from "@/composables/useLocalStorage";
 import { markEngaged } from "@/composables/usePwaInstall";
 import {
@@ -234,7 +234,7 @@ const object = computed({
 });
 
 const mix = computed<MixParams>({
-  get: () => ({ ...state.value.mix, gypsumDensity: 2.58 }),
+  get: () => ({ ...state.value.mix, gypsumDensity: PLASTER_DENSITY }),
   set: (v) => updateState({ mix: { ratio: v.ratio, margin: v.margin } }),
 });
 
