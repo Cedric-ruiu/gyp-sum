@@ -119,7 +119,7 @@ useHead(() => {
               <li v-for="(_, j) in section.steps" :key="`s${j}`" class="flex gap-3">
                 <span class="shrink-0 pt-0.5 font-mono text-sm font-light text-accent">{{ j + 1 }}</span>
                 <!-- I18nT so a step can embed the {calculator} link -->
-                <I18nT :keypath="`moldGuide.sections.${i}.steps.${j}`" tag="span">
+                <I18nT scope="global" :keypath="`moldGuide.sections.${i}.steps.${j}`" tag="span">
                   <template #calculator>
                     <RouterLink
                       :to="calculatorPath"

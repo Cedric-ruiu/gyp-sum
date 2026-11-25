@@ -92,7 +92,7 @@ const linkClass =
         </section>
       </div>
 
-      <I18nT keypath="footer.credit" tag="p" class="mt-10 border-t border-line pt-6 text-xs font-light leading-relaxed text-muted">
+      <I18nT scope="global" keypath="footer.credit" tag="p" class="mt-10 border-t border-line pt-6 text-xs font-light leading-relaxed text-muted">
         <template #name>
           <a :href="AUTHOR_URL" target="_blank" rel="author noopener" class="link">Cédric Ruiu</a>
         </template>
