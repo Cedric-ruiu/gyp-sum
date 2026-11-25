@@ -20,23 +20,28 @@
   },
   "meta": {
     "title": "Proporción yeso agua para moldes: calculadora gratuita — GypSum",
-    "description": "¿Qué proporción de agua y yeso necesita tu molde? Introduce las medidas del molde y de la pieza: la calculadora te da el agua y el yeso. Gratis.",
+    "description": "¿Qué proporción de agua y yeso necesita tu molde? Introduce las medidas de la pieza y del molde: la calculadora te da el agua y el yeso. Gratis.",
     "keywords": "calculadora de yeso para moldes, proporción yeso agua, proporción de yeso y agua para moldes, cantidad de yeso para un molde, yeso cerámico, yeso para moldes, escayola, moldes de cerámica",
     "ogTitle": "Proporción yeso agua para moldes: calculadora gratuita",
-    "ogDescription": "¿Qué proporción de agua y yeso necesita tu molde? Introduce las medidas del molde y de la pieza: la calculadora te da el agua y el yeso.",
+    "ogDescription": "¿Qué proporción de agua y yeso necesita tu molde? Introduce las medidas de la pieza y del molde: la calculadora te da el agua y el yeso.",
     "twitterDescription": "¿Qué proporción de agua y yeso necesita tu molde? La calculadora te da el agua y el yeso, descontando la pieza.",
     "schemaApp": "Calculadora de la proporción de agua y yeso para moldes (cerámica, alfarería, escultura), basada en la densidad del yeso en polvo (2,63 kg/L)."
   },
   "intro": {
     "h1": "Proporción de yeso y agua para moldes: la calculadora",
-    "lead": "Para un molde, la proporción habitual es de 1,5 kg de yeso por litro de agua, es decir, unos 0,67 L de agua por kilo de yeso: 1,3 para un yeso fluido que copia bien los detalles, 1,8 para un molde duro. Indica las medidas de tu molde y de la pieza: la calculadora te da las cantidades exactas, descontando la pieza."
+    "lead": "Para un molde, la proporción habitual es de 1,5 kg de yeso por litro de agua, es decir, unos 0,67 L de agua por kilo de yeso: 1,3 para un yeso fluido que copia bien los detalles, 1,8 para un molde duro. Indica las medidas de la pieza y de tu molde: la calculadora te da las cantidades exactas, descontando la pieza."
   },
   "mold": {
     "title": "Molde",
     "volume": "Volumen del molde",
     "titleTooltip": "Las medidas son las del interior de tu encofrado. La altura que debes indicar es la altura hasta la que quieres llenar de yeso, no necesariamente la altura total del encofrado.",
     "adaptToObject": "Ajustar a la pieza",
-    "adaptToObjectTooltip": "Calcula las medidas mínimas del molde a partir de la pieza definida, con 2,5 cm de margen en cada lado y por encima. Las medidas del molde se actualizan solas: útil para preparar el encofrado antes de empezar.",
+    "adaptToObjectTooltip": "Calcula las medidas mínimas del molde a partir de la pieza, con un margen en cada lado y por encima (2,5 cm por defecto; haz clic en el valor para cambiarlo). Mientras la casilla esté marcada, el molde sigue los cambios de la pieza.",
+    "shapeTitle": "Forma",
+    "dimensionsTitle": "Medidas interiores",
+    "fitLinked": "Medidas calculadas a partir de la pieza. Desmarca la casilla para escribirlas tú.",
+    "fitFree": "Medidas libres: escribe las medidas interiores de tu encofrado.",
+    "fitUnavailable": "Primero describe la pieza por su forma y sus medidas (paso 1).",
     "margin": "margen",
     "marginEditHint": "Haz clic para cambiar el margen"
   },
@@ -179,12 +184,12 @@
     "intro": "En cinco pasos, calcula y prepara la cantidad justa de yeso para llenar tu molde sin desperdiciar.",
     "steps": [
       {
-        "title": "Medir el volumen del molde",
-        "text": "Toma las medidas interiores de tu encofrado (largo, ancho y altura de llenado que quieres). Es el volumen total que hay que llenar de yeso."
+        "title": "Calcular el volumen de la pieza",
+        "text": "Elige la forma más parecida a tu pieza y toma sus medidas, o mide su volumen sumergiéndola en un recipiente graduado. Si no hay pieza, pasa al paso siguiente."
       },
       {
-        "title": "Calcular el volumen de la pieza",
-        "text": "Si hay una pieza dentro del molde, resta su volumen. Elige la forma más parecida, o mídelo sumergiéndola en un recipiente graduado."
+        "title": "Medir el volumen del molde",
+        "text": "Toma las medidas interiores de tu encofrado (largo, ancho y altura de llenado que quieres), o dedúcelas de la pieza añadiendo un margen. El yeso llena ese volumen, menos el de la pieza."
       },
       {
         "title": "Elegir la proporción yeso / agua",

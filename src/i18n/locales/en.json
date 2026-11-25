@@ -20,23 +20,28 @@
   },
   "meta": {
     "title": "Pottery Plaster Calculator: Plaster to Water Ratio for Molds",
-    "description": "How much plaster and water for your mold? Enter the mold and object sizes in cm or inches and your plaster to water ratio to get the exact amounts. Free.",
+    "description": "How much plaster and water for your mold? Enter the object and mold sizes in cm or inches and your plaster to water ratio to get the exact amounts. Free.",
     "keywords": "plaster calculator, plaster to water ratio calculator, pottery plaster calculator, plaster of paris calculator, mold making, mould making, ceramic mold, slip casting plaster",
     "ogTitle": "Pottery Plaster Calculator: Plaster to Water Ratio for Molds",
-    "ogDescription": "How much plaster and water for your mold? Enter the mold and object sizes and your plaster to water ratio to get the exact amounts.",
+    "ogDescription": "How much plaster and water for your mold? Enter the object and mold sizes and your plaster to water ratio to get the exact amounts.",
     "twitterDescription": "How much plaster and water for your mold? Enter its size and your ratio: the calculator does the rest.",
     "schemaApp": "Plaster calculator for mold making (ceramics, pottery, sculpture), based on the density of powdered plaster (2.63 kg/L)."
   },
   "intro": {
     "h1": "Pottery Plaster Calculator for Molds — Plaster to Water Ratio",
-    "lead": "For most molds, mix about 1.5 kg of plaster per liter of water: a consistency of about 67, or 0.67 parts water to 1 part plaster by weight. Use 1.3 for a fluid, detailed cast and 1.8 for a hard mold. Enter your mold and object sizes: the calculator gives the exact amounts, with the object volume subtracted."
+    "lead": "For most molds, mix about 1.5 kg of plaster per liter of water: a consistency of about 67, or 0.67 parts water to 1 part plaster by weight. Use 1.3 for a fluid, detailed cast and 1.8 for a hard mold. Enter your object and mold sizes: the calculator gives the exact amounts, with the object volume subtracted."
   },
   "mold": {
     "title": "Mold",
     "volume": "Mold volume",
     "titleTooltip": "These dimensions are those of the inside of your formwork. The height to enter is how high you want to fill with plaster, not necessarily the full height of the formwork.",
     "adaptToObject": "Fit to object",
-    "adaptToObjectTooltip": "Computes the minimum mold dimensions from the defined piece, adding a margin (2.5 cm, about 1 in, by default) on each side and on top. The mold dimensions update automatically — useful to size your formwork before you start.",
+    "adaptToObjectTooltip": "Computes the minimum mold dimensions from the object, with a margin on each side and on top (2.5 cm, about 1 in, by default; click the value to change it). While this option is on, the mold follows every change to the object.",
+    "shapeTitle": "Shape",
+    "dimensionsTitle": "Inside dimensions",
+    "fitLinked": "Dimensions worked out from the object. Turn this option off to enter them yourself.",
+    "fitFree": "Free dimensions: enter the inside measurements of your formwork.",
+    "fitUnavailable": "First describe the object by its shape and dimensions (step 1).",
     "margin": "margin",
     "marginEditHint": "Click to edit the margin"
   },
@@ -208,12 +213,12 @@
     "intro": "In five steps, calculate and prepare the right amount of plaster to fill your mold without waste.",
     "steps": [
       {
-        "title": "Measure the mold volume",
-        "text": "Record the inside dimensions of your formwork (length, width, the fill height you want), in centimeters or inches. This is the total volume to fill with plaster."
+        "title": "Estimate the volume of the piece to mold",
+        "text": "Pick the shape closest to your piece and measure it, or measure its volume by immersion in a graduated container. No piece? Go straight to the next step."
       },
       {
-        "title": "Estimate the volume of the piece to mold",
-        "text": "If a piece sits in the mold, subtract its volume. Pick the closest shape, or measure it by immersion in a graduated container."
+        "title": "Measure the mold volume",
+        "text": "Record the inside dimensions of your formwork (length, width, the fill height you want), in centimeters or inches, or derive them from the piece plus a margin. The plaster fills this volume, minus the piece."
       },
       {
         "title": "Choose the plaster-to-water ratio",

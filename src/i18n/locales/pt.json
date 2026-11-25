@@ -20,23 +20,28 @@
   },
   "meta": {
     "title": "Proporção gesso e água para moldes: calculadora grátis — GypSum",
-    "description": "Quanta água e quanto gesso o seu molde precisa? Indique as medidas do molde e da peça: a calculadora dá a água e o gesso. Grátis.",
+    "description": "Quanta água e quanto gesso o seu molde precisa? Indique as medidas da peça e do molde: a calculadora dá a água e o gesso. Grátis.",
     "keywords": "proporção gesso água, proporção de gesso e água para moldes, quantidade de gesso para molde, gesso para moldes, molde de gesso para cerâmica, moldes de enchimento, barbotina",
     "ogTitle": "Proporção gesso e água para moldes: calculadora grátis",
-    "ogDescription": "Quanta água e quanto gesso o seu molde precisa? Indique as medidas do molde e da peça: a calculadora dá a água e o gesso.",
+    "ogDescription": "Quanta água e quanto gesso o seu molde precisa? Indique as medidas da peça e do molde: a calculadora dá a água e o gesso.",
     "twitterDescription": "Quanta água e quanto gesso o seu molde precisa? A calculadora dá a água e o gesso, já descontando a peça.",
     "schemaApp": "Calculadora da proporção de água e gesso para moldes (cerâmica, olaria, escultura), baseada na densidade do gesso em pó (2,63 kg/L)."
   },
   "intro": {
     "h1": "Proporção de gesso e água para moldes: a calculadora",
-    "lead": "Para um molde, a proporção habitual é de 1,5 kg de gesso por litro de água, ou seja, cerca de 0,67 L de água para 1 kg de gesso: 1,3 para um gesso fluido que copia bem os detalhes, 1,8 para um molde duro. Indique as medidas do seu molde e da peça: a calculadora dá as quantidades exatas, já descontando a peça."
+    "lead": "Para um molde, a proporção habitual é de 1,5 kg de gesso por litro de água, ou seja, cerca de 0,67 L de água para 1 kg de gesso: 1,3 para um gesso fluido que copia bem os detalhes, 1,8 para um molde duro. Indique as medidas da peça e do seu molde: a calculadora dá as quantidades exatas, já descontando a peça."
   },
   "mold": {
     "title": "Molde",
     "volume": "Volume do molde",
     "titleTooltip": "As medidas são as do interior da caixa de moldagem (as paredes que seguram o gesso). A altura a indicar é aquela até onde você quer encher de gesso, não necessariamente a altura total da caixa.",
     "adaptToObject": "Ajustar à peça",
-    "adaptToObjectTooltip": "Calcula as medidas mínimas do molde a partir da peça indicada, com 2,5 cm de margem em cada lado e por cima. As medidas do molde são atualizadas automaticamente: útil para dimensionar a caixa de moldagem antes de começar.",
+    "adaptToObjectTooltip": "Calcula as medidas mínimas do molde a partir da peça, com uma margem em cada lado e por cima (2,5 cm por padrão; clique no valor para mudá-lo). Enquanto a opção estiver marcada, o molde acompanha as mudanças da peça.",
+    "shapeTitle": "Forma",
+    "dimensionsTitle": "Medidas internas",
+    "fitLinked": "Medidas calculadas a partir da peça. Desmarque a opção para digitá-las você mesmo.",
+    "fitFree": "Medidas livres: informe as medidas internas da sua caixa de moldagem.",
+    "fitUnavailable": "Primeiro descreva a peça pela forma e pelas medidas (passo 1).",
     "margin": "margem",
     "marginEditHint": "Clique para mudar a margem"
   },
@@ -179,12 +184,12 @@
     "intro": "Em cinco passos, calcule e prepare a quantidade certa de gesso para encher o seu molde sem desperdício.",
     "steps": [
       {
-        "title": "Medir o volume do molde",
-        "text": "Anote as medidas internas da caixa de moldagem (comprimento, largura, altura de enchimento desejada). É o volume total a encher de gesso."
+        "title": "Calcular o volume da peça",
+        "text": "Escolha a forma mais parecida com a sua peça e anote as medidas dela, ou meça o volume mergulhando a peça num recipiente graduado. Sem peça, passe para o próximo passo."
       },
       {
-        "title": "Calcular o volume da peça",
-        "text": "Se houver uma peça dentro do molde, desconte o volume dela. Escolha a forma mais parecida, ou meça-o mergulhando a peça num recipiente graduado."
+        "title": "Medir o volume do molde",
+        "text": "Anote as medidas internas da caixa de moldagem (comprimento, largura, altura de enchimento desejada), ou deduza-as da peça somando uma margem. O gesso enche esse volume, menos o da peça."
       },
       {
         "title": "Escolher a proporção gesso / água",

@@ -43,6 +43,10 @@ export interface SphereDimensions extends Dimensions {
 export interface MoldConfig {
   shape: ShapeType;
   dimensions: Dimensions;
+  // Dimensions follow the object (plus `fitMargin` cm) while on. Optional:
+  // states stored before this option have neither field (= off).
+  fit?: boolean;
+  fitMargin?: number;
 }
 
 export interface ObjectConfig {

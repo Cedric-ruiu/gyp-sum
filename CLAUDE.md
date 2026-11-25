@@ -50,10 +50,12 @@ SPA statique hébergée sur GitHub Pages (`base: '/gyp-sum/'`). Aucun backend.
 src/
 ├── types/index.ts          Dimensions = Record<string,number> (clés = ShapeField.key)
 ├── shapes/
-│   ├── types.ts            ShapeDefinition, ShapeField
-│   └── registry.ts         boxShape/cylinderShape/sphereShape/halfSphereShape
-│                           moldShapeRegistry  (box, cylinder)
-│                           objectShapeRegistry (box, cylinder, sphere, half-sphere)
+│   ├── types.ts            ShapeDefinition, ShapeField, ShapeBounds
+│   ├── registry.ts         boxShape/cylinderShape/sphereShape/halfSphereShape
+│   │                       moldShapeRegistry  (box, cylinder)
+│   │                       objectShapeRegistry (box, cylinder, sphere, half-sphere)
+│   └── fit.ts              objectBounds(), canFitMold(), fitMold() : moule ajusté
+│                           à la pièce (DEFAULT_FIT_MARGIN = 2,5 cm)
 ├── composables/
 │   ├── useShapeVolume.ts   cm3ToLiters() — export nommé, utilisé par le registre
 │   ├── useCalculator.ts    computed<CalculationResult> (formules figées, voir ci-dessous)
@@ -131,6 +133,19 @@ dans un composant Vue.
 
 `useThreeScene` est la seule exception : il construit les géométries Three.js
 avec des branches par forme (inévitable avec l'API Three.js).
+
+## Ordre du formulaire et moule ajusté à la pièce
+
+Étapes numérotées : 1 Pièce à mouler → 2 Moule (sous-parties Forme, avec la
+case « Adapter à la pièce » et sa marge, puis Dimensions intérieures) → 3
+Paramètres de mélange. Une forme de pièce déclare son encombrement
+(`bounds`), une forme de moule comment l'englober (`fitAround`) ; pas de
+branche par forme dans `MoldConfigurator`. Tant que `mold.fit` est vrai,
+`updateState()` de `HomePage.vue` recalcule les cotes du moule (`fitMold()`,
+arrondies au mm supérieur) à chaque changement de la pièce, de la forme du
+moule ou de la marge. Case cochée : les champs de cotes sont masqués, les
+cotes calculées affichées en lecture seule ; décocher rend les champs, pré-remplis.
+Case indisponible si la pièce est « Aucune » ou un volume saisi directement.
 
 ## Formules de calcul — NE PAS MODIFIER
 
@@ -222,6 +237,9 @@ tableaux de messages (steps, faq items), utiliser `tm()` + `rt()`.
 ## Persistance localStorage
 
 Clé `plaster-calc-state`, objet `{ mold, object, mix }`. Fallback silencieux.
+`mold.fit` / `mold.fitMargin` (cm) sont optionnels : un état enregistré avant
+leur ajout n'en a pas et reste en cotes libres ; les valeurs par défaut (nouveau
+visiteur) ont `fit: true`.
 Préférences d'affichage à part : clé `plaster-calc-units`,
 `{ system: 'metric' | 'us', ratioMode: 'ratio' | 'consistency' }` (changer
 d'unité n'est pas une utilisation du calculateur).

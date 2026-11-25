@@ -29,36 +29,36 @@ export interface SitePage {
 // Every pre-rendered route must be listed here: the sitemap build fails on a
 // route without an entry.
 export const SITE_PAGES: SitePage[] = [
-  { path: "/", locale: "fr", group: "calculator", lastModified: "2026-11-24" },
+  { path: "/", locale: "fr", group: "calculator", lastModified: "2026-11-25" },
   {
     path: "/en/",
     locale: "en",
     group: "calculator",
-    lastModified: "2026-11-24",
+    lastModified: "2026-11-25",
   },
   {
     path: "/es/",
     locale: "es",
     group: "calculator",
-    lastModified: "2026-11-24",
+    lastModified: "2026-11-25",
   },
   {
     path: "/de/",
     locale: "de",
     group: "calculator",
-    lastModified: "2026-11-24",
+    lastModified: "2026-11-25",
   },
   {
     path: "/it/",
     locale: "it",
     group: "calculator",
-    lastModified: "2026-11-24",
+    lastModified: "2026-11-25",
   },
   {
     path: "/pt/",
     locale: "pt",
     group: "calculator",
-    lastModified: "2026-11-24",
+    lastModified: "2026-11-25",
   },
   {
     path: "/moule-en-platre/",

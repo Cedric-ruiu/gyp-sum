@@ -1,5 +1,13 @@
 import { cm3ToLiters } from "@/composables/useShapeVolume";
-import type { ShapeDefinition } from "./types";
+import type { ShapeBounds, ShapeDefinition } from "./types";
+
+// Bounds of an object with a round footprint.
+const roundBounds = (diameter: number, height: number): ShapeBounds => ({
+  length: diameter,
+  width: diameter,
+  height,
+  footprintDiameter: diameter,
+});
 
 export const boxShape: ShapeDefinition = {
   type: "box",
@@ -29,6 +37,17 @@ export const boxShape: ShapeDefinition = {
     },
   ],
   computeVolume: ([l, w, h]) => cm3ToLiters(l * w * h),
+  bounds: ([l, w, h]) => ({
+    length: l,
+    width: w,
+    height: h,
+    footprintDiameter: Math.hypot(l, w),
+  }),
+  fitAround: (b, m) => ({
+    length: b.length + 2 * m,
+    width: b.width + 2 * m,
+    height: b.height + m,
+  }),
 };
 
 export const cylinderShape: ShapeDefinition = {
@@ -52,6 +71,11 @@ export const cylinderShape: ShapeDefinition = {
     },
   ],
   computeVolume: ([d, h]) => cm3ToLiters((Math.PI / 4) * d ** 2 * h),
+  bounds: ([d, h]) => roundBounds(d, h),
+  fitAround: (b, m) => ({
+    diameter: b.footprintDiameter + 2 * m,
+    height: b.height + m,
+  }),
 };
 
 export const frustumShape: ShapeDefinition = {
@@ -83,6 +107,7 @@ export const frustumShape: ShapeDefinition = {
   ],
   computeVolume: ([d1, d2, h]) =>
     cm3ToLiters(((Math.PI * h) / 12) * (d1 * d1 + d1 * d2 + d2 * d2)),
+  bounds: ([d1, d2, h]) => roundBounds(Math.max(d1, d2), h),
 };
 
 export const sphereShape: ShapeDefinition = {
@@ -99,6 +124,7 @@ export const sphereShape: ShapeDefinition = {
     },
   ],
   computeVolume: ([d]) => cm3ToLiters((Math.PI / 6) * d ** 3),
+  bounds: ([d]) => roundBounds(d, d),
 };
 
 export const halfSphereShape: ShapeDefinition = {
@@ -115,6 +141,7 @@ export const halfSphereShape: ShapeDefinition = {
     },
   ],
   computeVolume: ([d]) => cm3ToLiters((Math.PI / 12) * d ** 3),
+  bounds: ([d]) => roundBounds(d, d / 2),
 };
 
 export const sphericalCapShape: ShapeDefinition = {
@@ -139,6 +166,7 @@ export const sphericalCapShape: ShapeDefinition = {
   ],
   computeVolume: ([d, h]) =>
     cm3ToLiters(((Math.PI * h) / 24) * (3 * d * d + 4 * h * h)),
+  bounds: ([d, h]) => roundBounds(d, h),
 };
 
 export const manualVolumeShape: ShapeDefinition = {

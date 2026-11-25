@@ -20,23 +20,28 @@
   },
   "meta": {
     "title": "Dosi gesso e acqua per stampi: calcolatore gratuito — GypSum",
-    "description": "Quanta acqua e quanto gesso servono per il tuo stampo? Inserisci le misure dello stampo e del modello: il calcolatore ti dà l'acqua e il gesso. Gratis.",
+    "description": "Quanta acqua e quanto gesso servono per il tuo stampo? Inserisci le misure del modello e dello stampo: il calcolatore ti dà l'acqua e il gesso. Gratis.",
     "keywords": "dosi gesso acqua per stampi, quanta acqua per il gesso, rapporto gesso acqua, gesso per stampi, gesso per stampi da colaggio, stampi in gesso per ceramica, calcolare il gesso per uno stampo",
     "ogTitle": "Dosi gesso e acqua per stampi: calcolatore gratuito",
-    "ogDescription": "Quanta acqua e quanto gesso servono per il tuo stampo? Inserisci le misure dello stampo e del modello: il calcolatore ti dà l'acqua e il gesso.",
+    "ogDescription": "Quanta acqua e quanto gesso servono per il tuo stampo? Inserisci le misure del modello e dello stampo: il calcolatore ti dà l'acqua e il gesso.",
     "twitterDescription": "Quanta acqua e quanto gesso servono per il tuo stampo? Il calcolatore ti dà l'acqua e il gesso, modello già sottratto.",
     "schemaApp": "Calcolatore delle dosi di acqua e gesso per stampi (ceramica, terracotta, scultura), basato sulla densità del gesso in polvere (2,63 kg/L)."
   },
   "intro": {
     "h1": "Dosi di gesso e acqua per stampi: il calcolatore",
-    "lead": "Per uno stampo si contano di solito 1,5 kg di gesso per litro d'acqua, cioè circa 0,67 L d'acqua per 1 kg di gesso: 1,3 per un gesso fluido che riprende bene i dettagli, 1,8 per uno stampo duro. Inserisci le misure del tuo stampo e del modello: il calcolatore ti dà le quantità esatte, modello già sottratto."
+    "lead": "Per uno stampo si contano di solito 1,5 kg di gesso per litro d'acqua, cioè circa 0,67 L d'acqua per 1 kg di gesso: 1,3 per un gesso fluido che riprende bene i dettagli, 1,8 per uno stampo duro. Inserisci le misure del modello e del tuo stampo: il calcolatore ti dà le quantità esatte, modello già sottratto."
   },
   "mold": {
     "title": "Stampo",
     "volume": "Volume dello stampo",
     "titleTooltip": "Le misure sono quelle interne della tua cassaforma. L'altezza da inserire è quella fino a cui vuoi colare il gesso, non per forza l'altezza totale della cassaforma.",
     "adaptToObject": "Adatta al modello",
-    "adaptToObjectTooltip": "Calcola le misure minime dello stampo a partire dal modello indicato, aggiungendo 2,5 cm di margine su ogni lato e sopra. Le misure dello stampo si aggiornano da sole: utile per dimensionare la cassaforma prima di iniziare.",
+    "adaptToObjectTooltip": "Calcola le misure minime dello stampo a partire dal modello, con un margine su ogni lato e sopra (2,5 cm come impostazione predefinita; clicca sul valore per cambiarlo). Finché la casella è spuntata, lo stampo segue ogni modifica del modello.",
+    "shapeTitle": "Forma",
+    "dimensionsTitle": "Misure interne",
+    "fitLinked": "Misure calcolate dal modello. Togli la spunta per inserirle tu.",
+    "fitFree": "Misure libere: inserisci le misure interne della tua cassaforma.",
+    "fitUnavailable": "Prima descrivi il modello con forma e misure (passo 1).",
     "margin": "margine",
     "marginEditHint": "Clicca per modificare il margine"
   },
@@ -179,12 +184,12 @@
     "intro": "In cinque passaggi, calcola e prepara la quantità giusta di gesso per riempire il tuo stampo senza sprechi.",
     "steps": [
       {
-        "title": "Misurare il volume dello stampo",
-        "text": "Prendi le misure interne della cassaforma (lunghezza, larghezza, altezza di colata che vuoi). È il volume totale da riempire di gesso."
+        "title": "Stimare il volume del modello",
+        "text": "Scegli la forma più simile al tuo modello e prendine le misure, oppure misura il suo volume immergendolo in un recipiente graduato. Senza modello, passa al passaggio successivo."
       },
       {
-        "title": "Stimare il volume del modello",
-        "text": "Se nello stampo c'è un modello, sottrai il suo volume. Scegli la forma più simile, oppure misuralo immergendolo in un recipiente graduato."
+        "title": "Misurare il volume dello stampo",
+        "text": "Prendi le misure interne della cassaforma (lunghezza, larghezza, altezza di colata che vuoi), oppure ricavale dal modello aggiungendo un margine. Il gesso riempie questo volume, meno quello del modello."
       },
       {
         "title": "Scegliere il rapporto gesso / acqua",

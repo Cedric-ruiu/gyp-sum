@@ -20,23 +20,28 @@
   },
   "meta": {
     "title": "Gips-Wasser-Verhältnis für Gipsformen: kostenloser Rechner — GypSum",
-    "description": "Wie viel Wasser und Gips braucht deine Gipsform? Gib die Maße von Form und Modell ein: Der Rechner liefert die Wasser- und Gipsmenge. Kostenlos.",
+    "description": "Wie viel Wasser und Gips braucht deine Gipsform? Gib die Maße von Modell und Form ein: Der Rechner liefert die Wasser- und Gipsmenge. Kostenlos.",
     "keywords": "Gips Wasser Verhältnis, Gips Mischverhältnis, Gips anrühren Verhältnis, Modellgips anrühren, Keramikgips, Gipsform, Gipsform für Keramik, Gipsmenge berechnen",
     "ogTitle": "Gips-Wasser-Verhältnis für Gipsformen: kostenloser Rechner",
-    "ogDescription": "Wie viel Wasser und Gips braucht deine Gipsform? Gib die Maße von Form und Modell ein: Der Rechner liefert die Wasser- und Gipsmenge.",
+    "ogDescription": "Wie viel Wasser und Gips braucht deine Gipsform? Gib die Maße von Modell und Form ein: Der Rechner liefert die Wasser- und Gipsmenge.",
     "twitterDescription": "Wie viel Wasser und Gips braucht deine Gipsform? Der Rechner liefert die Wasser- und Gipsmenge, Modell bereits abgezogen.",
     "schemaApp": "Rechner für das Gips-Wasser-Verhältnis von Gipsformen (Keramik, Töpfern, Bildhauerei), auf Basis der Dichte von Gipspulver (2,63 kg/L)."
   },
   "intro": {
     "h1": "Gips-Wasser-Verhältnis für Gipsformen: der Rechner",
-    "lead": "Für eine Gipsform rechnet man meist mit 1,5 kg Gips pro Liter Wasser, also etwa 0,67 L Wasser auf 1 kg Gips: 1,3 für einen flüssigen Gips, der Details gut abformt, 1,8 für eine harte Form. Gib die Maße deiner Form und des Modells ein: Der Rechner liefert die genauen Mengen, das Modell bereits abgezogen."
+    "lead": "Für eine Gipsform rechnet man meist mit 1,5 kg Gips pro Liter Wasser, also etwa 0,67 L Wasser auf 1 kg Gips: 1,3 für einen flüssigen Gips, der Details gut abformt, 1,8 für eine harte Form. Gib die Maße des Modells und deiner Form ein: Der Rechner liefert die genauen Mengen, das Modell bereits abgezogen."
   },
   "mold": {
     "title": "Form",
     "volume": "Formvolumen",
     "titleTooltip": "Die Maße entsprechen der Innenseite deines Formkastens. Als Höhe gibst du die Füllhöhe an, bis zu der du Gips gießen willst, nicht unbedingt die Gesamthöhe des Formkastens.",
     "adaptToObject": "An Modell anpassen",
-    "adaptToObjectTooltip": "Berechnet die Mindestmaße der Form aus dem angegebenen Modell, mit 2,5 cm Rand auf jeder Seite und darüber. Die Formmaße werden automatisch aktualisiert: praktisch, um den Formkasten vor dem Gießen zu bemessen.",
+    "adaptToObjectTooltip": "Berechnet die Mindestmaße der Form aus dem Modell, mit einem Rand auf jeder Seite und darüber (standardmäßig 2,5 cm; klick auf den Wert, um ihn zu ändern). Solange die Option aktiv ist, folgt die Form jeder Änderung am Modell.",
+    "shapeTitle": "Grundform",
+    "dimensionsTitle": "Innenmaße",
+    "fitLinked": "Maße aus dem Modell berechnet. Deaktiviere die Option, um sie selbst einzugeben.",
+    "fitFree": "Freie Maße: Gib die Innenmaße deines Formkastens ein.",
+    "fitUnavailable": "Beschreibe zuerst das Modell mit Form und Maßen (Schritt 1).",
     "margin": "Rand",
     "marginEditHint": "Klicken, um den Rand zu ändern"
   },
@@ -179,12 +184,12 @@
     "intro": "In fünf Schritten berechnest und mischst du die richtige Gipsmenge, um deine Form ohne Verschwendung zu füllen.",
     "steps": [
       {
-        "title": "Formvolumen messen",
-        "text": "Miss die Innenmaße deines Formkastens (Länge, Breite, gewünschte Füllhöhe). Das ist das Gesamtvolumen, das mit Gips gefüllt wird."
+        "title": "Volumen des Modells schätzen",
+        "text": "Wähle die Form, die deinem Modell am nächsten kommt, und miss es aus, oder bestimme sein Volumen durch Eintauchen in einen Messbecher. Ohne Modell geht es direkt mit dem nächsten Schritt weiter."
       },
       {
-        "title": "Volumen des Modells schätzen",
-        "text": "Steht ein Modell in der Form, zieh sein Volumen ab. Wähle die ähnlichste Form oder miss es durch Eintauchen in einen Messbecher."
+        "title": "Formvolumen messen",
+        "text": "Miss die Innenmaße deines Formkastens (Länge, Breite, gewünschte Füllhöhe) oder leite sie aus dem Modell plus Rand ab. Der Gips füllt dieses Volumen, abzüglich des Modells."
       },
       {
         "title": "Gips-Wasser-Verhältnis wählen",

@@ -7,7 +7,7 @@ import SegmentedControl from "@/components/ui/SegmentedControl.vue";
 import type { MixParams, RatioMode } from "@/types";
 import { useUnits } from "@/units";
 
-const props = defineProps<{ modelValue: MixParams }>();
+const props = defineProps<{ modelValue: MixParams; step: number }>();
 const emit = defineEmits<(e: "update:modelValue", v: MixParams) => void>();
 
 const { t, n } = useI18n();
@@ -46,7 +46,7 @@ function updateMargin(v: number) {
   <section class="rounded border border-line px-5 py-5">
     <div class="mb-4 flex items-center">
       <h2 class="text-xs font-medium tracking-widest uppercase text-muted">
-        {{ t("mix.title") }}
+        <span class="mr-2 font-mono font-light">{{ step }}</span>{{ t("mix.title") }}
       </h2>
       <InfoTooltip :text="t('mix.titleTooltip')" :label="t('mix.title')" />
     </div>

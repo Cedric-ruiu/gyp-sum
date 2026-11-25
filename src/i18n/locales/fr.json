@@ -20,23 +20,28 @@
   },
   "meta": {
     "title": "Dosage eau / plâtre pour moulage\u00a0: calculateur gratuit — GypSum",
-    "description": "Quelle proportion d'eau et de plâtre pour votre moulage\u00a0? Entrez les dimensions du moule et de la pièce\u00a0: le calculateur donne l'eau et le plâtre. Gratuit.",
+    "description": "Quelle proportion d'eau et de plâtre pour votre moulage\u00a0? Entrez les dimensions de la pièce et du moule\u00a0: le calculateur donne l'eau et le plâtre. Gratuit.",
     "keywords": "calculateur plâtre, dosage plâtre eau, ratio plâtre eau, proportion eau plâtre, plâtre de moulage, moule céramique, plâtre poterie, plâtre de Paris, quantité plâtre moule",
     "ogTitle": "Dosage eau / plâtre pour moulage\u00a0: calculateur gratuit",
-    "ogDescription": "Quelle proportion d'eau et de plâtre pour votre moulage\u00a0? Entrez les dimensions du moule et de la pièce\u00a0: le calculateur donne l'eau et le plâtre.",
+    "ogDescription": "Quelle proportion d'eau et de plâtre pour votre moulage\u00a0? Entrez les dimensions de la pièce et du moule\u00a0: le calculateur donne l'eau et le plâtre.",
     "twitterDescription": "Quelle proportion d'eau et de plâtre pour votre moulage\u00a0? Le calculateur donne l'eau et le plâtre, pièce déduite.",
     "schemaApp": "Calculateur de dosage eau / plâtre pour le moulage (céramique, poterie, sculpture), basé sur la masse volumique du plâtre en poudre (2,63 kg/L)."
   },
   "intro": {
     "h1": "Dosage eau et plâtre pour un moulage\u00a0: le calculateur",
-    "lead": "Pour un moulage, comptez en général 1,5 kg de plâtre par litre d'eau, soit environ 0,67 L d'eau pour 1 kg de plâtre\u00a0: 1,3 pour un plâtre fluide qui prend bien les détails, 1,8 pour un moule dur. Indiquez les dimensions de votre moule et de la pièce\u00a0: le calculateur donne les quantités exactes, pièce déduite."
+    "lead": "Pour un moulage, comptez en général 1,5 kg de plâtre par litre d'eau, soit environ 0,67 L d'eau pour 1 kg de plâtre\u00a0: 1,3 pour un plâtre fluide qui prend bien les détails, 1,8 pour un moule dur. Indiquez les dimensions de la pièce et de votre moule\u00a0: le calculateur donne les quantités exactes, pièce déduite."
   },
   "mold": {
     "title": "Moule",
     "volume": "Volume du moule",
     "titleTooltip": "Les dimensions correspondent à celles de votre coffrage intérieur. La hauteur à renseigner est celle jusqu'où vous souhaitez remplir le plâtre, pas nécessairement la hauteur totale du coffrage.",
-    "adaptToObject": "Adapter au gabarit",
-    "adaptToObjectTooltip": "Calcule les dimensions minimales du moule à partir de la pièce définie, en ajoutant 2,5 cm de marge de chaque côté et au-dessus. Les dimensions du moule sont mises à jour automatiquement — utile pour dimensionner votre coffrage avant de commencer.",
+    "adaptToObject": "Adapter à la pièce",
+    "adaptToObjectTooltip": "Calcule les dimensions minimales du moule à partir de la pièce, avec une marge de chaque côté et au-dessus (2,5\u00a0cm par défaut, cliquez sur la valeur pour la changer). Tant que la case est cochée, le moule suit les changements de la pièce.",
+    "shapeTitle": "Forme",
+    "dimensionsTitle": "Dimensions intérieures",
+    "fitLinked": "Dimensions calculées à partir de la pièce. Décochez la case pour les saisir vous-même.",
+    "fitFree": "Dimensions libres\u00a0: saisissez celles de votre coffrage.",
+    "fitUnavailable": "Décrivez d'abord la pièce par sa forme et ses dimensions (étape 1).",
     "margin": "marge",
     "marginEditHint": "Cliquer pour modifier la marge"
   },
@@ -184,12 +189,12 @@
     "intro": "En cinq étapes, calculez et préparez la bonne quantité de plâtre pour remplir votre moule sans gâchis.",
     "steps": [
       {
-        "title": "Mesurer le volume du moule",
-        "text": "Relevez les dimensions intérieures de votre coffrage (longueur, largeur, hauteur de remplissage souhaitée). C'est le volume total à remplir de plâtre."
+        "title": "Estimer le volume de la pièce à mouler",
+        "text": "Choisissez la forme la plus proche de votre pièce et relevez ses dimensions, ou mesurez son volume par immersion dans un récipient gradué. Sans pièce, passez à l'étape suivante."
       },
       {
-        "title": "Estimer le volume de la pièce à mouler",
-        "text": "Si une pièce occupe le moule, soustrayez son volume. Choisissez la forme la plus proche, ou mesurez-le par immersion dans un récipient gradué."
+        "title": "Mesurer le volume du moule",
+        "text": "Relevez les dimensions intérieures de votre coffrage (longueur, largeur, hauteur de remplissage souhaitée), ou déduisez-les de la pièce en ajoutant une marge. Le plâtre remplit ce volume, moins celui de la pièce."
       },
       {
         "title": "Choisir le ratio plâtre / eau",

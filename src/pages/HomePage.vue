@@ -67,6 +67,7 @@ import {
   pageUrl,
   SITE_PAGES,
 } from "@/seo";
+import { DEFAULT_FIT_MARGIN, fitMold } from "@/shapes/fit";
 import type {
   MixParams,
   PersistedState,
@@ -217,6 +218,8 @@ const defaults: PersistedState = {
   mold: {
     shape: "box",
     dimensions: { length: 18, width: 17, height: 10 },
+    fit: true,
+    fitMargin: DEFAULT_FIT_MARGIN,
   },
   object: {
     shape: "none",
@@ -237,7 +240,9 @@ const state = useLocalStorage<PersistedState>("plaster-calc-state", defaults);
 // same value).
 let calculatorUseTracked = false;
 function updateState(patch: Partial<PersistedState>) {
-  const next = { ...state.value, ...patch };
+  const merged = { ...state.value, ...patch };
+  // A fitted mold follows every change to the object, its shape or margin.
+  const next = { ...merged, mold: fitMold(merged.mold, merged.object) };
   if (
     !calculatorUseTracked &&
     JSON.stringify(next) !== JSON.stringify(state.value)
@@ -346,9 +351,9 @@ function setUnitSystem(v: string) {
             :model-value="unitSystem"
             @update:model-value="setUnitSystem"
           />
-          <MoldConfigurator v-model="mold" :object-config="object" />
-          <ObjectConfigurator v-model="object" />
-          <MixParameters v-model="mix" />
+          <ObjectConfigurator v-model="object" :step="1" />
+          <MoldConfigurator v-model="mold" :object-config="object" :step="2" />
+          <MixParameters v-model="mix" :step="3" />
         </div>
 
         <!-- Results + 3D scene (right col, sticky, spans all rows).
