@@ -85,7 +85,8 @@
     "plaster": "Gips",
     "withMargin": "mit Zuschlag",
     "withoutMargin": "ohne Zuschlag",
-    "netVolume": "Nettovolumen"
+    "netVolume": "Nettovolumen",
+    "show": "Alle Ergebnisse anzeigen"
   },
   "contribute": {
     "text": "Fehlt eine Form? {github} oder {email}.",

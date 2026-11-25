@@ -85,7 +85,8 @@
     "plaster": "Yeso",
     "withMargin": "con margen",
     "withoutMargin": "sin margen",
-    "netVolume": "Volumen neto"
+    "netVolume": "Volumen neto",
+    "show": "Ver los resultados completos"
   },
   "contribute": {
     "text": "¿Falta una forma? {github} o {email}.",

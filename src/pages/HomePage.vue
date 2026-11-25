@@ -17,6 +17,7 @@ import MixParameters from "@/components/MixParameters.vue";
 import MoldConfigurator from "@/components/MoldConfigurator.vue";
 import ObjectConfigurator from "@/components/ObjectConfigurator.vue";
 import ResultPanel from "@/components/ResultPanel.vue";
+import ResultsBar from "@/components/ResultsBar.vue";
 import SiteFooter from "@/components/SiteFooter.vue";
 import SiteHeader from "@/components/SiteHeader.vue";
 import PwaInstallPrompt from "@/components/ui/PwaInstallPrompt.vue";
@@ -27,6 +28,7 @@ const SceneViewer = defineAsyncComponent(
 );
 
 const sceneSlot = ref<HTMLElement | null>(null);
+const resultsBlock = ref<HTMLElement | null>(null);
 
 const sceneVisible = ref(false);
 let sceneObserver: IntersectionObserver | null = null;
@@ -352,7 +354,8 @@ function setUnitSystem(v: string) {
         <!-- Results + 3D scene (right col, sticky, spans all rows).
              On mobile: order 3 — between configurators and guide for quick access. -->
         <div
-          class="order-3 lg:order-0 lg:col-start-2 lg:row-start-1 lg:row-span-3 lg:self-start lg:sticky lg:top-6"
+          ref="resultsBlock"
+          class="order-3 scroll-mt-4 lg:order-0 lg:col-start-2 lg:row-start-1 lg:row-span-3 lg:self-start lg:sticky lg:top-6"
         >
           <ResultPanel :result="result">
             <template #scene>
@@ -437,6 +440,10 @@ function setUnitSystem(v: string) {
 
     <SiteFooter />
 
-    <PwaInstallPrompt />
+    <!-- Fixed bottom dock: the results reminder stacks above the install banner. -->
+    <div class="fixed inset-x-0 bottom-0 z-40">
+      <ResultsBar :result="result" :target="resultsBlock" />
+      <PwaInstallPrompt />
+    </div>
   </div>
 </template>

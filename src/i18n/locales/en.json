@@ -93,7 +93,8 @@
     "plaster": "Plaster",
     "withMargin": "with margin",
     "withoutMargin": "without margin",
-    "netVolume": "Net volume"
+    "netVolume": "Net volume",
+    "show": "See full results"
   },
   "contribute": {
     "text": "Missing a shape? {github} or {email}.",

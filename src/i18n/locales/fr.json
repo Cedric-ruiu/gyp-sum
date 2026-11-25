@@ -85,7 +85,8 @@
     "plaster": "Plâtre",
     "withMargin": "avec marge",
     "withoutMargin": "sans marge",
-    "netVolume": "Volume net"
+    "netVolume": "Volume net",
+    "show": "Voir le détail des résultats"
   },
   "contribute": {
     "text": "Une forme manque\u00a0? {github} ou {email}.",

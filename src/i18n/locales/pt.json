@@ -85,7 +85,8 @@
     "plaster": "Gesso",
     "withMargin": "com margem",
     "withoutMargin": "sem margem",
-    "netVolume": "Volume líquido"
+    "netVolume": "Volume líquido",
+    "show": "Ver os resultados completos"
   },
   "contribute": {
     "text": "Falta uma forma? {github} ou {email}.",

@@ -75,6 +75,13 @@ body,
   height: 100%;
 }
 
+/* Below lg the results bar is fixed at the bottom: keep focused fields clear of it. */
+@media (width < 64rem) {
+  html {
+    scroll-padding-bottom: 4rem;
+  }
+}
+
 body {
   font-family: var(--font-sans);
   font-weight: 300;
