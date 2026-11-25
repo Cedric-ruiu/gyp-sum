@@ -2,7 +2,7 @@
 // sitemap, the language switcher and the share button.
 export const SITE_URL = "https://cedric-ruiu.github.io/gyp-sum";
 export const AUTHOR_URL = "https://cedric-ruiu.fr";
-export const OG_IMAGE = `${SITE_URL}/og-image.png`;
+export const OG_IMAGE = `${SITE_URL}/og-image.png?v=2`;
 
 // schema.org author, shared by every page's JSON-LD.
 export const AUTHOR_SCHEMA = {
@@ -29,50 +29,50 @@ export interface SitePage {
 // Every pre-rendered route must be listed here: the sitemap build fails on a
 // route without an entry.
 export const SITE_PAGES: SitePage[] = [
-  { path: "/", locale: "fr", group: "calculator", lastModified: "2026-10-27" },
+  { path: "/", locale: "fr", group: "calculator", lastModified: "2026-11-25" },
   {
     path: "/en/",
     locale: "en",
     group: "calculator",
-    lastModified: "2026-10-27",
+    lastModified: "2026-11-25",
   },
   {
     path: "/es/",
     locale: "es",
     group: "calculator",
-    lastModified: "2026-10-27",
+    lastModified: "2026-11-25",
   },
   {
     path: "/de/",
     locale: "de",
     group: "calculator",
-    lastModified: "2026-10-27",
+    lastModified: "2026-11-25",
   },
   {
     path: "/it/",
     locale: "it",
     group: "calculator",
-    lastModified: "2026-10-27",
+    lastModified: "2026-11-25",
   },
   {
     path: "/pt/",
     locale: "pt",
     group: "calculator",
-    lastModified: "2026-10-27",
+    lastModified: "2026-11-25",
   },
   {
     path: "/moule-en-platre/",
     locale: "fr",
     group: "moldGuide",
     published: "2026-10-27",
-    lastModified: "2026-10-27",
+    lastModified: "2026-11-24",
   },
   {
     path: "/en/how-to-make-a-plaster-mold/",
     locale: "en",
     group: "moldGuide",
     published: "2026-10-27",
-    lastModified: "2026-10-27",
+    lastModified: "2026-11-24",
   },
 ];
 

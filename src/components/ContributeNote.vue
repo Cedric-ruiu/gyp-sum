@@ -9,7 +9,7 @@ const { href, trackContact } = useContactAddress("results");
 </script>
 
 <template>
-  <I18nT keypath="contribute.text" tag="p" class="mt-3 text-sm font-light leading-relaxed text-muted">
+  <I18nT scope="global" keypath="contribute.text" tag="p" class="mt-3 text-sm font-light leading-relaxed text-muted">
     <template #github>
       <a
         href="https://github.com/Cedric-ruiu/gyp-sum/issues"

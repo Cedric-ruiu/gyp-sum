@@ -43,6 +43,10 @@ export interface SphereDimensions extends Dimensions {
 export interface MoldConfig {
   shape: ShapeType;
   dimensions: Dimensions;
+  // Dimensions follow the object (plus `fitMargin` cm) while on. Optional:
+  // states stored before this option have neither field (= off).
+  fit?: boolean;
+  fitMargin?: number;
 }
 
 export interface ObjectConfig {
@@ -54,7 +58,7 @@ export interface ObjectConfig {
 export interface MixParams {
   ratio: number; // kg/L, défaut 1.5
   margin: number; // 0-0.5, défaut 0.1
-  gypsumDensity: number; // constante 2.58
+  gypsumDensity: number; // constante 2.63 (PLASTER_DENSITY)
 }
 
 export interface CalculationResult {

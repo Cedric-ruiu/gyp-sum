@@ -16,7 +16,9 @@ import HowToGuide from "@/components/HowToGuide.vue";
 import MixParameters from "@/components/MixParameters.vue";
 import MoldConfigurator from "@/components/MoldConfigurator.vue";
 import ObjectConfigurator from "@/components/ObjectConfigurator.vue";
+import PrintSheet from "@/components/PrintSheet.vue";
 import ResultPanel from "@/components/ResultPanel.vue";
+import ResultsBar from "@/components/ResultsBar.vue";
 import SiteFooter from "@/components/SiteFooter.vue";
 import SiteHeader from "@/components/SiteHeader.vue";
 import PwaInstallPrompt from "@/components/ui/PwaInstallPrompt.vue";
@@ -27,10 +29,17 @@ const SceneViewer = defineAsyncComponent(
 );
 
 const sceneSlot = ref<HTMLElement | null>(null);
+const resultsBlock = ref<HTMLElement | null>(null);
+
 const sceneVisible = ref(false);
 let sceneObserver: IntersectionObserver | null = null;
 
+// The print sheet is client-only: kept out of the pre-rendered HTML, and
+// built from the visitor's restored values.
+const printSheetReady = ref(false);
+
 onMounted(() => {
+  printSheetReady.value = true;
   if (!sceneSlot.value) return;
   sceneObserver = new IntersectionObserver(
     (entries) => {
@@ -51,7 +60,7 @@ onUnmounted(() => {
 });
 
 import { track } from "@/analytics";
-import { useCalculator } from "@/composables/useCalculator";
+import { PLASTER_DENSITY, useCalculator } from "@/composables/useCalculator";
 import { useLocalStorage } from "@/composables/useLocalStorage";
 import { markEngaged } from "@/composables/usePwaInstall";
 import {
@@ -64,6 +73,7 @@ import {
   pageUrl,
   SITE_PAGES,
 } from "@/seo";
+import { DEFAULT_FIT_MARGIN, fitMold } from "@/shapes/fit";
 import type {
   MixParams,
   PersistedState,
@@ -77,6 +87,18 @@ const { t, tm, rt, locale } = useI18n();
 
 // The mold-making guide exists in French only for now.
 const moldGuidePage = computed(() => localePage("moldGuide", locale.value));
+
+// "On this page" links: in-page anchors, then the mold guide when the locale
+// has one.
+const tocItems = computed(() => [
+  { label: t("toc.guide"), href: "#guide" },
+  { label: t("toc.yourPlaster"), href: "#your-plaster" },
+  { label: t("toc.howto"), href: "#how-to" },
+  { label: t("toc.faq"), href: "#faq" },
+  ...(moldGuidePage.value
+    ? [{ label: t("toc.moldGuide"), route: moldGuidePage.value.path }]
+    : []),
+]);
 
 const yourPlasterParagraphs = computed(
   () => tm("yourPlaster.paragraphs") as string[],
@@ -143,14 +165,24 @@ useHead(() => {
     ),
   };
 
+  // Same answer and source line as FaqSection.vue (HTML links are allowed).
+  const faqAnswer = (it: { a: string; source?: string }) => {
+    if (!it.source) return rt(it.a);
+    const key = `sources.${rt(it.source)}`;
+    const label = t("format.label", { label: t("sources.label") });
+    return `${rt(it.a)} ${label} <a href="${t(`${key}.url`)}">${t(`${key}.name`)}</a>`;
+  };
+
   const faqSchema = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
     inLanguage,
-    mainEntity: (tm("faq.items") as { q: string; a: string }[]).map((it) => ({
+    mainEntity: (
+      tm("faq.items") as { q: string; a: string; source?: string }[]
+    ).map((it) => ({
       "@type": "Question",
       name: rt(it.q),
-      acceptedAnswer: { "@type": "Answer", text: rt(it.a) },
+      acceptedAnswer: { "@type": "Answer", text: faqAnswer(it) },
     })),
   };
 
@@ -192,6 +224,8 @@ const defaults: PersistedState = {
   mold: {
     shape: "box",
     dimensions: { length: 18, width: 17, height: 10 },
+    fit: true,
+    fitMargin: DEFAULT_FIT_MARGIN,
   },
   object: {
     shape: "none",
@@ -212,7 +246,9 @@ const state = useLocalStorage<PersistedState>("plaster-calc-state", defaults);
 // same value).
 let calculatorUseTracked = false;
 function updateState(patch: Partial<PersistedState>) {
-  const next = { ...state.value, ...patch };
+  const merged = { ...state.value, ...patch };
+  // A fitted mold follows every change to the object, its shape or margin.
+  const next = { ...merged, mold: fitMold(merged.mold, merged.object) };
   if (
     !calculatorUseTracked &&
     JSON.stringify(next) !== JSON.stringify(state.value)
@@ -234,7 +270,7 @@ const object = computed({
 });
 
 const mix = computed<MixParams>({
-  get: () => ({ ...state.value.mix, gypsumDensity: 2.58 }),
+  get: () => ({ ...state.value.mix, gypsumDensity: PLASTER_DENSITY }),
   set: (v) => updateState({ mix: { ratio: v.ratio, margin: v.margin } }),
 });
 
@@ -275,7 +311,7 @@ function setUnitSystem(v: string) {
 </script>
 
 <template>
-  <div class="min-h-full bg-white text-[color:var(--color-ink)]">
+  <div class="min-h-full bg-white text-[color:var(--color-ink)] print:hidden">
     <SiteHeader />
 
     <main class="mx-auto max-w-6xl px-6 py-8">
@@ -285,13 +321,30 @@ function setUnitSystem(v: string) {
         <!-- Intro (left col, row 1) -->
         <div class="order-1 lg:order-0 lg:col-start-1 lg:row-start-1 max-w-2xl">
           <p class="text-base font-light leading-relaxed text-muted">{{ t("intro.lead") }}</p>
-          <nav class="mt-4 flex flex-wrap items-center gap-x-4 gap-y-1 text-xs font-light text-muted">
-            <span class="uppercase tracking-widest">{{ t("toc.label") }}</span>
-            <a href="#guide" class="link">{{ t("toc.guide") }}</a>
-            <a href="#your-plaster" class="link">{{ t("toc.yourPlaster") }}</a>
-            <a href="#how-to" class="link">{{ t("toc.howto") }}</a>
-            <a href="#faq" class="link">{{ t("toc.faq") }}</a>
-            <RouterLink v-if="moldGuidePage" :to="moldGuidePage.path" class="link">{{ t("toc.moldGuide") }}</RouterLink>
+          <!-- Phone: a 48px toggle opening the full list of 48px links, so the
+               calculator stays in the first screen. Wider screens: inline row. -->
+          <details class="group mt-2 sm:hidden">
+            <summary
+              class="-mx-2 inline-flex min-h-12 cursor-pointer list-none items-center gap-1.5 px-2 text-xs font-light tracking-widest uppercase text-muted [&::-webkit-details-marker]:hidden"
+            >
+              {{ t("toc.label") }}
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="h-3.5 w-3.5 transition-transform duration-150 group-open:rotate-180" aria-hidden="true">
+                <path d="m6 9 6 6 6-6" />
+              </svg>
+            </summary>
+            <nav :aria-label="t('toc.label')" class="flex flex-col border-l border-line pl-4 text-sm font-light">
+              <template v-for="item in tocItems" :key="item.label">
+                <RouterLink v-if="item.route" :to="item.route" class="link flex min-h-12 items-center self-start">{{ item.label }}</RouterLink>
+                <a v-else :href="item.href" class="link flex min-h-12 items-center self-start">{{ item.label }}</a>
+              </template>
+            </nav>
+          </details>
+          <nav :aria-label="t('toc.label')" class="mt-4 hidden flex-wrap items-center gap-x-4 gap-y-1 text-xs font-light text-muted sm:flex">
+            <span class="uppercase tracking-widest" aria-hidden="true">{{ t("toc.label") }}</span>
+            <template v-for="item in tocItems" :key="item.label">
+              <RouterLink v-if="item.route" :to="item.route" class="link">{{ item.label }}</RouterLink>
+              <a v-else :href="item.href" class="link">{{ item.label }}</a>
+            </template>
           </nav>
         </div>
 
@@ -304,15 +357,16 @@ function setUnitSystem(v: string) {
             :model-value="unitSystem"
             @update:model-value="setUnitSystem"
           />
-          <MoldConfigurator v-model="mold" :object-config="object" />
-          <ObjectConfigurator v-model="object" />
-          <MixParameters v-model="mix" />
+          <ObjectConfigurator v-model="object" :step="1" />
+          <MoldConfigurator v-model="mold" :object-config="object" :step="2" />
+          <MixParameters v-model="mix" :step="3" />
         </div>
 
         <!-- Results + 3D scene (right col, sticky, spans all rows).
              On mobile: order 3 — between configurators and guide for quick access. -->
         <div
-          class="order-3 lg:order-0 lg:col-start-2 lg:row-start-1 lg:row-span-3 lg:self-start lg:sticky lg:top-6"
+          ref="resultsBlock"
+          class="order-3 scroll-mt-4 lg:order-0 lg:col-start-2 lg:row-start-1 lg:row-span-3 lg:self-start lg:sticky lg:top-6"
         >
           <ResultPanel :result="result">
             <template #scene>
@@ -397,6 +451,18 @@ function setUnitSystem(v: string) {
 
     <SiteFooter />
 
-    <PwaInstallPrompt />
+    <!-- Fixed bottom dock: the results reminder stacks above the install banner. -->
+    <div class="fixed inset-x-0 bottom-0 z-40">
+      <ResultsBar :result="result" :target="resultsBlock" />
+      <PwaInstallPrompt />
+    </div>
   </div>
+
+  <PrintSheet
+    v-if="printSheetReady"
+    :mold="mold"
+    :object="object"
+    :mix="mix"
+    :result="result"
+  />
 </template>

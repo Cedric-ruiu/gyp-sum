@@ -3,7 +3,7 @@
   "type": "module",
   "version": "1.0.0",
   "name": "gyp-sum",
-  "description": "Calculateur de dosage eau / plâtre pour moulage — calcul précis basé sur la masse volumique du plâtre en poudre (2,58 kg/L). SPA Vue 3, open source.",
+  "description": "Calculateur de dosage eau / plâtre pour moulage — calcul précis basé sur la masse volumique du plâtre en poudre (2,63 kg/L). SPA Vue 3, open source.",
   "keywords": [
     "plaster",
     "calculator",
@@ -26,23 +26,23 @@
     "format": "biome check . --write --unsafe"
   },
   "devDependencies": {
-    "@biomejs/biome": "2.6.3",
-    "@tailwindcss/vite": "4.3.3",
-    "@types/node": "26.6.5",
-    "@types/three": "0.186.0",
-    "@vitejs/plugin-vue": "6.0.10",
+    "@biomejs/biome": "2.6.9",
+    "@tailwindcss/vite": "4.3.5",
+    "@types/node": "26.6.10",
+    "@types/three": "0.187.0",
+    "@vitejs/plugin-vue": "6.0.11",
     "typescript": "6.0.3",
-    "vite": "8.3.5",
+    "vite": "8.3.8",
     "vite-ssg": "28.3.0",
-    "vue-tsc": "3.3.13"
+    "vue-tsc": "3.3.14"
   },
   "packageManager": "yarn@4.13.0",
   "dependencies": {
-    "@unhead/vue": "^2.1.17",
-    "tailwindcss": "4.3.3",
-    "three": "0.186.1",
-    "vue": "3.5.44",
-    "vue-i18n": "11.4.16",
-    "vue-router": "5.4.0"
+    "@unhead/vue": "^2.1.19",
+    "tailwindcss": "4.3.5",
+    "three": "0.187.0",
+    "vue": "3.5.46",
+    "vue-i18n": "11.4.23",
+    "vue-router": "5.5.1"
   }
 }

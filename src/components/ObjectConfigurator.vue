@@ -8,7 +8,7 @@ import { objectShapeRegistry } from "@/shapes/registry";
 import type { Dimensions, ObjectConfig } from "@/types";
 import { useUnits } from "@/units";
 
-const props = defineProps<{ modelValue: ObjectConfig }>();
+const props = defineProps<{ modelValue: ObjectConfig; step: number }>();
 const emit = defineEmits<(e: "update:modelValue", v: ObjectConfig) => void>();
 
 const { t, n } = useI18n();
@@ -87,7 +87,7 @@ const volume = computed(() => {
   <section class="rounded border border-line px-5 py-5" style="background: rgba(245,158,11,0.06)">
     <div class="mb-4 flex items-center">
       <h2 class="text-xs font-medium tracking-widest uppercase text-accent-soft-strong">
-        {{ t("object.title") }}
+        <span class="mr-2 font-mono font-light">{{ step }}</span>{{ t("object.title") }}
       </h2>
       <InfoTooltip :text="t('object.titleTooltip')" :label="t('object.title')" />
     </div>

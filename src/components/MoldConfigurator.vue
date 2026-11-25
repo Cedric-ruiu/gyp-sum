@@ -1,49 +1,80 @@
 <script setup lang="ts">
-import { computed, nextTick, ref } from "vue";
+import { computed, nextTick, ref, useId } from "vue";
 import { useI18n } from "vue-i18n";
 import InfoTooltip from "@/components/ui/InfoTooltip.vue";
 import NumberInput from "@/components/ui/NumberInput.vue";
 import ShapeSelector from "@/components/ui/ShapeSelector.vue";
+import { canFitMold, DEFAULT_FIT_MARGIN } from "@/shapes/fit";
 import { moldShapeRegistry } from "@/shapes/registry";
+import type { ShapeField } from "@/shapes/types";
 import type { Dimensions, MoldConfig, ObjectConfig } from "@/types";
 import { useUnits } from "@/units";
 
 const props = defineProps<{
   modelValue: MoldConfig;
   objectConfig?: ObjectConfig | null;
+  step: number;
 }>();
 const emit = defineEmits<(e: "update:modelValue", v: MoldConfig) => void>();
 
 const { t, n } = useI18n();
 const units = useUnits();
+const fitHelpId = useId();
+
+const currentShape = computed(
+  () =>
+    moldShapeRegistry.find((s) => s.type === props.modelValue.shape) ??
+    moldShapeRegistry[0],
+);
+
+// The dimensions themselves are derived in HomePage (fitMold), on every
+// change to the object, the mold shape or the margin.
+const canFit = computed(() =>
+  canFitMold(props.modelValue.shape, props.objectConfig),
+);
+const fitActive = computed(() => canFit.value && !!props.modelValue.fit);
+
+const fitHelp = computed(() => {
+  if (!canFit.value) return t("mold.fitUnavailable");
+  return fitActive.value ? t("mold.fitLinked") : t("mold.fitFree");
+});
+
+function setFit(e: Event) {
+  const fit = (e.target as HTMLInputElement).checked;
+  emit("update:modelValue", { ...props.modelValue, fit });
+}
 
 // Stored in cm; shown and edited in the current length unit.
-const adaptMargin = ref(2.5);
+const fitMargin = computed(
+  () => props.modelValue.fitMargin ?? DEFAULT_FIT_MARGIN,
+);
 const editingMargin = ref(false);
 const marginRaw = ref("");
 const marginInputEl = ref<HTMLInputElement | null>(null);
 
-const adaptMarginShown = computed(() =>
-  units.toInput("length", adaptMargin.value),
-);
-const adaptMarginDisplay = computed(() =>
-  n(adaptMarginShown.value, { maximumFractionDigits: 1 }),
+const marginShown = computed(() => units.toInput("length", fitMargin.value));
+const marginDisplay = computed(() =>
+  n(marginShown.value, { maximumFractionDigits: 1 }),
 );
 
-function startEditMargin() {
-  marginRaw.value = String(adaptMarginShown.value);
+async function startEditMargin() {
+  marginRaw.value = String(marginShown.value);
   editingMargin.value = true;
-  nextTick(() => marginInputEl.value?.select());
+  await nextTick();
+  marginInputEl.value?.select();
 }
 
 function commitMargin() {
   const parsed = Number(marginRaw.value.replace(",", "."));
   if (!Number.isNaN(parsed) && parsed >= 0.1) {
-    adaptMargin.value = units.fromInput(
+    const margin = units.fromInput(
       "length",
       Math.round(parsed * 10) / 10,
-      adaptMargin.value,
+      fitMargin.value,
     );
+    if (margin !== fitMargin.value) {
+      emit("update:modelValue", { ...props.modelValue, fitMargin: margin });
+    }
   }
   editingMargin.value = false;
 }
@@ -54,16 +85,10 @@ function cancelEdit() {
 
 function stepMargin(delta: number) {
   const current = Number(marginRaw.value.replace(",", "."));
-  const base = Number.isNaN(current) ? adaptMarginShown.value : current;
+  const base = Number.isNaN(current) ? marginShown.value : current;
   const next = Math.max(0.1, Math.round((base + delta) * 10) / 10);
   marginRaw.value = String(next);
 }
-
-const currentShape = computed(
-  () =>
-    moldShapeRegistry.find((s) => s.type === props.modelValue.shape) ??
-    moldShapeRegistry[0],
-);
 
 function updateShape(type: string) {
   const def = moldShapeRegistry.find((s) => s.type === type);
@@ -73,20 +98,41 @@ function updateShape(type: string) {
     dims[f.key] = props.modelValue.dimensions?.[f.key] ?? f.defaultValue;
   }
   emit("update:modelValue", {
+    ...props.modelValue,
     shape: type as MoldConfig["shape"],
     dimensions: dims,
   });
 }
 
-function fieldValue(key: string, fallback: number): number {
-  return props.modelValue.dimensions[key] ?? fallback;
+function fieldValue(field: ShapeField): number {
+  return props.modelValue.dimensions[field.key] ?? field.defaultValue;
 }
 
-function updateField(key: string, unitKey: string, shown: number) {
-  const current = props.modelValue.dimensions[key] ?? 0;
-  const val = units.fromInput(units.fieldQuantity(unitKey), shown, current);
-  const dims: Dimensions = { ...props.modelValue.dimensions, [key]: val };
-  emit("update:modelValue", { ...props.modelValue, dimensions: dims });
+function updateField(field: ShapeField, shown: number) {
+  const current = fieldValue(field);
+  const val = units.fromInput(
+    units.fieldQuantity(field.unitKey),
+    shown,
+    current,
+  );
+  // A blur re-emits the shown value: only a real edit frees a fitted mold.
+  if (val === current) return;
+  const dims: Dimensions = { ...props.modelValue.dimensions, [field.key]: val };
+  emit("update:modelValue", {
+    ...props.modelValue,
+    fit: false,
+    dimensions: dims,
+  });
+}
+
+function fieldDisplay(field: ShapeField): string {
+  const shown = units.toInput(
+    units.fieldQuantity(field.unitKey),
+    fieldValue(field),
+  );
+  return n(shown, {
+    maximumFractionDigits: units.system.value === "us" ? 2 : 1,
+  });
 }
 
 const volume = computed(() => {
@@ -95,180 +141,113 @@ const volume = computed(() => {
   const values = def.fields.map((f) => Number(dims?.[f.key]) || 0);
   return def.computeVolume(values);
 });
-
-const canAdapt = computed(() => {
-  const obj = props.objectConfig;
-  return (
-    !!obj &&
-    obj.shape !== "none" &&
-    obj.manualVolume === null &&
-    !!obj.dimensions
-  );
-});
-
-function adaptToObject() {
-  const obj = props.objectConfig;
-  if (!obj?.dimensions) return;
-
-  const d = obj.dimensions;
-  const m = adaptMargin.value;
-  const moldShape = props.modelValue.shape;
-  let dims: Dimensions | null = null;
-
-  if (moldShape === "box") {
-    if (obj.shape === "box") {
-      dims = {
-        length: (d.length || 0) + 2 * m,
-        width: (d.width || 0) + 2 * m,
-        height: (d.height || 0) + m,
-      };
-    } else if (obj.shape === "cylinder") {
-      const diam = d.diameter || 0;
-      dims = {
-        length: diam + 2 * m,
-        width: diam + 2 * m,
-        height: (d.height || 0) + m,
-      };
-    } else if (obj.shape === "sphere") {
-      const diam = d.diameter || 0;
-      dims = { length: diam + 2 * m, width: diam + 2 * m, height: diam + m };
-    } else if (obj.shape === "half-sphere") {
-      const diam = d.diameter || 0;
-      dims = {
-        length: diam + 2 * m,
-        width: diam + 2 * m,
-        height: diam / 2 + m,
-      };
-    } else if (obj.shape === "frustum") {
-      const maxDiam = Math.max(d.diameterBottom || 0, d.diameterTop || 0);
-      dims = {
-        length: maxDiam + 2 * m,
-        width: maxDiam + 2 * m,
-        height: (d.height || 0) + m,
-      };
-    } else if (obj.shape === "spherical-cap") {
-      const diam = d.diameter || 0;
-      dims = {
-        length: diam + 2 * m,
-        width: diam + 2 * m,
-        height: (d.height || 0) + m,
-      };
-    }
-  } else if (moldShape === "cylinder") {
-    if (obj.shape === "box") {
-      const l = d.length || 0;
-      const w = d.width || 0;
-      // diagonal to fully encompass box corners in the cylinder
-      dims = {
-        diameter: Math.sqrt(l * l + w * w) + 2 * m,
-        height: (d.height || 0) + m,
-      };
-    } else if (obj.shape === "cylinder") {
-      dims = {
-        diameter: (d.diameter || 0) + 2 * m,
-        height: (d.height || 0) + m,
-      };
-    } else if (obj.shape === "sphere") {
-      const diam = d.diameter || 0;
-      dims = { diameter: diam + 2 * m, height: diam + m };
-    } else if (obj.shape === "half-sphere") {
-      const diam = d.diameter || 0;
-      dims = { diameter: diam + 2 * m, height: diam / 2 + m };
-    } else if (obj.shape === "frustum") {
-      const maxDiam = Math.max(d.diameterBottom || 0, d.diameterTop || 0);
-      dims = { diameter: maxDiam + 2 * m, height: (d.height || 0) + m };
-    } else if (obj.shape === "spherical-cap") {
-      const diam = d.diameter || 0;
-      dims = { diameter: diam + 2 * m, height: (d.height || 0) + m };
-    }
-  }
-
-  if (dims)
-    emit("update:modelValue", { ...props.modelValue, dimensions: dims });
-}
 </script>
 
 <template>
   <section class="rounded border border-line bg-blue-50/40 px-5 py-5">
-    <div class="mb-4 flex items-center">
-      <h2 class="text-xs font-medium tracking-widest uppercase text-accent">
-        {{ t("mold.title") }}
-      </h2>
-      <InfoTooltip :text="t('mold.titleTooltip')" :label="t('mold.title')" />
-    </div>
+    <h2 class="mb-4 text-xs font-medium tracking-widest uppercase text-accent">
+      <span class="mr-2 font-mono font-light">{{ step }}</span>{{ t("mold.title") }}
+    </h2>
 
+    <h3 class="mb-2 text-xs font-medium text-ink">{{ t("mold.shapeTitle") }}</h3>
     <ShapeSelector
       :shapes="moldShapeRegistry"
       :model-value="modelValue.shape"
       @update:model-value="updateShape"
     />
 
-    <div class="fields-grid-wrap mt-4">
-    <div
-      class="fields-grid"
-      :style="{ '--fields-count': currentShape.fields.length }"
-    >
-      <NumberInput
-        v-for="field in currentShape.fields"
-        :key="field.key"
-        :label="t(field.labelKey)"
-        :unit="t(units.labelKey(units.fieldQuantity(field.unitKey)))"
-        :min="field.min"
-        :decimals="units.system.value === 'us' ? 2 : 1"
-        :model-value="units.toInput(units.fieldQuantity(field.unitKey), fieldValue(field.key, field.defaultValue))"
-        @update:model-value="updateField(field.key, field.unitKey, $event)"
-      />
-    </div>
-    </div>
-
-    <div class="mt-3 flex items-center gap-1.5">
-      <button
-        type="button"
-        class="inline-flex min-h-12 cursor-pointer items-center gap-1.5 rounded border border-line px-3 py-1.5 text-xs sm:min-h-0 font-light text-muted transition-colors duration-150 hover:border-accent hover:bg-accent/5 hover:text-accent disabled:cursor-not-allowed disabled:opacity-35"
-        :disabled="!canAdapt"
-        @click="adaptToObject"
-      >
-        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="h-3.5 w-3.5 shrink-0" aria-hidden="true">
-          <rect x="5.5" y="5.5" width="5" height="5" />
-          <path d="M1 4V1h3M12 1h3v3M1 12v3h3M12 15h3v-3" />
-        </svg>
-        {{ t("mold.adaptToObject") }}
-      </button>
-      <span class="flex items-center gap-0.5 select-none text-xs font-light text-muted">
-        {{ t("mold.margin") }}
-        <button
-          v-if="!editingMargin"
-          type="button"
-          class="min-h-12 min-w-12 p-2 font-mono text-ink underline sm:min-h-0 sm:min-w-0 decoration-dashed underline-offset-2 transition-colors duration-150 hover:text-accent"
-          :title="t('mold.marginEditHint')"
-          @click="startEditMargin"
-        >{{ adaptMarginDisplay }}</button>
-        <input
-          v-else
-          ref="marginInputEl"
-          v-model="marginRaw"
-          type="text"
-          inputmode="decimal"
-          class="w-12 border-b border-ink bg-transparent font-mono text-base text-ink outline-none text-center sm:w-8 sm:text-xs"
-          @blur="commitMargin"
-          @keydown.enter.prevent="commitMargin"
-          @keydown.escape="cancelEdit"
-          @keydown.up.prevent="stepMargin(0.5)"
-          @keydown.down.prevent="stepMargin(-0.5)"
+    <div class="mt-3">
+      <div class="flex flex-wrap items-center gap-x-3">
+        <label
+          class="inline-flex min-h-12 items-center gap-2 text-xs font-light sm:min-h-8"
+          :class="canFit ? 'cursor-pointer text-ink' : 'cursor-not-allowed text-muted opacity-55'"
+        >
+          <input
+            type="checkbox"
+            class="h-4 w-4 cursor-[inherit] accent-accent"
+            :checked="fitActive"
+            :disabled="!canFit"
+            :aria-describedby="fitHelpId"
+            @change="setFit"
+          />
+          {{ t("mold.adaptToObject") }}
+        </label>
+        <span
+          class="flex items-center gap-0.5 select-none text-xs font-light text-muted transition-opacity duration-150"
+          :class="{ 'opacity-55': !fitActive }"
+        >
+          {{ t("mold.margin") }}
+          <button
+            v-if="!editingMargin"
+            type="button"
+            class="min-h-12 min-w-12 p-2 font-mono text-ink underline sm:min-h-0 sm:min-w-0 decoration-dashed underline-offset-2 transition-colors duration-150 enabled:hover:text-accent disabled:cursor-not-allowed disabled:no-underline"
+            :title="t('mold.marginEditHint')"
+            :disabled="!fitActive"
+            @click="startEditMargin"
+          >{{ marginDisplay }}</button>
+          <input
+            v-else
+            ref="marginInputEl"
+            v-model="marginRaw"
+            type="text"
+            inputmode="decimal"
+            class="w-12 border-b border-ink bg-transparent font-mono text-base text-ink outline-none text-center sm:w-8 sm:text-xs"
+            @blur="commitMargin"
+            @keydown.enter.prevent="commitMargin"
+            @keydown.escape="cancelEdit"
+            @keydown.up.prevent="stepMargin(0.5)"
+            @keydown.down.prevent="stepMargin(-0.5)"
+          />
+          {{ t(units.labelKey("length")) }}
+        </span>
+        <InfoTooltip
+          :text="t('mold.adaptToObjectTooltip')"
+          :label="t('mold.adaptToObject')"
         />
-        {{ t(units.labelKey("length")) }}
-      </span>
-      <InfoTooltip
-        :text="t('mold.adaptToObjectTooltip')"
-        :label="t('mold.adaptToObject')"
-      />
+      </div>
+      <p :id="fitHelpId" class="text-xs font-light text-muted">{{ fitHelp }}</p>
     </div>
 
-    <p class="mt-4 text-xs font-light text-muted">
-      {{ t("format.label", { label: t("mold.volume") }) }}
-      <span class="font-mono tnum text-ink">
-        {{ n(units.convert("volume", volume), { maximumFractionDigits: 2, minimumFractionDigits: 2 }) }} {{ t(units.labelKey("volume")) }}
-      </span>
-    </p>
+    <div class="mt-4 border-t border-line pt-4">
+      <div class="mb-2 flex items-center">
+        <h3 class="text-xs font-medium text-ink">{{ t("mold.dimensionsTitle") }}</h3>
+        <InfoTooltip :text="t('mold.titleTooltip')" :label="t('mold.dimensionsTitle')" />
+      </div>
+
+      <!-- Fitted: computed from the object, shown read-only. -->
+      <dl v-if="fitActive" class="flex flex-wrap gap-x-8 gap-y-3">
+        <div v-for="field in currentShape.fields" :key="field.key" class="flex flex-col gap-1">
+          <dt class="text-xs font-light text-muted uppercase tracking-wide">{{ t(field.labelKey) }}</dt>
+          <dd class="font-mono text-sm font-light tnum text-ink">
+            {{ fieldDisplay(field) }}
+            <span class="text-xs text-muted">{{ t(units.labelKey(units.fieldQuantity(field.unitKey))) }}</span>
+          </dd>
+        </div>
+      </dl>
+      <div v-else class="fields-grid-wrap">
+      <div
+        class="fields-grid"
+        :style="{ '--fields-count': currentShape.fields.length }"
+      >
+        <NumberInput
+          v-for="field in currentShape.fields"
+          :key="field.key"
+          :label="t(field.labelKey)"
+          :unit="t(units.labelKey(units.fieldQuantity(field.unitKey)))"
+          :min="field.min"
+          :decimals="units.system.value === 'us' ? 2 : 1"
+          :model-value="units.toInput(units.fieldQuantity(field.unitKey), fieldValue(field))"
+          @update:model-value="updateField(field, $event)"
+        />
+      </div>
+      </div>
+
+      <p class="mt-4 text-xs font-light text-muted">
+        {{ t("format.label", { label: t("mold.volume") }) }}
+        <span class="font-mono tnum text-ink">
+          {{ n(units.convert("volume", volume), { maximumFractionDigits: 2, minimumFractionDigits: 2 }) }} {{ t(units.labelKey("volume")) }}
+        </span>
+      </p>
+    </div>
   </section>
 </template>

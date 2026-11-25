@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useI18n } from "vue-i18n";
+import PrintButton from "@/components/ui/PrintButton.vue";
 import type { CalculationResult } from "@/types";
 import { useUnits } from "@/units";
 
@@ -76,5 +77,7 @@ function fmtSmall(v: number): string {
     <div class="mt-5">
       <slot name="scene" />
     </div>
+
+    <PrintButton class="mt-4" :disabled="!result.isValid" />
   </section>
 </template>

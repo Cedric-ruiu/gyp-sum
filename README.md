@@ -12,7 +12,7 @@
 
 ## What is it?
 
-**GypSum** is a precision plaster calculator for mold making. It computes the exact water and plaster quantities needed to fill a mold, based on the density of powdered plaster (2.58 kg/L) and the net volume between the mold and the object being cast.
+**GypSum** is a precision plaster calculator for mold making. It computes the exact water and plaster quantities needed to fill a mold, based on the density of powdered plaster (2.63 kg/L) and the net volume between the mold and the object being cast.
 
 No more guessing, no more wasted material. Just enter your mold dimensions, describe the object inside, set your mixing ratio and safety margin — GypSum does the math.
 
@@ -24,10 +24,11 @@ No more guessing, no more wasted material. Just enter your mold dimensions, desc
 - **Object configurator** — supports box, cylinder, cone frustum, sphere, half-sphere and spherical cap shapes, or direct volume entry
 - **Mix parameters** — configurable plaster-to-water ratio and waste margin
 - **Live 3D scene** — interactive wireframe preview of the mold and object, with orbit controls and auto-rotation
+- **Printable workshop sheet** — one page with your amounts, a dimensioned drawing of the mold (section and top view), your parameters and a mixing checklist
 - **Precise formulas** — water and plaster amounts derived from plaster density, not rule-of-thumb ratios
 - **State persistence** — your inputs are saved in `localStorage` and restored on next visit
 - **No installation** — runs entirely in the browser, no account or backend required
-- **Three languages** — French, English (with US units) and Spanish, plus a step-by-step mold-making guide in French and English
+- **Six languages** — French, English (with US units), Spanish, German, Italian and Portuguese, plus a step-by-step mold-making guide in French and English
 
 ---
 
@@ -37,11 +38,13 @@ GypSum uses the following formula, fixed and not user-configurable:
 
 ```
 Net volume  = Mold volume − Object volume
-Water       = Net volume / (1 + Ratio / 2.58)
+Water       = Net volume / (1 + Ratio / 2.63)
 Plaster     = Ratio × Water
 ```
 
-The constant **2.58 kg/L** is the density of powdered plaster (calcium sulfate hemihydrate, CaSO₄·½H₂O). It varies slightly between plasters; the effect on the amounts stays below the default 10% safety margin.
+The constant **2.63 kg/L** is the density of the plaster grains (calcium sulfate hemihydrate, CaSO₄·½H₂O) for β plaster. Source: [International Chemical Safety Card ICSC 1217 (ILO/WHO)](https://chemicalsafety.ilo.org/dyn/icsc/showcard.display?p_card_id=1217&p_version=2&p_lang=en), which gives 2.63 g/cm³ for β and 2.76 g/cm³ for α hemihydrate. Data sheets of common mold-making plasters such as Molda 3 do not state the type, but their water demand (about 65 parts water per 100 parts plaster, against 30 to 40 for α) is that of a β plaster. With an α (hard) plaster, the amounts come out less than 3% low, within the default 10% safety margin. It is not the bulk density of loose powder (around 0.6 kg/L, air included) found on some data sheets.
+
+Before November 2026, GypSum used 2.58 kg/L, the density of soluble anhydrite (CaSO₄ III), not of hemihydrate; amounts are now 0.3–1% higher depending on the ratio.
 
 Dimensions are entered in centimeters and results are displayed in liters and kilograms. The English page can also show inches, US cups / fluid ounces and pounds / ounces, and accepts the ratio as a consistency (parts water per 100 parts plaster); calculations always run in metric.
 
@@ -49,16 +52,16 @@ Dimensions are entered in centimeters and results are displayed in liters and ki
 
 ## Tech stack
 
-| Layer | Technology |
-|---|---|
+| Layer     | Technology                                 |
+| --------- | ------------------------------------------ |
 | Framework | Vue 3 — Composition API + `<script setup>` |
-| Build | Vite 8 |
-| Language | TypeScript 6 |
-| Styling | Tailwind CSS v4 (`@tailwindcss/vite`) |
-| 3D | Three.js + OrbitControls |
-| i18n | vue-i18n 11 (French, English, Spanish) |
-| Linting | Biome 2.4 |
-| Hosting | GitHub Pages (static SPA) |
+| Build     | Vite 8                                     |
+| Language  | TypeScript 6                               |
+| Styling   | Tailwind CSS v4 (`@tailwindcss/vite`)      |
+| 3D        | Three.js + OrbitControls                   |
+| i18n      | vue-i18n 11 (French, English, Spanish)     |
+| Linting   | Biome 2.6                                  |
+| Hosting   | GitHub Pages (static SPA)                  |
 
 ---
 

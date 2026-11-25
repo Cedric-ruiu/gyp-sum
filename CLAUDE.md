@@ -9,7 +9,7 @@ SPA statique hébergée sur GitHub Pages (`base: '/gyp-sum/'`). Aucun backend.
 - vue-router 5 (routes statiques pour le multi-pages i18n) + `@unhead/vue` 2
   (gestion du `<head>` par locale)
 - Three.js + OrbitControls pour la scène 3D
-- Biome 2.4 (lint + format + CSS Tailwind v4) — `yarn lint` (vérif) /
+- Biome 2.6 (lint + format + CSS Tailwind v4) — `yarn lint` (vérif) /
   `yarn format` (= `biome check . --write --unsafe`, auto-fix complet : format,
   lint safe + unsafe, organize imports). Toujours lancer `yarn format` avant
   commit. `css.parser.tailwindDirectives: true` est requis pour `@theme`, `@apply`.
@@ -36,9 +36,14 @@ SPA statique hébergée sur GitHub Pages (`base: '/gyp-sum/'`). Aucun backend.
 - L'instance i18n est créée **par app** (`createAppI18n()`), pas en singleton :
   vite-ssg appelle la factory une fois par route, et un singleton partagé fait
   fuiter la locale d'une page à l'autre.
-- **`@unhead/vue` épinglé en `^2.1.2`** (= version utilisée par vite-ssg). En v3,
-  le `useHead` de l'app et le head de vite-ssg sont deux instances distinctes →
-  rien n'est injecté dans le HTML pré-généré. Ne pas remonter sans aligner vite-ssg.
+- **`@unhead/vue` reste en v2** tant que vite-ssg (28.3.0) embarque unhead v2
+  (PR antfu-collective/vite-ssg#470). Essai en 3.5.2 (2026-11-25) : le `useHead`
+  v3 pousse dans le moteur v2 de vite-ssg (même clé d'injection `usehead`), le
+  pré-rendu sort juste par compatibilité fortuite, et les types v3 rejettent nos
+  `link` hreflang. Ne pas remonter sans aligner vite-ssg.
+- **TypeScript reste en 6.x** : TS 7 (compilateur Go) n'expose plus l'API JS dont
+  dépend vue-tsc (`@volar/typescript` exige `typescript <7`), et le patch
+  TypeScript intégré à Yarn échoue à l'installation. Attendre un vue-tsc compatible.
 - Fonts : auto-hébergées dans `public/fonts/` (Fontsource, latin subset, woff2).
   Inter 300/400/500 + JetBrains Mono 300/400. Preload des 3 fichiers critiques
   dans `index.html`. Fallbacks avec metric overrides dans `main.css` pour CLS
@@ -50,10 +55,14 @@ SPA statique hébergée sur GitHub Pages (`base: '/gyp-sum/'`). Aucun backend.
 src/
 ├── types/index.ts          Dimensions = Record<string,number> (clés = ShapeField.key)
 ├── shapes/
-│   ├── types.ts            ShapeDefinition, ShapeField
-│   └── registry.ts         boxShape/cylinderShape/sphereShape/halfSphereShape
-│                           moldShapeRegistry  (box, cylinder)
-│                           objectShapeRegistry (box, cylinder, sphere, half-sphere)
+│   ├── types.ts            ShapeDefinition, ShapeField, ShapeBounds
+│   ├── registry.ts         boxShape/cylinderShape/sphereShape/halfSphereShape
+│   │                       moldShapeRegistry  (box, cylinder)
+│   │                       objectShapeRegistry (box, cylinder, sphere, half-sphere)
+│   ├── fit.ts              objectBounds(), canFitMold(), fitMold() : moule ajusté
+│   │                       à la pièce (DEFAULT_FIT_MARGIN = 2,5 cm)
+│   └── drawing.ts          moldOutlines(), objectOutlines() : contours 2D (coupe,
+│                           dessus) du plan coté de la fiche d'atelier
 ├── composables/
 │   ├── useShapeVolume.ts   cm3ToLiters() — export nommé, utilisé par le registre
 │   ├── useCalculator.ts    computed<CalculationResult> (formules figées, voir ci-dessous)
@@ -74,15 +83,18 @@ src/
 │   ├── SiteFooter.vue      pied de page commun (auteur, contact, partage, GitHub, PWA)
 │   ├── MoldConfigurator.vue
 │   ├── ObjectConfigurator.vue  (toggle saisie directe de volume)
-│   ├── MixParameters.vue
-│   ├── ResultPanel.vue
+│   ├── MixParameters.vue   ratio, marge, masse volumique + lien vers sa source
+│   ├── ResultPanel.vue     résultats, scène 3D, bouton d'impression
 │   ├── SceneViewer.vue     Three.js canvas, autoRotate + OrbitControls
+│   ├── PrintSheet.vue      fiche d'atelier imprimée (voir « Fiche d'atelier »)
+│   ├── MoldDrawing.vue     plan coté SVG de la fiche : coupe + vue de dessus
 │   ├── HowToGuide.vue      section « Comment doser le plâtre » (tm()/rt())
 │   ├── ContributeNote.vue  « Une forme manque ? » sous les résultats (issues GitHub +
 │   │                       e-mail, événements avec placement: results)
 │   ├── AuthorNote.vue      « Pourquoi cet outil » : texte de l'auteur (author.paragraphs),
 │   │                       masqué tant que le tableau est vide
-│   ├── FaqSection.vue      FAQ accordéon <details> (tm()/rt()), sans JS
+│   ├── FaqSection.vue      FAQ accordéon <details> (tm()/rt()), sans JS, ligne
+│   │                       « Source » sous la réponse si l'entrée a un `source`
 │   └── ui/
 │       ├── NumberInput.vue  virgule/point acceptés, spinners masqués
 │       ├── ShapeSelector.vue  généré depuis ShapeDefinition[], prop noneOption
@@ -92,6 +104,8 @@ src/
 │       │                         aria-current), masqué si la page n'existe qu'en une langue
 │       ├── ContactLink.vue  lien mailto du footer, adresse décodée en onMounted
 │       ├── ShareButton.vue  partage natif (mobile) / copie du lien (desktop)
+│       ├── PrintButton.vue  window.print() + événement print
+│       ├── AppLogo.vue      logo SVG (header et fiche d'atelier)
 │       └── SegmentedControl.vue  choix exclusif (unités, saisie du ratio)
 ├── seo.ts                  SITE_URL, SITE_PAGES (route, locale, groupe hreflang,
 │                           lastModified), LOCALE_META (lang, og:locale, devise),
@@ -110,7 +124,8 @@ autorisé par la CSP `connect-src`). Événements : `calculator-use` (`lang`), u
 fois par chargement, à la première valeur réellement modifiée par le visiteur
 (setters de `HomePage.vue` ; la restauration du localStorage n'est pas comptée),
 `contact-email` (`method` : mailto / copy), `share` (`method` : native / copy),
-`pwa-install` (`outcome`), `github-repo`, `github-issues`. Les liens
+`pwa-install` (`outcome`), `github-repo`, `github-issues`, `print` (bouton
+« Imprimer la fiche d'atelier » ; un Ctrl/Cmd+P n'est pas compté). Les liens
 d'appel à contribuer sous les résultats (`ContributeNote.vue`) envoient les
 mêmes événements `github-issues` / `contact-email`, avec `placement: results`. Liens simples :
 attribut `data-umami-event` ; tout élément qui a déjà un gestionnaire de clic :
@@ -131,19 +146,56 @@ dans un composant Vue.
 `useThreeScene` est la seule exception : il construit les géométries Three.js
 avec des branches par forme (inévitable avec l'API Three.js).
 
+Le plan coté de la fiche d'atelier suit la même règle : chaque forme déclare
+ses contours 2D (`outline`, chemins SVG en cm, voir `ShapeOutline`) dans le
+registre ; une forme sans `outline` n'est simplement pas dessinée.
+
+## Fiche d'atelier (impression)
+
+Bouton sous la scène 3D (`ResultPanel.vue`), désactivé si le calcul est
+invalide. À l'impression (bouton ou raccourci du navigateur), la page entière
+est masquée (`print:hidden` sur la racine de `HomePage.vue`) et remplacée par
+`PrintSheet.vue` (`hidden print:block`) : quantités, plan coté (coupe hachurée
+et vue de dessus, même échelle, cotes intérieures du moule), récapitulatif des
+3 étapes, checklist de préparation (temps repris du guide), lignes de notes.
+Rendue côté client seulement (après `onMounted`) : absente du HTML pré-rendu.
+`@page { margin: 0 }` (la fiche a son propre padding, pas d'en-tête/pied du
+navigateur). Elle doit tenir sur une page A4 **et** Letter : hauteur de
+contenu ≤ ~250 mm, à revérifier (export PDF A4 et Letter) après tout ajout.
+
+## Ordre du formulaire et moule ajusté à la pièce
+
+Étapes numérotées : 1 Pièce à mouler → 2 Moule (sous-parties Forme, avec la
+case « Adapter à la pièce » et sa marge, puis Dimensions intérieures) → 3
+Paramètres de mélange. Une forme de pièce déclare son encombrement
+(`bounds`), une forme de moule comment l'englober (`fitAround`) ; pas de
+branche par forme dans `MoldConfigurator`. Tant que `mold.fit` est vrai,
+`updateState()` de `HomePage.vue` recalcule les cotes du moule (`fitMold()`,
+arrondies au mm supérieur) à chaque changement de la pièce, de la forme du
+moule ou de la marge. Case cochée : les champs de cotes sont masqués, les
+cotes calculées affichées en lecture seule ; décocher rend les champs, pré-remplis.
+Case indisponible si la pièce est « Aucune » ou un volume saisi directement.
+
 ## Formules de calcul — NE PAS MODIFIER
 
-Constante : `gypsumDensity = 2.58` kg/L (non exposée à l'utilisateur).
+Constante : `PLASTER_DENSITY = 2.63` kg/L (`useCalculator.ts`, passée en
+`gypsumDensity`, non exposée à l'utilisateur). Masse volumique des grains de
+plâtre β, source : fiche ICSC 1217 (OIT/OMS), qui donne β 2,63 / α 2,76.
+La fiche Molda 3 ne précise pas le type : β est déduit de son gâchage (65 parts
+d'eau pour 100 de plâtre, contre 30 à 40 pour un α), formulation reprise dans
+les textes. Jusqu'au 2026-11-24 la valeur était 2,58,
+masse volumique de l'anhydrite soluble (CaSO₄ III), pas du semi-hydrate.
 
 ```
 netVolume  = moldVolume − objectVolume
-water      = netVolume / (1 + ratio / 2.58)
+water      = netVolume / (1 + ratio / 2.63)
 plaster    = ratio × water
 waterWithMargin   = water   × (1 + margin)
 plasterWithMargin = plaster × (1 + margin)
 ```
 
 Volumes (cm → litres via `cm3ToLiters = v / 1000`) :
+
 - Pavé : `L × l × h`
 - Cylindre : `π/4 × d² × h`
 - Sphère : `π/6 × d³`
@@ -182,9 +234,11 @@ seul, qui vise le drywall) : `es`, `de`, `it` et `pt` reprennent la structure
 de `fr.json`, métriques. Toutes les chaînes UI passent
 par `t()` / `$t()`. Pas de texte en dur dans les templates. Clés : `app`, `format`, `lang`, `help`, `contribute`,
 `meta`, `intro`, `mold`, `object`, `shapes`, `fields`, `mix`, `results`,
-`errors`, `units`, `unitSystem`, `toc`, `howto`, `faq`, `guide`, `yourPlaster`,
-`author`, `footer`, `scene`, `moldGuide` (fr et en ; pas en es : ses liens — sommaire, mode d'emploi, pied de page — n'apparaissent
-que si `localePage('moldGuide', locale)` existe). Pour les
+`errors`, `units`, `unitSystem`, `toc`, `howto`, `faq`, `guide`, `yourPlaster`, `print`,
+`author`, `footer`, `sources`, `scene`, `moldGuide` (fr et en ; pas en es : ses liens — sommaire, mode d'emploi, pied de page — n'apparaissent
+que si `localePage('moldGuide', locale)` existe). `sources.<id>` = `{ short,
+name, url }` d'une source citée (URL dans la langue de la locale) ; une entrée
+de `faq.items` la cite via `"source": "<id>"`. Pour les
 tableaux de messages (steps, faq items), utiliser `tm()` + `rt()`.
 
 - **Espaces insécables (fr)** : avant `? ! ; :` et à l'intérieur de `« »`, écrire
@@ -213,6 +267,9 @@ tableaux de messages (steps, faq items), utiliser `tm()` + `rt()`.
 ## Persistance localStorage
 
 Clé `plaster-calc-state`, objet `{ mold, object, mix }`. Fallback silencieux.
+`mold.fit` / `mold.fitMargin` (cm) sont optionnels : un état enregistré avant
+leur ajout n'en a pas et reste en cotes libres ; les valeurs par défaut (nouveau
+visiteur) ont `fit: true`.
 Préférences d'affichage à part : clé `plaster-calc-units`,
 `{ system: 'metric' | 'us', ratioMode: 'ratio' | 'consistency' }` (changer
 d'unité n'est pas une utilisation du calculateur).

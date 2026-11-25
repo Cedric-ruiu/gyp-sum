@@ -1,4 +1,5 @@
 <script setup lang="ts">
+// Not positioned itself: HomePage places it in the fixed bottom dock.
 import { useI18n } from "vue-i18n";
 import { usePwaInstall } from "@/composables/usePwaInstall";
 
@@ -18,7 +19,7 @@ const { showBanner, deferredAvailable, promptInstall, dismiss } =
       v-if="showBanner"
       role="dialog"
       :aria-label="t('pwa.title')"
-      class="fixed inset-x-0 bottom-0 z-50 border-t border-line bg-white"
+      class="border-t border-line bg-white"
     >
       <div class="mx-auto max-w-6xl px-6 py-3 flex items-center gap-3">
         <svg
@@ -60,7 +61,7 @@ const { showBanner, deferredAvailable, promptInstall, dismiss } =
         <button
           v-if="deferredAvailable"
           type="button"
-          class="shrink-0 rounded border border-accent px-3 py-1.5 text-xs font-medium text-accent transition-colors duration-150 hover:bg-accent hover:text-white"
+          class="min-h-12 shrink-0 rounded border border-accent px-4 text-xs font-medium text-accent transition-colors duration-150 hover:bg-accent hover:text-white"
           @click="promptInstall"
         >
           {{ t("pwa.installButton") }}
@@ -69,7 +70,7 @@ const { showBanner, deferredAvailable, promptInstall, dismiss } =
         <button
           type="button"
           :aria-label="t('pwa.dismissLabel')"
-          class="shrink-0 rounded p-1 text-muted transition-colors duration-150 hover:text-ink"
+          class="-mr-3 flex h-12 w-12 shrink-0 items-center justify-center rounded text-muted transition-colors duration-150 hover:text-ink"
           @click="dismiss"
         >
           <svg

@@ -20,23 +20,28 @@
   },
   "meta": {
     "title": "Dosage eau / plâtre pour moulage\u00a0: calculateur gratuit — GypSum",
-    "description": "Quelle proportion d'eau et de plâtre pour votre moulage\u00a0? Entrez les dimensions du moule et de la pièce\u00a0: le calculateur donne l'eau et le plâtre. Gratuit.",
+    "description": "Quelle proportion d'eau et de plâtre pour votre moulage\u00a0? Entrez les dimensions de la pièce et du moule\u00a0: le calculateur donne l'eau et le plâtre. Gratuit.",
     "keywords": "calculateur plâtre, dosage plâtre eau, ratio plâtre eau, proportion eau plâtre, plâtre de moulage, moule céramique, plâtre poterie, plâtre de Paris, quantité plâtre moule",
     "ogTitle": "Dosage eau / plâtre pour moulage\u00a0: calculateur gratuit",
-    "ogDescription": "Quelle proportion d'eau et de plâtre pour votre moulage\u00a0? Entrez les dimensions du moule et de la pièce\u00a0: le calculateur donne l'eau et le plâtre.",
+    "ogDescription": "Quelle proportion d'eau et de plâtre pour votre moulage\u00a0? Entrez les dimensions de la pièce et du moule\u00a0: le calculateur donne l'eau et le plâtre.",
     "twitterDescription": "Quelle proportion d'eau et de plâtre pour votre moulage\u00a0? Le calculateur donne l'eau et le plâtre, pièce déduite.",
-    "schemaApp": "Calculateur de dosage eau / plâtre pour le moulage (céramique, poterie, sculpture), basé sur la masse volumique du plâtre en poudre (2,58 kg/L)."
+    "schemaApp": "Calculateur de dosage eau / plâtre pour le moulage (céramique, poterie, sculpture), basé sur la masse volumique du plâtre en poudre (2,63 kg/L)."
   },
   "intro": {
     "h1": "Dosage eau et plâtre pour un moulage\u00a0: le calculateur",
-    "lead": "Pour un moulage, comptez en général 1,5 kg de plâtre par litre d'eau, soit environ 0,67 L d'eau pour 1 kg de plâtre\u00a0: 1,3 pour un plâtre fluide qui prend bien les détails, 1,8 pour un moule dur. Indiquez les dimensions de votre moule et de la pièce\u00a0: le calculateur donne les quantités exactes, pièce déduite."
+    "lead": "Pour un moulage, comptez en général 1,5 kg de plâtre par litre d'eau, soit environ 0,67 L d'eau pour 1 kg de plâtre\u00a0: 1,3 pour un plâtre fluide qui prend bien les détails, 1,8 pour un moule dur. Indiquez les dimensions de la pièce et de votre moule\u00a0: le calculateur donne les quantités exactes, pièce déduite."
   },
   "mold": {
     "title": "Moule",
     "volume": "Volume du moule",
     "titleTooltip": "Les dimensions correspondent à celles de votre coffrage intérieur. La hauteur à renseigner est celle jusqu'où vous souhaitez remplir le plâtre, pas nécessairement la hauteur totale du coffrage.",
-    "adaptToObject": "Adapter au gabarit",
-    "adaptToObjectTooltip": "Calcule les dimensions minimales du moule à partir de la pièce définie, en ajoutant 2,5 cm de marge de chaque côté et au-dessus. Les dimensions du moule sont mises à jour automatiquement — utile pour dimensionner votre coffrage avant de commencer.",
+    "adaptToObject": "Adapter à la pièce",
+    "adaptToObjectTooltip": "Calcule les dimensions minimales du moule à partir de la pièce, avec une marge de chaque côté et au-dessus (2,5\u00a0cm par défaut, cliquez sur la valeur pour la changer). Tant que la case est cochée, le moule suit les changements de la pièce.",
+    "shapeTitle": "Forme",
+    "dimensionsTitle": "Dimensions intérieures",
+    "fitLinked": "Dimensions calculées à partir de la pièce. Décochez la case pour les saisir vous-même.",
+    "fitFree": "Dimensions libres\u00a0: saisissez celles de votre coffrage.",
+    "fitUnavailable": "Décrivez d'abord la pièce par sa forme et ses dimensions (étape 1).",
     "margin": "marge",
     "marginEditHint": "Cliquer pour modifier la marge"
   },
@@ -77,7 +82,7 @@
     "ratioScale": "fin ← 1.3 — 1.5 — 1.8 → dur",
     "margin": "Marge de sécurité",
     "density": "Masse volumique du plâtre en poudre",
-    "densityTooltip": "Masse volumique du plâtre en poudre (semi-hydrate de sulfate de calcium, CaSO₄·½H₂O), qui sert à calculer le volume occupé par les grains. Elle varie un peu d'un plâtre à l'autre\u00a0; l'effet sur les quantités reste inférieur à la marge de sécurité par défaut."
+    "densityTooltip": "Masse volumique des grains de plâtre (semi-hydrate de sulfate de calcium, CaSO₄·½H₂O), qui sert à calculer le volume qu'ils occupent. 2,63 kg/L est la valeur du plâtre β (source\u00a0: fiche ICSC 1217, OIT/OMS), le type des plâtres de moulage courants comme le Molda 3, gâché avec environ 65 parts d'eau pour 100 de plâtre. Un plâtre α (plâtre dur), qui en demande 30 à 40, est à 2,76 kg/L\u00a0: l'écart sur les quantités reste sous 3\u00a0%, couvert par la marge de sécurité."
   },
   "results": {
     "title": "Résultats",
@@ -85,12 +90,32 @@
     "plaster": "Plâtre",
     "withMargin": "avec marge",
     "withoutMargin": "sans marge",
-    "netVolume": "Volume net"
+    "netVolume": "Volume net",
+    "show": "Voir le détail des résultats"
   },
   "contribute": {
     "text": "Une forme manque\u00a0? {github} ou {email}.",
     "github": "Proposez-la sur GitHub",
     "email": "écrivez-moi"
+  },
+  "print": {
+    "button": "Imprimer la fiche d'atelier",
+    "hint": "Quantités, plan coté et étapes de préparation, sur une page A4.",
+    "title": "Fiche d'atelier",
+    "sideView": "Coupe",
+    "topView": "Vue de dessus",
+    "fitted": "ajusté à la pièce, marge de {margin}",
+    "prep": "Préparation",
+    "weigh": "Peser {plaster} de plâtre",
+    "measure": "Mesurer {water} d'eau",
+    "steps": [
+      "Verser le plâtre dans l'eau, jamais l'inverse",
+      "Laisser reposer 2 à 3 minutes sans toucher",
+      "Mélanger 3 minutes",
+      "Vibrer, retirer les bulles et couler, en 5 minutes environ"
+    ],
+    "notes": "Notes",
+    "footer": "Calculé avec GypSum — {url}"
   },
   "errors": {
     "volumeExceeded": "Le volume de la pièce dépasse ou égale celui du moule",
@@ -107,8 +132,8 @@
     "answer": "Pour un moulage, la proportion courante est de 1,5 kg de plâtre pour 1 litre d'eau, soit environ 0,67 L d'eau par kilo de plâtre. Descendez à 1,3 pour un plâtre fluide qui prend les détails, montez à 1,8 pour un moule dur. Si le fabricant indique un taux de gâchage, c'est lui qui prime.",
     "pourOrder": "Toujours verser le plâtre dans l'eau, jamais l'inverse.",
     "immersion": "Pour mesurer le volume d'une pièce irrégulière, plongez-la dans un récipient gradué et notez la montée d'eau.",
-    "physics": "Le calculateur repose sur la physique du mélange\u00a0: quand on combine eau et plâtre, le volume final est la somme du volume d'eau et du volume occupé par les grains de plâtre (masse volumique du plâtre en poudre\u00a0: 2,58 kg/L). Cette approche est plus précise qu'un simple ratio volumique.",
-    "formula": "Formule\u00a0: Eau = Volume net ÷ (1 + Ratio ÷ 2.58)",
+    "physics": "Le calculateur repose sur la physique du mélange\u00a0: quand on combine eau et plâtre, le volume final est la somme du volume d'eau et du volume occupé par les grains de plâtre (masse volumique du plâtre en poudre\u00a0: 2,63 kg/L). Cette approche est plus précise qu'un simple ratio volumique.",
+    "formula": "Formule\u00a0: Eau = Volume net ÷ (1 + Ratio ÷ 2.63)",
     "ratioTable": {
       "caption": "Ratios plâtre / eau courants",
       "colRatio": "Ratio (kg/L)",
@@ -144,7 +169,7 @@
     ]
   },
   "footer": {
-    "tagline": "Calculateur de dosage eau / plâtre pour moulage. Formules basées sur la masse volumique du plâtre en poudre (2,58 kg/L). Aucune donnée n'est envoyée — tout reste dans votre navigateur.",
+    "tagline": "Calculateur de dosage eau / plâtre pour moulage. Formules basées sur la masse volumique du plâtre en poudre (2,63 kg/L). Aucune donnée n'est envoyée — tout reste dans votre navigateur.",
     "credit": "Créé par {name}, céramiste amateur et développeur web freelance ({site}).",
     "contribute": "Contribuer",
     "openSource": "Projet open source — vos suggestions et retours sont les bienvenus.",
@@ -183,12 +208,12 @@
     "intro": "En cinq étapes, calculez et préparez la bonne quantité de plâtre pour remplir votre moule sans gâchis.",
     "steps": [
       {
-        "title": "Mesurer le volume du moule",
-        "text": "Relevez les dimensions intérieures de votre coffrage (longueur, largeur, hauteur de remplissage souhaitée). C'est le volume total à remplir de plâtre."
+        "title": "Estimer le volume de la pièce à mouler",
+        "text": "Choisissez la forme la plus proche de votre pièce et relevez ses dimensions, ou mesurez son volume par immersion dans un récipient gradué. Sans pièce, passez à l'étape suivante."
       },
       {
-        "title": "Estimer le volume de la pièce à mouler",
-        "text": "Si une pièce occupe le moule, soustrayez son volume. Choisissez la forme la plus proche, ou mesurez-le par immersion dans un récipient gradué."
+        "title": "Mesurer le volume du moule",
+        "text": "Relevez les dimensions intérieures de votre coffrage (longueur, largeur, hauteur de remplissage souhaitée), ou déduisez-les de la pièce en ajoutant une marge. Le plâtre remplit ce volume, moins celui de la pièce."
       },
       {
         "title": "Choisir le ratio plâtre / eau",
@@ -230,7 +255,8 @@
       },
       {
         "q": "Quelle est la masse volumique du plâtre\u00a0?",
-        "a": "Le calcul utilise la masse volumique du plâtre en poudre (semi-hydrate de sulfate de calcium, CaSO₄·½H₂O)\u00a0: 2,58 kg/L. Elle varie un peu selon le type de plâtre\u00a0; l'effet sur les quantités calculées reste inférieur à la marge de sécurité par défaut. Elle permet un dosage plus précis qu'un simple ratio volumique."
+        "a": "Le calcul utilise la masse volumique des grains de plâtre (semi-hydrate de sulfate de calcium, CaSO₄·½H₂O)\u00a0: 2,63 kg/L, valeur du plâtre β, le type des plâtres de moulage courants comme le Molda 3, gâché avec environ 65 parts d'eau pour 100 de plâtre. Un plâtre α (plâtre dur), qui en demande 30 à 40, est à 2,76 kg/L\u00a0: l'écart sur les quantités calculées reste sous 3\u00a0%, couvert par la marge de sécurité par défaut. À ne pas confondre avec la densité apparente de la poudre en vrac (environ 0,6, air compris), indiquée sur certaines fiches techniques.",
+        "source": "density"
       },
       {
         "q": "Comment mesurer le volume d'une pièce de forme irrégulière\u00a0?",
@@ -245,6 +271,14 @@
         "a": "Oui, à condition d'étalonner votre mesure\u00a0: remplissez à ras un verre ou un gobelet de votre plâtre, pesez-le une fois, puis utilisez ce même verre pour toutes vos gâchées. Un verre pris au hasard ne suffit pas\u00a0: selon le plâtre et son tassement, un même volume ne pèse pas le même poids. Le calculateur donne le poids de plâtre\u00a0: divisez-le par le poids de votre verre pour savoir combien en verser."
       }
     ]
+  },
+  "sources": {
+    "label": "Source",
+    "density": {
+      "short": "ICSC 1217",
+      "name": "Fiche internationale de sécurité chimique ICSC 1217 (OIT/OMS)",
+      "url": "https://chemicalsafety.ilo.org/dyn/icsc/showcard.display?p_card_id=1217&p_version=2&p_lang=fr"
+    }
   },
   "scene": {
     "placeholder": "Visualisation 3D — bientôt disponible",
@@ -334,7 +368,7 @@
           "Laissez reposer 2 à 3 minutes sans toucher.",
           "Mélangez pendant 3 minutes avec le mélangeur à peinture monté sur la perceuse, en vitesse 2. Pour une très petite quantité, mélangez à la maryse, au moins 3 minutes aussi."
         ],
-        "example": "Exemple\u00a0: un gros bol de 20 cm de diamètre au bord, 10 cm au pied et 10 cm de haut (forme «\u00a0tronc de cône\u00a0»), dans un coffrage carré de 25 × 25 cm coulé jusqu'à 12,5 cm, soit 2,5 cm de marge sur les côtés et au-dessus. Avec un ratio de 1,5 et 10 % de marge de sécurité, le calculateur donne 4,16 L d'eau et 6,24 kg de plâtre. Pour un moule en deux parties, refaites le calcul à chaque coulée, avec les mesures prises une fois le coffrage monté."
+        "example": "Exemple\u00a0: un gros bol de 20 cm de diamètre au bord, 10 cm au pied et 10 cm de haut (forme «\u00a0tronc de cône\u00a0»), dans un coffrage carré de 25 × 25 cm coulé jusqu'à 12,5 cm, soit 2,5 cm de marge sur les côtés et au-dessus. Avec un ratio de 1,5 et 10 % de marge de sécurité, le calculateur donne 4,19 L d'eau et 6,28 kg de plâtre. Pour un moule en deux parties, refaites le calcul à chaque coulée, avec les mesures prises une fois le coffrage monté."
       },
       {
         "id": "couler",

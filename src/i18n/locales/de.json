@@ -20,23 +20,28 @@
   },
   "meta": {
     "title": "Gips-Wasser-Verhältnis für Gipsformen: kostenloser Rechner — GypSum",
-    "description": "Wie viel Wasser und Gips braucht deine Gipsform? Gib die Maße von Form und Modell ein: Der Rechner liefert die Wasser- und Gipsmenge. Kostenlos.",
+    "description": "Wie viel Wasser und Gips braucht deine Gipsform? Gib die Maße von Modell und Form ein: Der Rechner liefert die Wasser- und Gipsmenge. Kostenlos.",
     "keywords": "Gips Wasser Verhältnis, Gips Mischverhältnis, Gips anrühren Verhältnis, Modellgips anrühren, Keramikgips, Gipsform, Gipsform für Keramik, Gipsmenge berechnen",
     "ogTitle": "Gips-Wasser-Verhältnis für Gipsformen: kostenloser Rechner",
-    "ogDescription": "Wie viel Wasser und Gips braucht deine Gipsform? Gib die Maße von Form und Modell ein: Der Rechner liefert die Wasser- und Gipsmenge.",
+    "ogDescription": "Wie viel Wasser und Gips braucht deine Gipsform? Gib die Maße von Modell und Form ein: Der Rechner liefert die Wasser- und Gipsmenge.",
     "twitterDescription": "Wie viel Wasser und Gips braucht deine Gipsform? Der Rechner liefert die Wasser- und Gipsmenge, Modell bereits abgezogen.",
-    "schemaApp": "Rechner für das Gips-Wasser-Verhältnis von Gipsformen (Keramik, Töpfern, Bildhauerei), auf Basis der Dichte von Gipspulver (2,58 kg/L)."
+    "schemaApp": "Rechner für das Gips-Wasser-Verhältnis von Gipsformen (Keramik, Töpfern, Bildhauerei), auf Basis der Dichte von Gipspulver (2,63 kg/L)."
   },
   "intro": {
     "h1": "Gips-Wasser-Verhältnis für Gipsformen: der Rechner",
-    "lead": "Für eine Gipsform rechnet man meist mit 1,5 kg Gips pro Liter Wasser, also etwa 0,67 L Wasser auf 1 kg Gips: 1,3 für einen flüssigen Gips, der Details gut abformt, 1,8 für eine harte Form. Gib die Maße deiner Form und des Modells ein: Der Rechner liefert die genauen Mengen, das Modell bereits abgezogen."
+    "lead": "Für eine Gipsform rechnet man meist mit 1,5 kg Gips pro Liter Wasser, also etwa 0,67 L Wasser auf 1 kg Gips: 1,3 für einen flüssigen Gips, der Details gut abformt, 1,8 für eine harte Form. Gib die Maße des Modells und deiner Form ein: Der Rechner liefert die genauen Mengen, das Modell bereits abgezogen."
   },
   "mold": {
     "title": "Form",
     "volume": "Formvolumen",
     "titleTooltip": "Die Maße entsprechen der Innenseite deines Formkastens. Als Höhe gibst du die Füllhöhe an, bis zu der du Gips gießen willst, nicht unbedingt die Gesamthöhe des Formkastens.",
     "adaptToObject": "An Modell anpassen",
-    "adaptToObjectTooltip": "Berechnet die Mindestmaße der Form aus dem angegebenen Modell, mit 2,5 cm Rand auf jeder Seite und darüber. Die Formmaße werden automatisch aktualisiert: praktisch, um den Formkasten vor dem Gießen zu bemessen.",
+    "adaptToObjectTooltip": "Berechnet die Mindestmaße der Form aus dem Modell, mit einem Rand auf jeder Seite und darüber (standardmäßig 2,5 cm; klick auf den Wert, um ihn zu ändern). Solange die Option aktiv ist, folgt die Form jeder Änderung am Modell.",
+    "shapeTitle": "Grundform",
+    "dimensionsTitle": "Innenmaße",
+    "fitLinked": "Maße aus dem Modell berechnet. Deaktiviere die Option, um sie selbst einzugeben.",
+    "fitFree": "Freie Maße: Gib die Innenmaße deines Formkastens ein.",
+    "fitUnavailable": "Beschreibe zuerst das Modell mit Form und Maßen (Schritt 1).",
     "margin": "Rand",
     "marginEditHint": "Klicken, um den Rand zu ändern"
   },
@@ -77,7 +82,7 @@
     "ratioScale": "fein ← 1.3 — 1.5 — 1.8 → hart",
     "margin": "Sicherheitszuschlag",
     "density": "Dichte von Gipspulver",
-    "densityTooltip": "Dichte von Gipspulver (Calciumsulfat-Halbhydrat, CaSO₄·½H₂O), mit der das Volumen der Gipskörner berechnet wird. Sie schwankt leicht von Gips zu Gips; die Auswirkung auf die Mengen bleibt unter dem standardmäßigen Sicherheitszuschlag."
+    "densityTooltip": "Dichte der Gipskörner (Calciumsulfat-Halbhydrat, CaSO₄·½H₂O), mit der ihr Volumen in der Mischung berechnet wird. 2,63 kg/L ist der Wert für β-Gips (Quelle: ICSC 1217, IAO/WHO), den Typ üblicher Formgipse wie Molda 3, die mit etwa 65 Teilen Wasser auf 100 Teile Gips angerührt werden. Ein α-Gips (Hartgips), der 30 bis 40 Teile braucht, hat 2,76 kg/L: Die Abweichung bei den Mengen bleibt unter 3\u00a0% und wird vom Sicherheitszuschlag abgedeckt."
   },
   "results": {
     "title": "Ergebnisse",
@@ -85,12 +90,32 @@
     "plaster": "Gips",
     "withMargin": "mit Zuschlag",
     "withoutMargin": "ohne Zuschlag",
-    "netVolume": "Nettovolumen"
+    "netVolume": "Nettovolumen",
+    "show": "Alle Ergebnisse anzeigen"
   },
   "contribute": {
     "text": "Fehlt eine Form? {github} oder {email}.",
     "github": "Schlag sie auf GitHub vor",
     "email": "schreib mir"
+  },
+  "print": {
+    "button": "Werkstattblatt drucken",
+    "hint": "Mengen, bemaßte Zeichnung und Arbeitsschritte auf einer A4-Seite.",
+    "title": "Werkstattblatt",
+    "sideView": "Schnitt",
+    "topView": "Draufsicht",
+    "fitted": "an das Modell angepasst, {margin} Rand",
+    "prep": "Vorbereitung",
+    "weigh": "{plaster} Gips abwiegen",
+    "measure": "{water} Wasser abmessen",
+    "steps": [
+      "Gips ins Wasser geben, nie umgekehrt",
+      "2 bis 3 Minuten ohne Rühren einsumpfen lassen",
+      "3 Minuten rühren",
+      "Rütteln, Blasen abschöpfen und gießen, in etwa 5 Minuten"
+    ],
+    "notes": "Notizen",
+    "footer": "Berechnet mit GypSum — {url}"
   },
   "errors": {
     "volumeExceeded": "Das Modellvolumen ist gleich groß wie oder größer als das der Form",
@@ -107,8 +132,8 @@
     "answer": "Für eine Gipsform ist das übliche Verhältnis 1,5 kg Gips auf 1 Liter Wasser, also etwa 0,67 L Wasser pro Kilo Gips. Geh auf 1,3 herunter für einen flüssigen Gips, der Details abformt, auf 1,8 hinauf für eine harte Form. Gibt der Hersteller ein Mischverhältnis an, gilt seines.",
     "pourOrder": "Immer den Gips ins Wasser geben, nie umgekehrt.",
     "immersion": "Um das Volumen eines unregelmäßigen Modells zu messen, tauche es in einen Messbecher und lies ab, wie weit das Wasser steigt.",
-    "physics": "Der Rechner beruht auf der Physik der Mischung: Mischt man Wasser und Gips, ist das Endvolumen die Summe aus dem Wasservolumen und dem Volumen der Gipskörner (Dichte von Gipspulver: 2,58 kg/L). Das ist genauer als ein einfaches Volumenverhältnis.",
-    "formula": "Formel: Wasser = Nettovolumen ÷ (1 + Verhältnis ÷ 2.58)",
+    "physics": "Der Rechner beruht auf der Physik der Mischung: Mischt man Wasser und Gips, ist das Endvolumen die Summe aus dem Wasservolumen und dem Volumen der Gipskörner (Dichte von Gipspulver: 2,63 kg/L). Das ist genauer als ein einfaches Volumenverhältnis.",
+    "formula": "Formel: Wasser = Nettovolumen ÷ (1 + Verhältnis ÷ 2.63)",
     "ratioTable": {
       "caption": "Übliche Gips-Wasser-Verhältnisse",
       "colRatio": "Verhältnis (kg/L)",
@@ -144,7 +169,7 @@
     ]
   },
   "footer": {
-    "tagline": "Rechner für das Gips-Wasser-Verhältnis von Gipsformen. Formeln auf Basis der Dichte von Gipspulver (2,58 kg/L). Es werden keine Daten gesendet: Alles bleibt in deinem Browser.",
+    "tagline": "Rechner für das Gips-Wasser-Verhältnis von Gipsformen. Formeln auf Basis der Dichte von Gipspulver (2,63 kg/L). Es werden keine Daten gesendet: Alles bleibt in deinem Browser.",
     "credit": "Erstellt von {name}, Hobbykeramiker und freiberuflicher Webentwickler ({site}).",
     "contribute": "Mitmachen",
     "openSource": "Open-Source-Projekt: Vorschläge und Rückmeldungen sind willkommen.",
@@ -178,12 +203,12 @@
     "intro": "In fünf Schritten berechnest und mischst du die richtige Gipsmenge, um deine Form ohne Verschwendung zu füllen.",
     "steps": [
       {
-        "title": "Formvolumen messen",
-        "text": "Miss die Innenmaße deines Formkastens (Länge, Breite, gewünschte Füllhöhe). Das ist das Gesamtvolumen, das mit Gips gefüllt wird."
+        "title": "Volumen des Modells schätzen",
+        "text": "Wähle die Form, die deinem Modell am nächsten kommt, und miss es aus, oder bestimme sein Volumen durch Eintauchen in einen Messbecher. Ohne Modell geht es direkt mit dem nächsten Schritt weiter."
       },
       {
-        "title": "Volumen des Modells schätzen",
-        "text": "Steht ein Modell in der Form, zieh sein Volumen ab. Wähle die ähnlichste Form oder miss es durch Eintauchen in einen Messbecher."
+        "title": "Formvolumen messen",
+        "text": "Miss die Innenmaße deines Formkastens (Länge, Breite, gewünschte Füllhöhe) oder leite sie aus dem Modell plus Rand ab. Der Gips füllt dieses Volumen, abzüglich des Modells."
       },
       {
         "title": "Gips-Wasser-Verhältnis wählen",
@@ -224,7 +249,8 @@
       },
       {
         "q": "Wie hoch ist die Dichte von Gips?",
-        "a": "Die Berechnung nutzt die Dichte von Gipspulver (Calciumsulfat-Halbhydrat, CaSO₄·½H₂O): 2,58 kg/L. Sie schwankt leicht je nach Gipsart; die Auswirkung auf die berechneten Mengen bleibt unter dem standardmäßigen Sicherheitszuschlag. Damit wird die Dosierung genauer als mit einem einfachen Volumenverhältnis."
+        "a": "Die Berechnung nutzt die Dichte der Gipskörner (Calciumsulfat-Halbhydrat, CaSO₄·½H₂O): 2,63 kg/L, den Wert für β-Gips, den Typ üblicher Formgipse wie Molda 3, die mit etwa 65 Teilen Wasser auf 100 Teile Gips angerührt werden. Ein α-Gips (Hartgips), der 30 bis 40 Teile braucht, hat 2,76 kg/L: Die Abweichung bei den berechneten Mengen bleibt unter 3\u00a0% und wird vom standardmäßigen Sicherheitszuschlag abgedeckt. Nicht zu verwechseln mit der Schüttdichte des losen Pulvers (etwa 0,6, Luft eingeschlossen), die manche Datenblätter angeben.",
+        "source": "density"
       },
       {
         "q": "Wie misst man das Volumen eines unregelmäßigen Modells?",
@@ -239,6 +265,14 @@
         "a": "Ja, wenn du dein Maß vorher eichst: Füll ein Glas oder einen Becher randvoll mit deinem Gips, wiege es einmal und nimm dann dasselbe Glas für alle Mischungen. Ein beliebiges Glas reicht nicht: Je nach Gips und wie stark er sich setzt, wiegt dasselbe Volumen nicht gleich viel. Der Rechner gibt das Gipsgewicht an: Teile es durch das Gewicht deines Glases, um zu wissen, wie viele Gläser du brauchst."
       }
     ]
+  },
+  "sources": {
+    "label": "Quelle",
+    "density": {
+      "short": "ICSC 1217",
+      "name": "Internationale Chemikalien-Sicherheitskarte ICSC 1217 (IAO/WHO)",
+      "url": "https://chemicalsafety.ilo.org/dyn/icsc/showcard.display?p_card_id=1217&p_version=2&p_lang=de"
+    }
   },
   "scene": {
     "placeholder": "3D-Ansicht: bald verfügbar",

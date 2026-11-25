@@ -7,7 +7,7 @@ import SegmentedControl from "@/components/ui/SegmentedControl.vue";
 import type { MixParams, RatioMode } from "@/types";
 import { useUnits } from "@/units";
 
-const props = defineProps<{ modelValue: MixParams }>();
+const props = defineProps<{ modelValue: MixParams; step: number }>();
 const emit = defineEmits<(e: "update:modelValue", v: MixParams) => void>();
 
 const { t, n } = useI18n();
@@ -46,7 +46,7 @@ function updateMargin(v: number) {
   <section class="rounded border border-line px-5 py-5">
     <div class="mb-4 flex items-center">
       <h2 class="text-xs font-medium tracking-widest uppercase text-muted">
-        {{ t("mix.title") }}
+        <span class="mr-2 font-mono font-light">{{ step }}</span>{{ t("mix.title") }}
       </h2>
       <InfoTooltip :text="t('mix.titleTooltip')" :label="t('mix.title')" />
     </div>
@@ -105,12 +105,24 @@ function updateMargin(v: number) {
       </div>
     </div>
 
-    <div class="mt-4 flex items-center text-xs font-light text-muted">
+    <div class="mt-4 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs font-light text-muted">
       <span>{{ t("format.label", { label: t("mix.density") }) }}</span>
-      <span class="ml-2 font-mono tnum text-ink">
-        {{ modelValue.gypsumDensity }} {{ t("units.kg") }}/{{ t("units.liters") }}
+      <span class="inline-flex items-center">
+        <span class="font-mono tnum text-ink">
+          {{ n(modelValue.gypsumDensity) }} {{ t("units.kg") }}/{{ t("units.liters") }}
+        </span>
+        <InfoTooltip :text="t('mix.densityTooltip')" :label="t('mix.density')" />
       </span>
-      <InfoTooltip :text="t('mix.densityTooltip')" :label="t('mix.density')" />
+      <span>
+        {{ t("format.label", { label: t("sources.label") }) }}
+        <a
+          :href="t('sources.density.url')"
+          :title="t('sources.density.name')"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="link"
+        >{{ t("sources.density.short") }}</a>
+      </span>
     </div>
   </section>
 </template>

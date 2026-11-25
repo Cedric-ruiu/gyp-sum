@@ -75,6 +75,13 @@ body,
   height: 100%;
 }
 
+/* Below lg the results bar is fixed at the bottom: keep focused fields clear of it. */
+@media (width < 64rem) {
+  html {
+    scroll-padding-bottom: 4rem;
+  }
+}
+
 body {
   font-family: var(--font-sans);
   font-weight: 300;
@@ -128,6 +135,26 @@ input[type="number"] {
 @container (max-width: 340px) {
   .fields-grid {
     grid-template-columns: 1fr;
+  }
+}
+
+/* Printing swaps the page for the workshop sheet (PrintSheet.vue). No page
+   margin: the sheet pads itself, and the browser's own header and footer
+   (title, URL, date) are left out. */
+@page {
+  margin: 0;
+}
+
+@media print {
+  html,
+  body,
+  #app {
+    height: auto;
+  }
+
+  .print-sheet {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
   }
 }
 

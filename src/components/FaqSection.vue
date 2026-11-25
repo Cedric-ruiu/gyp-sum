@@ -4,7 +4,16 @@ import { useI18n } from "vue-i18n";
 
 const { t, tm, rt } = useI18n();
 
-const items = computed(() => tm("faq.items") as { q: string; a: string }[]);
+// `source` names an entry of `sources.*` cited under the answer.
+const items = computed(() =>
+  (tm("faq.items") as { q: string; a: string; source?: string }[]).map(
+    (item) => ({
+      q: rt(item.q),
+      a: rt(item.a),
+      source: item.source ? `sources.${rt(item.source)}` : null,
+    }),
+  ),
+);
 </script>
 
 <template>
@@ -16,12 +25,13 @@ const items = computed(() => tm("faq.items") as { q: string; a: string }[]);
       <details
         v-for="(item, i) in items"
         :key="i"
-        class="group rounded border border-line px-4 py-3"
+        class="group rounded border border-line"
       >
+        <!-- Padding sits on the summary so the whole row is the touch target. -->
         <summary
-          class="flex cursor-pointer list-none items-center justify-between gap-3 text-sm font-medium text-ink [&::-webkit-details-marker]:hidden"
+          class="flex min-h-12 cursor-pointer px-4 py-3 list-none items-center justify-between gap-3 text-sm font-medium text-ink [&::-webkit-details-marker]:hidden"
         >
-          {{ rt(item.q) }}
+          {{ item.q }}
           <span
             class="shrink-0 font-mono text-xs font-light text-muted transition-transform duration-150 group-open:rotate-45"
             aria-hidden="true"
@@ -29,8 +39,17 @@ const items = computed(() => tm("faq.items") as { q: string; a: string }[]);
             +
           </span>
         </summary>
-        <p class="mt-2 text-sm font-light leading-relaxed text-muted">
-          {{ rt(item.a) }}
+        <p class="-mt-1 px-4 pb-3 text-sm font-light leading-relaxed text-muted">
+          {{ item.a }}
+        </p>
+        <p v-if="item.source" class="-mt-1 px-4 pb-3 text-xs font-light text-muted">
+          {{ t("format.label", { label: t("sources.label") }) }}
+          <a
+            :href="t(`${item.source}.url`)"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="link"
+          >{{ t(`${item.source}.name`) }}</a>
         </p>
       </details>
     </div>
