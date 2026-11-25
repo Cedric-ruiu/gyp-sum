@@ -15,8 +15,9 @@ const homePath = computed(() => pageFor("calculator", locale.value).path);
 </script>
 
 <template>
-  <header class="border-b border-[color:var(--color-line)] py-4">
-    <div class="mx-auto max-w-6xl px-6 flex flex-wrap items-center justify-between gap-x-3 gap-y-3">
+  <header class="border-b border-line py-1 sm:py-4">
+    <!-- Phone: 48px row so the language button is a full touch target. -->
+    <div class="mx-auto min-h-12 max-w-6xl px-6 sm:min-h-0 flex flex-wrap items-center justify-between gap-x-3 gap-y-3">
       <RouterLink :to="homePath" aria-label="GypSum">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 190 44" class="-ml-1.25 h-6 w-27 sm:h-7 sm:w-31.25" aria-hidden="true">
           <g stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5">
