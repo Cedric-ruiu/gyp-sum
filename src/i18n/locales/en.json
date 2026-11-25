@@ -106,6 +106,25 @@
     "github": "Suggest it on GitHub",
     "email": "email me"
   },
+  "print": {
+    "button": "Print the workshop sheet",
+    "hint": "Amounts, dimensioned drawing and mixing steps, on a single page.",
+    "title": "Workshop sheet",
+    "sideView": "Section",
+    "topView": "Top view",
+    "fitted": "fitted to the object, {margin} margin",
+    "prep": "Preparation",
+    "weigh": "Weigh {plaster} of plaster",
+    "measure": "Measure {water} of water",
+    "steps": [
+      "Add the plaster to the water, never the other way round",
+      "Let it slake for 2 to 3 minutes without stirring",
+      "Mix for 3 minutes",
+      "Vibrate, skim off the bubbles and pour, within about 5 minutes"
+    ],
+    "notes": "Notes",
+    "footer": "Worked out with GypSum — {url}"
+  },
   "errors": {
     "volumeExceeded": "The object volume meets or exceeds the mold volume",
     "invalidRatio": "The ratio must be greater than 0"

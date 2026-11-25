@@ -16,6 +16,7 @@ import HowToGuide from "@/components/HowToGuide.vue";
 import MixParameters from "@/components/MixParameters.vue";
 import MoldConfigurator from "@/components/MoldConfigurator.vue";
 import ObjectConfigurator from "@/components/ObjectConfigurator.vue";
+import PrintSheet from "@/components/PrintSheet.vue";
 import ResultPanel from "@/components/ResultPanel.vue";
 import ResultsBar from "@/components/ResultsBar.vue";
 import SiteFooter from "@/components/SiteFooter.vue";
@@ -33,7 +34,12 @@ const resultsBlock = ref<HTMLElement | null>(null);
 const sceneVisible = ref(false);
 let sceneObserver: IntersectionObserver | null = null;
 
+// The print sheet is client-only: kept out of the pre-rendered HTML, and
+// built from the visitor's restored values.
+const printSheetReady = ref(false);
+
 onMounted(() => {
+  printSheetReady.value = true;
   if (!sceneSlot.value) return;
   sceneObserver = new IntersectionObserver(
     (entries) => {
@@ -305,7 +311,7 @@ function setUnitSystem(v: string) {
 </script>
 
 <template>
-  <div class="min-h-full bg-white text-[color:var(--color-ink)]">
+  <div class="min-h-full bg-white text-[color:var(--color-ink)] print:hidden">
     <SiteHeader />
 
     <main class="mx-auto max-w-6xl px-6 py-8">
@@ -451,4 +457,12 @@ function setUnitSystem(v: string) {
       <PwaInstallPrompt />
     </div>
   </div>
+
+  <PrintSheet
+    v-if="printSheetReady"
+    :mold="mold"
+    :object="object"
+    :mix="mix"
+    :result="result"
+  />
 </template>

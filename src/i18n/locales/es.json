@@ -98,6 +98,25 @@
     "github": "Proponla en GitHub",
     "email": "escríbeme"
   },
+  "print": {
+    "button": "Imprimir la ficha de taller",
+    "hint": "Cantidades, plano acotado y pasos de preparación, en una página A4.",
+    "title": "Ficha de taller",
+    "sideView": "Corte",
+    "topView": "Vista superior",
+    "fitted": "ajustado a la pieza, margen de {margin}",
+    "prep": "Preparación",
+    "weigh": "Pesa {plaster} de yeso",
+    "measure": "Mide {water} de agua",
+    "steps": [
+      "Echa el yeso en el agua, nunca al revés",
+      "Déjalo reposar 2 a 3 minutos sin remover",
+      "Mezcla durante 3 minutos",
+      "Vibra, quita las burbujas y vierte, en unos 5 minutos"
+    ],
+    "notes": "Notas",
+    "footer": "Calculado con GypSum — {url}"
+  },
   "errors": {
     "volumeExceeded": "El volumen de la pieza es igual o mayor que el del molde",
     "invalidRatio": "La proporción debe ser mayor que 0"

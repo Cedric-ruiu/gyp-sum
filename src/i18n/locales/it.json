@@ -98,6 +98,25 @@
     "github": "Proponila su GitHub",
     "email": "scrivimi"
   },
+  "print": {
+    "button": "Stampa la scheda di laboratorio",
+    "hint": "Dosi, disegno quotato e fasi di preparazione, su una pagina A4.",
+    "title": "Scheda di laboratorio",
+    "sideView": "Sezione",
+    "topView": "Vista dall'alto",
+    "fitted": "adattato al modello, margine di {margin}",
+    "prep": "Preparazione",
+    "weigh": "Pesa {plaster} di gesso",
+    "measure": "Misura {water} d'acqua",
+    "steps": [
+      "Versa il gesso nell'acqua, mai il contrario",
+      "Lascialo assorbire 2-3 minuti senza mescolare",
+      "Mescola per 3 minuti",
+      "Vibra, togli le bolle e cola, in circa 5 minuti"
+    ],
+    "notes": "Note",
+    "footer": "Calcolato con GypSum — {url}"
+  },
   "errors": {
     "volumeExceeded": "Il volume del modello è uguale o superiore a quello dello stampo",
     "invalidRatio": "Il rapporto deve essere maggiore di 0"

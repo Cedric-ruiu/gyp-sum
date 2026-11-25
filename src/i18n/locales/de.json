@@ -98,6 +98,25 @@
     "github": "Schlag sie auf GitHub vor",
     "email": "schreib mir"
   },
+  "print": {
+    "button": "Werkstattblatt drucken",
+    "hint": "Mengen, bemaßte Zeichnung und Arbeitsschritte auf einer A4-Seite.",
+    "title": "Werkstattblatt",
+    "sideView": "Schnitt",
+    "topView": "Draufsicht",
+    "fitted": "an das Modell angepasst, {margin} Rand",
+    "prep": "Vorbereitung",
+    "weigh": "{plaster} Gips abwiegen",
+    "measure": "{water} Wasser abmessen",
+    "steps": [
+      "Gips ins Wasser geben, nie umgekehrt",
+      "2 bis 3 Minuten ohne Rühren einsumpfen lassen",
+      "3 Minuten rühren",
+      "Rütteln, Blasen abschöpfen und gießen, in etwa 5 Minuten"
+    ],
+    "notes": "Notizen",
+    "footer": "Berechnet mit GypSum — {url}"
+  },
   "errors": {
     "volumeExceeded": "Das Modellvolumen ist gleich groß wie oder größer als das der Form",
     "invalidRatio": "Das Verhältnis muss größer als 0 sein"

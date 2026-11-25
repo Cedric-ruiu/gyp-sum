@@ -24,6 +24,7 @@ No more guessing, no more wasted material. Just enter your mold dimensions, desc
 - **Object configurator** — supports box, cylinder, cone frustum, sphere, half-sphere and spherical cap shapes, or direct volume entry
 - **Mix parameters** — configurable plaster-to-water ratio and waste margin
 - **Live 3D scene** — interactive wireframe preview of the mold and object, with orbit controls and auto-rotation
+- **Printable workshop sheet** — one page with your amounts, a dimensioned drawing of the mold (section and top view), your parameters and a mixing checklist
 - **Precise formulas** — water and plaster amounts derived from plaster density, not rule-of-thumb ratios
 - **State persistence** — your inputs are saved in `localStorage` and restored on next visit
 - **No installation** — runs entirely in the browser, no account or backend required

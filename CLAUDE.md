@@ -54,8 +54,10 @@ src/
 │   ├── registry.ts         boxShape/cylinderShape/sphereShape/halfSphereShape
 │   │                       moldShapeRegistry  (box, cylinder)
 │   │                       objectShapeRegistry (box, cylinder, sphere, half-sphere)
-│   └── fit.ts              objectBounds(), canFitMold(), fitMold() : moule ajusté
-│                           à la pièce (DEFAULT_FIT_MARGIN = 2,5 cm)
+│   ├── fit.ts              objectBounds(), canFitMold(), fitMold() : moule ajusté
+│   │                       à la pièce (DEFAULT_FIT_MARGIN = 2,5 cm)
+│   └── drawing.ts          moldOutlines(), objectOutlines() : contours 2D (coupe,
+│                           dessus) du plan coté de la fiche d'atelier
 ├── composables/
 │   ├── useShapeVolume.ts   cm3ToLiters() — export nommé, utilisé par le registre
 │   ├── useCalculator.ts    computed<CalculationResult> (formules figées, voir ci-dessous)
@@ -77,8 +79,10 @@ src/
 │   ├── MoldConfigurator.vue
 │   ├── ObjectConfigurator.vue  (toggle saisie directe de volume)
 │   ├── MixParameters.vue   ratio, marge, masse volumique + lien vers sa source
-│   ├── ResultPanel.vue
+│   ├── ResultPanel.vue     résultats, scène 3D, bouton d'impression
 │   ├── SceneViewer.vue     Three.js canvas, autoRotate + OrbitControls
+│   ├── PrintSheet.vue      fiche d'atelier imprimée (voir « Fiche d'atelier »)
+│   ├── MoldDrawing.vue     plan coté SVG de la fiche : coupe + vue de dessus
 │   ├── HowToGuide.vue      section « Comment doser le plâtre » (tm()/rt())
 │   ├── ContributeNote.vue  « Une forme manque ? » sous les résultats (issues GitHub +
 │   │                       e-mail, événements avec placement: results)
@@ -95,6 +99,8 @@ src/
 │       │                         aria-current), masqué si la page n'existe qu'en une langue
 │       ├── ContactLink.vue  lien mailto du footer, adresse décodée en onMounted
 │       ├── ShareButton.vue  partage natif (mobile) / copie du lien (desktop)
+│       ├── PrintButton.vue  window.print() + événement print
+│       ├── AppLogo.vue      logo SVG (header et fiche d'atelier)
 │       └── SegmentedControl.vue  choix exclusif (unités, saisie du ratio)
 ├── seo.ts                  SITE_URL, SITE_PAGES (route, locale, groupe hreflang,
 │                           lastModified), LOCALE_META (lang, og:locale, devise),
@@ -113,7 +119,8 @@ autorisé par la CSP `connect-src`). Événements : `calculator-use` (`lang`), u
 fois par chargement, à la première valeur réellement modifiée par le visiteur
 (setters de `HomePage.vue` ; la restauration du localStorage n'est pas comptée),
 `contact-email` (`method` : mailto / copy), `share` (`method` : native / copy),
-`pwa-install` (`outcome`), `github-repo`, `github-issues`. Les liens
+`pwa-install` (`outcome`), `github-repo`, `github-issues`, `print` (bouton
+« Imprimer la fiche d'atelier » ; un Ctrl/Cmd+P n'est pas compté). Les liens
 d'appel à contribuer sous les résultats (`ContributeNote.vue`) envoient les
 mêmes événements `github-issues` / `contact-email`, avec `placement: results`. Liens simples :
 attribut `data-umami-event` ; tout élément qui a déjà un gestionnaire de clic :
@@ -133,6 +140,23 @@ dans un composant Vue.
 
 `useThreeScene` est la seule exception : il construit les géométries Three.js
 avec des branches par forme (inévitable avec l'API Three.js).
+
+Le plan coté de la fiche d'atelier suit la même règle : chaque forme déclare
+ses contours 2D (`outline`, chemins SVG en cm, voir `ShapeOutline`) dans le
+registre ; une forme sans `outline` n'est simplement pas dessinée.
+
+## Fiche d'atelier (impression)
+
+Bouton sous la scène 3D (`ResultPanel.vue`), désactivé si le calcul est
+invalide. À l'impression (bouton ou raccourci du navigateur), la page entière
+est masquée (`print:hidden` sur la racine de `HomePage.vue`) et remplacée par
+`PrintSheet.vue` (`hidden print:block`) : quantités, plan coté (coupe hachurée
+et vue de dessus, même échelle, cotes intérieures du moule), récapitulatif des
+3 étapes, checklist de préparation (temps repris du guide), lignes de notes.
+Rendue côté client seulement (après `onMounted`) : absente du HTML pré-rendu.
+`@page { margin: 0 }` (la fiche a son propre padding, pas d'en-tête/pied du
+navigateur). Elle doit tenir sur une page A4 **et** Letter : hauteur de
+contenu ≤ ~250 mm, à revérifier (export PDF A4 et Letter) après tout ajout.
 
 ## Ordre du formulaire et moule ajusté à la pièce
 
@@ -204,7 +228,7 @@ seul, qui vise le drywall) : `es`, `de`, `it` et `pt` reprennent la structure
 de `fr.json`, métriques. Toutes les chaînes UI passent
 par `t()` / `$t()`. Pas de texte en dur dans les templates. Clés : `app`, `format`, `lang`, `help`, `contribute`,
 `meta`, `intro`, `mold`, `object`, `shapes`, `fields`, `mix`, `results`,
-`errors`, `units`, `unitSystem`, `toc`, `howto`, `faq`, `guide`, `yourPlaster`,
+`errors`, `units`, `unitSystem`, `toc`, `howto`, `faq`, `guide`, `yourPlaster`, `print`,
 `author`, `footer`, `sources`, `scene`, `moldGuide` (fr et en ; pas en es : ses liens — sommaire, mode d'emploi, pied de page — n'apparaissent
 que si `localePage('moldGuide', locale)` existe). `sources.<id>` = `{ short,
 name, url }` d'une source citée (URL dans la langue de la locale) ; une entrée

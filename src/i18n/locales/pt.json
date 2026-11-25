@@ -98,6 +98,25 @@
     "github": "Sugira no GitHub",
     "email": "me escreva"
   },
+  "print": {
+    "button": "Imprimir a ficha de ateliê",
+    "hint": "Quantidades, desenho cotado e etapas de preparo, em uma página A4.",
+    "title": "Ficha de ateliê",
+    "sideView": "Corte",
+    "topView": "Vista superior",
+    "fitted": "ajustado à peça, margem de {margin}",
+    "prep": "Preparo",
+    "weigh": "Pese {plaster} de gesso",
+    "measure": "Meça {water} de água",
+    "steps": [
+      "Coloque o gesso na água, nunca o contrário",
+      "Deixe hidratar 2 a 3 minutos sem mexer",
+      "Misture por 3 minutos",
+      "Vibre, retire as bolhas e despeje, em cerca de 5 minutos"
+    ],
+    "notes": "Anotações",
+    "footer": "Calculado com GypSum — {url}"
+  },
   "errors": {
     "volumeExceeded": "O volume da peça é igual ou maior que o do molde",
     "invalidRatio": "A proporção deve ser maior que 0"

@@ -98,6 +98,25 @@
     "github": "Proposez-la sur GitHub",
     "email": "écrivez-moi"
   },
+  "print": {
+    "button": "Imprimer la fiche d'atelier",
+    "hint": "Quantités, plan coté et étapes de préparation, sur une page A4.",
+    "title": "Fiche d'atelier",
+    "sideView": "Coupe",
+    "topView": "Vue de dessus",
+    "fitted": "ajusté à la pièce, marge de {margin}",
+    "prep": "Préparation",
+    "weigh": "Peser {plaster} de plâtre",
+    "measure": "Mesurer {water} d'eau",
+    "steps": [
+      "Verser le plâtre dans l'eau, jamais l'inverse",
+      "Laisser reposer 2 à 3 minutes sans toucher",
+      "Mélanger 3 minutes",
+      "Vibrer, retirer les bulles et couler, en 5 minutes environ"
+    ],
+    "notes": "Notes",
+    "footer": "Calculé avec GypSum — {url}"
+  },
   "errors": {
     "volumeExceeded": "Le volume de la pièce dépasse ou égale celui du moule",
     "invalidRatio": "Le ratio doit être supérieur à 0"

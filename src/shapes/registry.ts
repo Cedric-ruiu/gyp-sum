@@ -1,5 +1,5 @@
 import { cm3ToLiters } from "@/composables/useShapeVolume";
-import type { ShapeBounds, ShapeDefinition } from "./types";
+import type { ShapeBounds, ShapeDefinition, ShapeOutline } from "./types";
 
 // Bounds of an object with a round footprint.
 const roundBounds = (diameter: number, height: number): ShapeBounds => ({
@@ -8,6 +8,33 @@ const roundBounds = (diameter: number, height: number): ShapeBounds => ({
   height,
   footprintDiameter: diameter,
 });
+
+// Outline builders for the printed drawing (see ShapeOutline).
+const circlePath = (r: number, cy = 0) =>
+  `M${-r} ${cy}A${r} ${r} 0 1 0 ${r} ${cy}A${r} ${r} 0 1 0 ${-r} ${cy}Z`;
+
+const rectSide = (w: number, h: number): ShapeOutline => ({
+  path: `M${-w / 2} 0H${w / 2}V${-h}H${-w / 2}Z`,
+  width: w,
+  height: h,
+});
+
+const rectTop = (w: number, d: number): ShapeOutline => ({
+  path: `M${-w / 2} ${-d / 2}H${w / 2}V${d / 2}H${-w / 2}Z`,
+  width: w,
+  height: d,
+});
+
+// Concentric circles seen from above; the widest sets the size.
+const circlesTop = (...diameters: number[]): ShapeOutline => {
+  const d = Math.max(...diameters);
+  return {
+    path: diameters.map((di) => circlePath(di / 2)).join(""),
+    width: d,
+    height: d,
+    round: true,
+  };
+};
 
 export const boxShape: ShapeDefinition = {
   type: "box",
@@ -48,6 +75,7 @@ export const boxShape: ShapeDefinition = {
     width: b.width + 2 * m,
     height: b.height + m,
   }),
+  outline: ([l, w, h]) => ({ side: rectSide(l, h), top: rectTop(l, w) }),
 };
 
 export const cylinderShape: ShapeDefinition = {
@@ -75,6 +103,10 @@ export const cylinderShape: ShapeDefinition = {
   fitAround: (b, m) => ({
     diameter: b.footprintDiameter + 2 * m,
     height: b.height + m,
+  }),
+  outline: ([d, h]) => ({
+    side: { ...rectSide(d, h), round: true },
+    top: circlesTop(d),
   }),
 };
 
@@ -108,6 +140,15 @@ export const frustumShape: ShapeDefinition = {
   computeVolume: ([d1, d2, h]) =>
     cm3ToLiters(((Math.PI * h) / 12) * (d1 * d1 + d1 * d2 + d2 * d2)),
   bounds: ([d1, d2, h]) => roundBounds(Math.max(d1, d2), h),
+  outline: ([d1, d2, h]) => ({
+    side: {
+      path: `M${-d1 / 2} 0H${d1 / 2}L${d2 / 2} ${-h}H${-d2 / 2}Z`,
+      width: Math.max(d1, d2),
+      height: h,
+      round: true,
+    },
+    top: circlesTop(d1, d2),
+  }),
 };
 
 export const sphereShape: ShapeDefinition = {
@@ -125,6 +166,10 @@ export const sphereShape: ShapeDefinition = {
   ],
   computeVolume: ([d]) => cm3ToLiters((Math.PI / 6) * d ** 3),
   bounds: ([d]) => roundBounds(d, d),
+  outline: ([d]) => ({
+    side: { path: circlePath(d / 2, -d / 2), width: d, height: d, round: true },
+    top: circlesTop(d),
+  }),
 };
 
 export const halfSphereShape: ShapeDefinition = {
@@ -142,6 +187,15 @@ export const halfSphereShape: ShapeDefinition = {
   ],
   computeVolume: ([d]) => cm3ToLiters((Math.PI / 12) * d ** 3),
   bounds: ([d]) => roundBounds(d, d / 2),
+  outline: ([d]) => ({
+    side: {
+      path: `M${-d / 2} 0A${d / 2} ${d / 2} 0 0 1 ${d / 2} 0Z`,
+      width: d,
+      height: d / 2,
+      round: true,
+    },
+    top: circlesTop(d),
+  }),
 };
 
 export const sphericalCapShape: ShapeDefinition = {
@@ -169,6 +223,23 @@ export const sphericalCapShape: ShapeDefinition = {
   // Taller than its base radius, the cap bulges past its base: it is then as
   // wide as its sphere, of diameter d² / 4h + h.
   bounds: ([d, h]) => roundBounds(h > d / 2 ? (d * d) / (4 * h) + h : d, h),
+  outline: ([d, h]) => {
+    // Arc of the cap's sphere, radius (a² + h²) / 2h; the large arc once the
+    // cap is taller than its base radius.
+    const a = d / 2;
+    const r = (a * a + h * h) / (2 * h);
+    const large = h > a ? 1 : 0;
+    const width = h > a ? 2 * r : d;
+    return {
+      side: {
+        path: `M${-a} 0A${r} ${r} 0 ${large} 1 ${a} 0Z`,
+        width,
+        height: h,
+        round: true,
+      },
+      top: circlesTop(width),
+    };
+  },
 };
 
 export const manualVolumeShape: ShapeDefinition = {
