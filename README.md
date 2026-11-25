@@ -27,7 +27,7 @@ No more guessing, no more wasted material. Just enter your mold dimensions, desc
 - **Precise formulas** — water and plaster amounts derived from plaster density, not rule-of-thumb ratios
 - **State persistence** — your inputs are saved in `localStorage` and restored on next visit
 - **No installation** — runs entirely in the browser, no account or backend required
-- **Three languages** — French, English (with US units) and Spanish, plus a step-by-step mold-making guide in French and English
+- **Six languages** — French, English (with US units), Spanish, German, Italian and Portuguese, plus a step-by-step mold-making guide in French and English
 
 ---
 
