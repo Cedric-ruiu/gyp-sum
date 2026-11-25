@@ -36,9 +36,14 @@ SPA statique hébergée sur GitHub Pages (`base: '/gyp-sum/'`). Aucun backend.
 - L'instance i18n est créée **par app** (`createAppI18n()`), pas en singleton :
   vite-ssg appelle la factory une fois par route, et un singleton partagé fait
   fuiter la locale d'une page à l'autre.
-- **`@unhead/vue` épinglé en `^2.1.2`** (= version utilisée par vite-ssg). En v3,
-  le `useHead` de l'app et le head de vite-ssg sont deux instances distinctes →
-  rien n'est injecté dans le HTML pré-généré. Ne pas remonter sans aligner vite-ssg.
+- **`@unhead/vue` reste en v2** tant que vite-ssg (28.3.0) embarque unhead v2
+  (PR antfu-collective/vite-ssg#470). Essai en 3.5.2 (2026-11-25) : le `useHead`
+  v3 pousse dans le moteur v2 de vite-ssg (même clé d'injection `usehead`), le
+  pré-rendu sort juste par compatibilité fortuite, et les types v3 rejettent nos
+  `link` hreflang. Ne pas remonter sans aligner vite-ssg.
+- **TypeScript reste en 6.x** : TS 7 (compilateur Go) n'expose plus l'API JS dont
+  dépend vue-tsc (`@volar/typescript` exige `typescript <7`), et le patch
+  TypeScript intégré à Yarn échoue à l'installation. Attendre un vue-tsc compatible.
 - Fonts : auto-hébergées dans `public/fonts/` (Fontsource, latin subset, woff2).
   Inter 300/400/500 + JetBrains Mono 300/400. Preload des 3 fichiers critiques
   dans `index.html`. Fallbacks avec metric overrides dans `main.css` pour CLS
@@ -190,6 +195,7 @@ plasterWithMargin = plaster × (1 + margin)
 ```
 
 Volumes (cm → litres via `cm3ToLiters = v / 1000`) :
+
 - Pavé : `L × l × h`
 - Cylindre : `π/4 × d² × h`
 - Sphère : `π/6 × d³`
