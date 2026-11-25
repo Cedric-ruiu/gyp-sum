@@ -166,7 +166,9 @@ export const sphericalCapShape: ShapeDefinition = {
   ],
   computeVolume: ([d, h]) =>
     cm3ToLiters(((Math.PI * h) / 24) * (3 * d * d + 4 * h * h)),
-  bounds: ([d, h]) => roundBounds(d, h),
+  // Taller than its base radius, the cap bulges past its base: it is then as
+  // wide as its sphere, of diameter d² / 4h + h.
+  bounds: ([d, h]) => roundBounds(h > d / 2 ? (d * d) / (4 * h) + h : d, h),
 };
 
 export const manualVolumeShape: ShapeDefinition = {
