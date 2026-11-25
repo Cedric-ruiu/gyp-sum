@@ -25,10 +25,11 @@ const items = computed(() =>
       <details
         v-for="(item, i) in items"
         :key="i"
-        class="group rounded border border-line px-4 py-3"
+        class="group rounded border border-line"
       >
+        <!-- Padding sits on the summary so the whole row is the touch target. -->
         <summary
-          class="flex cursor-pointer list-none items-center justify-between gap-3 text-sm font-medium text-ink [&::-webkit-details-marker]:hidden"
+          class="flex min-h-12 cursor-pointer px-4 py-3 list-none items-center justify-between gap-3 text-sm font-medium text-ink [&::-webkit-details-marker]:hidden"
         >
           {{ item.q }}
           <span
@@ -38,10 +39,10 @@ const items = computed(() =>
             +
           </span>
         </summary>
-        <p class="mt-2 text-sm font-light leading-relaxed text-muted">
+        <p class="-mt-1 px-4 pb-3 text-sm font-light leading-relaxed text-muted">
           {{ item.a }}
         </p>
-        <p v-if="item.source" class="mt-2 text-xs font-light text-muted">
+        <p v-if="item.source" class="-mt-1 px-4 pb-3 text-xs font-light text-muted">
           {{ t("format.label", { label: t("sources.label") }) }}
           <a
             :href="t(`${item.source}.url`)"

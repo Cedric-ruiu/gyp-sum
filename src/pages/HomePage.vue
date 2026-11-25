@@ -27,6 +27,7 @@ const SceneViewer = defineAsyncComponent(
 );
 
 const sceneSlot = ref<HTMLElement | null>(null);
+
 const sceneVisible = ref(false);
 let sceneObserver: IntersectionObserver | null = null;
 
@@ -77,6 +78,18 @@ const { t, tm, rt, locale } = useI18n();
 
 // The mold-making guide exists in French only for now.
 const moldGuidePage = computed(() => localePage("moldGuide", locale.value));
+
+// "On this page" links: in-page anchors, then the mold guide when the locale
+// has one.
+const tocItems = computed(() => [
+  { label: t("toc.guide"), href: "#guide" },
+  { label: t("toc.yourPlaster"), href: "#your-plaster" },
+  { label: t("toc.howto"), href: "#how-to" },
+  { label: t("toc.faq"), href: "#faq" },
+  ...(moldGuidePage.value
+    ? [{ label: t("toc.moldGuide"), route: moldGuidePage.value.path }]
+    : []),
+]);
 
 const yourPlasterParagraphs = computed(
   () => tm("yourPlaster.paragraphs") as string[],
@@ -295,13 +308,30 @@ function setUnitSystem(v: string) {
         <!-- Intro (left col, row 1) -->
         <div class="order-1 lg:order-0 lg:col-start-1 lg:row-start-1 max-w-2xl">
           <p class="text-base font-light leading-relaxed text-muted">{{ t("intro.lead") }}</p>
-          <nav class="mt-4 flex flex-wrap items-center gap-x-4 gap-y-1 text-xs font-light text-muted">
-            <span class="uppercase tracking-widest">{{ t("toc.label") }}</span>
-            <a href="#guide" class="link">{{ t("toc.guide") }}</a>
-            <a href="#your-plaster" class="link">{{ t("toc.yourPlaster") }}</a>
-            <a href="#how-to" class="link">{{ t("toc.howto") }}</a>
-            <a href="#faq" class="link">{{ t("toc.faq") }}</a>
-            <RouterLink v-if="moldGuidePage" :to="moldGuidePage.path" class="link">{{ t("toc.moldGuide") }}</RouterLink>
+          <!-- Phone: a 48px toggle opening the full list of 48px links, so the
+               calculator stays in the first screen. Wider screens: inline row. -->
+          <details class="group mt-2 sm:hidden">
+            <summary
+              class="-mx-2 inline-flex min-h-12 cursor-pointer list-none items-center gap-1.5 px-2 text-xs font-light tracking-widest uppercase text-muted [&::-webkit-details-marker]:hidden"
+            >
+              {{ t("toc.label") }}
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="h-3.5 w-3.5 transition-transform duration-150 group-open:rotate-180" aria-hidden="true">
+                <path d="m6 9 6 6 6-6" />
+              </svg>
+            </summary>
+            <nav :aria-label="t('toc.label')" class="flex flex-col border-l border-line pl-4 text-sm font-light">
+              <template v-for="item in tocItems" :key="item.label">
+                <RouterLink v-if="item.route" :to="item.route" class="link flex min-h-12 items-center self-start">{{ item.label }}</RouterLink>
+                <a v-else :href="item.href" class="link flex min-h-12 items-center self-start">{{ item.label }}</a>
+              </template>
+            </nav>
+          </details>
+          <nav :aria-label="t('toc.label')" class="mt-4 hidden flex-wrap items-center gap-x-4 gap-y-1 text-xs font-light text-muted sm:flex">
+            <span class="uppercase tracking-widest" aria-hidden="true">{{ t("toc.label") }}</span>
+            <template v-for="item in tocItems" :key="item.label">
+              <RouterLink v-if="item.route" :to="item.route" class="link">{{ item.label }}</RouterLink>
+              <a v-else :href="item.href" class="link">{{ item.label }}</a>
+            </template>
           </nav>
         </div>
 

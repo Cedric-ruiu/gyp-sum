@@ -60,7 +60,7 @@ const { showBanner, deferredAvailable, promptInstall, dismiss } =
         <button
           v-if="deferredAvailable"
           type="button"
-          class="shrink-0 rounded border border-accent px-3 py-1.5 text-xs font-medium text-accent transition-colors duration-150 hover:bg-accent hover:text-white"
+          class="min-h-12 shrink-0 rounded border border-accent px-4 text-xs font-medium text-accent transition-colors duration-150 hover:bg-accent hover:text-white"
           @click="promptInstall"
         >
           {{ t("pwa.installButton") }}
@@ -69,7 +69,7 @@ const { showBanner, deferredAvailable, promptInstall, dismiss } =
         <button
           type="button"
           :aria-label="t('pwa.dismissLabel')"
-          class="shrink-0 rounded p-1 text-muted transition-colors duration-150 hover:text-ink"
+          class="-mr-3 flex h-12 w-12 shrink-0 items-center justify-center rounded text-muted transition-colors duration-150 hover:text-ink"
           @click="dismiss"
         >
           <svg
