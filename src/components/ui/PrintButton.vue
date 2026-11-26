@@ -1,19 +1,14 @@
 <script setup lang="ts">
 import { useId } from "vue";
 import { useI18n } from "vue-i18n";
-import { track } from "@/analytics";
+import { printFromButton } from "@/composables/usePrint";
 
 // Prints the workshop sheet (PrintSheet.vue), which the print styles swap in
-// for the page.
+// for the page. The `print` event is sent on `beforeprint` (useTrackPrints).
 defineProps<{ disabled?: boolean }>();
 
 const { t } = useI18n();
 const hintId = useId();
-
-function print() {
-  track("print");
-  window.print();
-}
 </script>
 
 <template>
@@ -23,7 +18,7 @@ function print() {
       :disabled="disabled"
       :aria-describedby="hintId"
       class="flex min-h-12 w-full cursor-pointer items-center justify-center gap-2 rounded border border-accent bg-white px-4 text-sm font-normal text-accent transition-colors duration-150 enabled:hover:bg-accent enabled:hover:text-white disabled:cursor-not-allowed disabled:border-line disabled:text-muted sm:min-h-10"
-      @click="print"
+      @click="printFromButton"
     >
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4 shrink-0" aria-hidden="true">
         <path d="M6 9V3h12v6" />

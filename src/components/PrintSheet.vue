@@ -3,6 +3,7 @@ import { computed } from "vue";
 import { useI18n } from "vue-i18n";
 import MoldDrawing from "@/components/MoldDrawing.vue";
 import AppLogo from "@/components/ui/AppLogo.vue";
+import { useTrackPrints } from "@/composables/usePrint";
 import { pageFor, pageUrl } from "@/seo";
 import { canFitMold, DEFAULT_FIT_MARGIN } from "@/shapes/fit";
 import { moldShapeRegistry, objectShapeRegistry } from "@/shapes/registry";
@@ -27,6 +28,7 @@ const props = defineProps<{
 
 const { t, tm, rt, n, locale } = useI18n();
 const units = useUnits();
+useTrackPrints();
 
 const isUs = computed(() => units.system.value === "us");
 const unit = (q: Quantity | SmallQuantity) => t(units.labelKey(q));

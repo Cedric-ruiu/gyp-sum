@@ -69,6 +69,7 @@ src/
 │   ├── useContactAddress.ts adresse e-mail encodée (décodée en onMounted), mailto,
 │   │                       événement contact-email
 │   ├── useLocalStorage.ts  ref + watch debounce 500 ms, clé 'plaster-calc-state'
+│   ├── usePrint.ts         printFromButton(), useTrackPrints() : événement print
 │   └── useThreeScene.ts    init/updateMold/updateObject/destroy (Three.js)
 ├── i18n/
 │   ├── index.ts            createAppI18n() (instance par app, SSG-safe), SUPPORTED_LOCALES = ['fr','en','es','de','it','pt']
@@ -104,7 +105,7 @@ src/
 │       │                         aria-current), masqué si la page n'existe qu'en une langue
 │       ├── ContactLink.vue  lien mailto du footer, adresse décodée en onMounted
 │       ├── ShareButton.vue  partage natif (mobile) / copie du lien (desktop)
-│       ├── PrintButton.vue  window.print() + événement print
+│       ├── PrintButton.vue  printFromButton() (usePrint.ts)
 │       ├── AppLogo.vue      logo SVG (header et fiche d'atelier)
 │       └── SegmentedControl.vue  choix exclusif (unités, saisie du ratio)
 ├── seo.ts                  SITE_URL, SITE_PAGES (route, locale, groupe hreflang,
@@ -124,8 +125,10 @@ autorisé par la CSP `connect-src`). Événements : `calculator-use` (`lang`), u
 fois par chargement, à la première valeur réellement modifiée par le visiteur
 (setters de `HomePage.vue` ; la restauration du localStorage n'est pas comptée),
 `contact-email` (`method` : mailto / copy), `share` (`method` : native / copy),
-`pwa-install` (`outcome`), `github-repo`, `github-issues`, `print` (bouton
-« Imprimer la fiche d'atelier » ; un Ctrl/Cmd+P n'est pas compté). Les liens
+`pwa-install` (`outcome`), `github-repo`, `github-issues`, `print` (`method` :
+button / shortcut, ce dernier pour Ctrl/Cmd+P ou le menu du navigateur ; envoyé
+sur `beforeprint` par `useTrackPrints()` de `src/composables/usePrint.ts`, le
+bouton ne fait que marquer l'impression comme sienne). Les liens
 d'appel à contribuer sous les résultats (`ContributeNote.vue`) envoient les
 mêmes événements `github-issues` / `contact-email`, avec `placement: results`. Liens simples :
 attribut `data-umami-event` ; tout élément qui a déjà un gestionnaire de clic :
